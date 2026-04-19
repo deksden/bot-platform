@@ -24,3 +24,4 @@ Expected families:
 ## First registry doc
 
 - [Framework epic map](framework-epic-map.md): initial split-aware registry of which epic families belong to `bot-platform`.
+- [Framework feature registry](framework-feature-registry.md): initial framework capability registry under the new repo model.
