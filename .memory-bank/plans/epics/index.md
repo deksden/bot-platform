@@ -20,3 +20,7 @@ Expected families:
 - workflow framework;
 - scenario and evaluation framework;
 - shared contracts and SDK.
+
+## First registry doc
+
+- [Framework epic map](framework-epic-map.md): initial split-aware registry of which epic families belong to `bot-platform`.

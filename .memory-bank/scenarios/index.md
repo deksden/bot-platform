@@ -37,6 +37,7 @@ It is not for:
 - [By epic](by-epic/index.md): framework scenarios grouped by platform epic or feature family.
 - [Contract scenarios](contracts/index.md): API, auth, workflow, runtime, and persistence contract verification.
 - [Hosted scenarios](hosted/index.md): shared hosted verification patterns and framework acceptance anchors.
+- [Scenario matrix](scenario-matrix.md): initial capability-to-scenario ownership map for the framework repo.
 
 ## First wave outcome
 
