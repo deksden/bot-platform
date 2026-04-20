@@ -9,7 +9,7 @@ import {
   type SemanticJudgeExecutionEnvelope,
   type SemanticJudgeInputPacket,
   type SemanticJudgeResult
-} from '@bot-platform/api-contract';
+} from '@dd-bot-platform/api-contract';
 import { prepareScenarioEvidencePath } from '../artifacts';
 import { resolveSemanticJudgeRunProvenance } from './provenance';
 

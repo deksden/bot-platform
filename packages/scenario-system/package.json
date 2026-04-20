@@ -1,5 +1,5 @@
 {
-  "name": "@bot-platform/scenario-system",
+  "name": "@dd-bot-platform/scenario-system",
   "description": "Framework-owned scenario and semantic-eval primitives for bot-platform consumers.",
   "version": "0.1.0",
   "main": "dist/index.js",
@@ -15,6 +15,7 @@
     "!dist/.tsbuildinfo"
   ],
   "keywords": [
+    "dd-bot-platform",
     "bot-platform",
     "framework",
     "scenario-system",
@@ -29,7 +30,7 @@
   "homepage": "https://github.com/deksden/bot-platform",
   "publishConfig": {
     "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "engines": {
     "node": ">=20"
@@ -40,7 +41,7 @@
     "typecheck": "tsc -p tsconfig.json --pretty false"
   },
   "dependencies": {
-    "@bot-platform/api-contract": "workspace:*",
+    "@dd-bot-platform/api-contract": "workspace:*",
     "@openai/codex-sdk": "^0.78.0"
   }
 }

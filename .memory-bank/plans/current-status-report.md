@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.3.0
+version: 0.4.0
 date: 2026-04-20
 status: DRAFT
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.4.0
+    date: 2026-04-20
+    changes: Switched the framework release target to npm scope `@dd-bot-platform`, added Changesets/release-workflow scaffolding, and established the first concrete private npm release runbook for extracted packages.
   - version: 0.3.0
     date: 2026-04-20
     changes: Recorded the first publish-readiness tranche for extracted framework packages: package metadata is now aligned with the private-registry bridge and the operational bridge contract is documented in repo-local operations specs.
@@ -33,13 +36,15 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - canonical `mbb/**`
 - mirrored `git-flow.md`
 - private-registry package bridge operations spec
+- npm package release runbook
 - initial architecture, project, and planning skeleton docs
 - framework epic map and feature registry
 - framework scenario matrix and verification matrix
 - canonical `PRT-036` copy in `bot-platform`
 - first publish-ready framework package metadata for:
-  - `@bot-platform/api-contract`
-  - `@bot-platform/scenario-system`
+  - `@dd-bot-platform/api-contract`
+  - `@dd-bot-platform/scenario-system`
+- Changesets/release workflow scaffolding for the first publishable framework packages
 
 ## Not landed yet
 
@@ -48,7 +53,7 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - moved framework ADRs and follow-up child protocols beyond `PRT-036`
 - actual framework scenario catalog behind the current matrix
 - actual framework code extraction
-- real package publish workflow automation
+- product-repo install auth contour proof for consuming published framework packages
 
 ## Current blockers before code extraction
 
@@ -66,7 +71,8 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
    - auth core
    - workflow host
    - persistence interface
-2. replace vendored consumer mirrors with published private-registry packages once auth/install contours are ready
-3. land framework planning docs:
+2. prove local/GitHub Actions/Vercel install auth for consuming `@dd-bot-platform/*`
+3. replace vendored consumer mirrors with published private-registry packages once auth/install contours are ready
+4. land framework planning docs:
    - follow-up split child protocols and ADR decisions after `PRT-036`
-4. start moving clearly framework-owned source docs into this repo
+5. start moving clearly framework-owned source docs into this repo

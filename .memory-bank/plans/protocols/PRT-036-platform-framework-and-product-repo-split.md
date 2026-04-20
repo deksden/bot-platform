@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.25.0
+version: 1.27.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,12 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.27.0
+    date: 2026-04-20
+    changes: Recorded wave-15 completion: `bot-platform` now has the real npm scope `@dd-bot-platform`, Changesets-based release intent, an allowlisted publish script, and a release workflow aligned to the repo's current `main`-branch bootstrap state.
+  - version: 1.26.0
+    date: 2026-04-20
+    changes: Converted the framework bridge from the temporary GitHub Packages assumption to the real npm scope `@dd-bot-platform`, added Changesets and a controlled release workflow in `bot-platform`, and recorded that future product cutovers must consume the published npm packages rather than vendor mirrors once install-auth contours are proven.
   - version: 1.25.0
     date: 2026-04-20
     changes: Completed the first publish-readiness tranche for the extracted framework bridge: `@bot-platform/api-contract` and `@bot-platform/scenario-system` now carry explicit private-registry publication metadata, tarball hygiene verification is documented, and repo-local operations truth now defines the package bridge needed to replace temporary vendored mirrors in later waves.
@@ -268,9 +274,15 @@ Review status:
 - wave-13 synthesis is recorded in `.tasks/prt-036-implementation-wave-13-2026-04-20/summary/PRT-036-implementation-wave-13-synthesis.md`;
 - implementation stage: wave 14 completed;
 - the first publish-readiness tranche for the framework bridge is now landed in `bot-platform`:
-  - `@bot-platform/api-contract` and `@bot-platform/scenario-system` now carry explicit private-registry publication metadata;
+  - `@dd-bot-platform/api-contract` and `@dd-bot-platform/scenario-system` now carry explicit private-registry publication metadata;
   - tarball hygiene and packed-manifest verification are now part of repo-local bridge operations truth;
 - wave-14 synthesis is recorded in `.tasks/prt-036-implementation-wave-14-2026-04-20/summary/PRT-036-implementation-wave-14-synthesis.md`;
+- implementation stage: wave 15 completed;
+- the framework bridge is now aligned to the real npm publication path:
+  - framework package scope: `@dd-bot-platform/*`
+  - registry target: npm
+  - release discipline: Changesets plus a controlled allowlisted publish script
+- wave-15 synthesis is recorded in `.tasks/prt-036-implementation-wave-15-2026-04-20/summary/PRT-036-implementation-wave-15-synthesis.md`;
 - the next protocol revision pass must focus on:
   - replacing the temporary `sa-judge` and `scenario-runner` vendored bridges with the published private-registry bridge once registry auth/install contours are ready;
   - deciding whether `scenario-runner` needs any later runtime-core adoption beyond the now-landed contract slice;

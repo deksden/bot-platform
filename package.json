@@ -6,9 +6,15 @@
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
     "typecheck": "tsc -b tsconfig.build.json --pretty false",
-    "clean": "find apps packages -type d -name dist -prune -exec rm -rf {} +"
+    "clean": "find apps packages -type d -name dist -prune -exec rm -rf {} +",
+    "changeset": "changeset",
+    "changeset:status": "changeset status",
+    "changeset:version": "changeset version",
+    "changeset:publish": "node scripts/publish-private-packages.mjs"
   },
   "devDependencies": {
+    "@changesets/changelog-git": "^0.2.1",
+    "@changesets/cli": "^2.30.0",
     "@types/node": "25.5.0",
     "typescript": "5.9.3"
   }

@@ -1,5 +1,5 @@
 {
-  "name": "@bot-platform/api-contract",
+  "name": "@dd-bot-platform/api-contract",
   "description": "Framework-safe API contract slice for bot-platform consumers.",
   "version": "0.1.0",
   "main": "dist/index.js",
@@ -15,6 +15,7 @@
     "!dist/.tsbuildinfo"
   ],
   "keywords": [
+    "dd-bot-platform",
     "bot-platform",
     "framework",
     "contracts",
@@ -29,7 +30,7 @@
   "homepage": "https://github.com/deksden/bot-platform",
   "publishConfig": {
     "access": "restricted",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "engines": {
     "node": ">=20"

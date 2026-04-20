@@ -2,7 +2,7 @@
 file: .memory-bank/spec/operations/index.md
 description: 'Framework operations spec hub for bot-platform.'
 purpose: Hold framework-wide operational standards, release rules, and mirrored process standards.
-version: 0.2.0
+version: 0.3.0
 date: 2026-04-20
 status: DRAFT
 tags: [operations, bot-platform, standards]
@@ -11,6 +11,9 @@ children:
   - git-flow.md
   - private-registry-package-bridge.md
 history:
+  - version: 0.3.0
+    date: 2026-04-20
+    changes: Updated operations navigation for the real npm-based private package bridge under `@dd-bot-platform/*`.
   - version: 0.2.0
     date: 2026-04-20
     changes: Added the private-registry package bridge contract so extracted framework packages can become publish-ready without pulling product deployment truth into bot-platform.
@@ -33,4 +36,4 @@ It should not contain product deployment truth.
 ## Initial doc
 
 - [Git flow](git-flow.md): mirrored shared process standard.
-- [Private registry package bridge](private-registry-package-bridge.md): publish-ready seam rules for `@bot-platform/*` packages consumed by product repos.
+- [Private registry package bridge](private-registry-package-bridge.md): publish-ready seam rules for `@dd-bot-platform/*` packages consumed by product repos.
