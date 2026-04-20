@@ -1,14 +1,15 @@
 ---
 file: .memory-bank/spec/operations/private-registry-package-bridge.md
-description: Operational contract for preparing and publishing framework-safe bot-platform packages through the approved private registry bridge.
-purpose: Read before replacing vendored product mirrors with published framework packages so package metadata, auth expectations, verification, and scope boundaries stay aligned with ADR-001.
-version: 1.1.0
+description: Operational contract for preparing and publishing framework-safe bot-platform packages through the accepted npm package bridge.
+purpose: Read before replacing vendored product mirrors with published framework packages so package metadata, publication expectations, verification, and scope boundaries stay aligned with the current bridge ADRs.
+version: 1.2.0
 date: 2026-04-20
 status: ACTIVE
 tags: [spec, operations, package-registry, bot-platform, prt-036]
 parent: .memory-bank/spec/operations/index.md
 related_files:
   - .memory-bank/plans/adr/ADR-001-private-registry-bridge-for-product-repos.md
+  - .memory-bank/plans/adr/ADR-002-public-npm-bridge-for-framework-packages.md
   - .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
   - .memory-bank/guides/reference/npm-package-release-runbook.md
   - .changeset/config.json
@@ -17,23 +18,26 @@ related_files:
   - /Users/deksden/Documents/_Projects/bot-platform/packages/api-contract/package.json
   - /Users/deksden/Documents/_Projects/bot-platform/packages/scenario-system/package.json
 history:
+  - version: 1.2.0
+    date: 2026-04-20
+    changes: Updated the bridge contract after the first real npm publish attempt failed with `E402` for restricted scoped packages; the accepted bridge for the first framework-safe slices is now public scoped npm under `@dd-bot-platform/*`.
   - version: 1.1.0
     date: 2026-04-20
     changes: Replaced the temporary GitHub Packages assumption with the real npm target under `@dd-bot-platform`, added Changesets/release-workflow expectations, and clarified token/install guidance for product repos and Vercel.
 ---
 
-# Private Registry Package Bridge
+# Package Registry Bridge
 
 ## Purpose
 
 `bot-platform` is the framework repo in `PRT-036`.
-When product repos stop using temporary vendored mirrors, they must consume extracted framework packages through the ADR-approved private registry bridge.
+When product repos stop using temporary vendored mirrors, they must consume extracted framework packages through the currently accepted npm package bridge.
 
 This document defines the minimum operational truth for that bridge.
 
 ## Current bridge posture
 
-- Primary bridge: published private-registry packages from `bot-platform`.
+- Current standard bridge: published npm packages from `bot-platform` under `@dd-bot-platform/*`.
 - Temporary exception: explicit narrow vendored mirrors with owner, upstream provenance, and removal trigger.
 - Not allowed as the primary bridge:
   - subtree/submodule dependency flows;
@@ -45,11 +49,12 @@ This document defines the minimum operational truth for that bridge.
 Current default registry target for publish-ready framework packages:
 - npm registry at `https://registry.npmjs.org`
 - framework scope: `@dd-bot-platform`
+- publication visibility for the currently accepted framework-safe slices: `public`
 
 Why:
 - the user already established the owning npm organization for the framework packages;
 - the same registry model is already familiar from the existing `selleragent` release path;
-- npm-based install auth is easier to reuse across local development, GitHub Actions, and Vercel than a second GitHub Packages-specific contour.
+- the public scoped npm path unblocks the bridge immediately after restricted scoped publication proved unavailable for the current organization/account contour.
 
 If the registry target changes later, update this document and the package manifests in the same wave.
 
@@ -70,7 +75,7 @@ A framework package is publish-ready only when all of the following are true:
   - `license`
 - package lifecycle hooks protect pack/publish hygiene:
   - `prepack` must build the package-local dist output before packing/publishing
-  - `publishConfig.access` must keep the package on the restricted/private path
+  - `publishConfig.access` must match the currently accepted bridge visibility
 - package tarball hygiene is checked:
   - no accidental product files
   - no unnecessary build residue such as `.tsbuildinfo`
@@ -79,7 +84,7 @@ A framework package is publish-ready only when all of the following are true:
 - Changesets and the release workflow recognize the package as part of the controlled publish set
 
 Publish-ready does not mean "full release automation is already built".
-It only means the seam is shaped and documented well enough to become a deliberate private package instead of a vendored exception.
+It only means the seam is shaped and documented well enough to become a deliberate published package instead of a vendored exception.
 
 ## What must stay out of scope
 
@@ -93,38 +98,29 @@ Do not publish:
 
 ## Auth and install policy
 
-The registry bridge must be supportable in every owning contour:
+The bridge must be supportable in every owning contour:
 
 - Local development:
-  - maintainers need registry auth capable of installing and publishing `@dd-bot-platform/*`;
+  - maintainers need npm publish auth capable of publishing `@dd-bot-platform/*`;
   - do not rely on an undocumented global npm state;
-  - use repo-local or explicitly provisioned auth instructions when product repos start consuming published packages;
-  - use `NPM_TOKEN` or the equivalent local publish/install token routed through an isolated npm userconfig.
+  - use `NPM_TOKEN` or the equivalent local publish token routed through an isolated npm userconfig.
 - GitHub Actions:
-  - workflows that install or publish `@dd-bot-platform/*` must use explicit registry auth secrets/tokens;
+  - workflows that publish `@dd-bot-platform/*` must use explicit npm auth secrets/tokens;
   - package publish is not considered healthy until the workflow can authenticate non-interactively.
 - Vercel:
-  - product repos that consume `@dd-bot-platform/*` must receive install-time registry auth in their Vercel project settings before vendored mirrors are removed;
-  - do not switch a product repo from vendored to published packages until the hosted install path is proven.
+  - no extra npm install auth is required for consuming the currently public `@dd-bot-platform/*` slices;
+  - product repos still need a hosted proof that the published package path really works before vendored mirrors are removed.
 
 Secret ownership remains repo-local:
 - `bot-platform` owns publish credentials for framework package publication;
-- each product repo owns the install credentials/config required for its own CI and Vercel contour.
-
-Recommended consumer install contour for product repos:
-
-```ini
-@dd-bot-platform:registry=https://registry.npmjs.org/
-//registry.npmjs.org/:_authToken=${NPM_TOKEN}
-always-auth=true
-```
+- product repos do not need consumer install secrets for the currently public bridge slices.
 
 ## Version consumption policy
 
 - Product repos consume published framework packages through deliberate pinned versions.
 - Version bumps happen by explicit PRs in the consuming repo.
 - Rollback happens first by reverting the consumed package version, not by emergency source copying.
-- Vendored exceptions must be removed once the same seam is proven through the private registry bridge.
+- Vendored exceptions must be removed once the same seam is proven through the published npm bridge.
 - `bot-platform` uses Changesets plus a controlled publish allowlist to keep that versioning explicit and auditable.
 
 ## Verification baseline
@@ -155,5 +151,5 @@ When a vendored mirror is replaced by a published package:
 
 - update the owning protocol wave summary;
 - update the vendored metadata/removal note in the consuming repo;
-- capture any auth/install lessons learned in the active wave artifacts;
+- capture any publication/cutover lessons learned in the active wave artifacts;
 - fold durable lessons back into the owning Memory Bank section by MBB routing rules.

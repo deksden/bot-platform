@@ -1,17 +1,22 @@
 ---
 file: .memory-bank/guides/reference/npm-package-release-runbook.md
-description: Practical runbook for versioning, verifying, publishing and post-release checking the private `@dd-bot-platform/*` npm packages.
+description: Practical runbook for versioning, verifying, publishing and post-release checking the `@dd-bot-platform/*` npm packages.
 purpose: Read when preparing or executing a real npm release for the first publishable framework packages so maintainers can follow one short canonical checklist instead of reconstructing the process from workflow files, Changesets config, and protocol notes.
-version: 1.0.0
+version: 1.1.0
 date: 2026-04-20
 status: ACTIVE
 parent: .memory-bank/guides/reference/index.md
 related_files:
   - .memory-bank/spec/operations/private-registry-package-bridge.md
+  - .memory-bank/plans/adr/ADR-002-public-npm-bridge-for-framework-packages.md
   - .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
   - .changeset/config.json
   - .github/workflows/release-packages.yml
   - scripts/publish-private-packages.mjs
+history:
+  - version: 1.1.0
+    date: 2026-04-20
+    changes: Updated the runbook after npm rejected restricted scoped publication; the accepted bridge for the first framework-safe slices now uses public scoped npm packages under `@dd-bot-platform`.
 ---
 
 # npm Package Release Runbook
@@ -93,7 +98,7 @@ Use the GitHub workflow when available:
 3. Wait for the `publish` job to complete successfully.
 4. Confirm the workflow used the intended commit SHA.
 
-This is the preferred operational path because it keeps private package publication tied to repository automation and avoids ad hoc local auth state.
+This is the preferred operational path because it keeps package publication tied to repository automation and avoids ad hoc local auth state.
 
 ## Maintainer fallback publish path
 
@@ -152,4 +157,4 @@ Do not treat these as a valid release:
 - relying on a stale personal `~/.npmrc` without isolating auth state;
 - bypassing the controlled allowlist in `publish-private-packages.mjs`;
 - assuming `pnpm pack` alone proves the final published dependency graph without packed-manifest inspection;
-- removing vendored consumer mirrors before product-repo install auth is proven in CI and Vercel.
+- removing vendored consumer mirrors before the published package path is proven in CI and hosted consumer verification.

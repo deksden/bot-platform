@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/deksden/bot-platform",
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "engines": {

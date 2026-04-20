@@ -57,9 +57,9 @@ async function loadPublishablePackages() {
     if (!allowedPackages.has(packageJson.name)) {
       continue;
     }
-    if (packageJson.publishConfig?.access !== 'restricted') {
+    if (packageJson.publishConfig?.access !== 'public') {
       throw new Error(
-        `Allowed package ${packageJson.name} must declare publishConfig.access="restricted".`
+        `Allowed package ${packageJson.name} must declare publishConfig.access="public".`
       );
     }
     packages.push({
@@ -156,7 +156,7 @@ async function main() {
         process.stdout.write(`Dry run: would publish ${name}@${version} from ${packed.tarballPath}\n`);
       } else {
         process.stdout.write(`Publishing ${name}@${version}...\n`);
-        run('npm', ['publish', packed.tarballPath, '--access', 'restricted'], {
+        run('npm', ['publish', packed.tarballPath, '--access', 'public'], {
           stdio: ['ignore', 'inherit', 'inherit']
         });
         published.push(`${name}@${version}`);

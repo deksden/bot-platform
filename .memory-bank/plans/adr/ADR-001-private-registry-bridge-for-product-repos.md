@@ -2,23 +2,28 @@
 file: .memory-bank/plans/adr/ADR-001-private-registry-bridge-for-product-repos.md
 description: 'ADR-001: use private registry packages as the primary dependency bridge from bot-platform into product repos during the split.'
 purpose: Record the long-lived decision for how selleragent and docoved-agent consume extracted framework packages while repository split waves are in flight.
-version: 1.0.0
+version: 1.1.0
 date: 2026-04-20
-status: ACTIVE
+status: SUPERSEDED
 tags: [adr, dependency-bridge, package-registry, repo-split, bot-platform, selleragent, docoved]
 parent: .memory-bank/plans/adr/index.md
 related_files:
+  - .memory-bank/plans/adr/ADR-002-public-npm-bridge-for-framework-packages.md
   - .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
   - .memory-bank/spec/architecture/boundaries.md
   - .memory-bank/spec/project/repo-structure.md
   - /Users/deksden/Documents/_Projects/sales-agent/.tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-02-dependency-bridge-decision.md
+history:
+  - version: 1.1.0
+    date: 2026-04-20
+    changes: Superseded by ADR-002 after npm rejected restricted scoped publication for the first framework-safe packages; the long-lived bridge remains versioned npm packages, but the accepted operational path for the first publishable slices is now public scoped npm.
 ---
 
 # ADR-001: Private Registry Bridge For Product Repos
 
 ## Status
 
-Accepted on `2026-04-20`.
+Superseded on `2026-04-20` by [ADR-002](ADR-002-public-npm-bridge-for-framework-packages.md).
 
 ## Context
 
