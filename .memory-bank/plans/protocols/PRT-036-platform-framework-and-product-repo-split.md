@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.12.0
+version: 1.13.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -20,6 +20,7 @@ related_files:
   - .memory-bank/spec/operations/production-rollout-runbook.md
   - .memory-bank/spec/operations/hosted-beta-acceptance-contract.md
   - .memory-bank/spec/engineering/delivery-standards.md
+  - .memory-bank/plans/adr/ADR-001-private-registry-bridge-for-product-repos.md
   - .tasks/prt-036-protocol-review-2026-04-19/summary/PRT-036-review-synthesis.md
   - .tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-00-execution-pack-index.md
   - .tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-01-ownership-matrix.md
@@ -35,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.13.0
+    date: 2026-04-20
+    changes: Synced implementation wave 02 completion into the canonical target-repo protocol copy: feature registries were actualized, D-02 was closed through ADR-001, and accepted documentation lessons were folded back into Memory Bank rules.
   - version: 1.12.0
     date: 2026-04-20
     changes: Recorded the completion of implementation wave 01: repo rebind matrix, secret split/rotation plan, first execution packet register, main-agent verification verdicts, and the folding of accepted lessons back into the owning Memory Bank docs.
@@ -141,10 +145,10 @@ This protocol exists so the split is performed as a boundary cleanup program, no
 
 ## Open questions / required research
 
-- Package publication strategy still needs a follow-up decision:
-  - workspace dependency only;
-  - private package registry;
-  - git reference or subtree bridge during migration.
+- Package publication strategy is now closed for the migration bridge:
+  - accepted primary bridge: private package registry from `bot-platform` into product repos;
+  - allowed backup only: narrow vendoring / temporary mirrors with explicit expiry;
+  - rejected as primary bridge: git subtree/submodule-like dependency model.
 - The exact split of current `packages/api-contract` and `packages/client-sdk` needs a contract inventory, because part of their surface is truly framework-level while part is product-specific.
 - The exact extraction line inside `packages/core` still needs a code-level owner map, especially around runtime, channels, and workflow-family helpers.
 - The exact split of `packages/scenario-runner` needs a scenario inventory:
@@ -210,6 +214,8 @@ Review status:
 - consolidated phase-3 ops/runbook synthesis is recorded in `.tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md`;
 - implementation stage: wave 01 completed;
 - consolidated implementation-wave-01 synthesis is recorded in `.tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md`;
+- implementation stage: wave 02 completed;
+- D-02 is canonically closed in [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md);
 - the next protocol revision pass must focus on:
   - executable contract families;
   - explicit MBB governance;
@@ -222,6 +228,7 @@ Review status:
 - Decision: auth/users live in `bot-platform` only as framework contracts, helpers, guards, and lifecycle patterns; each product owns its own actual user/auth tables and runtime authority data.
 - Decision: Telegram slash commands and comparable system-command mechanics live in `bot-platform` as a command framework plus command contract vocabulary; product-specific commands, handlers, and enablement policies live in product repos.
 - Decision: workflow core belongs in `bot-platform`, but concrete workflow hosts and workflow deployments remain product-local.
+- Decision: the dependency bridge from `bot-platform` into `selleragent` and `docoved-agent` is a private package registry; vendoring is allowed only as a narrow, time-boxed exception.
 - Decision: DB ownership is product-local by default; framework repos do not own product tables.
 - Decision: CI/CD is product-local by default; Vercel configuration should become simpler by giving each product repo its own deploy lifecycle.
 - Decision: if a feature is needed by both SellerAgent and Docoved, it graduates into `bot-platform` only after its boundary is clear enough to be framework code rather than one product's accidental abstraction.
@@ -1348,7 +1355,12 @@ Output:
   - local developer workflow
 
 Status:
-- still open
+- accepted:
+  - canonical decision direction is recorded in `R-036-02`
+  - long-lived framework ADR is [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md)
+  - private package registry is the primary bridge
+  - vendoring is backup-only with explicit expiry
+  - subtree/submodule-style bridges are not the primary path
 
 #### D-03: Product boundary confirmations
 
@@ -1396,7 +1408,9 @@ Must cover:
 - rollback path
 
 Status:
-- open
+- accepted for the migration program:
+  - decision synthesized in `.tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-02-dependency-bridge-decision.md`
+  - canonical long-lived ADR recorded as [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md)
 
 #### R-036-03: Repo skeleton pack
 

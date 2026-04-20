@@ -2,13 +2,20 @@
 file: '.memory-bank/mbb/delivery-docs-guide.md'
 description: 'MBB guide: how to use epic, feature, spec, protocol, and scenario documents without duplication.'
 purpose: 'Read when creating or updating delivery-oriented documentation so epic/feature/spec/protocol/scenario roles stay clear and useful.'
-version: '1.2.0'
-date: '2026-03-26'
+version: '1.3.0'
+date: '2026-04-20'
 status: 'ACTIVE'
 c4_level: 'standard'
 parent: '.memory-bank/mbb/index.md'
 architecture: 'MBB Standards'
 tags: [mbb, delivery, epic, feature, spec, protocol, scenario, traceability]
+history:
+  - version: 1.3.0
+    date: 2026-04-20
+    changes: Added ownership-language guidance for candidate seams so registries, matrices, and delivery docs do not over-claim framework ownership before the gate is closed.
+  - version: 1.2.0
+    date: 2026-03-26
+    changes: Prior baseline.
 ---
 
 # Delivery Docs Guide
@@ -219,6 +226,24 @@ Scenario **не** заменяет unit/integration/e2e tests:
 Допустимо:
 - использовать термин "implementation report" как человекочитаемое название конкретного protocol-like summary;
 - делать epic-level closure summary, если она ссылается на канонический protocol/evidence layer и не создаёт второй competing log.
+
+## 6c. Candidate seams must not be documented as owned truth
+
+Когда capability или package seam только **candidate** для framework ownership, delivery docs не должны описывать его так, будто ownership уже закрыт.
+
+Применяй это правило в:
+- feature registries;
+- verification/scenario matrices;
+- specs и protocols, где фигурирует будущая extraction target.
+
+Нормальная формулировка:
+- `candidate / gated`
+- `framework-owned only if [gate condition]`
+- `product-local until seam is extracted`
+
+Нельзя:
+- silently называть candidate seam “framework-owned”;
+- писать feature/scenario rows так, будто решение уже принято, если оно ещё зависит от boundary gate.
 
 ## 7. Minimal traceability rule
 

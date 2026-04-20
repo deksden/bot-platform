@@ -182,9 +182,9 @@ history:
 
 > Closure state должен отражать реальный delivery lifecycle, а не просто “ACTIVE/COMPLETED” в frontmatter.
 
-## Project-specific addendum for `sales-agent`
+## Project-specific addendum for `bot-platform`
 
-При использовании этого шаблона в `sales-agent` дополнительно соблюдаем:
+При использовании этого шаблона в `bot-platform` дополнительно соблюдаем:
 - feature описывается как vertical slice, а не как список задач по слоям;
 - если feature трогает runtime surface, она должна явно указать contract impact;
 - если feature участвует в пользовательском пути, она должна быть привязана хотя бы к одному `SCN-*` или `XE-*`;

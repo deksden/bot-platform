@@ -1,6 +1,6 @@
 ---
 file: .memory-bank/spec/operations/git-flow.md
-description: Git flow for sales-agent - stable promotion path from feature work to beta and production.
+description: Git flow for bot-platform - stable promotion path from feature work to protected branches and hosted verification when applicable.
 purpose: Read before creating branches or promoting changes so beta/prod releases stay predictable and traceable.
 version: 1.2.0
 date: 2026-04-19
@@ -29,13 +29,9 @@ related_files:
 
 ## Current implementation phase
 
-- Active parallel streams:
-  - `EP-006 Operator Control Plane`
-  - `EP-010 Operator Auth And Access`
-- Deferred next stream:
-  - `EP-008 Scenarios And Verification` starts after the first stable operator/auth surfaces land on `develop`.
-- Parallel planning reference:
-  - [Parallel delivery plan](../../plans/parallel-delivery-plan.md)
+- Repo status: bootstrap and split-program execution under `PRT-036`.
+- Active implementation waves should be declared in repo-local protocol / epic / feature docs before parallel work starts.
+- Do not leave stale cross-repo planning references in this runbook; only link repo-local planning docs that actually exist.
 
 ## Branch naming
 
@@ -78,9 +74,9 @@ related_files:
   - свой `git worktree`
   - своего owning agent или подкоманду
 - Recommended worktree naming:
-  - `sales-agent-ep006`
-  - `sales-agent-ep010`
-  - `sales-agent-ep008`
+  - `bot-platform-ep022`
+  - `bot-platform-auth`
+  - `bot-platform-workflow`
 - Recommended branch naming:
   - `feature/EP-006-operator-control-plane`
   - `feature/EP-010-operator-auth-access`
