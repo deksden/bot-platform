@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.53.0
+version: 1.55.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -59,7 +59,15 @@ related_files:
   - .tasks/prt-036-implementation-wave-38-2026-04-20/summary/PRT-036-implementation-wave-38-synthesis.md
   - .tasks/prt-036-implementation-wave-39-2026-04-20/summary/PRT-036-implementation-wave-39-synthesis.md
   - .tasks/prt-036-implementation-wave-40-2026-04-20/summary/PRT-036-implementation-wave-40-synthesis.md
+  - .tasks/prt-036-implementation-wave-41-2026-04-20/summary/PRT-036-implementation-wave-41-synthesis.md
+  - .tasks/prt-036-implementation-wave-42-2026-04-20/summary/PRT-036-implementation-wave-42-synthesis.md
 history:
+  - version: 1.55.0
+    date: 2026-04-20
+    changes: Recorded wave-42 completion: `sales-agent` now adopts the published `@docoved-agent/sa-docoved@0.1.4` ingest/validate surface in `SCN-209`, while broader shared-helper and multi-format Docoved ingest consumers remain explicitly deferred to later bounded waves.
+  - version: 1.54.0
+    date: 2026-04-20
+    changes: Recorded wave-41 completion: `@docoved-agent/sa-docoved@0.1.4` is now really published through the protected-branch GitHub release flow, so the next bounded wave can perform the first semver-backed ingest/validate consumer cutover in sales-agent.
   - version: 1.53.0
     date: 2026-04-20
     changes: Recorded wave-40 completion: the Docoved ingest/validate owner slice is now materialized into release-shaped repo state as `@docoved-agent/sa-docoved@0.1.4`, and detached tarball proof closes the local pre-publish gate before the next intentional publish wave.
@@ -546,8 +554,21 @@ Review status:
   - the exact packed tarball passes detached smoke install outside repo workspaces;
   - the local pre-publish gate is closed for this package version;
 - wave-40 synthesis is recorded in `.tasks/prt-036-implementation-wave-40-2026-04-20/summary/PRT-036-implementation-wave-40-synthesis.md`;
+- implementation stage: wave 41 completed;
+- the updated Docoved owner slice is now really published and available for semver-backed downstream adoption:
+  - `@docoved-agent/sa-docoved@0.1.4` is published to npm;
+  - the protected-branch readiness workflow is green on the release commit;
+  - the GitHub-hosted publish workflow is green for that same version;
+- wave-41 synthesis is recorded in `.tasks/prt-036-implementation-wave-41-2026-04-20/summary/PRT-036-implementation-wave-41-synthesis.md`;
+- implementation stage: wave 42 completed;
+- the first semver-backed downstream ingest/validate consumer now uses the published Docoved package:
+  - `scenario-runner` resolves `@docoved-agent/sa-docoved@0.1.4`;
+  - `SCN-209` now imports ingest/validate surface from the published package;
+  - `SCN-213` re-proves the earlier published-package Docoved seam after the dependency bump;
+  - the broader mixed `@sales-agent/sa-docoved` helper tail remains intentionally deferred;
+- wave-42 synthesis is recorded in `.tasks/prt-036-implementation-wave-42-2026-04-20/summary/PRT-036-implementation-wave-42-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - intentionally publishing `@docoved-agent/sa-docoved@0.1.4` through the accepted git/release flow;
+  - choosing the next bounded ingest/validate consumer tranche after `SCN-209`;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
