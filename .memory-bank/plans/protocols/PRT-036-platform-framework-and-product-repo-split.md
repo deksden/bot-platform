@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.52.0
+version: 1.53.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -58,7 +58,11 @@ related_files:
   - .tasks/prt-036-implementation-wave-37-2026-04-20/summary/PRT-036-implementation-wave-37-synthesis.md
   - .tasks/prt-036-implementation-wave-38-2026-04-20/summary/PRT-036-implementation-wave-38-synthesis.md
   - .tasks/prt-036-implementation-wave-39-2026-04-20/summary/PRT-036-implementation-wave-39-synthesis.md
+  - .tasks/prt-036-implementation-wave-40-2026-04-20/summary/PRT-036-implementation-wave-40-synthesis.md
 history:
+  - version: 1.53.0
+    date: 2026-04-20
+    changes: Recorded wave-40 completion: the Docoved ingest/validate owner slice is now materialized into release-shaped repo state as `@docoved-agent/sa-docoved@0.1.4`, and detached tarball proof closes the local pre-publish gate before the next intentional publish wave.
   - version: 1.52.0
     date: 2026-04-20
     changes: Recorded wave-39 completion: `docoved-agent/packages/sa-docoved` now owns the bounded ingest/validate contour in repo state, while versioning, publication, and downstream sales-agent adoption remain intentionally separate later waves.
@@ -536,8 +540,14 @@ Review status:
   - `docoved-agent/packages/sa-docoved` now contains the ingest/validate contour and its required helper files;
   - versioning, publish, and downstream consumer adoption remain intentionally separate later waves;
 - wave-39 synthesis is recorded in `.tasks/prt-036-implementation-wave-39-2026-04-20/summary/PRT-036-implementation-wave-39-synthesis.md`;
+- implementation stage: wave 40 completed;
+- the new Docoved owner slice is now materialized into release-shaped package state:
+  - `@docoved-agent/sa-docoved` now sits at repo version `0.1.4`;
+  - the exact packed tarball passes detached smoke install outside repo workspaces;
+  - the local pre-publish gate is closed for this package version;
+- wave-40 synthesis is recorded in `.tasks/prt-036-implementation-wave-40-2026-04-20/summary/PRT-036-implementation-wave-40-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - materializing the new Docoved ingest/validate owner slice into versioned release state and detached proof;
+  - intentionally publishing `@docoved-agent/sa-docoved@0.1.4` through the accepted git/release flow;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
