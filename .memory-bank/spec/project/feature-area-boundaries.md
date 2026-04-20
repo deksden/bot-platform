@@ -125,7 +125,7 @@ Otherwise they remain product-local.
 - `packages/client-sdk`
 - `apps/server` framework host glue
 - `apps/workflow` framework helpers
-- `packages/scenario-runner`
+- mixed-source `packages/scenario-runner` to target `packages/scenario-system`
 - `packages/shared`
 
 These areas must be split by seam first, not moved wholesale.

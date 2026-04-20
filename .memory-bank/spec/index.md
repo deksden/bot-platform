@@ -73,7 +73,7 @@ history:
 - `client-api/index.md`
 - `client-api/typed-client-api-and-sdk.md`
 - `scenarios/index.md`
-- `scenarios/scenario-system-and-evidence.md`
+- `runtime/scenario-system-framework-contract.md`
 - `scenarios/hosted-beta-execution-model.md`
 - `operations/index.md`
 - `operations/git-flow.md`

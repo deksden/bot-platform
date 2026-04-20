@@ -48,7 +48,7 @@ packages/
   api-contract/        # framework namespaces, envelopes, contract catalog plumbing
   client-sdk/          # base transport and typed invoke shell
   core/                # framework kernel, shared runtime seams, command/auth/workflow framework code
-  scenario-runner/     # shared runner, fixtures, evidence tooling
+  scenario-system/     # shared scenario taxonomy, evidence tooling, semantic-eval shell
   observability/       # logging, tracing, diagnostics helpers
   platform-config/     # typed env/config resolution and policy defaults
   prompt-catalog/      # shared prompt engine and reusable prompt assets
@@ -70,7 +70,7 @@ High-confidence first-wave candidates from the mixed source repo:
 - framework slices of `packages/api-contract/**`
 - framework slices of `packages/client-sdk/**`
 - framework slices of `packages/core/**`
-- shared scenario/evidence slices of `packages/scenario-runner/**`
+- shared scenario/evidence slices of `packages/scenario-runner/**` extracted into `packages/scenario-system/**`
 - canonical `mbb/**`
 
 Likely later candidates after seam extraction:
@@ -123,12 +123,13 @@ Not allowed here:
 - Seller customer/commerce/follow-up truth;
 - Docoved grounded-answering product truth.
 
-### `scenario-runner`
+### `scenario-system`
 
 Allowed here:
-- shared runner;
+- shared scenario taxonomy;
 - evidence helpers;
-- fixture and execution support.
+- fixture and execution support;
+- framework-safe semantic-eval transcript/provenance helpers.
 
 Product suites should not remain in the framework repo.
 
