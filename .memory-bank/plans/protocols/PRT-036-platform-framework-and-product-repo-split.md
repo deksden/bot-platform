@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.14.0
+version: 1.15.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.15.0
+    date: 2026-04-20
+    changes: Recorded the completion of implementation wave 04: TR-01 cross-repo traceability was assembled and verified, mixed-source replacement rules were made explicit, and accepted traceability-anchor lessons were folded into the shared MBB guidance.
   - version: 1.14.0
     date: 2026-04-20
     changes: Recorded the completion of implementation wave 03: framework, SellerAgent, and Docoved scenario/verification matrices were actualized against canonical feature registries, and accepted scenario-ownership lessons were folded back into the MBB scenario authoring rules.
@@ -1773,8 +1776,8 @@ Planning dependencies:
 
 Current execution note:
 - steps `1..4` are materially advanced, with Memory Bank bootstrap already landed and contract-boundary research packs already written;
-- steps `5..7` are materially advanced through feature/scenario actualization, with `TR-01` still pending inside step `7`;
-- the active protocol focus is now steps `7..8`;
+- steps `5..7` are materially advanced, with feature/scenario actualization and `TR-01` now completed;
+- the active protocol focus is now step `8` plus the remaining repo-local doc migration needed to retire broad hub anchors over time;
 - mixed-package extraction design should continue, but broad code movement must not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
@@ -1866,6 +1869,12 @@ Required sub-workstreams:
 Exit condition:
 - no major target repo is still relying on placeholder-only planning structure for its core features;
 - the next code migration wave can name the canonical spec/feature/scenario anchor for each moved family.
+
+Current status:
+- actualized feature registries are landed in all target repos;
+- scenario ownership and verification matrices are rebound to those registries;
+- `TR-01` explicit cross-repo traceability is complete for the current split stage;
+- remaining work in Wave 1B is deeper repo-local doc migration so broad hub anchors can later be replaced with detailed child specs.
 
 ### Wave 2: Extract `bot-platform` framework core
 
