@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.29.0
+version: 1.30.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,7 +36,11 @@ related_files:
   - .tasks/prt-036-phase-2-implementation-planning-2026-04-19/summary/PRT-036-phase-2-implementation-synthesis.md
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
+  - .tasks/prt-036-implementation-wave-17-2026-04-20/summary/PRT-036-implementation-wave-17-synthesis.md
 history:
+  - version: 1.30.0
+    date: 2026-04-20
+    changes: Recorded wave-17 completion: target-repo readiness audits showed both product repos were still docs-only, `selleragent` was upgraded into the first buildable product code landing zone, and `packages/core` now owns the first SellerAgent business-profile root/git/media slice while the full `W09-MP-03` consumer rewrite remains a later wave.
   - version: 1.29.0
     date: 2026-04-20
     changes: Reconciled the canonical protocol text with the actual wave-16 result: the currently accepted bridge for framework-safe slices is public scoped npm under `@dd-bot-platform/*`, the first `sales-agent` consumer cutover is complete, and the next focus moved from bridge proof to later extraction/adoption waves.
@@ -296,10 +300,16 @@ Review status:
   - the active consumer bridge in `sales-agent` no longer uses vendored semantic-eval mirrors in `sa-judge` or `scenario-runner`;
   - ADR-002 records the accepted public scoped npm deviation after restricted publication failed with `E402`;
 - wave-16 synthesis is recorded in `.tasks/prt-036-implementation-wave-16-2026-04-20/summary/PRT-036-implementation-wave-16-synthesis.md`;
+- implementation stage: wave 17 completed;
+- target-repo bootstrap is now unblocked for the first SellerAgent slice:
+  - readiness audits confirmed both `selleragent` and `docoved-agent` were still docs-only target repos;
+  - `selleragent` now has a minimal pnpm/typescript workspace plus `packages/core` as the first product-owned landing package;
+  - the first SellerAgent business-profile root/git/media slice is landed in that package;
+- wave-17 synthesis is recorded in `.tasks/prt-036-implementation-wave-17-2026-04-20/summary/PRT-036-implementation-wave-17-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - recording and verifying the first vendored-bridge retirement evidence after the active consumer cutover;
-  - deciding whether `scenario-runner` needs any later runtime-core adoption beyond the now-landed contract slice;
-  - `W09-MP-02` and `W09-MP-03` execution once framework prerequisites are explicit;
+  - deciding the temporary bridge/shim strategy for SellerAgent product-package consumption during `W09-MP-03`;
+  - starting the first real SellerAgent consumer rewrite tranche onto the new `selleragent/packages/core` landing zone;
+  - bootstrapping `docoved-agent` into a runnable code contour before attempting `W09-MP-02`;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 
 ## Key decisions / deviations
