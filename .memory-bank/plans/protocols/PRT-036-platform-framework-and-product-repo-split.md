@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.22.0
+version: 1.23.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.23.0
+    date: 2026-04-20
+    changes: Started the first consumer-adoption tranche after framework extraction: `sa-judge` now uses one explicit temporary vendored mirror for the framework semantic-eval slice (`api-contract` semantic-eval/runtime leaf plus semantic judge runtime core), with local wrappers and explicit expiry/removal metadata while the private-registry bridge remains the target state.
   - version: 1.22.0
     date: 2026-04-20
     changes: Continued real execution of `W09-MP-01`: landed the minimal `bot-platform/packages/api-contract` semantic-eval slice (`semantic-eval` plus `runtimeUsage`), added the framework semantic judge runtime shell to `packages/scenario-system`, verified the framework boundary stays product-neutral, and recorded wave-11 adoption guidance to start consumer transition from `sa-judge`.
@@ -251,9 +254,12 @@ Review status:
 - implementation stage: wave 11 completed;
 - the next executable `W09-MP-01` tranche now exists in `bot-platform/packages/api-contract` plus `packages/scenario-system/src/semantic-eval/judge-runtime.ts`;
 - wave-11 synthesis is recorded in `.tasks/prt-036-implementation-wave-11-2026-04-20/summary/PRT-036-implementation-wave-11-synthesis.md`;
+- implementation stage: wave 12 completed;
+- the first consumer-adoption tranche is now landed in `sales-agent/packages/sa-judge` through an explicit temporary vendored mirror under `src/vendor/bot-platform/`;
+- wave-12 synthesis is recorded in `.tasks/prt-036-implementation-wave-12-2026-04-20/summary/PRT-036-implementation-wave-12-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - first product-consumer adoption under `W09-MP-01`, starting with `sa-judge`;
-  - keeping `scenario-runner` on a local adapter/export surface while shared runtime core adoption stabilizes;
+  - replacing the temporary `sa-judge` vendored bridge with the published private-registry bridge once ready;
+  - preparing the `scenario-runner` adoption tranche while keeping its local adapter/export surface;
   - `W09-MP-02` and `W09-MP-03` execution once framework prerequisites are explicit;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 
