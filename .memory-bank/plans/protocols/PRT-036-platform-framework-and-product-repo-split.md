@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.43.0
+version: 1.45.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -49,7 +49,15 @@ related_files:
   - .tasks/prt-036-implementation-wave-28-2026-04-20/summary/PRT-036-implementation-wave-28-synthesis.md
   - .tasks/prt-036-implementation-wave-29-2026-04-20/summary/PRT-036-implementation-wave-29-synthesis.md
   - .tasks/prt-036-implementation-wave-30-2026-04-20/summary/PRT-036-implementation-wave-30-synthesis.md
+  - .tasks/prt-036-implementation-wave-31-2026-04-20/summary/PRT-036-implementation-wave-31-synthesis.md
+  - .tasks/prt-036-implementation-wave-32-2026-04-20/summary/PRT-036-implementation-wave-32-synthesis.md
 history:
+  - version: 1.45.0
+    date: 2026-04-20
+    changes: Recorded wave-32 completion: the expanded Docoved seam is now materialized into versioned repo state as `@docoved-agent/sa-docoved@0.1.2`, and detached tarball smoke proof closes the local pre-publish gate before real npm publication and semver-backed downstream consumer work.
+  - version: 1.44.0
+    date: 2026-04-20
+    changes: Recorded wave-31 completion: `docoved-agent/packages/sa-docoved` now owns the next bounded quality-refresh operational seam through typed lifecycle helpers plus `loadQualityRefreshJob(...)`, while broader `sales-agent` consumer cutover remains a later wave after versioning/publication.
   - version: 1.43.0
     date: 2026-04-20
     changes: Recorded wave-30 completion: bounded scout tasks were used to choose the next executable post-wave-29 move, confirming that the next best tranche is Docoved quality-refresh operational readbacks through `@docoved-agent/sa-docoved` rather than a premature attack on `@sales-agent/core` or `@sales-agent/db`.
@@ -446,9 +454,21 @@ Review status:
   - there is no clean standalone SellerAgent-owned `@sales-agent/*` package left to extract next as a low-risk tranche;
   - the next best bounded packet is Docoved quality-refresh operational readbacks via `@docoved-agent/sa-docoved`, starting with `SCN-212` and `SCN-213`;
 - wave-30 synthesis is recorded in `.tasks/prt-036-implementation-wave-30-2026-04-20/summary/PRT-036-implementation-wave-30-synthesis.md`;
+- implementation stage: wave 31 completed;
+- the next bounded Docoved quality-refresh seam is now landed in the owning product package:
+  - `@docoved-agent/sa-docoved` exports typed quality-refresh lifecycle helpers;
+  - the legacy in-process host adapter now implements `readbacks.loadQualityRefreshJob(...)`;
+  - the contract version remains at `1`;
+- wave-31 synthesis is recorded in `.tasks/prt-036-implementation-wave-31-2026-04-20/summary/PRT-036-implementation-wave-31-synthesis.md`;
+- implementation stage: wave 32 completed;
+- the expanded Docoved seam is now materialized into versioned repo state and detached-proofed:
+  - `@docoved-agent/sa-docoved` now sits at repo version `0.1.2`;
+  - the exact packed tarball passes detached smoke install outside repo workspaces;
+  - the local pre-publish gate is closed for this package version;
+- wave-32 synthesis is recorded in `.tasks/prt-036-implementation-wave-32-2026-04-20/summary/PRT-036-implementation-wave-32-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - implementing the next Docoved quality-refresh operational-readback packet through `@docoved-agent/sa-docoved`;
-  - cutting `SCN-212` and `SCN-213` over to that product-owned seam while guarding the wave-21 seam with `SCN-179` and `SCN-180`;
+  - intentionally publishing `@docoved-agent/sa-docoved@0.1.2` through the accepted git/release flow;
+  - cutting `SCN-212` and `SCN-213` over to that product-owned semver-backed seam while guarding the wave-21 seam with `SCN-179` and `SCN-180`;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
