@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.16.0
+version: 1.17.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.17.0
+    date: 2026-04-20
+    changes: Recorded the completion of implementation wave 06 infrastructure-side extraction design (`X-04..X-06`) for `packages/db`, `apps/server`, and `apps/workflow`, leaving only `X-07..X-08` before the extraction-design backlog is complete.
   - version: 1.16.0
     date: 2026-04-20
     changes: Recorded the completion of implementation wave 05 first-tranche extraction design (`X-01..X-03`) for `packages/core`, `packages/api-contract`, and `packages/client-sdk`, and added an operational rule to use only locally supported subagent models during protocol execution.
@@ -1789,8 +1792,8 @@ Planning dependencies:
 Current execution note:
 - steps `1..4` are materially advanced, with Memory Bank bootstrap already landed and contract-boundary research packs already written;
 - steps `5..7` are materially advanced, with feature/scenario actualization and `TR-01` now completed;
-- step `8` is now partially advanced through the accepted `X-01..X-03` design tranche;
-- the active protocol focus is now the remaining `X-04..X-08` design slices plus the repo-local doc migration needed to retire broad hub anchors over time;
+- step `8` is now materially advanced through the accepted `X-01..X-06` design tranches;
+- the active protocol focus is now the final design slices `X-07..X-08` plus the repo-local doc migration needed to retire broad hub anchors over time;
 - mixed-package extraction design should continue, but broad code movement must not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
@@ -1903,12 +1906,18 @@ Current status:
   - `X-01` `packages/core`
   - `X-02` `packages/api-contract`
   - `X-03` `packages/client-sdk`
-- remaining design slices before broad code movement:
+- infrastructure-side design tranche is also complete for:
   - `X-04` `packages/db`
   - `X-05` `apps/server`
   - `X-06` `apps/workflow`
+- remaining design slices before broad code movement:
   - `X-07` `packages/scenario-runner`
   - `X-08` `packages/shared`
+
+Current extraction-design baseline:
+- package/runtime/data/host seams are now mapped for `core`, `api-contract`, `client-sdk`, `db`, `server`, and `workflow`;
+- remaining work is concentrated in shared verification tooling and the legacy `shared` dumping-ground tail;
+- broad source movement still remains gated on converting accepted design conclusions into canonical target-repo docs and move plans.
 
 ### Wave 3: Land SellerAgent product repo
 
