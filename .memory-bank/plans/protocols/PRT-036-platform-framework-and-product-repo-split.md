@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.42.0
+version: 1.43.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -48,7 +48,11 @@ related_files:
   - .tasks/prt-036-implementation-wave-27-2026-04-20/summary/PRT-036-implementation-wave-27-synthesis.md
   - .tasks/prt-036-implementation-wave-28-2026-04-20/summary/PRT-036-implementation-wave-28-synthesis.md
   - .tasks/prt-036-implementation-wave-29-2026-04-20/summary/PRT-036-implementation-wave-29-synthesis.md
+  - .tasks/prt-036-implementation-wave-30-2026-04-20/summary/PRT-036-implementation-wave-30-synthesis.md
 history:
+  - version: 1.43.0
+    date: 2026-04-20
+    changes: Recorded wave-30 completion: bounded scout tasks were used to choose the next executable post-wave-29 move, confirming that the next best tranche is Docoved quality-refresh operational readbacks through `@docoved-agent/sa-docoved` rather than a premature attack on `@sales-agent/core` or `@sales-agent/db`.
   - version: 1.42.0
     date: 2026-04-20
     changes: Recorded wave-29 completion: target package naming is now canonically fixed across the framework repo, both product repos, and the mixed source repo: `@dd-bot-platform/*`, `@selleragent/*`, and `@docoved-agent/*` are the accepted target scopes, while `@sales-agent/*` remains transitional mixed-repo naming only.
@@ -436,9 +440,15 @@ Review status:
   - Docoved target scope: `@docoved-agent/*`
   - `@sales-agent/*` is transitional mixed-repo naming only and must be retired by protocol closeout;
 - wave-29 synthesis is recorded in `.tasks/prt-036-implementation-wave-29-2026-04-20/summary/PRT-036-implementation-wave-29-synthesis.md`;
+- implementation stage: wave 30 completed;
+- bounded scout tasks were used to choose the next executable migration packet after waves 27-29:
+  - remaining mixed-ownership hotspots are concentrated in `@sales-agent/core`, `@sales-agent/db`, `@sales-agent/sa-docoved`, and `@sales-agent/scenario-runner`;
+  - there is no clean standalone SellerAgent-owned `@sales-agent/*` package left to extract next as a low-risk tranche;
+  - the next best bounded packet is Docoved quality-refresh operational readbacks via `@docoved-agent/sa-docoved`, starting with `SCN-212` and `SCN-213`;
+- wave-30 synthesis is recorded in `.tasks/prt-036-implementation-wave-30-2026-04-20/summary/PRT-036-implementation-wave-30-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - continuing later mixed-package extraction waves now that the first published product-package path is proven end-to-end;
-  - planning the next Docoved host-hardening tranche so temporary compat readback and mixed dist-path coupling can retire incrementally instead of spreading to later scenario families;
+  - implementing the next Docoved quality-refresh operational-readback packet through `@docoved-agent/sa-docoved`;
+  - cutting `SCN-212` and `SCN-213` over to that product-owned seam while guarding the wave-21 seam with `SCN-179` and `SCN-180`;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
