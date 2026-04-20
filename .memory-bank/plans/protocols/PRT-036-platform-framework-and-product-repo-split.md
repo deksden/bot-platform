@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.31.0
+version: 1.32.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -38,7 +38,11 @@ related_files:
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
   - .tasks/prt-036-implementation-wave-17-2026-04-20/summary/PRT-036-implementation-wave-17-synthesis.md
   - .tasks/prt-036-implementation-wave-18-2026-04-20/summary/PRT-036-implementation-wave-18-synthesis.md
+  - .tasks/prt-036-implementation-wave-19-2026-04-20/summary/PRT-036-implementation-wave-19-synthesis.md
 history:
+  - version: 1.32.0
+    date: 2026-04-20
+    changes: Recorded wave-19 completion: `sales-agent` now uses a temporary vendored workspace bridge for `@selleragent/core`, the first non-DB `W09-MP-03` consumers import SellerAgent-owned root/git/media symbols from that bridge, `@selleragent/shared` is reduced to a compatibility shim for deferred consumers such as `packages/db`, and the next Docoved runnable host slice is explicitly scoped around `packages/sa-docoved` plus `SCN-179`/`SCN-180`.
   - version: 1.31.0
     date: 2026-04-20
     changes: Recorded wave-18 completion: `docoved-agent` was upgraded from a docs-only bootstrap into a buildable product code landing zone, `packages/sa-docoved` now owns the first acceptance-host contract skeleton, and both target product repos now have minimal runnable code contours before their real move packets.
@@ -315,10 +319,17 @@ Review status:
   - `docoved-agent` now has a minimal pnpm/typescript workspace plus `packages/sa-docoved` as the first product-owned landing package;
   - the first Docoved acceptance-host contract skeleton is landed in that package;
 - wave-18 synthesis is recorded in `.tasks/prt-036-implementation-wave-18-2026-04-20/summary/PRT-036-implementation-wave-18-synthesis.md`;
+- implementation stage: wave 19 completed;
+- the first real SellerAgent consumer cutover tranche is now proven:
+  - `sales-agent` contains a temporary vendored workspace bridge package `@selleragent/core` whose source of truth remains `selleragent/packages/core`;
+  - first non-DB `W09-MP-03` consumers now import the moved SellerAgent root/git/media surface from `@selleragent/core`;
+  - `@selleragent/shared` now acts as a compatibility shim for the deferred DB/helper-tail contour instead of remaining an ungoverned second owner of the moved surface;
+  - targeted local scenario proof for the cutover is green (`SCN-038`, `SCN-042`, `SCN-091`);
+- wave-19 synthesis is recorded in `.tasks/prt-036-implementation-wave-19-2026-04-20/summary/PRT-036-implementation-wave-19-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - deciding the temporary bridge/shim strategy for SellerAgent product-package consumption during `W09-MP-03`;
-  - starting the first real SellerAgent consumer rewrite tranche onto the new `selleragent/packages/core` landing zone;
-  - starting the first runnable Docoved host-implementation tranche on top of `docoved-agent/packages/sa-docoved`;
+  - executing the SellerAgent DB-side/helper-tail follow-on packet so deferred moved-symbol imports disappear from `@selleragent/shared`;
+  - replacing the temporary SellerAgent vendored bridge with an installable/versioned product-package distribution path;
+  - starting the first runnable Docoved host-implementation tranche on top of `docoved-agent/packages/sa-docoved`, bounded to the `SCN-179`/`SCN-180` seam;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 
 ## Key decisions / deviations
