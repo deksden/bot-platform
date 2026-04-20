@@ -2,15 +2,21 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.4.0
+version: 0.6.0
 date: 2026-04-20
-status: DRAFT
+status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.6.0
+    date: 2026-04-20
+    changes: Closed the first bridge exercise instead of leaving it "underway": the published `@dd-bot-platform/*` path is proven by active `sales-agent` consumers, vendored mirrors are retired there, and the remaining blocker is no longer bridge validation but later framework extraction/adoption scope.
+  - version: 0.5.0
+    date: 2026-04-20
+    changes: Recorded the first real npm bridge exercise: `@dd-bot-platform/api-contract@0.2.0` and `@dd-bot-platform/scenario-system@0.2.0` are published, the bridge policy moved to public scoped npm via ADR-002, and the first active consumer cutover in `sales-agent` is now underway.
   - version: 0.4.0
     date: 2026-04-20
-    changes: Switched the framework release target to npm scope `@dd-bot-platform`, added Changesets/release-workflow scaffolding, and established the first concrete private npm release runbook for extracted packages.
+    changes: Switched the framework release target to npm scope `@dd-bot-platform`, added Changesets/release-workflow scaffolding, and established the first concrete npm release runbook for extracted packages.
   - version: 0.3.0
     date: 2026-04-20
     changes: Recorded the first publish-readiness tranche for extracted framework packages: package metadata is now aligned with the private-registry bridge and the operational bridge contract is documented in repo-local operations specs.
@@ -35,7 +41,7 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - spec/plans/guides/scenarios section hubs
 - canonical `mbb/**`
 - mirrored `git-flow.md`
-- private-registry package bridge operations spec
+- package bridge operations spec
 - npm package release runbook
 - initial architecture, project, and planning skeleton docs
 - framework epic map and feature registry
@@ -45,6 +51,13 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
   - `@dd-bot-platform/api-contract`
   - `@dd-bot-platform/scenario-system`
 - Changesets/release workflow scaffolding for the first publishable framework packages
+- first published framework package versions:
+  - `@dd-bot-platform/api-contract@0.2.0`
+  - `@dd-bot-platform/scenario-system@0.2.0`
+- first active consumer cutover proof in `sales-agent`:
+  - `packages/sa-judge` now consumes the published bridge
+  - `packages/scenario-runner` now consumes the published bridge
+  - temporary vendored semantic-eval mirrors are retired from those packages
 
 ## Not landed yet
 
@@ -53,11 +66,10 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - moved framework ADRs and follow-up child protocols beyond `PRT-036`
 - actual framework scenario catalog behind the current matrix
 - actual framework code extraction
-- product-repo install auth contour proof for consuming published framework packages
+- broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 
-## Current blockers before code extraction
+## Current blockers before broader code extraction
 
-- dependency bridge decision
 - broader namespace split for `client-sdk` and later framework packages
 - `packages/core` seam extraction map
 - workflow host split design
@@ -71,8 +83,6 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
    - auth core
    - workflow host
    - persistence interface
-2. prove local/GitHub Actions/Vercel install auth for consuming `@dd-bot-platform/*`
-3. replace vendored consumer mirrors with published private-registry packages once auth/install contours are ready
-4. land framework planning docs:
+2. land framework planning docs:
    - follow-up split child protocols and ADR decisions after `PRT-036`
-5. start moving clearly framework-owned source docs into this repo
+3. start moving clearly framework-owned source docs into this repo

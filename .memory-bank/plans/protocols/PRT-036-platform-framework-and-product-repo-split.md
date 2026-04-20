@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.27.0
+version: 1.29.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -21,6 +21,7 @@ related_files:
   - .memory-bank/spec/operations/hosted-beta-acceptance-contract.md
   - .memory-bank/spec/engineering/delivery-standards.md
   - .memory-bank/plans/adr/ADR-001-private-registry-bridge-for-product-repos.md
+  - .memory-bank/plans/adr/ADR-002-public-npm-bridge-for-framework-packages.md
   - .tasks/prt-036-protocol-review-2026-04-19/summary/PRT-036-review-synthesis.md
   - .tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-00-execution-pack-index.md
   - .tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-01-ownership-matrix.md
@@ -36,6 +37,12 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.29.0
+    date: 2026-04-20
+    changes: Reconciled the canonical protocol text with the actual wave-16 result: the currently accepted bridge for framework-safe slices is public scoped npm under `@dd-bot-platform/*`, the first `sales-agent` consumer cutover is complete, and the next focus moved from bridge proof to later extraction/adoption waves.
+  - version: 1.28.0
+    date: 2026-04-20
+    changes: Recorded wave-16 completion: the first framework packages were actually published to npm as `@dd-bot-platform/*`, ADR-002 captured the public scoped npm deviation after restricted publication failed, and the active consumer bridge in `sales-agent` moved from vendored semantic-eval mirrors to the published packages.
   - version: 1.27.0
     date: 2026-04-20
     changes: Recorded wave-15 completion: `bot-platform` now has the real npm scope `@dd-bot-platform`, Changesets-based release intent, an allowlisted publish script, and a release workflow aligned to the repo's current `main`-branch bootstrap state.
@@ -188,7 +195,7 @@ This protocol exists so the split is performed as a boundary cleanup program, no
 ## Open questions / required research
 
 - Package publication strategy is now closed for the migration bridge:
-  - accepted primary bridge: private package registry from `bot-platform` into product repos;
+  - accepted current bridge for framework-safe slices: public scoped npm packages from `bot-platform` under `@dd-bot-platform/*`;
   - allowed backup only: narrow vendoring / temporary mirrors with explicit expiry;
   - rejected as primary bridge: git subtree/submodule-like dependency model.
 - The exact split of current `packages/api-contract` and `packages/client-sdk` needs a contract inventory, because part of their surface is truly framework-level while part is product-specific.
@@ -200,7 +207,7 @@ This protocol exists so the split is performed as a boundary cleanup program, no
   - target product repo is currently `selleragent`;
   - any future rename back to `sales-agent` is a separate follow-up and is not allowed to block the split program.
 
-> This protocol is allowed to fix repository boundaries first and leave some package-publication mechanics for a later narrow decision.
+> This protocol is allowed to fix repository boundaries first and leave later package-family promotion mechanics for a narrow decision.
 > It is not allowed to postpone the boundary map itself.
 
 ## Security / rollout impact
@@ -257,7 +264,7 @@ Review status:
 - implementation stage: wave 01 completed;
 - consolidated implementation-wave-01 synthesis is recorded in `.tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md`;
 - implementation stage: wave 02 completed;
-- D-02 is canonically closed in [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md);
+- D-02 is canonically closed through [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md) and the later accepted operational deviation in [ADR-002](../adr/ADR-002-public-npm-bridge-for-framework-packages.md);
 - implementation stage: wave 03 completed;
 - accepted scenario-ownership lessons were folded into `.memory-bank/mbb/scenario-docs-guide.md`;
 - implementation stage: wave 10 completed;
@@ -274,7 +281,7 @@ Review status:
 - wave-13 synthesis is recorded in `.tasks/prt-036-implementation-wave-13-2026-04-20/summary/PRT-036-implementation-wave-13-synthesis.md`;
 - implementation stage: wave 14 completed;
 - the first publish-readiness tranche for the framework bridge is now landed in `bot-platform`:
-  - `@dd-bot-platform/api-contract` and `@dd-bot-platform/scenario-system` now carry explicit private-registry publication metadata;
+  - `@dd-bot-platform/api-contract` and `@dd-bot-platform/scenario-system` now carry explicit publication metadata;
   - tarball hygiene and packed-manifest verification are now part of repo-local bridge operations truth;
 - wave-14 synthesis is recorded in `.tasks/prt-036-implementation-wave-14-2026-04-20/summary/PRT-036-implementation-wave-14-synthesis.md`;
 - implementation stage: wave 15 completed;
@@ -283,10 +290,15 @@ Review status:
   - registry target: npm
   - release discipline: Changesets plus a controlled allowlisted publish script
 - wave-15 synthesis is recorded in `.tasks/prt-036-implementation-wave-15-2026-04-20/summary/PRT-036-implementation-wave-15-synthesis.md`;
+- implementation stage: wave 16 completed;
+- the first end-to-end published bridge exercise is now proven:
+  - `@dd-bot-platform/api-contract@0.2.0` and `@dd-bot-platform/scenario-system@0.2.0` are published in npm;
+  - the active consumer bridge in `sales-agent` no longer uses vendored semantic-eval mirrors in `sa-judge` or `scenario-runner`;
+  - ADR-002 records the accepted public scoped npm deviation after restricted publication failed with `E402`;
+- wave-16 synthesis is recorded in `.tasks/prt-036-implementation-wave-16-2026-04-20/summary/PRT-036-implementation-wave-16-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - replacing the temporary `sa-judge` and `scenario-runner` vendored bridges with the published private-registry bridge once registry auth/install contours are ready;
+  - recording and verifying the first vendored-bridge retirement evidence after the active consumer cutover;
   - deciding whether `scenario-runner` needs any later runtime-core adoption beyond the now-landed contract slice;
-  - wiring the first real local/GitHub Actions/Vercel registry-auth contour for published framework consumption;
   - `W09-MP-02` and `W09-MP-03` execution once framework prerequisites are explicit;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 
@@ -296,7 +308,7 @@ Review status:
 - Decision: auth/users live in `bot-platform` only as framework contracts, helpers, guards, and lifecycle patterns; each product owns its own actual user/auth tables and runtime authority data.
 - Decision: Telegram slash commands and comparable system-command mechanics live in `bot-platform` as a command framework plus command contract vocabulary; product-specific commands, handlers, and enablement policies live in product repos.
 - Decision: workflow core belongs in `bot-platform`, but concrete workflow hosts and workflow deployments remain product-local.
-- Decision: the dependency bridge from `bot-platform` into `selleragent` and `docoved-agent` is a private package registry; vendoring is allowed only as a narrow, time-boxed exception.
+- Decision: the current dependency bridge from `bot-platform` into product repos is public scoped npm for accepted framework-safe slices under `@dd-bot-platform/*`; vendoring is allowed only as a narrow, time-boxed exception.
 - Decision: DB ownership is product-local by default; framework repos do not own product tables.
 - Decision: CI/CD is product-local by default; Vercel configuration should become simpler by giving each product repo its own deploy lifecycle.
 - Decision: if a feature is needed by both SellerAgent and Docoved, it graduates into `bot-platform` only after its boundary is clear enough to be framework code rather than one product's accidental abstraction.
@@ -1422,7 +1434,7 @@ Goal:
 Output:
 - one approved bridge strategy:
   - workspace-only during extraction;
-  - private package registry;
+  - versioned npm package bridge;
   - git/subtree bridge;
   - or another repeatable mechanism
 - decision constraints:
@@ -1434,8 +1446,8 @@ Output:
 Status:
 - accepted:
   - canonical decision direction is recorded in `R-036-02`
-  - long-lived framework ADR is [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md)
-  - private package registry is the primary bridge
+  - long-lived framework ADR path is [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md) with the current accepted bridge deviation recorded in [ADR-002](../adr/ADR-002-public-npm-bridge-for-framework-packages.md)
+  - public scoped npm under `@dd-bot-platform/*` is the currently accepted bridge for framework-safe slices
   - vendoring is backup-only with explicit expiry
   - subtree/submodule-style bridges are not the primary path
 
@@ -1487,7 +1499,7 @@ Must cover:
 Status:
 - accepted for the migration program:
   - decision synthesized in `.tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-02-dependency-bridge-decision.md`
-  - canonical long-lived ADR recorded as [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md)
+  - canonical long-lived ADR recorded as [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md), superseded operationally by [ADR-002](../adr/ADR-002-public-npm-bridge-for-framework-packages.md)
 
 #### R-036-03: Repo skeleton pack
 
