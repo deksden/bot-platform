@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.32.0
+version: 1.33.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -40,6 +40,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-18-2026-04-20/summary/PRT-036-implementation-wave-18-synthesis.md
   - .tasks/prt-036-implementation-wave-19-2026-04-20/summary/PRT-036-implementation-wave-19-synthesis.md
 history:
+  - version: 1.33.0
+    date: 2026-04-20
+    changes: Recorded wave-20 completion: the DB-side follow-on is now closed, `packages/db` consumes the last moved SellerAgent media seam from `@selleragent/core` instead of `@selleragent/shared`, and the remaining shared package surface is explicitly limited to helper-tail/security utilities while the next focus moves to bridge replacement and the first runnable Docoved host slice.
   - version: 1.32.0
     date: 2026-04-20
     changes: Recorded wave-19 completion: `sales-agent` now uses a temporary vendored workspace bridge for `@selleragent/core`, the first non-DB `W09-MP-03` consumers import SellerAgent-owned root/git/media symbols from that bridge, `@selleragent/shared` is reduced to a compatibility shim for deferred consumers such as `packages/db`, and the next Docoved runnable host slice is explicitly scoped around `packages/sa-docoved` plus `SCN-179`/`SCN-180`.
@@ -326,10 +329,17 @@ Review status:
   - `@selleragent/shared` now acts as a compatibility shim for the deferred DB/helper-tail contour instead of remaining an ungoverned second owner of the moved surface;
   - targeted local scenario proof for the cutover is green (`SCN-038`, `SCN-042`, `SCN-091`);
 - wave-19 synthesis is recorded in `.tasks/prt-036-implementation-wave-19-2026-04-20/summary/PRT-036-implementation-wave-19-synthesis.md`;
+- implementation stage: wave 20 completed;
+- the DB-side `W09-MP-03` follow-on is now closed:
+  - `packages/db` now consumes the remaining moved SellerAgent media seam (`resolveBusinessProfileMediaScope`) from `@selleragent/core`;
+  - no moved root/git/media imports remain in DB from `@selleragent/shared`;
+  - the remaining `@selleragent/shared` surface is explicitly helper-tail/security-only for now;
+  - targeted local scenario proof remains green (`SCN-038`, `SCN-042`, `SCN-091`);
+- wave-20 synthesis is recorded in `.tasks/prt-036-implementation-wave-20-2026-04-20/summary/PRT-036-implementation-wave-20-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - executing the SellerAgent DB-side/helper-tail follow-on packet so deferred moved-symbol imports disappear from `@selleragent/shared`;
   - replacing the temporary SellerAgent vendored bridge with an installable/versioned product-package distribution path;
   - starting the first runnable Docoved host-implementation tranche on top of `docoved-agent/packages/sa-docoved`, bounded to the `SCN-179`/`SCN-180` seam;
+  - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 
 ## Key decisions / deviations
