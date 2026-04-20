@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.19.0
+version: 1.20.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.20.0
+    date: 2026-04-20
+    changes: Recorded the completion of the first move-wave packetization tranche: drafted and accepted `W09-MP-01` framework scenario-shell extraction, `W09-MP-02` Docoved local host/publication baseline, and `W09-MP-03` SellerAgent business-profile shared-retirement as the first executable move order after target-doc conversion.
   - version: 1.19.0
     date: 2026-04-20
     changes: Recorded the first canonical target-doc conversion tranche: landed the shared scenario-system framework contract in `bot-platform`, the SellerAgent business-profile ownership contract in `selleragent`, and the Docoved acceptance/host contract in `docoved-agent`, shifting active focus to explicit move-wave packetization anchored to those docs.
@@ -1800,7 +1803,8 @@ Current execution note:
 - steps `5..7` are materially advanced, with feature/scenario actualization and `TR-01` now completed;
 - step `8` is now complete through the accepted `X-01..X-08` design tranches;
 - first canonical target-doc anchors are now landed for the shared scenario-system, SellerAgent business-profile ownership, and Docoved acceptance host ownership;
-- the active protocol focus is now explicit move-wave packetization and further repo-local doc migration based on those accepted target anchors;
+- first explicit move-wave packets are now drafted for framework shell extraction, Docoved local host/publication baseline, and SellerAgent business-profile shared-retirement;
+- the active protocol focus is now execution of those first move packets, starting with the framework shell packet, plus continued repo-local doc migration where gaps remain;
 - mixed-package code movement must still not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
