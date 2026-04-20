@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.37.0
+version: 1.39.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -43,7 +43,15 @@ related_files:
   - .tasks/prt-036-implementation-wave-22-2026-04-20/summary/PRT-036-implementation-wave-22-synthesis.md
   - .tasks/prt-036-implementation-wave-23-2026-04-20/summary/PRT-036-implementation-wave-23-synthesis.md
   - .tasks/prt-036-implementation-wave-24-2026-04-20/summary/PRT-036-implementation-wave-24-synthesis.md
+  - .tasks/prt-036-implementation-wave-25-2026-04-20/summary/PRT-036-implementation-wave-25-synthesis.md
+  - .tasks/prt-036-implementation-wave-26-2026-04-20/summary/PRT-036-implementation-wave-26-synthesis.md
 history:
+  - version: 1.39.0
+    date: 2026-04-20
+    changes: Recorded wave-26 completion: `NPM_TOKEN` is now provisioned in both new product repositories, closing the npm publish-auth blocker for the first GitHub-hosted product-package publication waves.
+  - version: 1.38.0
+    date: 2026-04-20
+    changes: Recorded wave-25 completion: both product repos now materialize their first accepted Changesets release intent into repo state (`@selleragent/core@0.1.1` and `@docoved-agent/sa-docoved@0.1.1`), and their bounded publish flows validate already-versioned release state instead of stale pending Changeset intent.
   - version: 1.37.0
     date: 2026-04-20
     changes: Recorded wave-24 completion: the first release-ready product packages now also pass detached tarball clean-install proof outside repo workspaces, closing the last local pre-publish gate before real npm publication and downstream bridge replacement waves.
@@ -377,7 +385,20 @@ Review status:
   - bounded import/runtime assertions are green for both packages;
   - the protocol now has local proof not only of pack/publish dry-run readiness, but also of consumer-style detached installation before the first real npm publications;
 - wave-24 synthesis is recorded in `.tasks/prt-036-implementation-wave-24-2026-04-20/summary/PRT-036-implementation-wave-24-synthesis.md`;
+- implementation stage: wave 25 completed;
+- both product-package release flows now require already-versioned repo state before publication:
+  - `selleragent` materialized `@selleragent/core@0.1.1` into repo state and consumed its pending release intent;
+  - `docoved-agent` materialized `@docoved-agent/sa-docoved@0.1.1` into repo state and consumed its pending release intent;
+  - both bounded publish scripts now refuse to publish while unreleased `.changeset/*.md` files still exist;
+  - both release workflows now validate publishable versioned state through dry-run publish instead of treating pending Changeset intent as the final gate;
+- wave-25 synthesis is recorded in `.tasks/prt-036-implementation-wave-25-2026-04-20/summary/PRT-036-implementation-wave-25-synthesis.md`;
+- implementation stage: wave 26 completed;
+- product-repo npm publish auth is now provisioned:
+  - `NPM_TOKEN` exists in `deksden/seller-agent`;
+  - `NPM_TOKEN` exists in `deksden/docoved-agent`;
+- wave-26 synthesis is recorded in `.tasks/prt-036-implementation-wave-26-2026-04-20/summary/PRT-036-implementation-wave-26-synthesis.md`;
 - the next protocol revision pass must focus on:
+  - committing and promoting the already-versioned SellerAgent and Docoved release state to `main` through the accepted git-flow;
   - executing the first real publication for `@selleragent/core` and then replacing the temporary SellerAgent vendored bridge in `sales-agent`;
   - executing the first real publication for `@docoved-agent/sa-docoved` and then replacing the temporary Docoved vendored bridge in `sales-agent`;
   - planning the next Docoved host-hardening tranche so temporary compat readback and mixed dist-path coupling can retire incrementally instead of spreading to later scenario families;
