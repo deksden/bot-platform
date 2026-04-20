@@ -15,9 +15,26 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
-  packages/scenario-system: {}
+  packages/api-contract:
+    dependencies:
+      zod:
+        specifier: 4.3.6
+        version: 4.3.6
+
+  packages/scenario-system:
+    dependencies:
+      '@bot-platform/api-contract':
+        specifier: workspace:*
+        version: link:../api-contract
+      '@openai/codex-sdk':
+        specifier: ^0.78.0
+        version: 0.78.0
 
 packages:
+
+  '@openai/codex-sdk@0.78.0':
+    resolution: {integrity: sha512-sKASs6a5mqR7haOtyTETm+a72dZLLxIYGfMwiJiLGI/xDJyABV0UYQ2V0rvGxG+MPj5ndH+pef6S2BZKpftTiA==}
+    engines: {node: '>=18'}
 
   '@types/node@25.5.0':
     resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
@@ -30,7 +47,12 @@ packages:
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+
 snapshots:
+
+  '@openai/codex-sdk@0.78.0': {}
 
   '@types/node@25.5.0':
     dependencies:
@@ -39,3 +61,5 @@ snapshots:
   typescript@5.9.3: {}
 
   undici-types@7.18.2: {}
+
+  zod@4.3.6: {}

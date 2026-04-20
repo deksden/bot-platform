@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.21.0
+version: 1.22.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.22.0
+    date: 2026-04-20
+    changes: Continued real execution of `W09-MP-01`: landed the minimal `bot-platform/packages/api-contract` semantic-eval slice (`semantic-eval` plus `runtimeUsage`), added the framework semantic judge runtime shell to `packages/scenario-system`, verified the framework boundary stays product-neutral, and recorded wave-11 adoption guidance to start consumer transition from `sa-judge`.
   - version: 1.21.0
     date: 2026-04-20
     changes: Started real execution of `W09-MP-01`: committed the `bot-platform` workspace bootstrap, landed the first framework-owned `packages/scenario-system` shell (neutral vocabulary, artifact/evidence helpers, provenance and transcript summary utilities), synced naming drift away from `scenario-runner`, and recorded wave-10 verification artifacts.
@@ -245,9 +248,12 @@ Review status:
 - implementation stage: wave 10 completed;
 - the first executable `W09-MP-01` tranche now exists in `bot-platform/packages/scenario-system`;
 - wave-10 synthesis is recorded in `.tasks/prt-036-implementation-wave-10-2026-04-20/summary/PRT-036-implementation-wave-10-synthesis.md`;
+- implementation stage: wave 11 completed;
+- the next executable `W09-MP-01` tranche now exists in `bot-platform/packages/api-contract` plus `packages/scenario-system/src/semantic-eval/judge-runtime.ts`;
+- wave-11 synthesis is recorded in `.tasks/prt-036-implementation-wave-11-2026-04-20/summary/PRT-036-implementation-wave-11-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - deeper semantic-eval shell extraction under `W09-MP-01`;
-  - product-consumer transition planning for the registry bridge;
+  - first product-consumer adoption under `W09-MP-01`, starting with `sa-judge`;
+  - keeping `scenario-runner` on a local adapter/export surface while shared runtime core adoption stabilizes;
   - `W09-MP-02` and `W09-MP-03` execution once framework prerequisites are explicit;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 

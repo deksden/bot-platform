@@ -1,4 +1,4 @@
 {
   "files": [],
-  "references": [{ "path": "./packages/scenario-system" }]
+  "references": [{ "path": "./packages/api-contract" }, { "path": "./packages/scenario-system" }]
 }
