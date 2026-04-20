@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.13.0
+version: 1.14.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.14.0
+    date: 2026-04-20
+    changes: Recorded the completion of implementation wave 03: framework, SellerAgent, and Docoved scenario/verification matrices were actualized against canonical feature registries, and accepted scenario-ownership lessons were folded back into the MBB scenario authoring rules.
   - version: 1.13.0
     date: 2026-04-20
     changes: Synced implementation wave 02 completion into the canonical target-repo protocol copy: feature registries were actualized, D-02 was closed through ADR-001, and accepted documentation lessons were folded back into Memory Bank rules.
@@ -216,10 +219,12 @@ Review status:
 - consolidated implementation-wave-01 synthesis is recorded in `.tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md`;
 - implementation stage: wave 02 completed;
 - D-02 is canonically closed in [ADR-001](../adr/ADR-001-private-registry-bridge-for-product-repos.md);
+- implementation stage: wave 03 completed;
+- accepted scenario-ownership lessons were folded into `.memory-bank/mbb/scenario-docs-guide.md`;
 - the next protocol revision pass must focus on:
-  - executable contract families;
-  - explicit MBB governance;
+  - `TR-01` cross-repo traceability;
   - extraction-enabling cleanup tasks;
+  - mixed-package source routing and retirement design;
   - reliability, migration, verification, and CI/CD gates.
 
 ## Key decisions / deviations
@@ -1768,7 +1773,8 @@ Planning dependencies:
 
 Current execution note:
 - steps `1..4` are materially advanced, with Memory Bank bootstrap already landed and contract-boundary research packs already written;
-- the active protocol focus is now steps `5..7`;
+- steps `5..7` are materially advanced through feature/scenario actualization, with `TR-01` still pending inside step `7`;
+- the active protocol focus is now steps `7..8`;
 - mixed-package extraction design should continue, but broad code movement must not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
