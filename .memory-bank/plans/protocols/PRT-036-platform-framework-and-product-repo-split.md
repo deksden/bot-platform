@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.46.0
+version: 1.47.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -52,7 +52,11 @@ related_files:
   - .tasks/prt-036-implementation-wave-31-2026-04-20/summary/PRT-036-implementation-wave-31-synthesis.md
   - .tasks/prt-036-implementation-wave-32-2026-04-20/summary/PRT-036-implementation-wave-32-synthesis.md
   - .tasks/prt-036-implementation-wave-33-2026-04-20/summary/PRT-036-implementation-wave-33-synthesis.md
+  - .tasks/prt-036-implementation-wave-34-2026-04-20/summary/PRT-036-implementation-wave-34-synthesis.md
 history:
+  - version: 1.47.0
+    date: 2026-04-20
+    changes: Recorded wave-34 completion: the narrow Docoved quality-report contract/helper slice now lives in `docoved-agent/packages/sa-docoved`, and the host/readback contract uses concrete `DocovedQualityReport` payloads while versioning and downstream semver adoption remain later waves.
   - version: 1.46.0
     date: 2026-04-20
     changes: Recorded wave-33 completion: `sales-agent` now consumes the published `@docoved-agent/sa-docoved@0.1.2` quality-refresh client in `SCN-212` and `SCN-213`, while `SCN-179` and `SCN-180` re-prove that the earlier Docoved host/publication seam still holds after the cutover.
@@ -478,8 +482,15 @@ Review status:
   - `SCN-179` and `SCN-180` re-confirm the earlier wave-21 Docoved host/publication/answer seam after the cutover;
   - remaining `@sales-agent/sa-docoved` usage is now explicitly a later helper-tail wave rather than a hidden assumption;
 - wave-33 synthesis is recorded in `.tasks/prt-036-implementation-wave-33-2026-04-20/summary/PRT-036-implementation-wave-33-synthesis.md`;
+- implementation stage: wave 34 completed;
+- the next bounded Docoved helper-tail move is now landed in the owning product package:
+  - `docoved-agent/packages/sa-docoved` now owns the Docoved quality-report contract/helper slice;
+  - quality-refresh job summaries and aggregate readbacks now carry concrete `DocovedQualityReport` payloads rather than `unknown`;
+  - the move remained narrower than a full quality-refresh engine or ingest/publication migration;
+- wave-34 synthesis is recorded in `.tasks/prt-036-implementation-wave-34-2026-04-20/summary/PRT-036-implementation-wave-34-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - identifying the next smallest Docoved helper tail that still blocks mixed-repo retirement after the now-complete quality-refresh transport cutover;
+  - materializing the new Docoved owner slice into versioned package state and detached tarball proof;
+  - only then choosing the next semver-backed consumer cutover for the report-type surface;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
