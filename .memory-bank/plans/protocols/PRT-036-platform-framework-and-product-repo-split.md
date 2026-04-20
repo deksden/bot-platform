@@ -2,8 +2,8 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.5.0
-date: 2026-04-19
+version: 1.11.0
+date: 2026-04-20
 status: ACTIVE
 epic: EP-022
 tags: [protocol, architecture, repo-split, bot-platform, selleragent, docoved, monorepo, migration, ci-cd]
@@ -15,6 +15,11 @@ related_files:
   - .memory-bank/spec/project/repo-structure.md
   - .memory-bank/spec/security/auth-and-access.md
   - .memory-bank/spec/operations/deployment-architecture.md
+  - .memory-bank/spec/operations/git-flow.md
+  - .memory-bank/spec/operations/runbook.md
+  - .memory-bank/spec/operations/production-rollout-runbook.md
+  - .memory-bank/spec/operations/hosted-beta-acceptance-contract.md
+  - .memory-bank/spec/engineering/delivery-standards.md
   - .tasks/prt-036-protocol-review-2026-04-19/summary/PRT-036-review-synthesis.md
   - .tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-00-execution-pack-index.md
   - .tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-01-ownership-matrix.md
@@ -25,7 +30,28 @@ related_files:
   - .tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-06-archive-and-history-policy.md
   - .tasks/prt-036-memory-bank-redesign-2026-04-19/summary/PRT-036-memory-bank-redesign-synthesis.md
   - .tasks/prt-036-boundary-contract-review-2026-04-19/summary/PRT-036-boundary-contract-review-synthesis.md
+  - .tasks/prt-036-phase-1-protocol-review-2026-04-19/summary/PRT-036-phase-1-review-synthesis.md
+  - .tasks/prt-036-phase-2-implementation-planning-2026-04-19/summary/PRT-036-phase-2-implementation-synthesis.md
+  - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
 history:
+  - version: 1.11.0
+    date: 2026-04-20
+    changes: Added explicit repo-rebinding and secret-separation rules: governed repo/project rebind matrix, secret inventory and rotation/decommission policy, stage-closeout requirements, and stronger MBB routing for lessons learned and insights.
+  - version: 1.10.0
+    date: 2026-04-20
+    changes: Added the phase-3 operational execution layer for PRT-036: git/worktree discipline, push and hosted-build policy, deploy/preflight and rollout gates, GitHub/Vercel green requirements, hosted scenario expectations, and mandatory lessons-learned/insights capture.
+  - version: 1.9.0
+    date: 2026-04-19
+    changes: Added the implementation-oriented execution model for PRT-036: subagent task-file standard, delegation and verification workflow, parallel task graph, wave-specific verification stages, and a phase-2 completion mark.
+  - version: 1.8.0
+    date: 2026-04-19
+    changes: Recorded the completion of phase-1 protocol review and linked the consolidated synthesis covering architecture, contracts, MBB governance, lean design, cleanup prerequisites, reliability, verification, UI, storage, and CI/CD gate requirements for the next protocol refinement pass.
+  - version: 1.7.0
+    date: 2026-04-19
+    changes: Rebased the protocol onto the real post-bootstrap state: target repo Memory Banks and first-wave planning docs are already landed, and the next required wave now explicitly covers repo-local content migration, feature-model actualization, scenario refresh, and traceability.
+  - version: 1.6.0
+    date: 2026-04-19
+    changes: Recorded the next Memory Bank fill wave in target repos: initial epic maps, feature registries, scenario matrices, and the canonical PRT-036 copy in bot-platform were added.
   - version: 1.5.0
     date: 2026-04-19
     changes: Recorded the first substantive Memory Bank fill wave in target repos: framework/product boundary docs, repo-structure docs, current-status snapshots, and verification matrices were added to bot-platform, selleragent, and docoved-agent.
@@ -120,8 +146,9 @@ This protocol exists so the split is performed as a boundary cleanup program, no
 - The exact split of `packages/scenario-runner` needs a scenario inventory:
   - scenario engine and generic evidence tooling may become platform-level;
   - SellerAgent and Docoved scenario suites should become product-local.
-- Final naming still needs one explicit confirmation:
-  - repo name `selleragent` versus keeping `sales-agent` as the long-term product repo name.
+- Operational naming is now provisionally closed for this migration wave:
+  - target product repo is currently `selleragent`;
+  - any future rename back to `sales-agent` is a separate follow-up and is not allowed to block the split program.
 
 > This protocol is allowed to fix repository boundaries first and leave some package-publication mechanics for a later narrow decision.
 > It is not allowed to postpone the boundary map itself.
@@ -143,6 +170,46 @@ This protocol exists so the split is performed as a boundary cleanup program, no
    - concrete workflow deployments in each product repo.
 5. Archive and remove historical tails from the active mainline early so the migration is not blocked by dead code ownership.
 
+## Current state baseline
+
+As of 2026-04-19, the split program is no longer at "blank target repo" stage.
+
+Already landed:
+- real target repos exist in `_Projects`:
+  - `bot-platform`
+  - `selleragent`
+  - `docoved-agent`
+- target `.memory-bank/**` roots and section hubs exist in all three repos;
+- canonical `mbb/**` upstream exists in `bot-platform`, with mirrored packs in both product repos;
+- first-wave repo-local planning/navigation docs are landed:
+  - root indexes
+  - repo-structure docs
+  - boundary docs
+  - current-status reports
+  - verification matrices
+  - epic maps
+  - feature registries
+  - scenario matrices
+- `bot-platform` already contains a canonical target-repo copy of `PRT-036`.
+
+Implication:
+- the protocol must now drive controlled content migration and repo-local truth actualization;
+- the next blocker is no longer "create Memory Bank skeletons";
+- the next blocker is "fill those Memory Banks with correct repo-owned truth and bind features to scenarios before code extraction".
+
+Review status:
+- stage of plan elaboration: phase 1 completed;
+- consolidated phase-1 review synthesis is recorded in `.tasks/prt-036-phase-1-protocol-review-2026-04-19/summary/PRT-036-phase-1-review-synthesis.md`;
+- stage of plan elaboration: phase 2 completed;
+- consolidated phase-2 implementation synthesis is recorded in `.tasks/prt-036-phase-2-implementation-planning-2026-04-19/summary/PRT-036-phase-2-implementation-synthesis.md`;
+- stage of plan elaboration: phase 3 completed;
+- consolidated phase-3 ops/runbook synthesis is recorded in `.tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md`;
+- the next protocol revision pass must focus on:
+  - executable contract families;
+  - explicit MBB governance;
+  - extraction-enabling cleanup tasks;
+  - reliability, migration, verification, and CI/CD gates.
+
 ## Key decisions / deviations
 
 - Decision: `bot-platform` is a framework/product-support repo, not a multi-tenant shared runtime serving both SellerAgent and Docoved as one live instance.
@@ -153,6 +220,545 @@ This protocol exists so the split is performed as a boundary cleanup program, no
 - Decision: CI/CD is product-local by default; Vercel configuration should become simpler by giving each product repo its own deploy lifecycle.
 - Decision: if a feature is needed by both SellerAgent and Docoved, it graduates into `bot-platform` only after its boundary is clear enough to be framework code rather than one product's accidental abstraction.
 - Decision: legacy SellerAgent Python is retained only in git history, not as live source.
+
+## Implementation Operating Model
+
+This protocol is now also the implementation contract for the split program, not only its planning frame.
+
+Implementation rule:
+- broad code movement must be driven by bounded execution slices;
+- bounded execution slices may be delegated to subagents only through explicit task files under `.tasks/**`;
+- every delegated slice must be verification-ready, not just "apparently done".
+
+### Delegation packet rule
+
+Each delegated slice must have:
+- one task file in `.tasks/<wave>/tasks/`;
+- one output report in `.tasks/<wave>/reports/`;
+- one clear primary write scope;
+- one explicit done definition;
+- one explicit verification contour.
+
+Do not delegate by chat summary alone.
+
+### Task-file standard
+
+Task files must reuse MBB/delivery discipline rather than inventing a separate document type.
+
+Every implementation-phase task file must include:
+- `Purpose`
+- `Task type`
+- `Scope of this task`
+- `Context to gather before analysis`
+- `Questions to answer`
+- `Required output`
+- `Constraints and design logic`
+- `What to avoid`
+- `Done criteria`
+- `Verification expectations`
+- `Report format`
+
+Task type must be one of:
+- `implementation`
+- `research`
+- `verification`
+- `documentation-only`
+
+Task-file rule:
+- if the task does not have explicit scope, context, done criteria, and verification expectations, it is not implementation-ready and must be treated as a research/planning slice first.
+
+### Mandatory grounding before execution
+
+Before making edits or normative claims, a subagent must:
+- read the task file in full;
+- read every mandatory context file referenced by the task;
+- inspect the directly affected code/doc surfaces;
+- preserve or state material assumptions;
+- stop for a narrowing/research pass if unresolved ambiguity can change:
+  - contract shape;
+  - ownership boundary;
+  - rollout model;
+  - acceptance contour.
+
+### Task hygiene and anti-drift rules
+
+A subagent must not:
+- silently expand scope beyond the task boundary;
+- edit unrelated files;
+- modify other subagent reports;
+- rewrite the governing protocol unless explicitly assigned;
+- use destructive git actions;
+- mark work complete without a verification-ready report.
+
+Adjacent issues may be reported as follow-up items, but not silently absorbed into the task.
+
+## Git And Worktree Discipline
+
+This protocol must execute inside the project's existing git-flow rather than inventing a repo-split-specific branch model.
+
+### Branching baseline
+
+Until the split is complete, the source-repo canonical rules remain:
+- `feature/*` branches start from `develop`;
+- `hotfix/*` branches start from `main` only for true production repair;
+- direct pushes to `develop` and `main` are forbidden;
+- merges to protected branches happen through PRs, with merge commits as the normal path.
+
+Practical rule for this protocol:
+- docs-only and research waves may stay local until review-ready;
+- executable waves that need protected-branch evidence must flow through `feature/* -> develop`;
+- any later production promotion follows `develop -> main`, not cherry-picks from feature branches.
+
+### Worktree rule
+
+Every active implementation stream in this protocol should use:
+- its own feature branch;
+- its own git worktree when parallel work is active;
+- a bounded ownership area that does not overlap another live stream unless the protocol explicitly sequences that overlap.
+
+The repo split must not be run as several unrelated waves inside one shared dirty worktree.
+
+### Commit rule
+
+Commits should be made:
+- after a bounded slice reaches a coherent local checkpoint;
+- before handoff to a verifier or another subagent;
+- before opening or updating a PR for a protected-branch merge.
+
+Do not:
+- batch unrelated slices into one commit;
+- leave substantial delegated work uncommitted when another slice depends on it;
+- rewrite history on protected branches.
+
+## Push, CI, And Hosted Build Policy
+
+This protocol must distinguish local iteration, GitHub verification, and hosted deployment triggers.
+
+### Push rule
+
+Push when at least one of the following is true:
+- the slice is ready for PR review;
+- GitHub checks are needed as part of the wave-closure evidence;
+- a hosted preview or beta/prod deployment is intentionally required for the next verification stage;
+- the work must be shared across worktrees or repos as an approved dependency slice.
+
+Do not push just to "save progress" if the push would trigger irrelevant hosted build churn or remote noise.
+
+### GitHub CI rule
+
+For this source repo, the minimum remote checks to inspect are:
+- `Verification`
+- `Release Packages`
+
+Interpretation rule:
+- `Verification` is the main protected-branch health signal;
+- `Release Packages` on push to `develop` is release-readiness validation, not proof that a hosted environment already runs the change.
+
+Wave-closure rule:
+- if a wave is pushed for remote verification, the relevant GitHub checks must end green before the wave is considered closure-ready;
+- if a check is intentionally not relevant, record `N/A` with reason in the evidence rather than omitting it;
+- if CI fails, the protocol requires fixing the issue or explicitly re-scoping the wave before promotion continues.
+
+### Hosted build rule
+
+Hosted builds are not run by default just because code changed.
+
+Operational policy:
+- do not merge/push into a branch mapped to a hosted environment unless the slice is actually ready for hosted verification or deployment progression;
+- do not use Vercel builds as a substitute for local build/typecheck discipline;
+- docs-only, planning-only, and purely local refactor waves should usually stop before hosted build triggers.
+
+Preview builds may be used for targeted review when the wave truly needs preview evidence, but preview is not a substitute for beta acceptance.
+
+## Local Verification Baseline
+
+Every executable wave must plan the smallest honest local gate before any deploy-facing action.
+
+Default source-repo baseline for code waves:
+- `pnpm build`
+- `pnpm audit:no-console`
+- `pnpm verify:security` when DB/auth/data surfaces are touched
+- relevant `typecheck`, package-local tests, and scenario checks for the changed slice
+- `pnpm scenario:tier:premerge` or a narrower justified equivalent when the wave targets the protected-branch verification contour
+
+Convenience rule:
+- `pnpm verify:premerge` is the canonical combined pre-merge baseline when its full scope is appropriate for the wave.
+
+Closure rule:
+- red local checks are not carried forward into PR, beta, or prod stages as "known issues";
+- the protocol must explicitly budget repair work for problems discovered by lint/build/typecheck/tests/scenarios.
+
+## Deployment And Hosted Verification Policy
+
+Hosted deployment work in this protocol must follow the project's existing operations docs, not ad hoc branch folklore.
+
+### Beta trigger rule
+
+Deploy or merge toward `develop` when both are true:
+- the wave passed its required local verification class;
+- there is an actual need to run hosted beta proof for the scoped scenarios or runtime surfaces.
+
+Do not treat beta deployment as a routine heartbeat step for every wave.
+
+### Beta deploy truth rule
+
+For hosted beta acceptance, proof must come from the actual stable beta surface:
+- verify the aliased deployment pair for the affected surface;
+- verify environment identity through the live beta alias and health/readback checks;
+- record deployment ids/URLs or alias evidence;
+- then run the hosted scenario pack.
+
+Do not accept as sufficient proof:
+- a green package workflow alone;
+- a preview URL;
+- branch intention without alias verification.
+
+### Hosted scenario rule
+
+When beta acceptance is required, the protocol must plan:
+- hosted preflight first;
+- bootstrap/session path second;
+- `beta_api` assertions as the default business-truth layer;
+- `beta_ui` as a thin UI proof layer when needed;
+- `beta_external_manual` only where a true external system or live channel is unavoidable.
+
+Hosted scenario planning should explicitly name which scenario set is expected on deploy and why.
+
+### Migration and backup gate
+
+For auth, DB, workflow-host, storage/provider, or webhook-sensitive waves, the protocol must explicitly decide:
+- whether the wave is schema- or migration-dependent;
+- whether backward compatibility or a migration-first path is being used;
+- whether dangerous-migration backup requirements apply;
+- which rollback or containment note must be captured before promotion.
+
+For SellerAgent-contour hosted rollouts in the current source repo, this means aligning with:
+- schema compatibility gate from the operations runbook;
+- dangerous migration backup gate and freeze/drain rules where relevant;
+- `sa-admin rollout` / rollout evidence flow for production promotion.
+
+### Prod promotion rule
+
+Production promotion is a separate governed step, not an automatic consequence of beta success.
+
+If the protocol wave is later promoted:
+- promotion must follow the source project's `develop -> main` PR path;
+- beta acceptance must already be green for the in-scope hosted scenarios;
+- production rollout must use the production rollout runbook and keep post-release proof narrow, non-destructive, and separately recorded.
+
+## Lessons Learned And Insights Discipline
+
+This protocol must capture reusable non-obvious findings during research, implementation, verification, deployment, and documentation work.
+
+### Run-folder artifact rule
+
+Each active protocol run folder should keep a `lessons/` area with monotonic zero-padded files such as:
+- `lessons/001-lessons-learned.md`
+- `lessons/002-lessons-learned.md`
+- `lessons/003-insights.md`
+
+### Trigger rule
+
+Create or extend the next numbered lesson/insight artifact when execution reveals:
+- a missing or incorrect runbook step;
+- a code constraint that was not documented but materially affects future work;
+- a documentation claim that proved false or incomplete;
+- a reusable deployment, verification, migration, or tooling insight;
+- a non-obvious failure mode that required investigation.
+
+### Content rule
+
+These artifacts must:
+- avoid diary/history style;
+- avoid raw log dumping;
+- state the reusable truth, when it matters, and what action follows;
+- name the owning SSoT that should absorb the knowledge if it is long-lived.
+
+This follows the MBB principle that reusable knowledge should end up in the correct owning runbook/spec/guide/protocol rather than living only in transient notes.
+
+### Closeout rule
+
+Lessons/insights files are execution artifacts, not the final SSoT.
+
+Before protocol closeout:
+- accepted long-lived lessons must be folded into the owning Memory Bank document;
+- the run-folder artifact remains as evidence/routing support, not as the sole home of that knowledge.
+
+Stage-closeout rule:
+- every stage that produced accepted lessons/insights must include an explicit `MBB routing decision`;
+- the closeout note must say which Memory Bank document absorbed each accepted finding, or why the finding was intentionally deferred;
+- "captured only in lessons file" is not an acceptable final state for long-lived knowledge.
+
+### MBB routing rule
+
+When folding accepted findings back into Memory Bank, route them by MBB ownership:
+- `spec` when the finding changes design truth, boundaries, contracts, invariants, or data ownership;
+- `scenario` when the finding changes verification logic, scenario expectations, evidence paths, or acceptance contours;
+- `runbook` when the finding changes operational procedure, deploy order, migration handling, rollback, or diagnostics;
+- `guide` when the finding changes a user/operator task path;
+- `ADR` when the finding establishes or corrects a long-lived architectural decision;
+- `mbb` when the finding changes the documentation rules themselves.
+
+The executor or verifier who records the finding must propose this routing in the lesson/insight artifact.
+
+### Mandatory subagent instruction
+
+Every worker and verifier subagent launched under this protocol must be told explicitly:
+- which git-flow and runbook documents to read before starting;
+- whether the task is allowed to trigger pushes, PRs, preview deploys, beta deploys, or prod promotion;
+- which local checks, scenario layers, and hosted checks belong to the task;
+- that they must create or extend the next numbered lesson/insight file when they uncover a reusable non-obvious finding;
+- that they must propose the owning Memory Bank destination for each accepted finding using the `spec / scenario / runbook / guide / ADR / mbb` routing model;
+- that they must not leave such findings only in chat or only inside their executor/verifier report.
+
+## Subagent Verification Workflow
+
+Every delegated implementation slice must be independently reviewed.
+
+### Roles
+
+- `executor subagent`
+  - performs the bounded task;
+  - writes the executor report;
+  - records checks/evidence or explicit `N/A` notes.
+- `verifier subagent`
+  - reads the task file, executor report, and actual changed files;
+  - applies the review checklist;
+  - returns a bounded verdict.
+- `main agent`
+  - decides integration, escalation, and protocol impact;
+  - owns cross-slice and cross-repo decisions.
+
+### Verifier inputs
+
+The verifier must read, at minimum:
+- the source task file;
+- the executor report;
+- the actual changed files/diff;
+- the relevant standards referenced by the task;
+- any checks/evidence artifacts claimed in the executor report.
+
+### Verifier verdicts
+
+Verifier must return one of:
+- `PASS`
+- `PARTIAL`
+- `FAIL`
+- `DRIFT`
+- `LOW-CONFIDENCE`
+
+Meaning:
+- `PASS`
+  - task requirements are met and checks/evidence are sufficient.
+- `PARTIAL`
+  - the main slice is complete, but a bounded follow-up remains.
+- `FAIL`
+  - required outputs or checks are materially missing or broken.
+- `DRIFT`
+  - work escaped the task boundary or violated explicit constraints.
+- `LOW-CONFIDENCE`
+  - the result may be directionally correct, but the verifier cannot confirm it with sufficient evidence.
+
+### Mandatory review checklist
+
+Verifier review must cover:
+- task alignment against `Done criteria`;
+- report-to-repo integrity;
+- code/doc quality for the touched slice;
+- scenario/contract/evidence expectations;
+- security / rollout / exposure impact where relevant;
+- hosted or CI evidence where relevant.
+
+No claimed check may be omitted silently:
+- if a check was not run or cannot be run, the report must say `N/A` with a reason.
+
+## Execution Graph And Parallel Lanes
+
+The split program is not purely sequential.
+It should run through bounded parallel lanes with an explicit critical path.
+
+### Critical path before broad code extraction
+
+The following must be closed before Wave 2 broad code movement:
+1. `D-02` and `R-036-02` dependency bridge decision
+2. canonicalization of `CB-*` contract docs
+3. `FM-01..FM-03`
+4. `SCN-MIG-01..SCN-MIG-03` and `TR-01`
+5. acceptance of the relevant `X-*` extraction design tasks
+
+### Parallel lanes
+
+Recommended bounded lanes:
+- `Platform lane`
+  - `bot-platform` contract docs, framework feature model, framework scenario-system baseline, framework doc migration, framework extraction design.
+- `SellerAgent lane`
+  - SellerAgent product overlays, feature/scenario/doc migration, product extraction design.
+- `Docoved lane`
+  - Docoved product overlays, feature/scenario/doc migration, product extraction design.
+- `Source-transition lane`
+  - `sales-agent` migration stubs, source routing, archive/move checklists.
+- `Ops lane`
+  - Vercel/Supabase/CI ownership plan, deploy-cutover checklist, hosted proof model.
+
+### Task sizing rule
+
+Implementation tasks must stay subagent-friendly:
+- one bounded concern per task;
+- one primary write scope per task;
+- avoid mixing docs migration and code migration in one slice;
+- avoid giant tasks like "migrate all SellerAgent docs" or "split all mixed packages".
+
+### Local-only tasks
+
+The following should remain main-agent owned unless there is a narrow supporting subtask:
+- final bridge decision and package-consumption strategy;
+- final canonical contract acceptance;
+- broad mixed-package moves;
+- cross-repo CI/CD and secrets decisions;
+- final hosted cutover and rollback decisions.
+
+## Verification Model By Wave Type
+
+This protocol now distinguishes verification classes by wave type.
+
+### `doc wave`
+
+Used for:
+- docs migration;
+- protocol refinement;
+- index/stub/router work;
+- traceability-only updates.
+
+Required verification:
+- doc consistency and link integrity where touched;
+- frontmatter/index consistency where touched;
+- explicit note that runtime/code/deploy checks are `N/A`, when true.
+
+Hosted proof:
+- not required by default.
+
+### `local-only code wave`
+
+Used for:
+- internal refactors;
+- bounded support-package cleanup;
+- local tooling changes;
+- implementation slices that do not affect hosted/runtime-facing behavior.
+
+Required verification:
+- build/typecheck/static-policy checks for the touched slice;
+- relevant local tests or contract checks;
+- relevant local scenario smoke where applicable.
+
+Hosted proof:
+- not required unless the change implicitly affects hosted/runtime-facing behavior.
+
+### `framework extraction wave`
+
+Used for:
+- framework-owned `bot-platform` extraction or publishable seam work.
+
+Required verification:
+- build/typecheck/static-policy checks;
+- framework contract tests;
+- repo-local regression pack;
+- updated ownership and evidence docs.
+
+Hosted proof:
+- required if the extracted seam materially changes hosted contracts consumed by a product contour.
+
+### `product cutover wave`
+
+Used for:
+- real SellerAgent or Docoved product-surface transfer to target repo ownership.
+
+Required verification:
+- build/typecheck/static-policy checks;
+- relevant product scenario pack;
+- contract checks for touched seams;
+- hosted beta acceptance.
+
+Hosted proof:
+- mandatory.
+
+### `migration-sensitive wave`
+
+Used for:
+- DB ownership changes;
+- workflow-host split/cutover;
+- storage/provider rewiring;
+- auth/session cutover;
+- channel or webhook migration.
+
+Required verification:
+- build/typecheck/static-policy checks;
+- contract checks;
+- split migration smoke;
+- relevant scenario pack;
+- rollout and rollback notes;
+- migration/backward-compatibility decision record;
+- backup/preflight evidence where the runbook requires it;
+- hosted beta acceptance.
+
+Hosted proof:
+- mandatory.
+
+## Verification Stages
+
+Verification is staged, not flat.
+
+### `local`
+
+Required for every wave.
+Must cover the smallest honest contour for the touched slice.
+
+### `pre-merge`
+
+Required for every executable wave merged to a protected branch.
+Must include the repo-local pre-merge gate and relevant scenario or contract coverage.
+
+### `beta`
+
+Required for:
+- externally-facing waves;
+- runtime/auth/channel/provider waves;
+- migration-sensitive waves;
+- product cutover waves.
+
+Hosted acceptance must be:
+- `beta_api` first where possible;
+- `beta_ui` as thin supplementary proof;
+- `beta_external_manual` only for true external/live-channel flows.
+
+### `prod-safe smoke`
+
+Required only after promotion to `main` for hosted-impact waves.
+Must stay narrow and non-destructive.
+
+## Evidence Contract
+
+Every implementation wave must record:
+- task/wave class;
+- commit or PR linkage;
+- local checks run and outcome;
+- scenario or contract evidence where relevant;
+- explicit `N/A` reasons for non-applicable checks.
+
+Hosted-required waves must additionally record:
+- target environment(s);
+- deployment or alias reference;
+- environment identity proof;
+- hosted verdict by layer;
+- GitHub workflow ids/status for the pushed commit or merge commit;
+- Vercel deployment status and stable-alias proof where applicable;
+- rollback / containment note where relevant.
+
+Migration-sensitive waves must additionally record:
+- split migration smoke evidence;
+- compatibility-window note;
+- migration authority note;
+- backup/preflight evidence when applicable;
+- rollback or recovery note.
 
 ## Target repository topology
 
@@ -265,6 +871,134 @@ Each product repo owns:
 - runtime workers;
 - hosted acceptance;
 - rollback procedures.
+
+## Repository Rebinding And Secret Separation Policy
+
+The split is not complete when code moves.
+It is complete only when runtime ownership, deploy ownership, and secret ownership are rebound to the correct repo.
+
+### Rebinding rule
+
+Every live integration currently attached to the mixed repo must be classified as one of:
+- `move to bot-platform`
+- `move to selleragent`
+- `move to docoved-agent`
+- `retire with the mixed repo`
+
+This classification must be captured in a governed rebind matrix before the corresponding cutover wave starts.
+
+### Required rebind matrix
+
+The protocol must maintain an explicit `repo rebind and deploy ownership matrix` covering, at minimum:
+- integration or hosted surface name;
+- current repo / current owner;
+- target repo / target owner;
+- provider:
+  - GitHub
+  - Vercel
+  - Supabase
+  - Telegram
+  - other runtime provider when relevant;
+- environment:
+  - local
+  - preview
+  - beta
+  - prod;
+- current project/account identifier;
+- target project/account identifier;
+- branch mapping or production-branch rule;
+- domains / aliases / webhook endpoints when relevant;
+- required secret family;
+- cutover action;
+- prerequisites;
+- verification proof;
+- rollback path;
+- source-side decommission action.
+
+The protocol must not rely on "we will remember how this is wired later".
+
+### GitHub and hosting rebind scope
+
+For repo/hosting ownership, the matrix must explicitly cover:
+- GitHub repository ownership of each active product contour;
+- branch protection and protected-branch CI expectations;
+- Vercel project linkage per target repo;
+- production-branch mapping for each hosted project;
+- domain and alias ownership;
+- hosted workflow projects and their environment-specific aliases.
+
+### Supabase and data-platform scope
+
+For persistence ownership, the matrix must explicitly cover:
+- which Supabase project/account belongs to `selleragent`;
+- which Supabase project/account belongs to `docoved-agent`;
+- whether any mixed-repo operational access still exists temporarily;
+- when and how temporary mixed-repo access is revoked;
+- which migration or reconcile path proves the target contour is authoritative.
+
+### Secret inventory rule
+
+The protocol must keep a `secret inventory and split matrix` for all live environments touched by the split.
+
+Each secret entry must record:
+- secret name or canonical alias;
+- secret class:
+  - framework configuration
+  - product runtime secret
+  - deploy/infrastructure credential
+  - provider credential
+  - backup/crypto material
+  - operator-only local secret;
+- owning repo;
+- owning product contour;
+- owning environment(s);
+- consumer surfaces;
+- whether duplication is allowed or forbidden;
+- whether rotation is required at cutover;
+- target storage location;
+- source-side decommission rule;
+- verification proof after migration.
+
+### Secret ownership rules
+
+Default rule:
+- `bot-platform` may define secret contracts and configuration interfaces;
+- live product secrets belong to product repos, not to `bot-platform`.
+
+Therefore:
+- SellerAgent runtime secrets must end up under `selleragent`-owned projects and inventories;
+- Docoved runtime secrets must end up under `docoved-agent`-owned projects and inventories;
+- no long-lived shared live secret should remain jointly owned across both products unless a protocol-level exception is documented and justified.
+
+### Rotation and decommission rule
+
+Secret migration is not just copy/paste.
+
+For each secret family the cutover plan must state one of:
+- `copy only`
+- `copy and rotate`
+- `re-issue new credential`
+- `retire`
+
+Rotation or re-issue is required when:
+- the secret was previously exposed to a broader mixed-repo contour than the future owner;
+- the provider supports safe re-issuance and the old credential should not remain valid;
+- the secret protected a contour that is changing repo/operator ownership.
+
+After target verification is green:
+- remove, disable, or revoke the source-side secret from the non-owning repo/project/inventory;
+- record the decommission proof;
+- treat lingering source-side access as an incomplete split.
+
+### Stage closeout gate for rebinds
+
+No deploy-cutover stage is complete until:
+- the rebind matrix entries for the in-scope surfaces are filled;
+- target repo/project ownership is live and verified;
+- required secrets exist in the new owner location;
+- required rotations/re-issues are complete;
+- source-side secrets and obsolete project bindings are removed, disabled, or explicitly time-boxed as transition exceptions;
+- the closeout evidence names what still remains transitional, if anything.
 
 ## Current repository decomposition map
 
@@ -581,6 +1315,12 @@ Output:
 - bootstrap location agreed in `_Projects`
 - repo role statement aligned with this protocol
 
+Status:
+- provisionally closed for the migration program:
+  - repo initialized as `selleragent`
+  - target Memory Bank already landed there
+  - future rename, if any, is a separate repo-identity follow-up and not a current blocker
+
 #### D-02: Dependency bridge strategy
 
 Goal:
@@ -598,6 +1338,9 @@ Output:
   - rollback behavior
   - local developer workflow
 
+Status:
+- still open
+
 #### D-03: Product boundary confirmations
 
 Goal:
@@ -609,6 +1352,9 @@ Output:
   - shared vs product-local operator surfaces
   - `ui-contract` ownership conditions
   - scenario/evidence framework vs product scenario suites
+
+Status:
+- materially advanced by `CB-01..CB-06` and the boundary review pack, but still needs conversion into accepted target-repo contract docs before mixed package extraction
 
 ### Review-artifact tasks
 
@@ -624,6 +1370,10 @@ Must cover:
 - root docs outside Memory Bank
 - archive-only zones
 
+Status:
+- planning artifact exists in `.tasks/prt-036-protocol-review-2026-04-19/artifact-workspace/R-036-01-ownership-matrix.md`
+- still needs final normalization into repo-owned migration checklists
+
 #### R-036-02: Dependency bridge decision
 
 Goal:
@@ -635,6 +1385,9 @@ Must cover:
 - local development flow
 - CI implications
 - rollback path
+
+Status:
+- open
 
 #### R-036-03: Repo skeleton pack
 
@@ -651,6 +1404,10 @@ Must cover:
 - minimal app/package placeholders
 - ownership statement
 
+Status:
+- substantially complete at Memory Bank/bootstrap level
+- target repos and their documentation skeletons now physically exist
+
 #### R-036-04: Memory Bank split map
 
 Goal:
@@ -660,17 +1417,28 @@ Goal:
   - docoved truth
   - migration/archive only
 
+Status:
+- completed as planning pack in `.tasks/prt-036-memory-bank-redesign-2026-04-19/`
+- now needs conversion into actual source-doc migration batches
+
 #### R-036-05: Ops split plan
 
 Goal:
 - define hosted/runtime separation across target repos.
 
 Must cover:
+- GitHub repository and branch-protection rebind plan
 - Vercel project mapping
 - domains and aliases
 - environment variables and secrets
 - Supabase/project ownership
+- secret inventory, rotation, and source-side decommission policy
 - deploy/cutover/reconnect order
+- rollback path for repo/project rebind mistakes
+
+Status:
+- research artifact exists
+- implementation planning still pending
 
 #### R-036-06: Archive and history policy
 
@@ -684,6 +1452,10 @@ Must cover:
 - generated/binary/demo handling
 - `.tasks/` retention policy
 
+Status:
+- research artifact exists
+- policy still needs conversion into concrete move/delete checklists per repo
+
 ### Memory Bank redesign tasks
 
 These tasks are mandatory Wave 1 sub-workstreams and are detailed in the section above:
@@ -696,6 +1468,16 @@ These tasks are mandatory Wave 1 sub-workstreams and are detailed in the section
 
 Execution note:
 - `MB-01..MB-06` close the documentation topology before repo-local SSOT migration begins.
+
+Progress snapshot:
+- `MB-01..MB-04` are substantially complete:
+  - target repo Memory Bank roots exist
+  - `mbb/**` mirrors exist
+  - section hubs exist
+- `MB-06` exists as planning guidance and initial target-index rollout;
+- `MB-05` is only partially complete:
+  - root transition note landed in current `sales-agent/.memory-bank/index.md`
+  - broader hub-level transition stubbing still remains
 
 ### Contract-boundary tasks
 
@@ -776,6 +1558,134 @@ Must cover:
 - dependencies
 - priority and writing order
 
+Progress snapshot:
+- planning-level closure achieved through the boundary review pack in `.tasks/prt-036-boundary-contract-review-2026-04-19/`
+- next step is to convert this pack into canonical docs under `bot-platform/.memory-bank/spec/**` plus product overlays under `selleragent` and `docoved-agent`
+
+### Feature-model actualization tasks
+
+These tasks turn the freshly bootstrapped target Memory Banks into usable repo-local planning systems.
+They should complete before broad scenario migration and before any mixed code package is split on the basis of stale feature definitions.
+
+#### FM-01: `bot-platform` framework feature model actualization
+
+Goal:
+- restate framework features and epics in the language of the new `bot-platform` repo rather than the mixed-source repo.
+
+Must cover:
+- framework epics and feature buckets
+- framework-owned verification surfaces
+- platform package families and support lanes
+- deprecated mixed-source feature definitions that should not be copied forward
+
+#### FM-02: `selleragent` feature model actualization
+
+Goal:
+- restate SellerAgent features in product-owned terms and stop carrying forward stale mixed phrasing.
+
+Must cover:
+- customer/runtime/commerce/operator feature families
+- product web/bot/server/workflow surfaces
+- SellerAgent operational and rollout features
+- SellerAgent-only overlays that depend on framework contracts
+
+#### FM-03: `docoved-agent` feature model actualization
+
+Goal:
+- restate Docoved features in product-owned terms around ingest, publication, retrieval, grounded answering, and hosted operations.
+
+Must cover:
+- Docoved product epic map
+- Docoved ingest/publication/runtime families
+- Docoved operator and hosted-delivery surfaces
+- Docoved-only overlays that depend on framework contracts
+
+### Source-doc migration tasks
+
+These tasks convert the current mixed-repo documentation into repo-owned canonical documentation.
+They must follow the ownership map and contract pack, not precede them.
+
+#### DOC-MOVE-01: `bot-platform` canonical doc migration pack
+
+Goal:
+- move framework-owned source docs from the mixed repo into canonical `bot-platform` locations.
+
+Must cover:
+- framework project/architecture/runtime/client-api/scenario docs
+- framework-owned protocols and ADR overlays
+- contract docs produced from `CB-01..CB-06`
+- upstream `mbb/**` maintenance and indexing
+
+#### DOC-MOVE-02: `selleragent` canonical doc migration pack
+
+Goal:
+- move SellerAgent-owned source docs into `selleragent/.memory-bank/**` and normalize them around the new product repo.
+
+Must cover:
+- SellerAgent product/domain/runtime/operations docs
+- SellerAgent guides and runbooks
+- SellerAgent plans/protocols/features
+- source-doc families that should become product-local stubs in the mixed repo after migration
+
+#### DOC-MOVE-03: `docoved-agent` canonical doc migration pack
+
+Goal:
+- move Docoved-owned source docs into `docoved-agent/.memory-bank/**` and normalize them around the new product repo.
+
+Must cover:
+- Docoved architecture/runtime/operations docs
+- `EP-023`, `ADR-005..006`, and `PRT-025..035`
+- Docoved guides/reference docs
+- Docoved source-doc families that should become product-local stubs in the mixed repo after migration
+
+### Scenario and traceability tasks
+
+These tasks align scenario ownership with the re-baselined feature model in each target repo.
+The goal is to stop treating legacy scenario catalogs as mixed-repo baggage.
+
+#### SCN-MIG-01: framework scenario-system baseline
+
+Goal:
+- define which scenario-system docs and evidence rules belong to `bot-platform` versus product repos.
+
+Must cover:
+- scenario engine and evidence vocabulary
+- generic hosted verification rules
+- platform versus product acceptance ownership
+
+#### SCN-MIG-02: `selleragent` scenario matrix rewrite
+
+Goal:
+- bind SellerAgent scenario ownership to the new SellerAgent feature registry.
+
+Must cover:
+- SellerAgent `SCN-*` and `XE-*` ownership
+- feature-to-scenario mapping
+- stale or duplicate scenario retirement candidates
+- hosted versus local verification overlays
+
+#### SCN-MIG-03: `docoved-agent` scenario matrix rewrite
+
+Goal:
+- bind Docoved scenario ownership to the new Docoved feature registry.
+
+Must cover:
+- Docoved `SCN-179..220` families
+- feature-to-scenario mapping
+- stale or duplicate scenario retirement candidates
+- hosted versus local verification overlays
+
+#### TR-01: Cross-repo traceability matrix
+
+Goal:
+- create an explicit `feature -> spec/protocol -> scenario` traceability map across the three target repos.
+
+Must cover:
+- framework traceability anchors in `bot-platform`
+- SellerAgent traceability anchors
+- Docoved traceability anchors
+- replacement of mixed-source planning references with target-repo canonical links
+
 ### Mixed-package extraction design tasks
 
 These tasks remain planning/design tasks until ownership, bridge, and Memory Bank prerequisites are closed.
@@ -827,11 +1737,23 @@ Planning dependencies:
 2. `R-036-01..R-036-06`
 3. `MB-01..MB-06`
 4. `CB-01..CB-06`
-5. `X-01..X-08`
-6. migration wave implementation planning
+5. `FM-01..FM-03`
+6. `DOC-MOVE-01..DOC-MOVE-03`
+7. `SCN-MIG-01..SCN-MIG-03` and `TR-01`
+8. `X-01..X-08`
+9. migration wave implementation planning
+
+Current execution note:
+- steps `1..4` are materially advanced, with Memory Bank bootstrap already landed and contract-boundary research packs already written;
+- the active protocol focus is now steps `5..7`;
+- mixed-package extraction design should continue, but broad code movement must not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
-- do not start broad source moves for mixed packages until the corresponding `CB-*` contract tasks and `X-*` design tasks are accepted and their repo/document owners are already established.
+- do not start broad source moves for mixed packages until:
+  - the corresponding `CB-*` contract tasks and `X-*` design tasks are accepted;
+  - target repo feature registries are re-baselined;
+  - scenario ownership is rebound to those target repo feature registries;
+  - the moved code will have canonical repo-local documentation waiting for it.
 
 ## Migration waves
 
@@ -881,7 +1803,40 @@ Progress snapshot:
   - target repo-structure docs
   - repo-local current-status reports
   - repo-local verification matrices
+- first planning and scenario ownership docs are now landed in target repos:
+  - epic maps
+  - feature registries
+  - scenario matrices
+- `bot-platform` now also contains the canonical target-repo copy of `PRT-036`;
 - this closes the "target repo Memory Bank does not yet exist" blocker and shifts Wave 1 focus toward feature/epic/scenario population and source-repo transition routing.
+
+Residual work before Wave 1 can be considered fully closed:
+- convert current mixed `sales-agent/.memory-bank/**` hubs into explicit transition stubs where needed;
+- migrate first canonical source-doc families into their target repos;
+- replace placeholder-level feature/scenario structure with repo-local actualized content.
+
+### Wave 1B: Repo-local truth population and traceability
+
+Goal:
+- turn the bootstrapped target Memory Banks into real repo-local SSoT before code extraction accelerates.
+
+Deliverables:
+- actualized feature/epic models in all three target repos;
+- canonical migration of first source-doc families into each target repo;
+- refreshed scenario matrices tied to repo-local feature registries;
+- explicit `feature -> docs -> scenarios` traceability;
+- source-repo transition routing updated to point at target-repo canonical truth.
+
+Required sub-workstreams:
+- `FM-01..FM-03`
+- `DOC-MOVE-01..DOC-MOVE-03`
+- `SCN-MIG-01..SCN-MIG-03`
+- `TR-01`
+- remaining `MB-05` transition stubs
+
+Exit condition:
+- no major target repo is still relying on placeholder-only planning structure for its core features;
+- the next code migration wave can name the canonical spec/feature/scenario anchor for each moved family.
 
 ### Wave 2: Extract `bot-platform` framework core
 
@@ -916,8 +1871,10 @@ Goal:
 - remove multi-product release coupling from one source repo.
 
 Expected outcome:
+- GitHub repo integrations and protected-branch CI are rebound to the owning repos;
 - separate Vercel project configuration per product;
 - separate environment variables and secrets per repo;
+- source-side shared or obsolete secrets are rotated/decommissioned from the mixed contour;
 - simpler release management without repo-level deployment gymnastics.
 
 ### Wave 6: Mixed-source retirement
@@ -935,23 +1892,54 @@ Expected outcome:
   - a runnable minimal contour;
   - a committed `.memory-bank/index.md`;
   - at least one repo-local architecture/spec boundary doc;
-  - a documented deployment/readme baseline.
+  - a documented deployment/readme baseline;
+  - a repo-local verification baseline and CI gate for its protected branches.
 - A framework package is not considered extracted until:
   - it no longer imports product-local domain truth;
   - its public contract is documented in `bot-platform`;
-  - at least one consuming product repo can build against it.
+  - at least one consuming product repo can build against it;
+  - the extraction wave has declared and satisfied its verification class.
 - A source path is not considered fully migrated until:
   - the owning target repo is explicit;
   - the old path is either removed or marked transitional with a planned deletion step.
+- Every implementation wave must declare one verification class:
+  - `doc wave`
+  - `local-only code wave`
+  - `framework extraction wave`
+  - `product cutover wave`
+  - `migration-sensitive wave`
+- No delegated implementation slice is considered complete until:
+  - its executor report exists;
+  - its verifier verdict is recorded;
+  - its required checks/evidence are either present or explicitly marked `N/A` with reason.
+- No deploy-facing wave is considered complete until:
+  - the git-flow path used by the wave is explicit;
+  - the required local checks are green;
+  - the relevant GitHub checks are green or explicitly `N/A`;
+  - the relevant Vercel/hosted readiness proof is green or explicitly `N/A`;
+  - any required hosted scenario pack has a recorded verdict.
+- No migration-sensitive or production-facing wave is considered complete until:
+  - schema compatibility path is explicit;
+  - backup/preflight obligations are either satisfied or explicitly `N/A`;
+  - rollout/rollback evidence is recorded.
+- No repo-rebind or secret-split wave is considered complete until:
+  - the rebind matrix entries for the in-scope integrations are explicit;
+  - secret inventory ownership and target locations are explicit;
+  - required rotations/decommissions are complete or explicitly time-boxed as transition exceptions;
+  - rollback and decommission evidence is recorded.
+- No protocol run is considered operationally closed until:
+  - reusable lessons learned / insights have been captured when needed;
+  - accepted long-lived findings have been folded into the owning SSoT before closeout.
 
 ## Outcome
 
 - Result: `follow_up_needed`
 - Follow-up needed:
-  - create the path ownership matrix;
-  - create repo-local Memory Bank skeletons;
+  - finalize dependency bridge strategy between `bot-platform` and product repos;
+  - convert phase-1 and phase-2 findings into the next normative revision of the protocol task register and gates;
+  - complete Wave `1B` repo-local truth population and source-doc migration;
   - perform package-by-package extraction planning for `api-contract`, `client-sdk`, `core`, `db`, and `scenario-runner`;
-  - choose the final SellerAgent target repo naming and package-consumption strategy.
+  - convert current mixed-repo hubs into durable transition stubs as target-repo canonical docs take over.
 
 ## Memory Bank impact
 
@@ -959,3 +1947,6 @@ Expected outcome:
 - Established the canonical decision that `bot-platform` is a framework repo rather than a shared live product instance.
 - Established the rule that auth/users and workflow are framework-defined but product-bound in concrete data and deployment.
 - Recorded the requirement that future product truth must move into repo-local Memory Banks rather than remaining mixed in this source repo.
+- Recorded that target repo Memory Banks now exist and that the next mandatory protocol phase is repo-local truth population, feature/scenario actualization, and transition routing rather than raw bootstrap.
+- Recorded the phase-2 implementation model for subagent task files, verification workflow, execution lanes, and wave-specific verification stages.
+- Recorded the phase-3 operational execution model: git/worktree discipline, CI/Vercel trigger policy, deploy/preflight gates, hosted verification expectations, and lessons-learned/insights handling for protocol-driven execution.
