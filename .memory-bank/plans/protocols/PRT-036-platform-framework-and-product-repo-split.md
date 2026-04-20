@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.11.0
+version: 1.12.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -33,7 +33,11 @@ related_files:
   - .tasks/prt-036-phase-1-protocol-review-2026-04-19/summary/PRT-036-phase-1-review-synthesis.md
   - .tasks/prt-036-phase-2-implementation-planning-2026-04-19/summary/PRT-036-phase-2-implementation-synthesis.md
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
+  - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.12.0
+    date: 2026-04-20
+    changes: Recorded the completion of implementation wave 01: repo rebind matrix, secret split/rotation plan, first execution packet register, main-agent verification verdicts, and the folding of accepted lessons back into the owning Memory Bank docs.
   - version: 1.11.0
     date: 2026-04-20
     changes: Added explicit repo-rebinding and secret-separation rules: governed repo/project rebind matrix, secret inventory and rotation/decommission policy, stage-closeout requirements, and stronger MBB routing for lessons learned and insights.
@@ -204,6 +208,8 @@ Review status:
 - consolidated phase-2 implementation synthesis is recorded in `.tasks/prt-036-phase-2-implementation-planning-2026-04-19/summary/PRT-036-phase-2-implementation-synthesis.md`;
 - stage of plan elaboration: phase 3 completed;
 - consolidated phase-3 ops/runbook synthesis is recorded in `.tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md`;
+- implementation stage: wave 01 completed;
+- consolidated implementation-wave-01 synthesis is recorded in `.tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md`;
 - the next protocol revision pass must focus on:
   - executable contract families;
   - explicit MBB governance;
@@ -969,6 +975,8 @@ Therefore:
 - SellerAgent runtime secrets must end up under `selleragent`-owned projects and inventories;
 - Docoved runtime secrets must end up under `docoved-agent`-owned projects and inventories;
 - no long-lived shared live secret should remain jointly owned across both products unless a protocol-level exception is documented and justified.
+- during split waves, avoid silent cross-contour fallback from generic env names into another product contour's credential inventory;
+- if temporary aliasing remains, the wave must record explicit proof that the intended product-local credential path won at runtime.
 
 ### Rotation and decommission rule
 
@@ -1240,7 +1248,8 @@ Task:
   - `.tasks/**` workbench materials
 
 Stub standard:
-- `status: migrated-stub`
+- `status: DEPRECATED`
+- `migration_role: transition-stub`
 - `owner_repo`
 - `canonical_doc`
 - `replaced_on`
