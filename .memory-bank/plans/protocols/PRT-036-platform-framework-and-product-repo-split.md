@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.50.0
+version: 1.52.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -56,7 +56,15 @@ related_files:
   - .tasks/prt-036-implementation-wave-35-2026-04-20/summary/PRT-036-implementation-wave-35-synthesis.md
   - .tasks/prt-036-implementation-wave-36-2026-04-20/summary/PRT-036-implementation-wave-36-synthesis.md
   - .tasks/prt-036-implementation-wave-37-2026-04-20/summary/PRT-036-implementation-wave-37-synthesis.md
+  - .tasks/prt-036-implementation-wave-38-2026-04-20/summary/PRT-036-implementation-wave-38-synthesis.md
+  - .tasks/prt-036-implementation-wave-39-2026-04-20/summary/PRT-036-implementation-wave-39-synthesis.md
 history:
+  - version: 1.52.0
+    date: 2026-04-20
+    changes: Recorded wave-39 completion: `docoved-agent/packages/sa-docoved` now owns the bounded ingest/validate contour in repo state, while versioning, publication, and downstream sales-agent adoption remain intentionally separate later waves.
+  - version: 1.51.0
+    date: 2026-04-20
+    changes: Recorded wave-38 completion: the next executable remaining Docoved seam was selected as the ingest/validate contour after code-backed review showed that `quality-refresh`, `semantic-map`, and `placement` remain blocked by `@sales-agent/core` coupling or mixed-repo path assumptions.
   - version: 1.50.0
     date: 2026-04-20
     changes: Recorded wave-37 completion: `sales-agent` now adopts the published `@docoved-agent/sa-docoved@0.1.3` report-type surface in `SCN-210`, `SCN-212`, and `SCN-213`, while the wider mixed Docoved helper tail remains explicitly deferred to later bounded waves.
@@ -518,8 +526,18 @@ Review status:
   - `SCN-210`, `SCN-212`, and `SCN-213` now import `DocovedQualityReport` from the published package;
   - the broader mixed `@sales-agent/sa-docoved` helper tail remains intentionally deferred;
 - wave-37 synthesis is recorded in `.tasks/prt-036-implementation-wave-37-2026-04-20/summary/PRT-036-implementation-wave-37-synthesis.md`;
+- implementation stage: wave 38 completed;
+- the next executable remaining Docoved seam is now explicitly chosen:
+  - `quality-refresh`, `semantic-map`, and `placement` stay deferred because they are still core-coupled;
+  - the next practical owner-slice wave is the Docoved ingest/validate contour;
+- wave-38 synthesis is recorded in `.tasks/prt-036-implementation-wave-38-2026-04-20/summary/PRT-036-implementation-wave-38-synthesis.md`;
+- implementation stage: wave 39 completed;
+- the next practical Docoved owner slice now lives in target repo state:
+  - `docoved-agent/packages/sa-docoved` now contains the ingest/validate contour and its required helper files;
+  - versioning, publish, and downstream consumer adoption remain intentionally separate later waves;
+- wave-39 synthesis is recorded in `.tasks/prt-036-implementation-wave-39-2026-04-20/summary/PRT-036-implementation-wave-39-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next smallest remaining mixed Docoved helper seam after the now-complete report-type cutover;
+  - materializing the new Docoved ingest/validate owner slice into versioned release state and detached proof;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
