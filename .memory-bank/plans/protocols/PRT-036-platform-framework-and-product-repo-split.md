@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.39.0
+version: 1.42.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -45,7 +45,19 @@ related_files:
   - .tasks/prt-036-implementation-wave-24-2026-04-20/summary/PRT-036-implementation-wave-24-synthesis.md
   - .tasks/prt-036-implementation-wave-25-2026-04-20/summary/PRT-036-implementation-wave-25-synthesis.md
   - .tasks/prt-036-implementation-wave-26-2026-04-20/summary/PRT-036-implementation-wave-26-synthesis.md
+  - .tasks/prt-036-implementation-wave-27-2026-04-20/summary/PRT-036-implementation-wave-27-synthesis.md
+  - .tasks/prt-036-implementation-wave-28-2026-04-20/summary/PRT-036-implementation-wave-28-synthesis.md
+  - .tasks/prt-036-implementation-wave-29-2026-04-20/summary/PRT-036-implementation-wave-29-synthesis.md
 history:
+  - version: 1.42.0
+    date: 2026-04-20
+    changes: Recorded wave-29 completion: target package naming is now canonically fixed across the framework repo, both product repos, and the mixed source repo: `@dd-bot-platform/*`, `@selleragent/*`, and `@docoved-agent/*` are the accepted target scopes, while `@sales-agent/*` remains transitional mixed-repo naming only.
+  - version: 1.41.0
+    date: 2026-04-20
+    changes: Recorded wave-28 completion: `sales-agent` now consumes the first published product seams from npm (`@selleragent/core@0.1.1`, `@docoved-agent/sa-docoved@0.1.1`), the temporary workspace vendor bridge packages are removed, and targeted seam scenarios plus full build prove the new package path.
+  - version: 1.40.0
+    date: 2026-04-20
+    changes: Recorded wave-27 completion: the first product release commits were promoted to `main`, real npm publish workflows succeeded for `@selleragent/core@0.1.1` and `@docoved-agent/sa-docoved@0.1.1`, and detached registry-consumption proof is now part of the accepted evidence.
   - version: 1.39.0
     date: 2026-04-20
     changes: Recorded wave-26 completion: `NPM_TOKEN` is now provisioned in both new product repositories, closing the npm publish-auth blocker for the first GitHub-hosted product-package publication waves.
@@ -397,12 +409,38 @@ Review status:
   - `NPM_TOKEN` exists in `deksden/seller-agent`;
   - `NPM_TOKEN` exists in `deksden/docoved-agent`;
 - wave-26 synthesis is recorded in `.tasks/prt-036-implementation-wave-26-2026-04-20/summary/PRT-036-implementation-wave-26-synthesis.md`;
+- implementation stage: wave 27 completed;
+- the first real product npm publication tranche is now proven:
+  - `seller-agent` PR #1 and `docoved-agent` PR #1 were merged to `main`;
+  - `@selleragent/core@0.1.1` was published from `seller-agent`;
+  - `@docoved-agent/sa-docoved@0.1.1` was published from `docoved-agent`;
+  - registry readback and detached install proof are green for both packages;
+- wave-27 synthesis is recorded in `.tasks/prt-036-implementation-wave-27-2026-04-20/summary/PRT-036-implementation-wave-27-synthesis.md`;
+- implementation stage: wave 28 completed;
+- the first downstream product-package cutover is now proven in `sales-agent`:
+  - temporary workspace vendor bridge packages for SellerAgent and Docoved are removed;
+  - `sales-agent` now resolves the first product seams through published npm packages:
+    - `@selleragent/core@0.1.1`
+    - `@docoved-agent/sa-docoved@0.1.1`
+  - `pnpm build` and targeted seam scenarios are green:
+    - `SCN-038`
+    - `SCN-042`
+    - `SCN-091`
+    - `SCN-179`
+    - `SCN-180`
+- wave-28 synthesis is recorded in `.tasks/prt-036-implementation-wave-28-2026-04-20/summary/PRT-036-implementation-wave-28-synthesis.md`;
+- implementation stage: wave 29 completed;
+- target package naming is now fixed across all participating repos:
+  - framework target scope: `@dd-bot-platform/*`
+  - SellerAgent target scope: `@selleragent/*`
+  - Docoved target scope: `@docoved-agent/*`
+  - `@sales-agent/*` is transitional mixed-repo naming only and must be retired by protocol closeout;
+- wave-29 synthesis is recorded in `.tasks/prt-036-implementation-wave-29-2026-04-20/summary/PRT-036-implementation-wave-29-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - committing and promoting the already-versioned SellerAgent and Docoved release state to `main` through the accepted git-flow;
-  - executing the first real publication for `@selleragent/core` and then replacing the temporary SellerAgent vendored bridge in `sales-agent`;
-  - executing the first real publication for `@docoved-agent/sa-docoved` and then replacing the temporary Docoved vendored bridge in `sales-agent`;
+  - continuing later mixed-package extraction waves now that the first published product-package path is proven end-to-end;
   - planning the next Docoved host-hardening tranche so temporary compat readback and mixed dist-path coupling can retire incrementally instead of spreading to later scenario families;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
+  - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 
 ## Key decisions / deviations

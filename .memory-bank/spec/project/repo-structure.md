@@ -2,7 +2,7 @@
 file: .memory-bank/spec/project/repo-structure.md
 description: 'Target repository structure for bot-platform as a framework monorepo.'
 purpose: Use when placing new framework packages, docs, and support apps so bot-platform grows as a clean framework repo rather than a second mixed product monorepo.
-version: 0.1.0
+version: 0.2.0
 date: 2026-04-19
 status: DRAFT
 tags: [repo-structure, bot-platform, framework, monorepo]
@@ -12,6 +12,9 @@ related_files:
   - .memory-bank/spec/project/feature-area-boundaries.md
   - .memory-bank/plans/protocols/index.md
 history:
+  - version: 0.2.0
+    date: 2026-04-20
+    changes: Added the canonical package-naming policy for the split program: framework-owned packages use `@dd-bot-platform/*`, product scopes stay out of bot-platform, and package renaming should happen as each seam migrates rather than as one giant end-only rename.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial bot-platform repo-structure baseline created from PRT-036, the ownership matrix, and the current mixed-repo source layout.
@@ -85,6 +88,24 @@ Likely later candidates after seam extraction:
 3. If code still needs product-specific domain truth, it stays in the product repo until a clean seam exists.
 4. `shared` is not a target destination for new code.
 5. Product runbooks, product docs, and product scenarios must not accumulate here "temporarily".
+
+## Package naming policy
+
+Canonical scope for this repo:
+
+- framework-owned published or cross-repo packages use `@dd-bot-platform/*`.
+
+This repo must not become the owner of packages named:
+
+- `@selleragent/*`
+- `@docoved-agent/*`
+- `@sales-agent/*`
+
+Migration rule:
+
+- when a seam is promoted into `bot-platform`, rename it to the target framework scope as part of that migration wave whenever practical;
+- do not wait for one giant final rename if a package is already clearly framework-owned and ready to move;
+- any temporary mixed-repo package names that survive the split program must be retired by the end of `PRT-036`.
 
 ## Package ownership notes
 
