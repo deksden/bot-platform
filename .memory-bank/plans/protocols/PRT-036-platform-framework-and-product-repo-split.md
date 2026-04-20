@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.47.0
+version: 1.48.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -53,7 +53,11 @@ related_files:
   - .tasks/prt-036-implementation-wave-32-2026-04-20/summary/PRT-036-implementation-wave-32-synthesis.md
   - .tasks/prt-036-implementation-wave-33-2026-04-20/summary/PRT-036-implementation-wave-33-synthesis.md
   - .tasks/prt-036-implementation-wave-34-2026-04-20/summary/PRT-036-implementation-wave-34-synthesis.md
+  - .tasks/prt-036-implementation-wave-35-2026-04-20/summary/PRT-036-implementation-wave-35-synthesis.md
 history:
+  - version: 1.48.0
+    date: 2026-04-20
+    changes: Recorded wave-35 completion: the Docoved quality-report owner slice is now materialized into versioned repo state as `@docoved-agent/sa-docoved@0.1.3`, and detached tarball smoke proof closes the local pre-publish gate before the next intentional publish or semver-backed report-type consumer wave.
   - version: 1.47.0
     date: 2026-04-20
     changes: Recorded wave-34 completion: the narrow Docoved quality-report contract/helper slice now lives in `docoved-agent/packages/sa-docoved`, and the host/readback contract uses concrete `DocovedQualityReport` payloads while versioning and downstream semver adoption remain later waves.
@@ -488,9 +492,15 @@ Review status:
   - quality-refresh job summaries and aggregate readbacks now carry concrete `DocovedQualityReport` payloads rather than `unknown`;
   - the move remained narrower than a full quality-refresh engine or ingest/publication migration;
 - wave-34 synthesis is recorded in `.tasks/prt-036-implementation-wave-34-2026-04-20/summary/PRT-036-implementation-wave-34-synthesis.md`;
+- implementation stage: wave 35 completed;
+- the updated Docoved owner slice is now materialized into release-shaped repo state:
+  - `@docoved-agent/sa-docoved` now sits at repo version `0.1.3`;
+  - the exact packed tarball passes detached smoke install outside repo workspaces;
+  - the local pre-publish gate is closed for this package version;
+- wave-35 synthesis is recorded in `.tasks/prt-036-implementation-wave-35-2026-04-20/summary/PRT-036-implementation-wave-35-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - materializing the new Docoved owner slice into versioned package state and detached tarball proof;
-  - only then choosing the next semver-backed consumer cutover for the report-type surface;
+  - intentionally publishing `@docoved-agent/sa-docoved@0.1.3` through the accepted git/release flow if the release gate is open;
+  - only then choosing the next semver-backed consumer cutover for the report-type surface, starting from the cleanest target (`SCN-213`);
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
