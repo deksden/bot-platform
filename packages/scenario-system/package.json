@@ -1,5 +1,6 @@
 {
   "name": "@bot-platform/scenario-system",
+  "description": "Framework-owned scenario and semantic-eval primitives for bot-platform consumers.",
   "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,12 +11,31 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/.tsbuildinfo"
   ],
+  "keywords": [
+    "bot-platform",
+    "framework",
+    "scenario-system",
+    "semantic-eval"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deksden/bot-platform.git",
+    "directory": "packages/scenario-system"
+  },
+  "homepage": "https://github.com/deksden/bot-platform",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
   "engines": {
     "node": ">=20"
   },
   "scripts": {
+    "prepack": "pnpm build",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --pretty false"
   },

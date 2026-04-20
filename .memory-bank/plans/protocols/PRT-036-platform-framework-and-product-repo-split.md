@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.24.0
+version: 1.25.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.25.0
+    date: 2026-04-20
+    changes: Completed the first publish-readiness tranche for the extracted framework bridge: `@bot-platform/api-contract` and `@bot-platform/scenario-system` now carry explicit private-registry publication metadata, tarball hygiene verification is documented, and repo-local operations truth now defines the package bridge needed to replace temporary vendored mirrors in later waves.
   - version: 1.24.0
     date: 2026-04-20
     changes: Continued staged consumer adoption after the `sa-judge` tranche: `scenario-runner` now uses one explicit temporary vendored mirror for the framework semantic-eval contract slice only, while keeping its local semantic judge runtime implementation, `executeSemanticJudge(...)` adapter, and `index.ts` export surface unchanged.
@@ -263,9 +266,15 @@ Review status:
 - implementation stage: wave 13 completed;
 - the first `scenario-runner` consumer-adoption tranche is now landed through an explicit temporary vendored semantic-eval contract mirror under `packages/scenario-runner/src/vendor/bot-platform/`;
 - wave-13 synthesis is recorded in `.tasks/prt-036-implementation-wave-13-2026-04-20/summary/PRT-036-implementation-wave-13-synthesis.md`;
+- implementation stage: wave 14 completed;
+- the first publish-readiness tranche for the framework bridge is now landed in `bot-platform`:
+  - `@bot-platform/api-contract` and `@bot-platform/scenario-system` now carry explicit private-registry publication metadata;
+  - tarball hygiene and packed-manifest verification are now part of repo-local bridge operations truth;
+- wave-14 synthesis is recorded in `.tasks/prt-036-implementation-wave-14-2026-04-20/summary/PRT-036-implementation-wave-14-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - replacing the temporary `sa-judge` and `scenario-runner` vendored bridges with the published private-registry bridge once ready;
+  - replacing the temporary `sa-judge` and `scenario-runner` vendored bridges with the published private-registry bridge once registry auth/install contours are ready;
   - deciding whether `scenario-runner` needs any later runtime-core adoption beyond the now-landed contract slice;
+  - wiring the first real local/GitHub Actions/Vercel registry-auth contour for published framework consumption;
   - `W09-MP-02` and `W09-MP-03` execution once framework prerequisites are explicit;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
 

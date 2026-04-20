@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.2.0
+version: 0.3.0
 date: 2026-04-20
 status: DRAFT
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.3.0
+    date: 2026-04-20
+    changes: Recorded the first publish-readiness tranche for extracted framework packages: package metadata is now aligned with the private-registry bridge and the operational bridge contract is documented in repo-local operations specs.
   - version: 0.2.0
     date: 2026-04-20
     changes: Refreshed the bootstrap snapshot to match the actual repo state: framework epic/feature docs, scenario matrix, verification matrix, and the canonical PRT-036 copy are already landed, but remain draft and still need truth actualization.
@@ -29,10 +32,14 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - spec/plans/guides/scenarios section hubs
 - canonical `mbb/**`
 - mirrored `git-flow.md`
+- private-registry package bridge operations spec
 - initial architecture, project, and planning skeleton docs
 - framework epic map and feature registry
 - framework scenario matrix and verification matrix
 - canonical `PRT-036` copy in `bot-platform`
+- first publish-ready framework package metadata for:
+  - `@bot-platform/api-contract`
+  - `@bot-platform/scenario-system`
 
 ## Not landed yet
 
@@ -41,11 +48,12 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - moved framework ADRs and follow-up child protocols beyond `PRT-036`
 - actual framework scenario catalog behind the current matrix
 - actual framework code extraction
+- real package publish workflow automation
 
 ## Current blockers before code extraction
 
 - dependency bridge decision
-- final namespace split for `api-contract` and `client-sdk`
+- broader namespace split for `client-sdk` and later framework packages
 - `packages/core` seam extraction map
 - workflow host split design
 - persistence interface vs product store split
@@ -58,6 +66,7 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
    - auth core
    - workflow host
    - persistence interface
-2. land framework planning docs:
+2. replace vendored consumer mirrors with published private-registry packages once auth/install contours are ready
+3. land framework planning docs:
    - follow-up split child protocols and ADR decisions after `PRT-036`
-3. start moving clearly framework-owned source docs into this repo
+4. start moving clearly framework-owned source docs into this repo

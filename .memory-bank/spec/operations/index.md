@@ -2,14 +2,18 @@
 file: .memory-bank/spec/operations/index.md
 description: 'Framework operations spec hub for bot-platform.'
 purpose: Hold framework-wide operational standards, release rules, and mirrored process standards.
-version: 0.1.0
-date: 2026-04-19
+version: 0.2.0
+date: 2026-04-20
 status: DRAFT
 tags: [operations, bot-platform, standards]
 parent: .memory-bank/spec/index.md
 children:
   - git-flow.md
+  - private-registry-package-bridge.md
 history:
+  - version: 0.2.0
+    date: 2026-04-20
+    changes: Added the private-registry package bridge contract so extracted framework packages can become publish-ready without pulling product deployment truth into bot-platform.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial framework operations hub created during Memory Bank bootstrap.
@@ -29,3 +33,4 @@ It should not contain product deployment truth.
 ## Initial doc
 
 - [Git flow](git-flow.md): mirrored shared process standard.
+- [Private registry package bridge](private-registry-package-bridge.md): publish-ready seam rules for `@bot-platform/*` packages consumed by product repos.
