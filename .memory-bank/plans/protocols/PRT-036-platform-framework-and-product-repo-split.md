@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.15.0
+version: 1.16.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -36,6 +36,9 @@ related_files:
   - .tasks/prt-036-phase-3-ops-runbook-refinement-2026-04-20/summary/PRT-036-phase-3-ops-synthesis.md
   - .tasks/prt-036-implementation-wave-01-2026-04-20/summary/PRT-036-implementation-wave-01-synthesis.md
 history:
+  - version: 1.16.0
+    date: 2026-04-20
+    changes: Recorded the completion of implementation wave 05 first-tranche extraction design (`X-01..X-03`) for `packages/core`, `packages/api-contract`, and `packages/client-sdk`, and added an operational rule to use only locally supported subagent models during protocol execution.
   - version: 1.15.0
     date: 2026-04-20
     changes: Recorded the completion of implementation wave 04: TR-01 cross-repo traceability was assembled and verified, mixed-source replacement rules were made explicit, and accepted traceability-anchor lessons were folded into the shared MBB guidance.
@@ -261,6 +264,15 @@ Each delegated slice must have:
 - one explicit verification contour.
 
 Do not delegate by chat summary alone.
+
+### Subagent launch rule
+
+Before launching a worker or verifier subagent, the main agent must ensure that the selected model/provider is actually available in the local execution environment.
+
+Operational rule:
+- prefer a known-good locally supported model when one is already established for the workspace;
+- if provider support is uncertain, omit the override or choose the most conservative supported default;
+- treat subagent launch failures as operational lessons and record them in the active wave workspace when they reveal a reusable protocol risk.
 
 ### Task-file standard
 
@@ -1777,7 +1789,8 @@ Planning dependencies:
 Current execution note:
 - steps `1..4` are materially advanced, with Memory Bank bootstrap already landed and contract-boundary research packs already written;
 - steps `5..7` are materially advanced, with feature/scenario actualization and `TR-01` now completed;
-- the active protocol focus is now step `8` plus the remaining repo-local doc migration needed to retire broad hub anchors over time;
+- step `8` is now partially advanced through the accepted `X-01..X-03` design tranche;
+- the active protocol focus is now the remaining `X-04..X-08` design slices plus the repo-local doc migration needed to retire broad hub anchors over time;
 - mixed-package extraction design should continue, but broad code movement must not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
@@ -1884,6 +1897,18 @@ Goal:
 Expected outcome:
 - framework packages compile without product data ownership;
 - product repos can consume framework code without inheriting each other's business domains.
+
+Current status:
+- first extraction-design tranche is complete for:
+  - `X-01` `packages/core`
+  - `X-02` `packages/api-contract`
+  - `X-03` `packages/client-sdk`
+- remaining design slices before broad code movement:
+  - `X-04` `packages/db`
+  - `X-05` `apps/server`
+  - `X-06` `apps/workflow`
+  - `X-07` `packages/scenario-runner`
+  - `X-08` `packages/shared`
 
 ### Wave 3: Land SellerAgent product repo
 
