@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.34.0
+version: 1.35.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -40,7 +40,11 @@ related_files:
   - .tasks/prt-036-implementation-wave-18-2026-04-20/summary/PRT-036-implementation-wave-18-synthesis.md
   - .tasks/prt-036-implementation-wave-19-2026-04-20/summary/PRT-036-implementation-wave-19-synthesis.md
   - .tasks/prt-036-implementation-wave-21-2026-04-20/summary/PRT-036-implementation-wave-21-synthesis.md
+  - .tasks/prt-036-implementation-wave-22-2026-04-20/summary/PRT-036-implementation-wave-22-synthesis.md
 history:
+  - version: 1.35.0
+    date: 2026-04-20
+    changes: Recorded wave-22 completion: `docoved-agent` now has the first release-ready product-package scaffold for `@docoved-agent/sa-docoved` with Changesets, an allowlisted publish script, a release workflow, and local dry-run proof, while actual npm publication and downstream bridge replacement remain later waves.
   - version: 1.34.0
     date: 2026-04-20
     changes: Recorded wave-21 completion: `docoved-agent/packages/sa-docoved` now owns the first runnable Docoved acceptance-host adapter slice, `sales-agent` proves that slice through a temporary vendored `@docoved-agent/sa-docoved` bridge plus `SCN-179`/`SCN-180`, the base host contract remains on version 1, and the next focus moves to bridge replacement and later host-hardening beyond temporary compat glue.
@@ -347,9 +351,15 @@ Review status:
   - `SCN-179` and `SCN-180` now start through the Docoved seam helper rather than the old direct mixed harness;
   - the base host contract remains at `DOCOVED_ACCEPTANCE_HOST_CONTRACT_VERSION = 1`, while temporary compat readback is isolated to one seam helper for this wave;
 - wave-21 synthesis is recorded in `.tasks/prt-036-implementation-wave-21-2026-04-20/summary/PRT-036-implementation-wave-21-synthesis.md`;
+- implementation stage: wave 22 completed;
+- the first Docoved product-package release-readiness slice is now proven:
+  - `@docoved-agent/sa-docoved` now carries publish-ready npm metadata;
+  - `docoved-agent` now has Changesets, an allowlisted publish script, and a release workflow for that package;
+  - local pack and publish dry-run proof are green without performing a real publication;
+- wave-22 synthesis is recorded in `.tasks/prt-036-implementation-wave-22-2026-04-20/summary/PRT-036-implementation-wave-22-synthesis.md`;
 - the next protocol revision pass must focus on:
   - replacing the temporary SellerAgent vendored bridge with an installable/versioned product-package distribution path;
-  - replacing the temporary Docoved vendored bridge with an installable/versioned product-package distribution path;
+  - executing the first real publication for `@docoved-agent/sa-docoved` and then replacing the temporary Docoved vendored bridge in `sales-agent`;
   - planning the next Docoved host-hardening tranche so temporary compat readback and mixed dist-path coupling can retire incrementally instead of spreading to later scenario families;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
