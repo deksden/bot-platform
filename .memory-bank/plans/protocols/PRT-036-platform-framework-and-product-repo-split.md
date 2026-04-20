@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.36.0
+version: 1.37.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -42,7 +42,11 @@ related_files:
   - .tasks/prt-036-implementation-wave-21-2026-04-20/summary/PRT-036-implementation-wave-21-synthesis.md
   - .tasks/prt-036-implementation-wave-22-2026-04-20/summary/PRT-036-implementation-wave-22-synthesis.md
   - .tasks/prt-036-implementation-wave-23-2026-04-20/summary/PRT-036-implementation-wave-23-synthesis.md
+  - .tasks/prt-036-implementation-wave-24-2026-04-20/summary/PRT-036-implementation-wave-24-synthesis.md
 history:
+  - version: 1.37.0
+    date: 2026-04-20
+    changes: Recorded wave-24 completion: the first release-ready product packages now also pass detached tarball clean-install proof outside repo workspaces, closing the last local pre-publish gate before real npm publication and downstream bridge replacement waves.
   - version: 1.36.0
     date: 2026-04-20
     changes: Recorded wave-23 completion: `selleragent` now has the first release-ready product-package scaffold for `@selleragent/core` with Changesets, an allowlisted publish script, a release workflow, and local dry-run proof, while actual npm publication and downstream bridge replacement remain later waves.
@@ -367,6 +371,12 @@ Review status:
   - `selleragent` now has Changesets, an allowlisted publish script, and a release workflow for that package;
   - local pack and publish dry-run proof are green without performing a real publication;
 - wave-23 synthesis is recorded in `.tasks/prt-036-implementation-wave-23-2026-04-20/summary/PRT-036-implementation-wave-23-synthesis.md`;
+- implementation stage: wave 24 completed;
+- the first detached clean-install proof for product packages is now proven:
+  - tarballs for `@docoved-agent/sa-docoved` and `@selleragent/core` install successfully into a fresh temp project outside repo workspaces;
+  - bounded import/runtime assertions are green for both packages;
+  - the protocol now has local proof not only of pack/publish dry-run readiness, but also of consumer-style detached installation before the first real npm publications;
+- wave-24 synthesis is recorded in `.tasks/prt-036-implementation-wave-24-2026-04-20/summary/PRT-036-implementation-wave-24-synthesis.md`;
 - the next protocol revision pass must focus on:
   - executing the first real publication for `@selleragent/core` and then replacing the temporary SellerAgent vendored bridge in `sales-agent`;
   - executing the first real publication for `@docoved-agent/sa-docoved` and then replacing the temporary Docoved vendored bridge in `sales-agent`;
