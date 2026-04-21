@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.64.0
+version: 1.65.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -85,7 +85,15 @@ related_files:
   - .tasks/prt-036-implementation-wave-75-2026-04-21/summary/PRT-036-implementation-wave-75-synthesis.md
   - .tasks/prt-036-implementation-wave-76-2026-04-21/summary/PRT-036-implementation-wave-76-synthesis.md
   - .tasks/prt-036-implementation-wave-77-2026-04-21/summary/PRT-036-implementation-wave-77-synthesis.md
+  - .tasks/prt-036-implementation-wave-79-2026-04-21/summary/PRT-036-implementation-wave-79-synthesis.md
+  - .tasks/prt-036-implementation-wave-80-2026-04-21/summary/PRT-036-implementation-wave-80-synthesis.md
+  - .tasks/prt-036-implementation-wave-81-2026-04-21/summary/PRT-036-implementation-wave-81-synthesis.md
+  - .tasks/prt-036-implementation-wave-82-2026-04-21/summary/PRT-036-implementation-wave-82-synthesis.md
+  - .tasks/prt-036-implementation-wave-83-2026-04-21/summary/PRT-036-implementation-wave-83-synthesis.md
 history:
+  - version: 1.65.0
+    date: 2026-04-21
+    changes: Recorded waves 79-83: the stale post-SCN-215 tail was corrected, `docoved-answer-artifact.ts`, `research-workflow.ts`, and `simulated-response.ts` now all consume the published `@docoved-agent/sa-docoved@0.1.10` citation-resolution surface, `packages/core/src/index.ts` now re-exports that surface directly from the published package, and verification is green on `SCN-186`, `SCN-195`, `SCN-215`, plus `@sales-agent/core` typecheck/build.
   - version: 1.64.0
     date: 2026-04-21
     changes: Recorded waves 73-77: the first runtime extraction consumer in `memory-bank.ts` now uses the published Docoved seam, the broader citation-resolution helper contour is now really published as `@docoved-agent/sa-docoved@0.1.10`, and `SCN-215` now passes as the first downstream consumer of that broader published citation-resolution surface.
@@ -789,8 +797,34 @@ Review status:
   - `SCN-215` now consumes `createDocovedResolvedSourceRef` and `createDocovedDocumentLevelSourceRef` from `@docoved-agent/sa-docoved@0.1.10`;
   - `SCN-215` is green on the cutover;
 - wave-77 synthesis is recorded in `.tasks/prt-036-implementation-wave-77-2026-04-21/summary/PRT-036-implementation-wave-77-synthesis.md`;
+- implementation stage: wave 79 completed;
+- bounded scout verification corrected the stale post-`SCN-215` tail:
+  - `docoved-answer-artifact.ts` was already cut over in the live checkout by the time the scout closed;
+  - the next bounded runtime consumer was confirmed as `research-workflow.ts`, with `SCN-186` and `SCN-195` selected as the primary anchors;
+- wave-79 synthesis is recorded in `.tasks/prt-036-implementation-wave-79-2026-04-21/summary/PRT-036-implementation-wave-79-synthesis.md`;
+- implementation stage: wave 80 completed;
+- the Docoved answer-artifact runtime path now uses the broader published citation-resolution seam:
+  - `packages/core/src/runtime/docoved-answer-artifact.ts` now consumes citation-resolution helpers from `@docoved-agent/sa-docoved@0.1.10`;
+  - `packages/core` now explicitly depends on `@docoved-agent/sa-docoved@0.1.10`;
+  - `SCN-186` and `SCN-215` are green on the cutover;
+- wave-80 synthesis is recorded in `.tasks/prt-036-implementation-wave-80-2026-04-21/summary/PRT-036-implementation-wave-80-synthesis.md`;
+- implementation stage: wave 81 completed;
+- the live Docoved workflow fallback now uses the broader published citation-resolution seam:
+  - `packages/core/src/runtime/research-workflow.ts` now consumes `buildDocovedResolvedSourceRefs` and `DocovedResolvedSourceRef` from `@docoved-agent/sa-docoved@0.1.10`;
+  - `SCN-186` and `SCN-195` are green on the cutover;
+- wave-81 synthesis is recorded in `.tasks/prt-036-implementation-wave-81-2026-04-21/summary/PRT-036-implementation-wave-81-synthesis.md`;
+- implementation stage: wave 82 completed;
+- the remaining scenario-side simulated fallback now also uses the broader published citation-resolution seam:
+  - `packages/core/src/runtime/providers/simulated-response.ts` now consumes `buildDocovedResolvedSourceRefs` from `@docoved-agent/sa-docoved@0.1.10`;
+  - `SCN-186` and `SCN-195` are green on the cutover;
+- wave-82 synthesis is recorded in `.tasks/prt-036-implementation-wave-82-2026-04-21/summary/PRT-036-implementation-wave-82-synthesis.md`;
+- implementation stage: wave 83 completed;
+- the transitional compatibility export for the broader citation-resolution seam is now also routed to the published package:
+  - `packages/core/src/index.ts` now re-exports `buildDocovedDocumentMachineLocator`, `buildDocovedResolvedSourceRefs`, `createDocovedDocumentLevelSourceRef`, and `createDocovedResolvedSourceRef` from `@docoved-agent/sa-docoved@0.1.10`;
+  - `@sales-agent/core` `typecheck` and `build`, plus `SCN-215`, are green on the cutover;
+- wave-83 synthesis is recorded in `.tasks/prt-036-implementation-wave-83-2026-04-21/summary/PRT-036-implementation-wave-83-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next bounded mixed Docoved tail after `SCN-215` is closed;
+  - choosing the next bounded local cleanup tail after the completed citation-resolution consumer waves;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
