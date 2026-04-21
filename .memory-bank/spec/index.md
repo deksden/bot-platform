@@ -2,7 +2,7 @@
 file: .memory-bank/spec/index.md
 description: 'Spec hub для bot-platform: framework architecture, package contracts, scenario system и repo-level placement rules.'
 purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo и какие нормативные docs обязаны жить именно здесь.
-version: 0.12.0
+version: 0.13.0
 date: 2026-04-21
 status: DRAFT
 c4_level: L1
@@ -16,14 +16,21 @@ children:
   - project/repo-structure.md
   - project/feature-area-boundaries.md
   - runtime/index.md
+  - engineering/index.md
+  - engineering/delivery-standards.md
+  - engineering/coding-style.md
   - security/index.md
   - security/auth-core.md
+  - security/auth-and-access.md
   - client-api/index.md
   - client-api/api-namespace-registry.md
   - client-api/typed-client-api-and-sdk.md
   - scenarios/index.md
   - operations/index.md
 history:
+  - version: 0.13.0
+    date: 2026-04-21
+    changes: Linked the framework engineering packet (delivery-standards and coding-style) and the framework auth-and-access security contract in spec navigation and must-exist inventory (PRT-036 Wave 139).
   - version: 0.12.0
     date: 2026-04-21
     changes: Linked the landed framework operations packet (deployment architecture, operations runbook, production rollout runbook, hosted-beta acceptance contract) from spec/operations and must-exist inventory (PRT-036 Wave 135).
@@ -90,7 +97,8 @@ history:
 - [Framework boundaries](architecture/boundaries.md): главный запретительный документ про то, что может и не может жить в `bot-platform`.
 - [Project docs](project/index.md): repo shape, package catalog, feature-area ownership и naming/placement conventions.
 - [Runtime docs](runtime/index.md): execution kernel, decision-explanation envelope, execution traces/token accounting, trace-artifact governance, pipeline registry/binding contract, persistence-interface/store-boundary contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
-- [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md).
+- [Engineering docs](engineering/index.md): framework delivery and coding standards, включая [delivery standards](engineering/delivery-standards.md) и [coding style](engineering/coding-style.md).
+- [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md) и [auth and access](security/auth-and-access.md).
 - [Client API docs](client-api/index.md): operation catalog, schemas, typed errors и client-sdk boundary, включая [API namespace registry](client-api/api-namespace-registry.md) и landed [typed client API and SDK](client-api/typed-client-api-and-sdk.md).
 - [Scenario docs](scenarios/index.md): scenario taxonomy, evidence model, hosted verification classes и runner assumptions, включая [scenario system and evidence](scenarios/scenario-system-and-evidence.md) и [hosted beta execution model](scenarios/hosted-beta-execution-model.md).
 - [Operations docs](operations/index.md): package publishing, deployment/runbook contracts, hosted-beta acceptance rules, mirrored process standards и framework-level release/verification rules.
@@ -111,6 +119,9 @@ history:
 - `project/repo-structure.md`
 - `project/feature-area-boundaries.md`
 - `runtime/index.md`
+- `engineering/index.md`
+- `engineering/delivery-standards.md`
+- `engineering/coding-style.md`
 - `runtime/agent-execution-kernel.md`
 - `runtime/decision-explanation-envelope.md`
 - `runtime/execution-traces-and-token-accounting.md`
@@ -119,6 +130,7 @@ history:
 - `runtime/trace-artifact-governance.md`
 - `security/index.md`
 - `security/auth-core.md`
+- `security/auth-and-access.md`
 - `client-api/index.md`
 - `client-api/api-namespace-registry.md`
 - `client-api/typed-client-api-and-sdk.md`
