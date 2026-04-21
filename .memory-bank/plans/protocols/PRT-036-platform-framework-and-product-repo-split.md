@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.71.0
+version: 1.72.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.72.0
+    date: 2026-04-21
+    changes: Recorded waves 114-115: the fifth target-repo doc packet is now landed, with Docoved guides/reference docs (`docoved-dv-admin-shell`, `docoved-local-regression-pack`, and `docoved-hosted-live-channel-acceptance-playbook`) migrated into `docoved-agent`, framework architecture-context docs (`platform-glossary`, `system-context`, `container-architecture`, and `dependency-and-placement-rules`) migrated into `bot-platform`, and Wave 1B status wording narrowed to still-unlanded doc families.
   - version: 1.71.0
     date: 2026-04-21
     changes: Recorded waves 107-112: the fourth target-repo doc packet is now landed, with Docoved channel-adapter plus Telegram/email channel-acceptance docs migrated into `docoved-agent`, framework execution-traces plus trace-artifact-governance plus decision-explanation-envelope docs migrated into `bot-platform`, and Wave 1B status wording advanced to the next still-unlanded doc families.
@@ -2282,7 +2285,20 @@ Current progress:
   - `spec/client-api/typed-client-api-and-sdk.md`
   - `spec/architecture/containers/index.md`
   - `spec/architecture/containers/workflow-host.md`
-- remaining backlog is the broader framework architecture/project/client-api/scenario/protocol set.
+- framework contract packet is landed:
+  - `spec/security/auth-core.md`
+  - `spec/runtime/persistence-interface-and-store-boundary.md`
+  - `spec/client-api/api-namespace-registry.md`
+- framework runtime-governance packet is landed:
+  - `spec/runtime/execution-traces-and-token-accounting.md`
+  - `spec/runtime/trace-artifact-governance.md`
+  - `spec/runtime/decision-explanation-envelope.md`
+- framework architecture-context packet is landed:
+  - `spec/architecture/platform-glossary.md`
+  - `spec/architecture/system-context.md`
+  - `spec/architecture/container-architecture.md`
+  - `spec/architecture/dependency-and-placement-rules.md`
+- remaining backlog is the still-unlanded framework project/spec/scenario/protocol/ADR families beyond the five landed packets.
 
 Must cover:
 - framework project/architecture/runtime/client-api/scenario docs
@@ -2315,12 +2331,24 @@ Current progress:
   - `spec/architecture/domains/index.md`
   - `spec/architecture/domains/docoved-knowledge-lifecycle.md`
   - `spec/architecture/domains/docoved-agentic-ingest-and-knowledge-projection-model.md`
-- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides family.
+- runtime/operations packet is landed:
+  - `spec/runtime/docoved-single-endpoint-api-contract.md`
+  - `spec/runtime/docoved-memory-bank-publication-and-active-snapshot-model.md`
+  - `spec/operations/docoved-hosted-bootstrap-runbook.md`
+- operations channel packet is landed:
+  - `spec/operations/docoved-channel-adapter-contract.md`
+  - `spec/operations/docoved-telegram-channel-binding-and-hosted-acceptance.md`
+  - `spec/operations/docoved-email-channel-binding-and-hosted-acceptance.md`
+- guides/reference packet is landed:
+  - `guides/reference/docoved-dv-admin-shell.md`
+  - `guides/reference/docoved-local-regression-pack.md`
+  - `guides/reference/docoved-hosted-live-channel-acceptance-playbook.md`
+- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides/reference families beyond the five landed packets.
 
 Must cover:
 - Docoved architecture/runtime/operations docs
 - `EP-023`, `ADR-005..006`, and `PRT-025..035`
-- Docoved guides/reference docs
+- remaining Docoved guides/reference docs not yet landed in repo-local form
 - Docoved source-doc families that should become product-local stubs in the mixed repo after migration
 
 ### Scenario and traceability tasks
@@ -2531,7 +2559,7 @@ Current status:
 - actualized feature registries are landed in all target repos;
 - scenario ownership and verification matrices are rebound to those registries;
 - `TR-01` explicit cross-repo traceability is complete for the current split stage;
-- remaining work in Wave 1B is deeper repo-local doc migration beyond the first four landed packets in `docoved-agent` and the first four landed packets in `bot-platform`, so broad hub anchors can later be replaced with detailed child specs.
+- remaining work in Wave 1B is deeper repo-local doc migration beyond the first five landed packets in `docoved-agent` and the first five landed packets in `bot-platform`, so broad hub anchors can later be replaced with detailed child specs.
 
 ### Wave 2: Extract `bot-platform` framework core
 
