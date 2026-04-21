@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.65.0
+version: 1.66.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -90,7 +90,13 @@ related_files:
   - .tasks/prt-036-implementation-wave-81-2026-04-21/summary/PRT-036-implementation-wave-81-synthesis.md
   - .tasks/prt-036-implementation-wave-82-2026-04-21/summary/PRT-036-implementation-wave-82-synthesis.md
   - .tasks/prt-036-implementation-wave-83-2026-04-21/summary/PRT-036-implementation-wave-83-synthesis.md
+  - .tasks/prt-036-implementation-wave-84-2026-04-21/summary/PRT-036-implementation-wave-84-synthesis.md
+  - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
+  - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.66.0
+    date: 2026-04-21
+    changes: Recorded waves 84-86: the post-consumer cleanup tail was reduced to type-only/local-compat bindings, those remaining `packages/core/src` imports are now cut over to `@docoved-agent/sa-docoved`, and the former local `docoved-citations.ts` implementation in `sales-agent` is now only a thin compatibility shim with verification green on `SCN-186`, `SCN-195`, `SCN-215`, plus `@sales-agent/core` typecheck/build.
   - version: 1.65.0
     date: 2026-04-21
     changes: Recorded waves 79-83: the stale post-SCN-215 tail was corrected, `docoved-answer-artifact.ts`, `research-workflow.ts`, and `simulated-response.ts` now all consume the published `@docoved-agent/sa-docoved@0.1.10` citation-resolution surface, `packages/core/src/index.ts` now re-exports that surface directly from the published package, and verification is green on `SCN-186`, `SCN-195`, `SCN-215`, plus `@sales-agent/core` typecheck/build.
