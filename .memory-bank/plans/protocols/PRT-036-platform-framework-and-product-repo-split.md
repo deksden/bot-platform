@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.67.0
+version: 1.68.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.68.0
+    date: 2026-04-21
+    changes: Recorded waves 94-99: the next target-repo doc tranche is now landed, with Docoved architecture-domain docs migrated into `docoved-agent`, typed-client plus workflow-host docs migrated into `bot-platform`, and cross-repo status/protocol sync updated so Wave 1B progress reflects both the first and second landed doc packets.
   - version: 1.67.0
     date: 2026-04-21
     changes: Recorded waves 87-93: the first repo-local doc-migration packets are now landed in the target repos, with Docoved answer-artifact/runbook/topology docs migrated into `docoved-agent`, execution-kernel and pipeline-registry runtime docs migrated into `bot-platform`, and cross-repo status/protocol sync updated to treat those packets as completed Wave 1B progress rather than pending migration intent.
@@ -2262,6 +2265,10 @@ Current progress:
 - first runtime packet is landed:
   - `spec/runtime/agent-execution-kernel.md`
   - `spec/runtime/pipeline-registry-and-binding-contract.md`
+- next framework surface packet is landed:
+  - `spec/client-api/typed-client-api-and-sdk.md`
+  - `spec/architecture/containers/index.md`
+  - `spec/architecture/containers/workflow-host.md`
 - remaining backlog is the broader framework architecture/project/client-api/scenario/protocol set.
 
 Must cover:
@@ -2291,6 +2298,10 @@ Current progress:
   - `spec/runtime/docoved-answer-artifact-contract.md`
   - `spec/operations/docoved-contour-runbook.md`
   - `spec/operations/docoved-hosted-deployment-topology.md`
+- first architecture-domain packet is landed:
+  - `spec/architecture/domains/index.md`
+  - `spec/architecture/domains/docoved-knowledge-lifecycle.md`
+  - `spec/architecture/domains/docoved-agentic-ingest-and-knowledge-projection-model.md`
 - remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides family.
 
 Must cover:
@@ -2410,7 +2421,7 @@ Current execution note:
 - step `8` is now complete through the accepted `X-01..X-08` design tranches;
 - first canonical target-doc anchors are now landed for the shared scenario-system, SellerAgent business-profile ownership, and Docoved acceptance host ownership;
 - first explicit move-wave packets are now drafted for framework shell extraction, Docoved local host/publication baseline, and SellerAgent business-profile shared-retirement;
-- the active protocol focus is now continued Wave `1B` repo-local doc migration plus later bounded code-move packets, with the first framework and Docoved target-repo doc packets already landed;
+- the active protocol focus is now continued Wave `1B` repo-local doc migration plus later bounded code-move packets, with the first and second framework/Docoved target-repo doc packets already landed;
 - mixed-package code movement must still not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
@@ -2507,7 +2518,7 @@ Current status:
 - actualized feature registries are landed in all target repos;
 - scenario ownership and verification matrices are rebound to those registries;
 - `TR-01` explicit cross-repo traceability is complete for the current split stage;
-- remaining work in Wave 1B is deeper repo-local doc migration beyond the first landed packets in `docoved-agent` and `bot-platform`, so broad hub anchors can later be replaced with detailed child specs.
+- remaining work in Wave 1B is deeper repo-local doc migration beyond the first two landed packets in `docoved-agent` and the first two landed packets in `bot-platform`, so broad hub anchors can later be replaced with detailed child specs.
 
 ### Wave 2: Extract `bot-platform` framework core
 
