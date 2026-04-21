@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.72.0
+version: 1.75.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,15 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.75.0
+    date: 2026-04-21
+    changes: Recorded waves 123-124: the eighth target-repo doc packet is now landed, with Docoved ADR docs (`ADR-005-ordinary-root-index-and-directory-backed-knowledge-slices` and `ADR-006-docoved-source-layer-and-semantic-projection-split`, plus ADR/plans hub linkage) migrated into `docoved-agent`, framework hosted-scenario docs (`hosted-beta-execution-model` plus scenarios/spec hub linkage) migrated into `bot-platform`, and Wave 1B remaining-next wording narrowed to still-unlanded doc families.
+  - version: 1.74.0
+    date: 2026-04-21
+    changes: Recorded waves 120-121: the seventh target-repo doc packet is now landed, with Docoved protocol docs (`PRT-025-docoved-document-grounded-answering-and-knowledge-publication-foundation` and `PRT-027-docoved-kb-reglaments-production-knowledge-base-rollout`, plus protocol/plans hub linkage) migrated into `docoved-agent`, framework scenario-system docs (`scenario-system-and-evidence` plus scenarios/spec hub linkage) migrated into `bot-platform`, and Wave 1B remaining-next wording narrowed to still-unlanded doc families.
+  - version: 1.73.0
+    date: 2026-04-21
+    changes: Recorded waves 117-118: the sixth target-repo doc packet is now landed, with Docoved runtime foundation docs (`document-grounded-answering-contract`, `research-then-answer-memory-bank-workflow`, and `docoved-agentic-search-and-verification-pipeline`) migrated into `docoved-agent`, framework ADR terminology docs (`ADR-004-workspace-product-instance-pipeline-and-environment-terminology` plus ADR index linkage) migrated into `bot-platform`, and Wave 1B remaining-next wording narrowed to still-unlanded doc families.
   - version: 1.72.0
     date: 2026-04-21
     changes: Recorded waves 114-115: the fifth target-repo doc packet is now landed, with Docoved guides/reference docs (`docoved-dv-admin-shell`, `docoved-local-regression-pack`, and `docoved-hosted-live-channel-acceptance-playbook`) migrated into `docoved-agent`, framework architecture-context docs (`platform-glossary`, `system-context`, `container-architecture`, and `dependency-and-placement-rules`) migrated into `bot-platform`, and Wave 1B status wording narrowed to still-unlanded doc families.
@@ -2298,7 +2307,18 @@ Current progress:
   - `spec/architecture/system-context.md`
   - `spec/architecture/container-architecture.md`
   - `spec/architecture/dependency-and-placement-rules.md`
-- remaining backlog is the still-unlanded framework project/spec/scenario/protocol/ADR families beyond the five landed packets.
+- framework ADR packet is landed:
+  - `plans/adr/ADR-004-workspace-product-instance-pipeline-and-environment-terminology.md`
+  - `plans/adr/index.md`
+- framework scenario-system packet is landed:
+  - `spec/scenarios/scenario-system-and-evidence.md`
+  - `spec/scenarios/index.md`
+  - `spec/index.md`
+- framework hosted-scenario packet is landed:
+  - `spec/scenarios/hosted-beta-execution-model.md`
+  - `spec/scenarios/index.md`
+  - `spec/index.md`
+- remaining backlog is the still-unlanded framework project/spec/scenario/protocol/ADR families beyond the eight landed packets.
 
 Must cover:
 - framework project/architecture/runtime/client-api/scenario docs
@@ -2343,11 +2363,25 @@ Current progress:
   - `guides/reference/docoved-dv-admin-shell.md`
   - `guides/reference/docoved-local-regression-pack.md`
   - `guides/reference/docoved-hosted-live-channel-acceptance-playbook.md`
-- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides/reference families beyond the five landed packets.
+- runtime foundation packet is landed:
+  - `spec/runtime/document-grounded-answering-contract.md`
+  - `spec/runtime/research-then-answer-memory-bank-workflow.md`
+  - `spec/runtime/docoved-agentic-search-and-verification-pipeline.md`
+- protocol/plans packet is landed:
+  - `plans/protocols/PRT-025-docoved-document-grounded-answering-and-knowledge-publication-foundation.md`
+  - `plans/protocols/PRT-027-docoved-kb-reglaments-production-knowledge-base-rollout.md`
+  - `plans/protocols/index.md`
+  - `plans/index.md`
+- ADR/plans packet is landed:
+  - `plans/adr/ADR-005-ordinary-root-index-and-directory-backed-knowledge-slices.md`
+  - `plans/adr/ADR-006-docoved-source-layer-and-semantic-projection-split.md`
+  - `plans/adr/index.md`
+  - `plans/index.md`
+- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides/reference families beyond the eight landed packets.
 
 Must cover:
 - Docoved architecture/runtime/operations docs
-- `EP-023`, `ADR-005..006`, and `PRT-025..035`
+- `EP-023`, `ADR-005..006`, and remaining `PRT-026`, `PRT-028..035`
 - remaining Docoved guides/reference docs not yet landed in repo-local form
 - Docoved source-doc families that should become product-local stubs in the mixed repo after migration
 
@@ -2559,7 +2593,7 @@ Current status:
 - actualized feature registries are landed in all target repos;
 - scenario ownership and verification matrices are rebound to those registries;
 - `TR-01` explicit cross-repo traceability is complete for the current split stage;
-- remaining work in Wave 1B is deeper repo-local doc migration beyond the first five landed packets in `docoved-agent` and the first five landed packets in `bot-platform`, so broad hub anchors can later be replaced with detailed child specs.
+- remaining work in Wave 1B is deeper repo-local doc migration beyond the first seven landed packets in `docoved-agent` and the first seven landed packets in `bot-platform`, so broad hub anchors can later be replaced with detailed child specs.
 
 ### Wave 2: Extract `bot-platform` framework core
 

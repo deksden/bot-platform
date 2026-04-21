@@ -2,7 +2,7 @@
 file: .memory-bank/spec/index.md
 description: 'Spec hub для bot-platform: framework architecture, package contracts, scenario system и repo-level placement rules.'
 purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo и какие нормативные docs обязаны жить именно здесь.
-version: 0.9.0
+version: 0.11.0
 date: 2026-04-21
 status: DRAFT
 c4_level: L1
@@ -24,6 +24,12 @@ children:
   - scenarios/index.md
   - operations/index.md
 history:
+  - version: 0.11.0
+    date: 2026-04-21
+    changes: Linked the landed hosted-beta-execution-model packet from scenario hubs and the scenario section inventory (PRT-036 Wave 124).
+  - version: 0.10.0
+    date: 2026-04-21
+    changes: Linked the landed framework scenario-system-and-evidence packet from the scenario section and must-exist inventory (PRT-036 Wave 121).
   - version: 0.9.0
     date: 2026-04-21
     changes: Linked the new runtime decision-explanation-envelope framework contract from the spec/runtime hubs and added it to the must-exist runtime inventory (PRT-036 Wave 112).
@@ -83,7 +89,7 @@ history:
 - [Runtime docs](runtime/index.md): execution kernel, decision-explanation envelope, execution traces/token accounting, trace-artifact governance, pipeline registry/binding contract, persistence-interface/store-boundary contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
 - [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md).
 - [Client API docs](client-api/index.md): operation catalog, schemas, typed errors и client-sdk boundary, включая [API namespace registry](client-api/api-namespace-registry.md) и landed [typed client API and SDK](client-api/typed-client-api-and-sdk.md).
-- [Scenario docs](scenarios/index.md): scenario taxonomy, evidence model, hosted verification classes и runner assumptions.
+- [Scenario docs](scenarios/index.md): scenario taxonomy, evidence model, hosted verification classes и runner assumptions, включая [scenario system and evidence](scenarios/scenario-system-and-evidence.md) и [hosted beta execution model](scenarios/hosted-beta-execution-model.md).
 - [Operations docs](operations/index.md): package publishing, mirrored process standards и framework-level release/verification rules.
 
 ## Must-exist docs immediately
@@ -114,6 +120,7 @@ history:
 - `client-api/api-namespace-registry.md`
 - `client-api/typed-client-api-and-sdk.md`
 - `scenarios/index.md`
+- `scenarios/scenario-system-and-evidence.md`
 - `runtime/scenario-system-framework-contract.md`
 - `scenarios/hosted-beta-execution-model.md`
 - `operations/index.md`
