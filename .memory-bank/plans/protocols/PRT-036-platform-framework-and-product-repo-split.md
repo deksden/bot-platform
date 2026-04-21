@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.76.0
+version: 1.77.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.77.0
+    date: 2026-04-21
+    changes: Recorded waves 130-132: the tenth target-repo doc packet is now landed, with SellerAgent commerce specs (`catalog-cart-deal-model` and `travelbook-business-playbook-and-seed`, plus commerce/spec hub linkage) migrated into `seller-agent`, framework protocol docs (`PRT-030-architecture-boundary-simplification-and-ownership-convergence` plus protocol hub linkage) migrated into `bot-platform`, Docoved protocol docs (`PRT-028-docoved-hierarchical-index-publication-and-tree-traversal-search` and `PRT-029-docoved-ordinary-root-index-and-directory-backed-knowledge-slices`, plus protocol/plans hub linkage) migrated into `docoved-agent`, and Wave 1B remaining-next wording narrowed to still-unlanded doc families.
   - version: 1.76.0
     date: 2026-04-21
     changes: Recorded waves 126-128: the ninth target-repo doc packet is now landed, with SellerAgent customers specs (`customer-memory-model` and `model-guided-memory-followup-pipeline`, plus customers/spec hub linkage) migrated into `seller-agent`, framework ADR docs (`ADR-003-deterministic-hosted-scenarios-and-browser-automation` plus ADR hub linkage) migrated into `bot-platform`, Docoved protocol docs (`PRT-026-docoved-workspace-control-plane-channel-access-and-locator-fidelity` plus protocol/plans hub linkage) migrated into `docoved-agent`, and Wave 1B remaining-next wording narrowed to still-unlanded doc families.
@@ -2387,11 +2390,11 @@ Current progress:
   - `plans/protocols/PRT-026-docoved-workspace-control-plane-channel-access-and-locator-fidelity.md`
   - `plans/protocols/index.md`
   - `plans/index.md`
-- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides/reference families beyond the nine landed packets.
+- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides/reference families beyond the ten landed packets.
 
 Must cover:
 - Docoved architecture/runtime/operations docs
-- `EP-023`, `ADR-005..006`, and remaining `PRT-026`, `PRT-028..035`
+- `EP-023`, `ADR-005..006`, and remaining `PRT-031..035`
 - remaining Docoved guides/reference docs not yet landed in repo-local form
 - Docoved source-doc families that should become product-local stubs in the mixed repo after migration
 
@@ -2506,7 +2509,7 @@ Current execution note:
 - step `8` is now complete through the accepted `X-01..X-08` design tranches;
 - first canonical target-doc anchors are now landed for the shared scenario-system, SellerAgent business-profile ownership, and Docoved acceptance host ownership;
 - first explicit move-wave packets are now drafted for framework shell extraction, Docoved local host/publication baseline, and SellerAgent business-profile shared-retirement;
-- the active protocol focus is now continued Wave `1B` repo-local doc migration plus later bounded code-move packets, with the first through fourth framework/Docoved target-repo doc packets already landed;
+- the active protocol focus is now continued Wave `1B` repo-local doc migration plus later bounded code-move packets, with ten target-repo documentation packets already landed across `seller-agent`, `bot-platform`, and `docoved-agent`;
 - mixed-package code movement must still not outrun repo-local doc/feature/scenario truth.
 
 Implementation gating rule:
@@ -2603,7 +2606,7 @@ Current status:
 - actualized feature registries are landed in all target repos;
 - scenario ownership and verification matrices are rebound to those registries;
 - `TR-01` explicit cross-repo traceability is complete for the current split stage;
-- remaining work in Wave 1B is deeper repo-local doc migration beyond the first seven landed packets in `docoved-agent` and the first seven landed packets in `bot-platform`, so broad hub anchors can later be replaced with detailed child specs.
+- remaining work in Wave 1B is deeper repo-local doc migration beyond the first ten landed Docoved packets, the first eight landed framework packets, and the first two landed SellerAgent source-spec packets, so broad hub anchors can later be replaced with detailed child specs.
 
 ### Wave 2: Extract `bot-platform` framework core
 
