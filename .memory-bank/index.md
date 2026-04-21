@@ -2,8 +2,8 @@
 file: .memory-bank/index.md
 description: 'Memory Bank корневой вход для bot-platform: framework-only navigation по specs, planning, guides, scenario system и MBB standards.'
 purpose: Читать как главный entrypoint в документацию `bot-platform`, чтобы быстро понять архитектурную правду framework-репозитория и не смешивать ее с product-owned truth.
-version: 0.1.0
-date: 2026-04-19
+version: 0.2.0
+date: 2026-04-21
 status: DRAFT
 c4_level: L1
 tags: [memory-bank, navigation, bot-platform, framework, mbb, repo-split]
@@ -15,6 +15,9 @@ children:
   - scenarios/index.md
   - mbb/index.md
 history:
+  - version: 0.2.0
+    date: 2026-04-21
+    changes: Added the framework Security spec entrypoint and linked the first auth-core contract for discoverability from the root Memory Bank hub.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial draft root index for the future bot-platform Memory Bank under PRT-036.
@@ -41,6 +44,7 @@ history:
 - [Architecture hub](spec/architecture/index.md): top-down карта системы, glossary, container model и framework/product boundaries.
 - [Project structure](spec/project/repo-structure.md): on-disk shape `bot-platform` и правила package/container placement.
 - [Runtime and framework contracts](spec/runtime/index.md): execution kernel, auth/command/workflow framework contracts и shared runtime semantics.
+- [Security specs](spec/security/index.md): framework-owned auth primitives, access-check boundaries и reusable auth-core contract.
 - [Client API specs](spec/client-api/index.md): typed operation catalog, SDK boundary и shared client-facing contracts.
 - [Scenario specs](spec/scenarios/index.md): canonical scenario system, evidence model и hosted verification layering.
 - [Plans hub](plans/index.md): framework-only ADRs, epics, protocols и delivery status.
@@ -55,6 +59,7 @@ history:
 - `spec/project/repo-structure.md`
 - `spec/project/feature-area-boundaries.md`
 - `spec/runtime/index.md`
+- `spec/security/index.md`
 - `spec/client-api/index.md`
 - `spec/scenarios/index.md`
 - `plans/index.md`
@@ -68,5 +73,6 @@ history:
 1. Начать с `spec/architecture/index.md`.
 2. Затем прочитать `spec/architecture/boundaries.md` и `spec/project/repo-structure.md`.
 3. После этого перейти в `spec/client-api/index.md`, `spec/runtime/index.md` и `spec/scenarios/index.md`.
-4. Для текущей migration wave посмотреть `plans/protocols/PRT-036-platform-framework-and-product-repo-split.md`.
-5. Для authoring discipline и mirror policy использовать `mbb/index.md`.
+4. Затем прочитать `spec/security/index.md` и `spec/security/auth-core.md`.
+5. Для текущей migration wave посмотреть `plans/protocols/PRT-036-platform-framework-and-product-repo-split.md`.
+6. Для authoring discipline и mirror policy использовать `mbb/index.md`.

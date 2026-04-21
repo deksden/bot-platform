@@ -2,7 +2,7 @@
 file: .memory-bank/spec/index.md
 description: 'Spec hub для bot-platform: framework architecture, package contracts, scenario system и repo-level placement rules.'
 purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo и какие нормативные docs обязаны жить именно здесь.
-version: 0.3.0
+version: 0.6.0
 date: 2026-04-21
 status: DRAFT
 c4_level: L1
@@ -16,11 +16,23 @@ children:
   - project/repo-structure.md
   - project/feature-area-boundaries.md
   - runtime/index.md
+  - security/index.md
+  - security/auth-core.md
   - client-api/index.md
+  - client-api/api-namespace-registry.md
   - client-api/typed-client-api-and-sdk.md
   - scenarios/index.md
   - operations/index.md
 history:
+  - version: 0.6.0
+    date: 2026-04-21
+    changes: Added the API namespace registry to the client-api spec inventory as canonical framework namespace ownership guidance (PRT-036 wave 105).
+  - version: 0.5.0
+    date: 2026-04-21
+    changes: Linked the runtime persistence-interface/store-boundary framework contract from the spec hub and updated the must-exist runtime doc inventory (PRT-036 Wave 104).
+  - version: 0.4.0
+    date: 2026-04-21
+    changes: Added the new framework Security section with the first auth-core contract doc and linked it from the main spec hub.
   - version: 0.3.0
     date: 2026-04-21
     changes: Landed the next framework surface packet (PRT-036 waves 97-98): repo-local typed client API doc, workflow-host container doc, and architecture container index are now present and linked from the spec hubs.
@@ -59,8 +71,9 @@ history:
 - [Architecture hub](architecture/index.md): glossary, system context, container map, domain map и dependency rules для framework repo, включая [containers index](architecture/containers/index.md) и [workflow host](architecture/containers/workflow-host.md).
 - [Framework boundaries](architecture/boundaries.md): главный запретительный документ про то, что может и не может жить в `bot-platform`.
 - [Project docs](project/index.md): repo shape, package catalog, feature-area ownership и naming/placement conventions.
-- [Runtime docs](runtime/index.md): execution kernel, pipeline registry/binding contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
-- [Client API docs](client-api/index.md): operation catalog, schemas, typed errors и client-sdk boundary, включая landed [typed client API and SDK](client-api/typed-client-api-and-sdk.md).
+- [Runtime docs](runtime/index.md): execution kernel, pipeline registry/binding contract, persistence-interface/store-boundary contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
+- [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md).
+- [Client API docs](client-api/index.md): operation catalog, schemas, typed errors и client-sdk boundary, включая [API namespace registry](client-api/api-namespace-registry.md) и landed [typed client API and SDK](client-api/typed-client-api-and-sdk.md).
 - [Scenario docs](scenarios/index.md): scenario taxonomy, evidence model, hosted verification classes и runner assumptions.
 - [Operations docs](operations/index.md): package publishing, mirrored process standards и framework-level release/verification rules.
 
@@ -82,7 +95,11 @@ history:
 - `runtime/index.md`
 - `runtime/agent-execution-kernel.md`
 - `runtime/pipeline-registry-and-binding-contract.md`
+- `runtime/persistence-interface-and-store-boundary.md`
+- `security/index.md`
+- `security/auth-core.md`
 - `client-api/index.md`
+- `client-api/api-namespace-registry.md`
 - `client-api/typed-client-api-and-sdk.md`
 - `scenarios/index.md`
 - `runtime/scenario-system-framework-contract.md`

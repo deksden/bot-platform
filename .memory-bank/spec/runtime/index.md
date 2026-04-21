@@ -2,7 +2,7 @@
 file: .memory-bank/spec/runtime/index.md
 description: 'Runtime hub for bot-platform.'
 purpose: Hold framework runtime contracts for kernels, providers, pipelines, prompts, workflow, auth, command, and shared scenario-system layers.
-version: 0.3.0
+version: 0.4.0
 date: 2026-04-21
 status: DRAFT
 tags: [runtime, bot-platform, contracts]
@@ -10,10 +10,14 @@ parent: .memory-bank/spec/index.md
 children:
   - agent-execution-kernel.md
   - pipeline-registry-and-binding-contract.md
+  - persistence-interface-and-store-boundary.md
   - scenario-system-framework-contract.md
 target_audience: [developers, ai-agents]
 automation_ready: true
 history:
+  - version: 0.4.0
+    date: 2026-04-21
+    changes: Added the framework persistence-interface and store-boundary runtime contract and linked it from the runtime hub (PRT-036 Wave 104).
   - version: 0.3.0
     date: 2026-04-21
     changes: Added repo-local runtime framework docs for execution kernel and pipeline registry/binding contract (PRT-036 waves 91-92 migration packet).
@@ -35,6 +39,7 @@ This section is reserved for framework runtime contracts:
 - conversation kernel abstractions;
 - workflow framework;
 - auth and command framework seams;
+- persistence interfaces and store-boundary contracts;
 - shared scenario-system framework contracts.
 
 Product runtime overlays stay out of this repo.
@@ -43,4 +48,5 @@ Product runtime overlays stay out of this repo.
 
 - [Agent execution kernel](agent-execution-kernel.md): defines the shared kernel contracts, workflow-family boundary, capability model, execution split, and trace requirements.
 - [Pipeline registry and binding contract](pipeline-registry-and-binding-contract.md): defines canonical pipeline definitions, channel binding validation, ownership boundaries, and pipeline defaults.
+- [Persistence interface and store boundary](persistence-interface-and-store-boundary.md): defines reusable repository/interface ownership rules, stable DTO placement, projection constraints, and boundary-level idempotency/error/transaction expectations.
 - [Scenario system framework contract](scenario-system-framework-contract.md): defines the lean framework-owned scenario vocabulary, evidence contracts, semantic-eval rules, and product-owned exclusions.
