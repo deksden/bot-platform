@@ -2,8 +2,8 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.59.0
-date: 2026-04-20
+version: 1.60.0
+date: 2026-04-21
 status: ACTIVE
 epic: EP-022
 tags: [protocol, architecture, repo-split, bot-platform, selleragent, docoved, monorepo, migration, ci-cd]
@@ -63,7 +63,17 @@ related_files:
   - .tasks/prt-036-implementation-wave-42-2026-04-20/summary/PRT-036-implementation-wave-42-synthesis.md
   - .tasks/prt-036-implementation-wave-43-2026-04-21/summary/PRT-036-implementation-wave-43-synthesis.md
   - .tasks/prt-036-implementation-wave-44-2026-04-21/summary/PRT-036-implementation-wave-44-synthesis.md
+  - .tasks/prt-036-implementation-wave-54-2026-04-21/summary/PRT-036-implementation-wave-54-synthesis.md
+  - .tasks/prt-036-implementation-wave-55-2026-04-21/summary/PRT-036-implementation-wave-55-synthesis.md
+  - .tasks/prt-036-implementation-wave-56-2026-04-21/summary/PRT-036-implementation-wave-56-synthesis.md
+  - .tasks/prt-036-implementation-wave-57-2026-04-21/summary/PRT-036-implementation-wave-57-synthesis.md
+  - .tasks/prt-036-implementation-wave-58-2026-04-21/summary/PRT-036-implementation-wave-58-synthesis.md
+  - .tasks/prt-036-implementation-wave-59-2026-04-21/summary/PRT-036-implementation-wave-59-synthesis.md
+  - .tasks/prt-036-implementation-wave-60-2026-04-21/summary/PRT-036-implementation-wave-60-synthesis.md
 history:
+  - version: 1.60.0
+    date: 2026-04-21
+    changes: Recorded waves 54-60: `refreshDocovedQualityReport` was selected as the next bounded mixed Docoved seam, published first as `@docoved-agent/sa-docoved@0.1.6`, the first `SCN-210` adoption attempt exposed a real `process.cwd()`-coupled owner-package runtime defect, and the corrected `@docoved-agent/sa-docoved@0.1.7` is now really published with `SCN-210`, `SCN-212`, `SCN-213`, and `SCN-189` green on the real published path.
   - version: 1.59.0
     date: 2026-04-21
     changes: Recorded waves 48-53: corrected `@docoved-agent/sa-docoved@0.1.5` is now really published through the protected-branch flow, the blocked `SCN-189` cutover is green on the real published package, and the remaining single-scenario multi-format consumers `SCN-190` through `SCN-193` are now also migrated in `sales-agent`.
@@ -627,8 +637,47 @@ Review status:
   - `SCN-193` now imports from the published package;
   - repeated `SCN-189` canary reruns remain green through this tranche;
 - wave-50 through wave-53 syntheses are recorded in their respective `.tasks/prt-036-implementation-wave-5x-2026-04-21/summary/*` files;
+- implementation stage: wave 54 completed;
+- the next bounded mixed Docoved seam is now explicitly chosen after the single-scenario multi-format consumer tranche:
+  - `refreshDocovedQualityReport` is the next best executable owner slice;
+  - `docoved-shared.ts`, `SCN-205`, and `SCN-208` remain intentionally deferred as wider shared-helper/runtime-coupled contours;
+- wave-54 synthesis is recorded in `.tasks/prt-036-implementation-wave-54-2026-04-21/summary/PRT-036-implementation-wave-54-synthesis.md`;
+- implementation stage: wave 55 completed;
+- the next bounded quality-refresh owner slice now lives in target repo state:
+  - `docoved-agent/packages/sa-docoved` now owns the bounded `refreshDocovedQualityReport` + `quality-engine` slice in repo state;
+  - broader helper-tail and core-coupled contours remain deferred;
+- wave-55 synthesis is recorded in `.tasks/prt-036-implementation-wave-55-2026-04-21/summary/PRT-036-implementation-wave-55-synthesis.md`;
+- implementation stage: wave 56 completed;
+- the new quality-refresh owner slice is now materialized into release-shaped package state:
+  - `@docoved-agent/sa-docoved` now sits at repo version `0.1.6`;
+  - local release-prep checks are green for that version;
+- wave-56 synthesis is recorded in `.tasks/prt-036-implementation-wave-56-2026-04-21/summary/PRT-036-implementation-wave-56-synthesis.md`;
+- implementation stage: wave 57 completed as blocked discovery;
+- the first bounded `SCN-210` cutover attempt correctly surfaced an owner-side runtime defect instead of being accepted as a broken consumer move:
+  - published `@docoved-agent/sa-docoved@0.1.6` depended on a `process.cwd()`-coupled loader for `createMemoryBankResearchService`;
+  - the failure is scoped to the owner-package runtime bridge, not to the already-landed published Docoved seam in general;
+- wave-57 synthesis is recorded in `.tasks/prt-036-implementation-wave-57-2026-04-21/summary/PRT-036-implementation-wave-57-synthesis.md`;
+- implementation stage: wave 58 completed;
+- the runtime failure is now concretely diagnosed:
+  - the broken assumption was filesystem/module resolution via `process.cwd()` under `pnpm --filter`, not a missing `@sales-agent/core` export;
+  - later waves must prefer explicit dependency input over hidden root-path probing for temporary cross-repo bridges;
+- wave-58 synthesis is recorded in `.tasks/prt-036-implementation-wave-58-2026-04-21/summary/PRT-036-implementation-wave-58-synthesis.md`;
+- implementation stage: wave 59 completed;
+- the owner-side corrective release-prep wave is now closed in `docoved-agent`:
+  - `refreshDocovedQualityReport` now supports explicit `createMemoryBankResearchService` injection while preserving the legacy fallback loader for non-migrated callers;
+  - repo version is now materialized as `@docoved-agent/sa-docoved@0.1.7`;
+  - local release-prep checks are green for the exact versioned state;
+- wave-59 synthesis is recorded in `.tasks/prt-036-implementation-wave-59-2026-04-21/summary/PRT-036-implementation-wave-59-synthesis.md`;
+- implementation stage: wave 60 completed;
+- the corrected quality-refresh seam is now really published and consumed through the real npm path:
+  - PR `#7` merged the versioned release commit to `docoved-agent/main`;
+  - `Release Packages` readiness and publish workflow both succeeded on the merge commit path for `0.1.7`;
+  - `npm view @docoved-agent/sa-docoved version` now returns `0.1.7`;
+  - `SCN-210` now passes on real published `@docoved-agent/sa-docoved@0.1.7` with explicit injection from `@sales-agent/core`;
+  - `SCN-212`, `SCN-213`, and `SCN-189` remain green as canaries after the dependency bump;
+- wave-60 synthesis is recorded in `.tasks/prt-036-implementation-wave-60-2026-04-21/summary/PRT-036-implementation-wave-60-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next bounded mixed Docoved tail after the single-scenario multi-format consumers;
+  - choosing the next bounded mixed Docoved tail after the `refreshDocovedQualityReport` seam is closed;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
