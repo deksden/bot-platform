@@ -2,12 +2,18 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.6.0
-date: 2026-04-20
+version: 0.8.0
+date: 2026-04-21
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.8.0
+    date: 2026-04-21
+    changes: Completed the W93 sync pass after waves 91-92: the first framework runtime migration packet remains landed, and the next-doc framing now explicitly continues broader framework source-doc migration instead of describing it as not yet started.
+  - version: 0.7.0
+    date: 2026-04-21
+    changes: Closed runtime migration packet waves 91-92 by landing repo-local execution-kernel and pipeline-registry docs in bot-platform, updating spec/runtime indexes, and removing runtime-kernel from the immediate next-doc wave.
   - version: 0.6.0
     date: 2026-04-20
     changes: Closed the first bridge exercise instead of leaving it "underway": the published `@dd-bot-platform/*` path is proven by active `sales-agent` consumers, vendored mirrors are retired there, and the remaining blocker is no longer bridge validation but later framework extraction/adoption scope.
@@ -58,10 +64,14 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
   - `packages/sa-judge` now consumes the published bridge
   - `packages/scenario-runner` now consumes the published bridge
   - temporary vendored semantic-eval mirrors are retired from those packages
+- runtime migration packet waves 91-92 is landed in repo-local Memory Bank:
+  - `.memory-bank/spec/runtime/agent-execution-kernel.md`
+  - `.memory-bank/spec/runtime/pipeline-registry-and-binding-contract.md`
+  - runtime/spec index linkage refreshed for these contracts
 
 ## Not landed yet
 
-- migrated framework specs from the mixed source repo
+- remaining framework specs from the mixed source repo beyond the landed runtime kernel/pipeline registry packet
 - framework contract docs from the `CB-*` workstream
 - moved framework ADRs and follow-up child protocols beyond `PRT-036`
 - actual framework scenario catalog behind the current matrix
@@ -78,11 +88,10 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 ## Immediate next document wave
 
 1. land framework contract docs:
-   - runtime kernel
    - API namespace registry
    - auth core
    - workflow host
    - persistence interface
 2. land framework planning docs:
    - follow-up split child protocols and ADR decisions after `PRT-036`
-3. start moving clearly framework-owned source docs into this repo
+3. continue moving clearly framework-owned source docs into this repo
