@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.18.0
+version: 0.19.0
 date: 2026-04-21
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.19.0
+    date: 2026-04-21
+    changes: Closed framework operations packet wave 135 by landing repo-local `deployment-architecture`, `runbook`, `production-rollout-runbook`, and `hosted-beta-acceptance-contract` plus operations/spec hub linkage, and narrowed immediate-next wording to still-unlanded framework doc families beyond the now-landed operations packet.
   - version: 0.18.0
     date: 2026-04-21
     changes: Closed framework protocol packet wave 131 by landing repo-local `PRT-030-architecture-boundary-simplification-and-ownership-convergence` plus protocol hub linkage, and narrowed immediate-next wording to still-unlanded framework doc families beyond the now-landed protocol and ADR packet set.
@@ -69,7 +72,7 @@ history:
 ## State
 
 `bot-platform` now has a real `.memory-bank/**` skeleton and canonical `mbb/**`.
-This closes the earlier "target Memory Bank does not exist" blocker from `PRT-036`, and the first framework scenario-system packet, hosted-beta execution-model packet, next hosted-scenarios ADR packet, and architecture-boundary simplification protocol packet are now landed in repo-local form.
+This closes the earlier "target Memory Bank does not exist" blocker from `PRT-036`, and the first framework scenario-system packet, hosted-beta execution-model packet, next hosted-scenarios ADR packet, architecture-boundary simplification protocol packet, and framework operations packet are now landed in repo-local form.
 
 ## Already landed
 
@@ -141,10 +144,18 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
   - `.memory-bank/plans/protocols/PRT-030-architecture-boundary-simplification-and-ownership-convergence.md`
   - `.memory-bank/plans/protocols/index.md`
   - protocol/plans hub linkage refreshed for this decision packet
+- framework operations packet wave 135 is landed in repo-local Memory Bank:
+  - `.memory-bank/spec/operations/deployment-architecture.md`
+  - `.memory-bank/spec/operations/runbook.md`
+  - `.memory-bank/spec/operations/production-rollout-runbook.md`
+  - `.memory-bank/spec/operations/hosted-beta-acceptance-contract.md`
+  - `.memory-bank/spec/operations/index.md`
+  - `.memory-bank/spec/index.md`
+  - operations/spec hub linkage refreshed for this packet
 
 ## Not landed yet
 
-- remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, scenario-system, and hosted-scenario packets
+- remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, scenario-system, hosted-scenario, and operations packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace core
 - moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
 - remaining framework scenario docs/catalog beyond the now-landed scenario-system/evidence baseline
@@ -162,7 +173,7 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 
 1. land remaining framework spec families:
    - remaining `CB-*` contracts not yet landed in repo-local form
-   - remaining framework runtime/security/client-api/architecture/scenario docs still only present in the mixed repo beyond the now-landed packets
+   - remaining framework runtime/security/client-api/architecture/scenario/engineering docs still only present in the mixed repo beyond the now-landed packets
 2. land framework planning docs:
    - follow-up split child protocols and ADR decisions after `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
-3. continue moving clearly framework-owned scenario/planning source docs into this repo beyond the landed `scenario-system-and-evidence` and `hosted-beta-execution-model` packets
+3. continue moving clearly framework-owned scenario/planning source docs into this repo beyond the landed scenario, operations, and protocol packets
