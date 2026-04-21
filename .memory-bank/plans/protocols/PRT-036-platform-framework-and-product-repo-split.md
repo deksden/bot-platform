@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.61.0
+version: 1.62.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -73,7 +73,14 @@ related_files:
   - .tasks/prt-036-implementation-wave-61-2026-04-21/summary/PRT-036-implementation-wave-61-synthesis.md
   - .tasks/prt-036-implementation-wave-62-2026-04-21/summary/PRT-036-implementation-wave-62-synthesis.md
   - .tasks/prt-036-implementation-wave-63-2026-04-21/summary/PRT-036-implementation-wave-63-synthesis.md
+  - .tasks/prt-036-implementation-wave-64-2026-04-21/summary/PRT-036-implementation-wave-64-synthesis.md
+  - .tasks/prt-036-implementation-wave-65-2026-04-21/summary/PRT-036-implementation-wave-65-synthesis.md
+  - .tasks/prt-036-implementation-wave-66-2026-04-21/summary/PRT-036-implementation-wave-66-synthesis.md
+  - .tasks/prt-036-implementation-wave-67-2026-04-21/summary/PRT-036-implementation-wave-67-synthesis.md
 history:
+  - version: 1.62.0
+    date: 2026-04-21
+    changes: Recorded waves 64-67: the next bounded Docoved seam was reduced to `extractDocovedCitationNodes`, the owner-side citation-node extraction helper slice is now really published as `@docoved-agent/sa-docoved@0.1.9`, the first shared downstream consumer in `docoved-shared.ts` now uses the real published package with `SCN-179` plus `SCN-180` green, and sales-agent scenario verification should use the repo-root `pnpm scenario:run -- run <SCN-ID>` alias rather than relying on an unregistered root `pnpm exec sales-agent-scenarios ...` path.
   - version: 1.61.0
     date: 2026-04-21
     changes: Recorded waves 61-63: the next bounded Docoved seam was selected as the semantic-map export helper contour, the semantic-map/placement owner slice is now really published as `@docoved-agent/sa-docoved@0.1.8`, and bounded downstream consumers `SCN-205` plus `SCN-208` now use the real published package while `SCN-210` and `SCN-189` remain green after the bump.
@@ -703,8 +710,32 @@ Review status:
   - `SCN-208` now uses the published placement surface from `@docoved-agent/sa-docoved@0.1.8`;
   - `SCN-210` and `SCN-189` remain green as canaries after the dependency bump;
 - wave-63 synthesis is recorded in `.tasks/prt-036-implementation-wave-63-2026-04-21/summary/PRT-036-implementation-wave-63-synthesis.md`;
+- implementation stage: wave 64 completed;
+- the next bounded remaining Docoved seam is now explicitly reduced to the raw citation-node extraction contour:
+  - `extractDocovedCitationNodes` was selected instead of a premature whole-file migration of `docoved-shared.ts`;
+  - the first shared consumer target is `packages/scenario-runner/src/scenarios/docoved-shared.ts`;
+  - broader scripts/runtime citation-resolution helpers remain intentionally deferred;
+- wave-64 synthesis is recorded in `.tasks/prt-036-implementation-wave-64-2026-04-21/summary/PRT-036-implementation-wave-64-synthesis.md`;
+- implementation stage: wave 65 completed;
+- the citation-node extraction owner slice now lives in target repo state and release-shaped package state:
+  - `docoved-agent/packages/sa-docoved` now owns `DocovedCitationNodeKind`, `DocovedCitationNode`, and `extractDocovedCitationNodes`;
+  - repo version is now materialized as `@docoved-agent/sa-docoved@0.1.9`;
+- wave-65 synthesis is recorded in `.tasks/prt-036-implementation-wave-65-2026-04-21/summary/PRT-036-implementation-wave-65-synthesis.md`;
+- implementation stage: wave 66 completed;
+- the citation-node extraction seam is now really published through the protected branch flow:
+  - PR `#9` merged the versioned release commit to `docoved-agent/main`;
+  - `Release Packages` readiness and publish workflow both succeeded on the merge commit path for `0.1.9`;
+  - `npm view @docoved-agent/sa-docoved version` now returns `0.1.9`;
+- wave-66 synthesis is recorded in `.tasks/prt-036-implementation-wave-66-2026-04-21/summary/PRT-036-implementation-wave-66-synthesis.md`;
+- implementation stage: wave 67 completed;
+- the first shared downstream consumer now uses the real published citation helper seam:
+  - `packages/scenario-runner/src/scenarios/docoved-shared.ts` now consumes `extractDocovedCitationNodes`, `ingestMarkdownDocument`, and `validateIngestManifest` from `@docoved-agent/sa-docoved@0.1.9`;
+  - `packages/scenario-runner` no longer depends on workspace `@sales-agent/sa-docoved`;
+  - `SCN-179` and `SCN-180` are green on the cutover;
+  - for sales-agent bounded scenario verification, the canonical repo-root command remains `pnpm scenario:run -- run <SCN-ID>`;
+- wave-67 synthesis is recorded in `.tasks/prt-036-implementation-wave-67-2026-04-21/summary/PRT-036-implementation-wave-67-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next bounded mixed Docoved tail after the semantic-map / placement seam is closed;
+  - choosing the next bounded mixed Docoved tail after the first shared citation-helper consumer is closed;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
