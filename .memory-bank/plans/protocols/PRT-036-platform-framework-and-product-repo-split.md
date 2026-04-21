@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.57.0
+version: 1.58.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -64,6 +64,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-43-2026-04-21/summary/PRT-036-implementation-wave-43-synthesis.md
   - .tasks/prt-036-implementation-wave-44-2026-04-21/summary/PRT-036-implementation-wave-44-synthesis.md
 history:
+  - version: 1.58.0
+    date: 2026-04-21
+    changes: Recorded waves 45-47: `SCN-189` was selected as the next bounded Docoved consumer, the first cutover attempt correctly exposed a real Markit runtime packaging defect in published `@docoved-agent/sa-docoved@0.1.4`, and the owner-side corrective package state is now prepared as release-ready `0.1.5` pending protected-branch publication before the consumer retry.
   - version: 1.57.0
     date: 2026-04-21
     changes: Recorded wave-44 completion: `sales-agent` now adopts the published `@docoved-agent/sa-docoved@0.1.4` ingest surface in `SCN-212`, while shared-helper and multi-format Docoved ingest consumers remain explicitly deferred to later bounded waves.
@@ -586,8 +589,26 @@ Review status:
   - `SCN-209` and `SCN-213` remain green as canaries after the cutover;
   - the broader mixed `@sales-agent/sa-docoved` helper tail remains intentionally deferred;
 - wave-44 synthesis is recorded in `.tasks/prt-036-implementation-wave-44-2026-04-21/summary/PRT-036-implementation-wave-44-synthesis.md`;
+- implementation stage: wave 45 completed;
+- the next bounded remaining Docoved consumer family is now explicitly chosen:
+  - `SCN-189` is the next bounded single-scenario consumer;
+  - shared-helper `docoved-shared.ts` remains a later dedicated wave;
+- wave-45 synthesis is recorded in `.tasks/prt-036-implementation-wave-45-2026-04-21/summary/PRT-036-implementation-wave-45-synthesis.md`;
+- implementation stage: wave 46 completed as blocked discovery;
+- the first `SCN-189` cutover attempt correctly surfaced an owner-side package defect instead of being merged as a broken consumer move:
+  - `@docoved-agent/sa-docoved@0.1.4` fails Markit-backed DOCX ingest from installed npm layout;
+  - `SCN-209` and `SCN-213` stayed green, so the defect is scoped to the owner package runtime path, not the already-landed semver seam in general;
+- wave-46 synthesis is recorded in `.tasks/prt-036-implementation-wave-46-2026-04-21/summary/PRT-036-implementation-wave-46-synthesis.md`;
+- implementation stage: wave 47 completed;
+- the owner-side corrective release-prep wave is now closed in `docoved-agent`:
+  - `packages/sa-docoved` now declares direct `markit-ai` runtime ownership;
+  - Markit CLI resolution no longer assumes package-local `.bin/markit` and instead derives `dist/main.js` from the exported `markit-ai` module entry;
+  - repo version is now materialized as `@docoved-agent/sa-docoved@0.1.5`;
+  - detached clean-install DOCX ingest smoke is green for the exact packed `0.1.5` artifact;
+- wave-47 synthesis is recorded in `.tasks/prt-036-implementation-wave-47-2026-04-21/summary/PRT-036-implementation-wave-47-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next bounded consumer family after `SCN-209`, `SCN-210`, and `SCN-212`;
+  - publishing `@docoved-agent/sa-docoved@0.1.5` through the protected-branch release flow;
+  - retrying the bounded `SCN-189` consumer cutover only after real npm publication of `0.1.5`;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
