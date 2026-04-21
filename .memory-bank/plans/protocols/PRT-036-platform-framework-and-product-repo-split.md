@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.60.0
+version: 1.61.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -70,7 +70,13 @@ related_files:
   - .tasks/prt-036-implementation-wave-58-2026-04-21/summary/PRT-036-implementation-wave-58-synthesis.md
   - .tasks/prt-036-implementation-wave-59-2026-04-21/summary/PRT-036-implementation-wave-59-synthesis.md
   - .tasks/prt-036-implementation-wave-60-2026-04-21/summary/PRT-036-implementation-wave-60-synthesis.md
+  - .tasks/prt-036-implementation-wave-61-2026-04-21/summary/PRT-036-implementation-wave-61-synthesis.md
+  - .tasks/prt-036-implementation-wave-62-2026-04-21/summary/PRT-036-implementation-wave-62-synthesis.md
+  - .tasks/prt-036-implementation-wave-63-2026-04-21/summary/PRT-036-implementation-wave-63-synthesis.md
 history:
+  - version: 1.61.0
+    date: 2026-04-21
+    changes: Recorded waves 61-63: the next bounded Docoved seam was selected as the semantic-map export helper contour, the semantic-map/placement owner slice is now really published as `@docoved-agent/sa-docoved@0.1.8`, and bounded downstream consumers `SCN-205` plus `SCN-208` now use the real published package while `SCN-210` and `SCN-189` remain green after the bump.
   - version: 1.60.0
     date: 2026-04-21
     changes: Recorded waves 54-60: `refreshDocovedQualityReport` was selected as the next bounded mixed Docoved seam, published first as `@docoved-agent/sa-docoved@0.1.6`, the first `SCN-210` adoption attempt exposed a real `process.cwd()`-coupled owner-package runtime defect, and the corrected `@docoved-agent/sa-docoved@0.1.7` is now really published with `SCN-210`, `SCN-212`, `SCN-213`, and `SCN-189` green on the real published path.
@@ -676,8 +682,29 @@ Review status:
   - `SCN-210` now passes on real published `@docoved-agent/sa-docoved@0.1.7` with explicit injection from `@sales-agent/core`;
   - `SCN-212`, `SCN-213`, and `SCN-189` remain green as canaries after the dependency bump;
 - wave-60 synthesis is recorded in `.tasks/prt-036-implementation-wave-60-2026-04-21/summary/PRT-036-implementation-wave-60-synthesis.md`;
+- implementation stage: wave 61 completed;
+- the next bounded post-quality-refresh Docoved seam is now explicitly chosen:
+  - the semantic-map export helper contour is the next best executable wave;
+  - `SCN-205` is the primary consumer because it proves the shared semantic-map builder path directly;
+  - `SCN-208` is the immediate canary because it uses the same builder through placement planning;
+- wave-61 synthesis is recorded in `.tasks/prt-036-implementation-wave-61-2026-04-21/summary/PRT-036-implementation-wave-61-synthesis.md`;
+- implementation stage: wave 62 completed;
+- the semantic-map / placement owner slice now lives in target repo state and release-shaped package state:
+  - `docoved-agent/packages/sa-docoved` now owns `buildDocovedSemanticMapFromFilesystem`, `exportSemanticMapArtifact`, and `planDocumentPlacement`;
+  - the helper slice supports explicit `buildSemanticMapFromFilesystem` injection while preserving a local fallback loader for non-migrated callers;
+  - repo version is now materialized as `@docoved-agent/sa-docoved@0.1.8`;
+- wave-62 synthesis is recorded in `.tasks/prt-036-implementation-wave-62-2026-04-21/summary/PRT-036-implementation-wave-62-synthesis.md`;
+- implementation stage: wave 63 completed;
+- the semantic-map / placement helper slice is now really published and consumed through the real npm path:
+  - PR `#8` merged the versioned release commit to `docoved-agent/main`;
+  - `Release Packages` readiness and publish workflow both succeeded on the merge commit path for `0.1.8`;
+  - `npm view @docoved-agent/sa-docoved version` now returns `0.1.8`;
+  - `SCN-205` now uses the published semantic-map helper surface from `@docoved-agent/sa-docoved@0.1.8`;
+  - `SCN-208` now uses the published placement surface from `@docoved-agent/sa-docoved@0.1.8`;
+  - `SCN-210` and `SCN-189` remain green as canaries after the dependency bump;
+- wave-63 synthesis is recorded in `.tasks/prt-036-implementation-wave-63-2026-04-21/summary/PRT-036-implementation-wave-63-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next bounded mixed Docoved tail after the `refreshDocovedQualityReport` seam is closed;
+  - choosing the next bounded mixed Docoved tail after the semantic-map / placement seam is closed;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
