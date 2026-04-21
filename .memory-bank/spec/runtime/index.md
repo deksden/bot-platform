@@ -2,19 +2,31 @@
 file: .memory-bank/spec/runtime/index.md
 description: 'Runtime hub for bot-platform.'
 purpose: Hold framework runtime contracts for kernels, providers, pipelines, prompts, workflow, auth, command, and shared scenario-system layers.
-version: 0.4.0
+version: 0.7.0
 date: 2026-04-21
 status: DRAFT
 tags: [runtime, bot-platform, contracts]
 parent: .memory-bank/spec/index.md
 children:
   - agent-execution-kernel.md
+  - decision-explanation-envelope.md
+  - execution-traces-and-token-accounting.md
   - pipeline-registry-and-binding-contract.md
   - persistence-interface-and-store-boundary.md
+  - trace-artifact-governance.md
   - scenario-system-framework-contract.md
 target_audience: [developers, ai-agents]
 automation_ready: true
 history:
+  - version: 0.7.0
+    date: 2026-04-21
+    changes: Added the framework decision-explanation-envelope runtime contract and linked it from the runtime hub (PRT-036 Wave 112).
+  - version: 0.6.0
+    date: 2026-04-21
+    changes: Added the repo-local framework trace-artifact governance runtime contract and linked it from the runtime hub (PRT-036 Wave 111).
+  - version: 0.5.0
+    date: 2026-04-21
+    changes: Added the framework execution-traces and token-accounting runtime contract and linked it from the runtime hub (PRT-036 Wave 110).
   - version: 0.4.0
     date: 2026-04-21
     changes: Added the framework persistence-interface and store-boundary runtime contract and linked it from the runtime hub (PRT-036 Wave 104).
@@ -47,6 +59,9 @@ Product runtime overlays stay out of this repo.
 ## Current runtime docs
 
 - [Agent execution kernel](agent-execution-kernel.md): defines the shared kernel contracts, workflow-family boundary, capability model, execution split, and trace requirements.
+- [Decision explanation envelope](decision-explanation-envelope.md): defines the framework-shared final-outcome explainability contract (`subject`, `final_outcome`, `summaries`, `decisive_factors`, `missing_requirements`, `provenance`) and projection boundaries.
+- [Execution traces and token accounting](execution-traces-and-token-accounting.md): defines framework-owned run/step/attempt trace layers, artifact linkage, usage accounting fields, and the billing boundary.
 - [Pipeline registry and binding contract](pipeline-registry-and-binding-contract.md): defines canonical pipeline definitions, channel binding validation, ownership boundaries, and pipeline defaults.
 - [Persistence interface and store boundary](persistence-interface-and-store-boundary.md): defines reusable repository/interface ownership rules, stable DTO placement, projection constraints, and boundary-level idempotency/error/transaction expectations.
+- [Trace artifact governance](trace-artifact-governance.md): defines framework policy for artifact kinds, selective heavy capture, redaction states, retention classes, and audited access boundaries.
 - [Scenario system framework contract](scenario-system-framework-contract.md): defines the lean framework-owned scenario vocabulary, evidence contracts, semantic-eval rules, and product-owned exclusions.

@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.11.0
+version: 0.12.0
 date: 2026-04-21
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.12.0
+    date: 2026-04-21
+    changes: Closed framework runtime-governance packet waves 110-112 by landing repo-local `execution-traces-and-token-accounting`, `trace-artifact-governance`, and `decision-explanation-envelope` docs with synced runtime/spec hubs; immediate-next wording now names only still-unlanded framework doc families.
   - version: 0.11.0
     date: 2026-04-21
     changes: Closed framework contract packet waves 103-105 by landing repo-local `auth-core`, `persistence-interface-and-store-boundary`, and `api-namespace-registry` docs with synced security/runtime/client-api/spec hubs; immediate-next wording now advances to the next still-unlanded framework docs/planning tranche.
@@ -87,10 +90,15 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
   - `.memory-bank/spec/runtime/persistence-interface-and-store-boundary.md`
   - `.memory-bank/spec/client-api/api-namespace-registry.md`
   - security/runtime/client-api/spec hub linkage refreshed for these contracts
+- framework runtime-governance packet waves 110-112 is landed in repo-local Memory Bank:
+  - `.memory-bank/spec/runtime/execution-traces-and-token-accounting.md`
+  - `.memory-bank/spec/runtime/trace-artifact-governance.md`
+  - `.memory-bank/spec/runtime/decision-explanation-envelope.md`
+  - runtime/spec hub linkage refreshed for these contracts
 
 ## Not landed yet
 
-- remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, and contract packets
+- remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, and runtime-governance packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace core
 - moved framework ADRs and follow-up child protocols beyond `PRT-036`
 - actual framework scenario catalog behind the current matrix
@@ -106,8 +114,9 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 
 ## Immediate next document wave
 
-1. land framework contract docs:
+1. land remaining framework spec families:
    - remaining `CB-*` contracts not yet landed in repo-local form
+   - remaining framework runtime/security/client-api/architecture docs still only present in the mixed repo
 2. land framework planning docs:
    - follow-up split child protocols and ADR decisions after `PRT-036`
-3. continue moving clearly framework-owned source docs into this repo
+3. continue moving clearly framework-owned scenario/planning source docs into this repo
