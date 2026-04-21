@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.55.0
+version: 1.57.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -61,7 +61,15 @@ related_files:
   - .tasks/prt-036-implementation-wave-40-2026-04-20/summary/PRT-036-implementation-wave-40-synthesis.md
   - .tasks/prt-036-implementation-wave-41-2026-04-20/summary/PRT-036-implementation-wave-41-synthesis.md
   - .tasks/prt-036-implementation-wave-42-2026-04-20/summary/PRT-036-implementation-wave-42-synthesis.md
+  - .tasks/prt-036-implementation-wave-43-2026-04-21/summary/PRT-036-implementation-wave-43-synthesis.md
+  - .tasks/prt-036-implementation-wave-44-2026-04-21/summary/PRT-036-implementation-wave-44-synthesis.md
 history:
+  - version: 1.57.0
+    date: 2026-04-21
+    changes: Recorded wave-44 completion: `sales-agent` now adopts the published `@docoved-agent/sa-docoved@0.1.4` ingest surface in `SCN-212`, while shared-helper and multi-format Docoved ingest consumers remain explicitly deferred to later bounded waves.
+  - version: 1.56.0
+    date: 2026-04-21
+    changes: Recorded wave-43 completion: `sales-agent` now adopts the published `@docoved-agent/sa-docoved@0.1.4` ingest surface in `SCN-210`, while broader shared-helper Docoved consumer work remains intentionally separate.
   - version: 1.55.0
     date: 2026-04-20
     changes: Recorded wave-42 completion: `sales-agent` now adopts the published `@docoved-agent/sa-docoved@0.1.4` ingest/validate surface in `SCN-209`, while broader shared-helper and multi-format Docoved ingest consumers remain explicitly deferred to later bounded waves.
@@ -567,8 +575,19 @@ Review status:
   - `SCN-213` re-proves the earlier published-package Docoved seam after the dependency bump;
   - the broader mixed `@sales-agent/sa-docoved` helper tail remains intentionally deferred;
 - wave-42 synthesis is recorded in `.tasks/prt-036-implementation-wave-42-2026-04-20/summary/PRT-036-implementation-wave-42-synthesis.md`;
+- implementation stage: wave 43 completed;
+- the next bounded downstream ingest consumer now uses the published Docoved package:
+  - `SCN-210` now imports `ingestMarkdownDocument` from the published package;
+  - `SCN-209` and `SCN-213` re-prove the already-landed semver path after the cutover;
+- wave-43 synthesis is recorded in `.tasks/prt-036-implementation-wave-43-2026-04-21/summary/PRT-036-implementation-wave-43-synthesis.md`;
+- implementation stage: wave 44 completed;
+- the next bounded downstream workflow-backed ingest consumer now uses the published Docoved package:
+  - `SCN-212` now imports `ingestMarkdownDocument` from the published package;
+  - `SCN-209` and `SCN-213` remain green as canaries after the cutover;
+  - the broader mixed `@sales-agent/sa-docoved` helper tail remains intentionally deferred;
+- wave-44 synthesis is recorded in `.tasks/prt-036-implementation-wave-44-2026-04-21/summary/PRT-036-implementation-wave-44-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next bounded ingest/validate consumer tranche after `SCN-209`;
+  - choosing the next bounded consumer family after `SCN-209`, `SCN-210`, and `SCN-212`;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
