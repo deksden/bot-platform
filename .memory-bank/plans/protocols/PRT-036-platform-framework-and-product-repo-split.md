@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.75.0
+version: 1.76.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.76.0
+    date: 2026-04-21
+    changes: Recorded waves 126-128: the ninth target-repo doc packet is now landed, with SellerAgent customers specs (`customer-memory-model` and `model-guided-memory-followup-pipeline`, plus customers/spec hub linkage) migrated into `seller-agent`, framework ADR docs (`ADR-003-deterministic-hosted-scenarios-and-browser-automation` plus ADR hub linkage) migrated into `bot-platform`, Docoved protocol docs (`PRT-026-docoved-workspace-control-plane-channel-access-and-locator-fidelity` plus protocol/plans hub linkage) migrated into `docoved-agent`, and Wave 1B remaining-next wording narrowed to still-unlanded doc families.
   - version: 1.75.0
     date: 2026-04-21
     changes: Recorded waves 123-124: the eighth target-repo doc packet is now landed, with Docoved ADR docs (`ADR-005-ordinary-root-index-and-directory-backed-knowledge-slices` and `ADR-006-docoved-source-layer-and-semantic-projection-split`, plus ADR/plans hub linkage) migrated into `docoved-agent`, framework hosted-scenario docs (`hosted-beta-execution-model` plus scenarios/spec hub linkage) migrated into `bot-platform`, and Wave 1B remaining-next wording narrowed to still-unlanded doc families.
@@ -2318,7 +2321,10 @@ Current progress:
   - `spec/scenarios/hosted-beta-execution-model.md`
   - `spec/scenarios/index.md`
   - `spec/index.md`
-- remaining backlog is the still-unlanded framework project/spec/scenario/protocol/ADR families beyond the eight landed packets.
+- framework ADR packet is landed:
+  - `plans/adr/ADR-003-deterministic-hosted-scenarios-and-browser-automation.md`
+  - `plans/adr/index.md`
+- remaining backlog is the still-unlanded framework project/spec/scenario/protocol/ADR families beyond the nine landed packets.
 
 Must cover:
 - framework project/architecture/runtime/client-api/scenario docs
@@ -2377,7 +2383,11 @@ Current progress:
   - `plans/adr/ADR-006-docoved-source-layer-and-semantic-projection-split.md`
   - `plans/adr/index.md`
   - `plans/index.md`
-- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides/reference families beyond the eight landed packets.
+- protocol/plans packet is landed:
+  - `plans/protocols/PRT-026-docoved-workspace-control-plane-channel-access-and-locator-fidelity.md`
+  - `plans/protocols/index.md`
+  - `plans/index.md`
+- remaining backlog is the broader Docoved architecture/runtime/operations/plans/guides/reference families beyond the nine landed packets.
 
 Must cover:
 - Docoved architecture/runtime/operations docs

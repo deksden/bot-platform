@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.16.0
+version: 0.17.0
 date: 2026-04-21
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.17.0
+    date: 2026-04-21
+    changes: Closed framework ADR packet wave 127 by landing repo-local `ADR-003-deterministic-hosted-scenarios-and-browser-automation` plus ADR hub linkage, and narrowed immediate-next wording to still-unlanded framework doc families beyond the now-landed ADR packet set.
   - version: 0.16.0
     date: 2026-04-21
     changes: Closed framework hosted-scenario packet wave 124 by landing repo-local `hosted-beta-execution-model` plus scenarios/spec hub linkage, and narrowed immediate-next wording to still-unlanded framework doc families beyond the now-landed scenario packets.
@@ -63,7 +66,7 @@ history:
 ## State
 
 `bot-platform` now has a real `.memory-bank/**` skeleton and canonical `mbb/**`.
-This closes the earlier "target Memory Bank does not exist" blocker from `PRT-036`, and the first framework scenario-system packet plus the hosted-beta execution-model packet are now landed in repo-local form.
+This closes the earlier "target Memory Bank does not exist" blocker from `PRT-036`, and the first framework scenario-system packet, hosted-beta execution-model packet, and next hosted-scenarios ADR packet are now landed in repo-local form.
 
 ## Already landed
 
@@ -127,12 +130,16 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
   - `.memory-bank/spec/scenarios/index.md`
   - `.memory-bank/spec/index.md`
   - scenario/spec hub linkage refreshed for this packet
+- framework ADR packet wave 127 is landed in repo-local Memory Bank:
+  - `.memory-bank/plans/adr/ADR-003-deterministic-hosted-scenarios-and-browser-automation.md`
+  - `.memory-bank/plans/adr/index.md`
+  - ADR/plans hub linkage refreshed for this decision packet
 
 ## Not landed yet
 
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, scenario-system, and hosted-scenario packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace core
-- moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-036` and `ADR-004`
+- moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-036`, `ADR-003`, and `ADR-004`
 - remaining framework scenario docs/catalog beyond the now-landed scenario-system/evidence baseline
 - actual framework code extraction
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
@@ -150,5 +157,5 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
    - remaining `CB-*` contracts not yet landed in repo-local form
    - remaining framework runtime/security/client-api/architecture/scenario docs still only present in the mixed repo beyond the now-landed packets
 2. land framework planning docs:
-   - follow-up split child protocols and ADR decisions after `PRT-036` and `ADR-004`
+   - follow-up split child protocols and ADR decisions after `PRT-036`, `ADR-003`, and `ADR-004`
 3. continue moving clearly framework-owned scenario/planning source docs into this repo beyond the landed `scenario-system-and-evidence` and `hosted-beta-execution-model` packets
