@@ -2,7 +2,7 @@
 file: .memory-bank/spec/index.md
 description: 'Spec hub для bot-platform: framework architecture, package contracts, scenario system и repo-level placement rules.'
 purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo и какие нормативные docs обязаны жить именно здесь.
-version: 0.11.0
+version: 0.12.0
 date: 2026-04-21
 status: DRAFT
 c4_level: L1
@@ -24,6 +24,9 @@ children:
   - scenarios/index.md
   - operations/index.md
 history:
+  - version: 0.12.0
+    date: 2026-04-21
+    changes: Linked the landed framework operations packet (deployment architecture, operations runbook, production rollout runbook, hosted-beta acceptance contract) from spec/operations and must-exist inventory (PRT-036 Wave 135).
   - version: 0.11.0
     date: 2026-04-21
     changes: Linked the landed hosted-beta-execution-model packet from scenario hubs and the scenario section inventory (PRT-036 Wave 124).
@@ -90,7 +93,7 @@ history:
 - [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md).
 - [Client API docs](client-api/index.md): operation catalog, schemas, typed errors и client-sdk boundary, включая [API namespace registry](client-api/api-namespace-registry.md) и landed [typed client API and SDK](client-api/typed-client-api-and-sdk.md).
 - [Scenario docs](scenarios/index.md): scenario taxonomy, evidence model, hosted verification classes и runner assumptions, включая [scenario system and evidence](scenarios/scenario-system-and-evidence.md) и [hosted beta execution model](scenarios/hosted-beta-execution-model.md).
-- [Operations docs](operations/index.md): package publishing, mirrored process standards и framework-level release/verification rules.
+- [Operations docs](operations/index.md): package publishing, deployment/runbook contracts, hosted-beta acceptance rules, mirrored process standards и framework-level release/verification rules.
 
 ## Must-exist docs immediately
 
@@ -124,6 +127,10 @@ history:
 - `runtime/scenario-system-framework-contract.md`
 - `scenarios/hosted-beta-execution-model.md`
 - `operations/index.md`
+- `operations/deployment-architecture.md`
+- `operations/runbook.md`
+- `operations/production-rollout-runbook.md`
+- `operations/hosted-beta-acceptance-contract.md`
 - `operations/git-flow.md`
 
 ## Section design notes
