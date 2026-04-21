@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.62.0
+version: 1.63.0
 date: 2026-04-21
 status: ACTIVE
 epic: EP-022
@@ -77,7 +77,13 @@ related_files:
   - .tasks/prt-036-implementation-wave-65-2026-04-21/summary/PRT-036-implementation-wave-65-synthesis.md
   - .tasks/prt-036-implementation-wave-66-2026-04-21/summary/PRT-036-implementation-wave-66-synthesis.md
   - .tasks/prt-036-implementation-wave-67-2026-04-21/summary/PRT-036-implementation-wave-67-synthesis.md
+  - .tasks/prt-036-implementation-wave-69-2026-04-21/summary/PRT-036-implementation-wave-69-synthesis.md
+  - .tasks/prt-036-implementation-wave-70-2026-04-21/summary/PRT-036-implementation-wave-70-synthesis.md
+  - .tasks/prt-036-implementation-wave-71-2026-04-21/summary/PRT-036-implementation-wave-71-synthesis.md
 history:
+  - version: 1.63.0
+    date: 2026-04-21
+    changes: Recorded waves 69-71: the next bounded citation-helper consumers after `docoved-shared.ts` were selected as the two Docoved scripts, both scripts now consume the published `@docoved-agent/sa-docoved` seam, the reviewed-import dry-run reached real corpus processing before exposing an external missing-artifact blocker in `br-kb-reglaments`, and the remaining tail is now concentrated in runtime memory-bank plus the transitional compatibility export.
   - version: 1.62.0
     date: 2026-04-21
     changes: Recorded waves 64-67: the next bounded Docoved seam was reduced to `extractDocovedCitationNodes`, the owner-side citation-node extraction helper slice is now really published as `@docoved-agent/sa-docoved@0.1.9`, the first shared downstream consumer in `docoved-shared.ts` now uses the real published package with `SCN-179` plus `SCN-180` green, and sales-agent scenario verification should use the repo-root `pnpm scenario:run -- run <SCN-ID>` alias rather than relying on an unregistered root `pnpm exec sales-agent-scenarios ...` path.
@@ -734,8 +740,23 @@ Review status:
   - `SCN-179` and `SCN-180` are green on the cutover;
   - for sales-agent bounded scenario verification, the canonical repo-root command remains `pnpm scenario:run -- run <SCN-ID>`;
 - wave-67 synthesis is recorded in `.tasks/prt-036-implementation-wave-67-2026-04-21/summary/PRT-036-implementation-wave-67-synthesis.md`;
+- implementation stage: wave 69 completed;
+- the next bounded citation-helper consumers after the first shared cutover are now explicitly selected:
+  - `scripts/docoved-import-reviewed-corpus-snapshot.ts` comes before `scripts/docoved-corpus-acceptance.ts`;
+  - `packages/core/src/runtime/memory-bank.ts` remains intentionally deferred as the broader runtime contour;
+- wave-69 synthesis is recorded in `.tasks/prt-036-implementation-wave-69-2026-04-21/summary/PRT-036-implementation-wave-69-synthesis.md`;
+- implementation stage: wave 70 completed;
+- the first script consumer now uses the real published citation helper seam:
+  - `scripts/docoved-import-reviewed-corpus-snapshot.ts` now consumes `extractDocovedCitationNodes` from `@docoved-agent/sa-docoved`;
+  - the stronger beta dry-run reaches real corpus processing and currently fails only on an external missing-artifact blocker in `br-kb-reglaments`;
+- wave-70 synthesis is recorded in `.tasks/prt-036-implementation-wave-70-2026-04-21/summary/PRT-036-implementation-wave-70-synthesis.md`;
+- implementation stage: wave 71 completed;
+- the second script consumer now also uses the real published citation helper seam:
+  - `scripts/docoved-corpus-acceptance.ts` now consumes `extractDocovedCitationNodes` from `@docoved-agent/sa-docoved` while keeping `DEFAULT_ANTHROPIC_*` on `@sales-agent/core`;
+  - the script help path is green on the updated import;
+- wave-71 synthesis is recorded in `.tasks/prt-036-implementation-wave-71-2026-04-21/summary/PRT-036-implementation-wave-71-synthesis.md`;
 - the next protocol revision pass must focus on:
-  - choosing the next bounded mixed Docoved tail after the first shared citation-helper consumer is closed;
+  - choosing the next bounded mixed Docoved tail after the script consumers are closed;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
