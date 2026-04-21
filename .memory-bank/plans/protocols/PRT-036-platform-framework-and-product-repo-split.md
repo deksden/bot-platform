@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.58.0
+version: 1.59.0
 date: 2026-04-20
 status: ACTIVE
 epic: EP-022
@@ -64,6 +64,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-43-2026-04-21/summary/PRT-036-implementation-wave-43-synthesis.md
   - .tasks/prt-036-implementation-wave-44-2026-04-21/summary/PRT-036-implementation-wave-44-synthesis.md
 history:
+  - version: 1.59.0
+    date: 2026-04-21
+    changes: Recorded waves 48-53: corrected `@docoved-agent/sa-docoved@0.1.5` is now really published through the protected-branch flow, the blocked `SCN-189` cutover is green on the real published package, and the remaining single-scenario multi-format consumers `SCN-190` through `SCN-193` are now also migrated in `sales-agent`.
   - version: 1.58.0
     date: 2026-04-21
     changes: Recorded waves 45-47: `SCN-189` was selected as the next bounded Docoved consumer, the first cutover attempt correctly exposed a real Markit runtime packaging defect in published `@docoved-agent/sa-docoved@0.1.4`, and the owner-side corrective package state is now prepared as release-ready `0.1.5` pending protected-branch publication before the consumer retry.
@@ -606,9 +609,26 @@ Review status:
   - repo version is now materialized as `@docoved-agent/sa-docoved@0.1.5`;
   - detached clean-install DOCX ingest smoke is green for the exact packed `0.1.5` artifact;
 - wave-47 synthesis is recorded in `.tasks/prt-036-implementation-wave-47-2026-04-21/summary/PRT-036-implementation-wave-47-synthesis.md`;
+- implementation stage: wave 48 completed;
+- corrected Docoved package is now really published:
+  - PR `#5` merged the versioned release commit to `docoved-agent/main`;
+  - `Release Packages` readiness and publish workflow both succeeded on the merge commit path;
+  - `npm view @docoved-agent/sa-docoved version` now returns `0.1.5`;
+- wave-48 synthesis is recorded in `.tasks/prt-036-implementation-wave-48-2026-04-21/summary/PRT-036-implementation-wave-48-synthesis.md`;
+- implementation stage: wave 49 completed;
+- the previously blocked bounded consumer retry is now closed:
+  - `SCN-189` now passes on real published `@docoved-agent/sa-docoved@0.1.5`;
+- wave-49 synthesis is recorded in `.tasks/prt-036-implementation-wave-49-2026-04-21/summary/PRT-036-implementation-wave-49-synthesis.md`;
+- implementation stage: waves 50-53 completed;
+- the remaining single-scenario multi-format consumer tail is now migrated:
+  - `SCN-190` now imports from the published package;
+  - `SCN-191` now imports from the published package;
+  - `SCN-192` now imports from the published package;
+  - `SCN-193` now imports from the published package;
+  - repeated `SCN-189` canary reruns remain green through this tranche;
+- wave-50 through wave-53 syntheses are recorded in their respective `.tasks/prt-036-implementation-wave-5x-2026-04-21/summary/*` files;
 - the next protocol revision pass must focus on:
-  - publishing `@docoved-agent/sa-docoved@0.1.5` through the protected-branch release flow;
-  - retrying the bounded `SCN-189` consumer cutover only after real npm publication of `0.1.5`;
+  - choosing the next bounded mixed Docoved tail after the single-scenario multi-format consumers;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
   - progressively renaming or retiring the remaining transitional `@sales-agent/*` packages as their seams migrate;
   - reliability, migration, verification, and CI/CD gates for later code-moving waves.
