@@ -2,7 +2,7 @@
 file: .memory-bank/scenarios/index.md
 description: 'Framework scenarios hub for bot-platform.'
 purpose: Use as the repo-local navigation hub for framework-owned verification scenarios, contract checks, and shared evidence rules.
-version: 0.2.0
+version: 0.3.0
 date: 2026-04-22
 status: DRAFT
 tags: [scenarios, bot-platform, framework, verification]
@@ -12,6 +12,9 @@ children:
   - contracts/index.md
   - hosted/index.md
 history:
+  - version: 0.3.0
+    date: 2026-04-22
+    changes: Landed the first framework-owned flat scenario docs (`SCN-001`, `SCN-116`, `SCN-175`) and updated the hub to distinguish those canonical contracts from the still-pending remainder of the framework catalog.
   - version: 0.2.0
     date: 2026-04-22
     changes: Removed bootstrap placeholder wording and aligned the scenarios hub with the landed scenario-system/hosted-beta specs plus the scenario/verification matrices as the current Wave 1B anchors.
@@ -45,13 +48,16 @@ It is not for:
 
 ## Current Wave 1B posture
 
-At this stage, the framework repo has canonical scenario-system and hosted-beta execution specs, plus planning matrices.
-Most concrete `SCN-*` scenario docs are still pending.
+At this stage, the framework repo has canonical scenario-system and hosted-beta execution specs, planning matrices, and the first flat framework-owned scenario docs:
+- [SCN-001](SCN-001-typed-sdk-parity.md)
+- [SCN-116](SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md)
+- [SCN-175](SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md)
 
-Until the runnable catalog lands:
+The broader runnable catalog is still pending.
+Until more flat scenario docs land:
 - use the spec hubs under `spec/scenarios/` and `spec/runtime/` as canonical contract anchors;
 - use [Scenario matrix](scenario-matrix.md) and [Verification matrix](../plans/verification-matrix.md) as the planning and traceability surfaces;
-- treat mixed-repo scenario IDs as source-side migration anchors only.
+- treat remaining mixed-repo scenario IDs as source-side migration anchors only.
 
 ## First wave outcome
 

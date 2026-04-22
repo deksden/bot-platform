@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as framework extraction moves from planning into implementation.
-version: 0.23.0
+version: 0.24.0
 date: 2026-04-22
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.24.0
+    date: 2026-04-22
+    changes: Landed the first framework-owned flat scenario docs (`SCN-001`, `SCN-116`, `SCN-175`) and advanced Wave 2 by adding the next real `@dd-bot-platform/core` execution-result helper slice on top of the initial execution-kernel vocabulary bootstrap.
   - version: 0.23.0
     date: 2026-04-22
     changes: Actualized the framework planning/scenario truth for Wave 1B: verification matrix is now aligned to the feature registry and extracted packages, scenario matrix anchors reflect the landed scenario-system/hosted-beta specs, the scenario hubs no longer read as bootstrap placeholders, and the first repo-local `@dd-bot-platform/core` extraction slice is now landed.
@@ -98,12 +101,18 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - framework epic map and feature registry
 - framework scenario matrix (actualized anchors) and verification matrix (actualized inventory)
 - scenario navigation hubs (`scenarios/`, `scenarios/contracts/`, `scenarios/hosted/`, `scenarios/by-epic/`) are no longer bootstrap placeholders
+- first flat framework scenario docs:
+  - `.memory-bank/scenarios/SCN-001-typed-sdk-parity.md`
+  - `.memory-bank/scenarios/SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md`
+  - `.memory-bank/scenarios/SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md`
 - canonical `PRT-036` copy in `bot-platform`
 - first publish-ready framework package metadata for:
   - `@dd-bot-platform/api-contract`
   - `@dd-bot-platform/scenario-system`
 - first repo-local Wave 2 core extraction slice:
   - `@dd-bot-platform/core@0.1.0` in `packages/core`
+- second repo-local Wave 2 core extraction slice:
+  - generic execution-result helpers in `packages/core/src/runtime/execution-result.ts`
 - Changesets/release workflow scaffolding for the first publishable framework packages
 - first published framework package versions:
   - `@dd-bot-platform/api-contract@0.2.0`
@@ -203,14 +212,14 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
 - moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
-- remaining framework scenario docs/catalog beyond the now-landed scenario-system/evidence and hosted-beta execution baseline
-- broader framework code extraction beyond the first contract-first `packages/core` slice
+- broader framework scenario docs/catalog beyond the first flat framework contracts (`SCN-001`, `SCN-116`, `SCN-175`) and the scenario-system/hosted-beta baseline
+- broader framework code extraction beyond the current execution-kernel plus execution-result slices in `packages/core`
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 
 ## Current blockers before broader code extraction
 
 - broader namespace split for `client-sdk` and later framework packages
-- next `packages/core` follow-on seams beyond the now-landed execution-contract vocabulary
+- next `packages/core` follow-on seams beyond the now-landed execution-contract and execution-result helper slices
 - workflow host code/runtime split design
 - persistence interface vs product store split
 

@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.82.0
+version: 1.83.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.83.0
+    date: 2026-04-22
+    changes: Recorded wave 157: all three target repos now own their first flat repo-local scenario contracts, and Wave 2 in `bot-platform` advanced beyond the initial kernel vocabulary slice with generic execution-result helpers in `@dd-bot-platform/core`.
   - version: 1.82.0
     date: 2026-04-22
     changes: Recorded wave 156: target repos now have actualized repo-local epic/feature/scenario/verification truth (`seller-agent`, `bot-platform`, and `docoved-agent` planning/scenario layers no longer rely on placeholder framing), and Wave 2 is now materially started by the first real `@dd-bot-platform/core` extraction slice in `bot-platform`.
@@ -914,6 +917,11 @@ Each delegated slice must have:
 - one explicit verification contour.
 
 Do not delegate by chat summary alone.
+
+Owner verification rule:
+- a subagent completion signal is not sufficient by itself;
+- the main agent must confirm that the required report file exists and that the claimed repo edits or artifacts actually landed before counting the delegated slice as done;
+- if completion arrives without the required report or target-repo diff, treat the delegation as failed/incomplete and either retry with a narrower packet or finish the slice owner-side.
 
 ### Subagent launch rule
 

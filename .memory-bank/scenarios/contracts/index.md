@@ -2,12 +2,15 @@
 file: .memory-bank/scenarios/contracts/index.md
 description: 'Framework contract scenario index for bot-platform.'
 purpose: Collect framework contract verification scenarios.
-version: 0.2.0
+version: 0.3.0
 date: 2026-04-22
 status: DRAFT
 tags: [scenarios, contracts, bot-platform]
 parent: .memory-bank/scenarios/index.md
 history:
+  - version: 0.3.0
+    date: 2026-04-22
+    changes: Added the first concrete framework contract scenario docs (`SCN-001`, `SCN-116`, `SCN-175`) and turned the hub into a real flat-contract navigation surface.
   - version: 0.2.0
     date: 2026-04-22
     changes: Actualized the contract-scenario index to align with the feature registry, the scenario matrix, and landed contract specs, replacing placeholder wording with current navigation anchors.
@@ -18,9 +21,10 @@ history:
 This hub covers framework-owned contract verification.
 It excludes product journeys and product acceptance overlays.
 
-Current anchors (until concrete `SCN-*` scenario docs land):
-- [Scenario matrix](../scenario-matrix.md)
-- [Verification matrix](../../plans/verification-matrix.md)
+Current flat framework contract docs:
+- [SCN-001 Typed SDK parity](../SCN-001-typed-sdk-parity.md)
+- [SCN-116 Workflow host job start status and completion over internal host](../SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md)
+- [SCN-175 Explicit model policy and config resolution diagnostics without silent fallback](../SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md)
 
 ## Contract families (framework-only)
 
@@ -38,4 +42,7 @@ Current anchors (until concrete `SCN-*` scenario docs land):
 - `workflow-framework` (gated)
   - anchors: `spec/runtime/index.md`, `spec/architecture/containers/workflow-host.md`
 
-When runnable scenario docs land, this hub should list the canonical flat `SCN-*` files and link each one back to the owning feature group and primary contract spec.
+Reading rule:
+- the flat `SCN-*` file is canonical;
+- this hub is a navigation overlay;
+- future framework contract scenarios should stay flat under `scenarios/` and be linked here by family.
