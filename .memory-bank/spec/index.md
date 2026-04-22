@@ -1,9 +1,9 @@
 ---
 file: .memory-bank/spec/index.md
-description: 'Spec hub для bot-platform: framework architecture, package contracts, scenario system и repo-level placement rules.'
-purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo и какие нормативные docs обязаны жить именно здесь.
-version: 0.13.0
-date: 2026-04-21
+description: 'Spec hub для bot-platform: framework architecture, project architecture, package contracts, scenario system и repo-level placement rules.'
+purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo, включая project-level architecture framing и обязательные нормативные docs.
+version: 0.14.0
+date: 2026-04-22
 status: DRAFT
 c4_level: L1
 tags: [spec, bot-platform, architecture, contracts, framework]
@@ -13,6 +13,7 @@ children:
   - architecture/boundaries.md
   - architecture/containers/index.md
   - project/index.md
+  - project/agent-execution-platform-architecture.md
   - project/repo-structure.md
   - project/feature-area-boundaries.md
   - runtime/index.md
@@ -28,6 +29,9 @@ children:
   - scenarios/index.md
   - operations/index.md
 history:
+  - version: 0.14.0
+    date: 2026-04-22
+    changes: Linked the new project-level framework architecture doc (`project/agent-execution-platform-architecture.md`) in spec navigation and must-exist inventory (PRT-036 Wave 145).
   - version: 0.13.0
     date: 2026-04-21
     changes: Linked the framework engineering packet (delivery-standards and coding-style) and the framework auth-and-access security contract in spec navigation and must-exist inventory (PRT-036 Wave 139).
@@ -95,7 +99,7 @@ history:
 
 - [Architecture hub](architecture/index.md): glossary, system context, container map, domain map и dependency rules для framework repo, включая [containers index](architecture/containers/index.md) и [workflow host](architecture/containers/workflow-host.md).
 - [Framework boundaries](architecture/boundaries.md): главный запретительный документ про то, что может и не может жить в `bot-platform`.
-- [Project docs](project/index.md): repo shape, package catalog, feature-area ownership и naming/placement conventions.
+- [Project docs](project/index.md): repo shape, project-level architecture framing, package catalog, feature-area ownership и naming/placement conventions, включая [agent execution platform architecture](project/agent-execution-platform-architecture.md).
 - [Runtime docs](runtime/index.md): execution kernel, decision-explanation envelope, execution traces/token accounting, trace-artifact governance, pipeline registry/binding contract, persistence-interface/store-boundary contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
 - [Engineering docs](engineering/index.md): framework delivery and coding standards, включая [delivery standards](engineering/delivery-standards.md) и [coding style](engineering/coding-style.md).
 - [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md) и [auth and access](security/auth-and-access.md).
@@ -116,6 +120,7 @@ history:
 - `architecture/containers/workflow-host.md`
 - `architecture/dependency-and-placement-rules.md`
 - `project/index.md`
+- `project/agent-execution-platform-architecture.md`
 - `project/repo-structure.md`
 - `project/feature-area-boundaries.md`
 - `runtime/index.md`
@@ -152,13 +157,13 @@ history:
 Остается главным top-down entrypoint.
 Сюда переезжает большая часть текущих:
 - `spec/architecture/**` кроме Docoved-owned domain docs;
-- `spec/project/agent-execution-platform-architecture.md` как high-level framework direction;
 - rules про `core -> api-contract -> client-sdk -> surfaces/adapters`.
 
 ### `project/`
 
 Нужен для repo-local shape.
-Даже если часть текущих документов переедет почти без изменений, здесь должна появиться `bot-platform`-specific версия:
+Project section уже должен содержать `bot-platform`-specific docs:
+- `agent-execution-platform-architecture.md` как project-level high-level framework direction;
 - без product-owned packages;
 - без product deploy truth;
 - с отдельным описанием framework packages и `apps/cli`.
