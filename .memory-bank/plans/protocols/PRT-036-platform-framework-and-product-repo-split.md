@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.88.0
+version: 1.89.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.89.0
+    date: 2026-04-22
+    changes: Recorded wave 163: Wave 2 is now closed in fully released form because the mainline `Release Packages` workflow was aligned to versioned-state publication and `@dd-bot-platform/core@0.2.0` was published from `bot-platform/main`; the next active work now moves from framework-core release closure toward product-facing Wave 3 adoption.
   - version: 1.88.0
     date: 2026-04-22
     changes: Recorded wave 162: `seller-agent`, `docoved-agent`, and `bot-platform` now all have a minimal protected-branch verification baseline (`pnpm check` plus push/PR workflow), closing the current acceptance-gate CI gap without widening release workflows or reopening Wave 2 extraction scope.
@@ -2686,6 +2689,10 @@ Current status:
   - `@dd-bot-platform/core` now sits at `0.2.0` after `changeset version`;
   - the broader helper tranche is therefore no longer only pending release intent, but concrete versioned package state in git;
   - in the accepted safe-mode path, this closes Wave 2 extraction work, while actual npm publication remains an operational release action on the mainline flow.
+- the mainline release action is now also completed:
+  - the `Release Packages` workflow now validates versioned publishable state via `pnpm changeset:publish --dry-run` instead of expecting unconsumed changeset intent;
+  - `bot-platform/main` has been promoted through the governed release path;
+  - `@dd-bot-platform/core@0.2.0` has been published from the mainline workflow.
 
 Current extraction-design baseline:
 - package/runtime/data/host/scenario/shared seams are now mapped for `core`, `api-contract`, `client-sdk`, `db`, `server`, `workflow`, `scenario-runner`, and `shared`;
