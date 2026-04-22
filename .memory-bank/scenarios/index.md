@@ -2,7 +2,7 @@
 file: .memory-bank/scenarios/index.md
 description: 'Framework scenarios hub for bot-platform.'
 purpose: Use as the repo-local navigation hub for framework-owned verification scenarios, contract checks, and shared evidence rules.
-version: 0.3.0
+version: 0.4.0
 date: 2026-04-22
 status: DRAFT
 tags: [scenarios, bot-platform, framework, verification]
@@ -12,6 +12,9 @@ children:
   - contracts/index.md
   - hosted/index.md
 history:
+  - version: 0.4.0
+    date: 2026-04-22
+    changes: Landed the next framework-owned scenario wave (`SCN-012`, `SCN-041`, `SCN-118`, `SCN-168`, `SCN-170`) and updated the hub to treat the obvious Wave 1B framework scenario gap as materially closed.
   - version: 0.3.0
     date: 2026-04-22
     changes: Landed the first framework-owned flat scenario docs (`SCN-001`, `SCN-116`, `SCN-175`) and updated the hub to distinguish those canonical contracts from the still-pending remainder of the framework catalog.
@@ -48,17 +51,23 @@ It is not for:
 
 ## Current Wave 1B posture
 
-At this stage, the framework repo has canonical scenario-system and hosted-beta execution specs, planning matrices, and the first flat framework-owned scenario docs:
+At this stage, the framework repo has canonical scenario-system and hosted-beta execution specs, planning matrices, and these flat framework-owned scenario docs:
 - [SCN-001](SCN-001-typed-sdk-parity.md)
+- [SCN-012](SCN-012-scenario-auth-bootstrap.md)
+- [SCN-041](SCN-041-verdict-export-stability-and-provenance.md)
 - [SCN-116](SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md)
+- [SCN-118](SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md)
+- [SCN-168](SCN-168-openai-runtime-provider-registration-and-readiness-projection.md)
+- [SCN-170](SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md)
 - [SCN-175](SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md)
 
-The broader runnable catalog is still pending.
-Until more flat scenario docs land:
-- use the spec hubs under `spec/scenarios/` and `spec/runtime/` as canonical contract anchors;
+The obvious Wave 1B framework gap is now materially closed for auth, runtime-kernel, workflow-framework hosted durability, and support-package export/provenance anchors.
+Deeper scenario families are still later-wave work.
+Until those additional flat scenario docs land:
+- use the spec hubs under `spec/scenarios/` and `spec/runtime/` as canonical contract anchors for still-thin families;
 - use [Scenario matrix](scenario-matrix.md) and [Verification matrix](../plans/verification-matrix.md) as the planning and traceability surfaces;
-- treat remaining mixed-repo scenario IDs as source-side migration anchors only.
+- treat remaining mixed-repo scenario IDs as source-side migration anchors only where no repo-local child scenario exists yet.
 
 ## First wave outcome
 
-This hub exists now so future scenario migration can land into a stable framework-owned structure instead of a mixed source repo.
+This hub now carries a real framework-owned baseline for the main Wave 1B contract families, so future migration can add depth without pretending the framework scenario layer is still only a placeholder.

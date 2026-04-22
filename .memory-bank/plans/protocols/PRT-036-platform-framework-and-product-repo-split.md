@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.83.0
+version: 1.84.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.84.0
+    date: 2026-04-22
+    changes: Recorded wave 158: Wave 1B is now materially closed, with core-family repo-local scenario anchors landed across `seller-agent`, `docoved-agent`, and `bot-platform`, missing framework workflow/command contract docs landed in `bot-platform`, and mixed-repo transition-routing tightened in `sales-agent`.
   - version: 1.83.0
     date: 2026-04-22
     changes: Recorded wave 157: all three target repos now own their first flat repo-local scenario contracts, and Wave 2 in `bot-platform` advanced beyond the initial kernel vocabulary slice with generic execution-result helpers in `@dd-bot-platform/core`.
@@ -2597,10 +2600,10 @@ Progress snapshot:
 - `bot-platform` now also contains the canonical target-repo copy of `PRT-036`;
 - this closes the "target repo Memory Bank does not yet exist" blocker and shifts Wave 1 focus toward feature/epic/scenario population and source-repo transition routing.
 
-Residual work before Wave 1 can be considered fully closed:
-- convert current mixed `sales-agent/.memory-bank/**` hubs into explicit transition stubs where needed;
-- migrate first canonical source-doc families into their target repos;
-- replace placeholder-level feature/scenario structure with repo-local actualized content.
+Wave 1 closure status:
+- mixed `sales-agent/.memory-bank/**` hubs now route readers toward target-repo canonical truth where needed;
+- the first canonical source-doc families are migrated into their target repos;
+- placeholder-level feature/scenario structure has been replaced with repo-local actualized content in all three target repos.
 
 ### Wave 1B: Repo-local truth population and traceability
 
@@ -2630,7 +2633,8 @@ Current status:
 - scenario ownership and verification matrices are rebound to those registries;
 - target-repo scenario hubs now explicitly distinguish repo-local acceptance anchors from still-unmigrated source-side `SCN/XE` ids;
 - `TR-01` explicit cross-repo traceability is complete for the current split stage;
-- remaining work in Wave 1B is now narrower: deeper repo-local doc migration and the first real repo-local scenario-doc families still need to replace matrix-only anchors where those detailed docs do not yet exist.
+- repo-local core-family scenario docs are now landed across `seller-agent`, `docoved-agent`, and `bot-platform`, so the next code migration wave can name canonical target-repo spec/feature/scenario anchors for each moved family;
+- deeper repo-local doc migration still remains as later documentation depth, but the Wave 1B exit condition is now satisfied.
 
 ### Wave 2: Extract `bot-platform` framework core
 

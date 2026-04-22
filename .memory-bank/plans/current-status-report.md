@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as framework extraction moves from planning into implementation.
-version: 0.24.0
+version: 0.25.0
 date: 2026-04-22
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.25.0
+    date: 2026-04-22
+    changes: Closed the remaining obvious Wave 1B framework contract/scenario gap by landing repo-local scenario docs (`SCN-012`, `SCN-041`, `SCN-118`, `SCN-168`, `SCN-170`) plus the workflow-framework and command-framework runtime contracts, and synced scenario/runtime/status surfaces accordingly.
   - version: 0.24.0
     date: 2026-04-22
     changes: Landed the first framework-owned flat scenario docs (`SCN-001`, `SCN-116`, `SCN-175`) and advanced Wave 2 by adding the next real `@dd-bot-platform/core` execution-result helper slice on top of the initial execution-kernel vocabulary bootstrap.
@@ -88,6 +91,7 @@ history:
 
 `bot-platform` now has a real `.memory-bank/**` skeleton and canonical `mbb/**`.
 This closes the earlier "target Memory Bank does not exist" blocker from `PRT-036`, and the first framework scenario-system packet, hosted-beta execution-model packet, next hosted-scenarios ADR packet, architecture-boundary simplification protocol packet, framework operations packet, framework engineering/security packet, framework project packet, framework architecture guardrails/container packet, and framework operations-observability packet are now landed in repo-local form.
+The remaining obvious Wave 1B framework contract/scenario gap is now materially closed as well: auth/runtime/workflow/support feature groups now have repo-local scenario anchors, and the runtime hub no longer points to workflow/command only as future placeholders.
 
 ## Already landed
 
@@ -101,10 +105,18 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - framework epic map and feature registry
 - framework scenario matrix (actualized anchors) and verification matrix (actualized inventory)
 - scenario navigation hubs (`scenarios/`, `scenarios/contracts/`, `scenarios/hosted/`, `scenarios/by-epic/`) are no longer bootstrap placeholders
-- first flat framework scenario docs:
+- current flat framework scenario docs:
   - `.memory-bank/scenarios/SCN-001-typed-sdk-parity.md`
+  - `.memory-bank/scenarios/SCN-012-scenario-auth-bootstrap.md`
+  - `.memory-bank/scenarios/SCN-041-verdict-export-stability-and-provenance.md`
   - `.memory-bank/scenarios/SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md`
+  - `.memory-bank/scenarios/SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md`
+  - `.memory-bank/scenarios/SCN-168-openai-runtime-provider-registration-and-readiness-projection.md`
+  - `.memory-bank/scenarios/SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md`
   - `.memory-bank/scenarios/SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md`
+- remaining Wave 1B runtime contract docs that were previously missing:
+  - `.memory-bank/spec/runtime/workflow-framework-contract.md`
+  - `.memory-bank/spec/runtime/command-framework-contract.md`
 - canonical `PRT-036` copy in `bot-platform`
 - first publish-ready framework package metadata for:
   - `@dd-bot-platform/api-contract`
@@ -212,7 +224,7 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
 - moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
-- broader framework scenario docs/catalog beyond the first flat framework contracts (`SCN-001`, `SCN-116`, `SCN-175`) and the scenario-system/hosted-beta baseline
+- additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`) and the scenario-system/hosted-beta baseline
 - broader framework code extraction beyond the current execution-kernel plus execution-result slices in `packages/core`
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 
@@ -225,15 +237,14 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 
 ## Immediate next document wave
 
-1. convert planning anchors into the first repo-local framework scenario docs:
-   - contract scenarios for extracted bridge slices (`api-contract`, `scenario-system`) and the core framework runtime/security contracts that are already landed
-   - hosted preflight/pattern scenarios that exercise the hosted-beta execution model without embedding product acceptance overlays
-2. land the next framework contract/spec docs that unblock gated feature groups without importing product truth:
-   - workflow framework contract spec (host/start/callback/durability vocabulary)
-   - command framework contract spec (envelope/registry primitives; no channel/product commands)
-3. continue PRT-036 planning migration:
+1. continue PRT-036 planning migration:
    - remaining `CB-*` contract docs not yet landed in repo-local form
    - follow-up split child protocols and ADR decisions after `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
+2. deepen framework scenario coverage only where a clean framework-owned split exists:
+   - persistence-interface scenarios
+   - command-framework split scenarios after Telegram/product semantics are stripped out
+   - later scenario-system package/tier anchors beyond the current hosted/auth/workflow/runtime baseline
+3. keep framework status surfaces aligned with real extraction progress instead of advertising future placeholders as current truth
 
 ## Immediate next implementation wave
 
