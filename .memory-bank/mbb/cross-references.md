@@ -2,8 +2,8 @@
 file: .memory-bank/mbb/cross-references.md
 description: 'MBB Rule: Cross-References - JSDoc теги, Markdown ссылки, двусторонняя связность'
 purpose: Изучить для понимания как создать двусторонние ссылки между кодом и документацией  
-version: '6.0.0'
-date: '2025-09-08'
+version: '6.1.0'
+date: '2026-04-20'
 status: ACTIVE
 c4_level: 'standard'
 tags: [cross-references, jsdoc, markdown, code-documentation, bidirectional-links]
@@ -13,6 +13,9 @@ related_files:
   - .memory-bank/mbb/frontmatter-standards.md
   - .memory-bank/tech/standards/jsdoc-standards.md
 history:
+  - version: 6.1.0
+    date: 2026-04-20
+    changes: Added split-bootstrap hygiene rules for copied docs: stale repo-name detection, internal-link validation, and explicit transition-stub wording when a target doc family is not migrated yet.
   - version: 1.0.0
     date: 2025-01-06
     changes: Created cross-references guide for MBB
@@ -32,6 +35,19 @@ history:
 - **Актуальность** - ссылки обновляются при рефакторинге  
 - **Специфичность** - ссылки ведут на конкретные секции, а не на общие файлы
 - **Контекстность** - ссылки содержат аннотации о цели перехода
+
+## Split / bootstrap hygiene for copied docs
+
+Если Memory Bank или его шаблоны копируются в новый repo во время split/bootstrap:
+- проверь, не остались ли в тексте старые repo-name / product-name ссылки;
+- проверь, что каждая внутренняя markdown-ссылка действительно существует в новом repo;
+- если owning doc family ещё не перенесён, не оставляй битую ссылку:
+  - либо замени её на существующий repo-local hub;
+  - либо явно пометь место как transition / bootstrap-level reference.
+
+Правило:
+- “документ существует, но ведёт в никуда” считается дефектом документации, а не допустимым временным состоянием;
+- copy artifacts не должны маскироваться под актуальную repo-local truth.
 
 ## JSDoc теги для кода → документация
 

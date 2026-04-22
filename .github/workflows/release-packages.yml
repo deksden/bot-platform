@@ -1,0 +1,81 @@
+name: Release Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the current release version to npm
+        required: false
+        default: 'false'
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  release-pr:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.23.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Validate publishable versioned state
+        run: pnpm changeset:publish --dry-run
+
+      - name: Note release workflow mode
+        run: |
+          echo "Release PR creation is not performed on push."
+          echo "This workflow treats only already-versioned repo state as publish-ready."
+          echo "Pending .changeset/*.md intent must be materialized with pnpm changeset version before publish."
+
+  publish:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.23.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Validate publishable versioned state
+        run: pnpm changeset:publish --dry-run
+
+      - name: Publish packages
+        run: pnpm changeset:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

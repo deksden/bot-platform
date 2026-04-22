@@ -2,8 +2,8 @@
 file: .memory-bank/guides/index.md
 description: 'Guides hub для bot-platform: Diataxis-layer для framework consumers, maintainers и product repos, использующих platform packages и standards.'
 purpose: Использовать как user-facing вход в документацию `bot-platform`, когда нужен ответ не только "что является нормой", но и "как этим framework-layer пользоваться и как его правильно встраивать".
-version: 0.1.0
-date: 2026-04-19
+version: 0.2.0
+date: 2026-04-20
 status: DRAFT
 tags: [guides, diataxis, bot-platform, framework, reference, how-to]
 parent: .memory-bank/index.md
@@ -13,6 +13,9 @@ children:
   - explanation/index.md
   - reference/index.md
 history:
+  - version: 0.2.0
+    date: 2026-04-20
+    changes: Replaced the placeholder CLI-oriented release reference with the real npm package release runbook for private `@dd-bot-platform/*` packages.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial draft guides hub for the future bot-platform Memory Bank under PRT-036.
@@ -43,7 +46,7 @@ history:
 - `explanation/index.md`
 - `reference/index.md`
 - `reference/environment-access-and-verification.md`
-- `reference/npm-cli-release-runbook.md`
+- `reference/npm-package-release-runbook.md`
 - `reference/deterministic-beta-scenarios.md`
 - `reference/hosted-beta-scenario-playbook.md`
 - `reference/judge-authoring-format.md`

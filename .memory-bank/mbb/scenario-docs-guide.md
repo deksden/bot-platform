@@ -2,13 +2,23 @@
 file: '.memory-bank/mbb/scenario-docs-guide.md'
 description: 'MBB guide: how to document executable SCN-* scenarios for platform and lifecycle verification.'
 purpose: 'Read when creating or updating scenario documents so platform scenarios stay reproducible, evidence-first, and distinct from normal tests.'
-version: '1.2.0'
-date: '2026-03-17'
+version: '1.4.0'
+date: '2026-04-20'
 status: 'ACTIVE'
 c4_level: 'standard'
 parent: '.memory-bank/mbb/index.md'
 architecture: 'MBB Standards'
 tags: [mbb, scenario, testing, verification, evidence]
+history:
+  - version: 1.4.0
+    date: 2026-04-20
+    changes: Added traceability-anchor rules for split migration: current repo-local hubs are valid canonical anchors when child docs are not landed yet, and future placeholder docs from planning matrices must not be treated as current SSoT.
+  - version: 1.3.0
+    date: 2026-04-20
+    changes: Added split-migration rules for scenario matrices: mixed-repo source anchors are not repo-local truth, numeric scenario bands are not ownership boundaries, and hosted overlays must stay explicit overlays instead of false ownership anchors.
+  - version: 1.2.0
+    date: 2026-03-17
+    changes: Prior baseline.
 ---
 
 # Scenario Docs Guide
@@ -90,6 +100,32 @@ Scenario:
 - planned anchor допустим на ранней стадии feature/spec;
 - acceptance-critical scenario должен быть доведён до full contract до feature closure;
 - короткий scenario stub не должен silently считаться полноценным must-run contract.
+
+## 4c. Split-migration matrix rule
+
+При repo-split или migration wave scenario matrix может ссылаться на mixed-repo `SCN-*` только как на **source-side migration anchors**.
+
+Правило:
+- если target repo ещё не содержит concrete scenario docs, матрица должна сначала ссылаться на реально существующие repo-local hubs/specs/verification docs;
+- mixed-source scenario ids нельзя выдавать за уже мигрировавшую repo-local truth;
+- source anchors полезны для migration traceability, но не заменяют канонический target-repo scenario layer.
+
+Антипаттерн:
+- target repo выглядит "полным" только потому, что в matrix перечислены старые `SCN-*` из mixed source.
+
+## 4d. Current local anchors vs future placeholders
+
+Во время split migration канонический traceability anchor должен ссылаться на то, что реально существует в target repo сейчас.
+
+Правило:
+- `spec/*/index.md`, section hubs, boundary docs, scenario hubs и verification matrices допустимы как канонические anchors, если это текущая repo-local owning surface;
+- такие anchors нужно явно помечать как broad / hub-level, если подробные child docs ещё не landed;
+- future placeholder paths из planning / verification docs остаются backlog signals, пока соответствующие файлы реально не созданы.
+
+Антипаттерны:
+- ссылаться на несуществующий `future spec/*.md` как будто он уже текущий SSoT;
+- использовать broad hub anchor так, как будто он доказывает наличие детализированной normative coverage;
+- из-за отсутствия child docs возвращаться к mixed-source deep links как к primary truth.
 
 ## 5. Evidence-first rule
 
@@ -191,6 +227,18 @@ Scenario runner может быть реализован поверх `vitest`, 
 Идентификатор должен быть уникальным.
 Недопустимо держать два разных scenario docs с одним и тем же `SCN-XXX`.
 
+## 13a. Numeric band rule
+
+Числовая близость scenario ids не является ownership rule.
+
+Нельзя:
+- считать, что весь числовой диапазон автоматически принадлежит одному product repo;
+- переносить scenario families по правилу "рядом по номеру".
+
+Нужно:
+- классифицировать ownership по canonical feature registry и смыслу scenario;
+- явно помечать `framework overlap`, `split candidate`, `retirement candidate` или аналогичный статус, если numeric neighborhood смешивает разные ownership contours.
+
 ## 14. Practical scope rule
 
 Не делай scenario слишком узким:
@@ -215,3 +263,18 @@ Scenario runner может быть реализован поверх `vitest`, 
 - `related_files`
 - `implementation_files`
 - `verification_domains`, если проект использует domain overlays.
+
+## 16. Hosted overlays stay overlays
+
+Hosted smoke / beta / cutover scenarios полезны, но не должны silently становиться primary ownership anchors в product scenario matrix.
+
+Правило:
+- hosted checks документируй как explicit overlays над product-owned local acceptance;
+- hosted overlay не заменяет основную product family, если та существует;
+- если у feature group coverage пока тонкое и держится в основном на hosted overlay, это нужно писать честно, а не маскировать gap.
+
+Полезные формулировки:
+- `hosted overlay`
+- `canonical hosted overlay`
+- `retirement candidate`
+- `local anchor remains primary`

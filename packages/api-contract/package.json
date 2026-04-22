@@ -1,0 +1,46 @@
+{
+  "name": "@dd-bot-platform/api-contract",
+  "description": "Framework-safe API contract slice for bot-platform consumers.",
+  "version": "0.2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo"
+  ],
+  "keywords": [
+    "dd-bot-platform",
+    "bot-platform",
+    "framework",
+    "contracts",
+    "semantic-eval"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deksden/bot-platform.git",
+    "directory": "packages/api-contract"
+  },
+  "homepage": "https://github.com/deksden/bot-platform",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prepack": "pnpm build",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --pretty false"
+  },
+  "dependencies": {
+    "zod": "4.3.6"
+  }
+}
