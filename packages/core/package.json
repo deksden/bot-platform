@@ -36,7 +36,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "prepack": "pnpm build",
+    "clean": "rm -rf dist",
+    "prepack": "pnpm clean && pnpm build",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --pretty false"
   }

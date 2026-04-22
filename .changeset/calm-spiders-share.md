@@ -2,4 +2,4 @@
 '@dd-bot-platform/core': minor
 ---
 
-Add framework-safe provider-result helpers to `@dd-bot-platform/core` for provider envelope detection, normalization, and error metadata extraction.
+Add a broader framework runtime helper pack to `@dd-bot-platform/core`, including provider-result helpers, generic pipeline-registry primitives, generic provider-stage vocabulary, and safer prepack cleaning.

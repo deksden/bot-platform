@@ -2,7 +2,7 @@
 file: .memory-bank/guides/reference/npm-package-release-runbook.md
 description: Practical runbook for versioning, verifying, publishing and post-release checking the `@dd-bot-platform/*` npm packages.
 purpose: Read when preparing or executing a real npm release for the first publishable framework packages so maintainers can follow one short canonical checklist instead of reconstructing the process from workflow files, Changesets config, and protocol notes.
-version: 1.1.0
+version: 1.2.0
 date: 2026-04-20
 status: ACTIVE
 parent: .memory-bank/guides/reference/index.md
@@ -14,6 +14,9 @@ related_files:
   - .github/workflows/release-packages.yml
   - scripts/publish-private-packages.mjs
 history:
+  - version: 1.2.0
+    date: 2026-04-22
+    changes: Widened the allowed publish set to include `@dd-bot-platform/core` after the broader Wave 2 runtime-helper pack made the package a real framework seam rather than a bootstrap-only stub, and added package-cleanliness guidance for stale `dist` prevention before `pack`/publish.
   - version: 1.1.0
     date: 2026-04-20
     changes: Updated the runbook after npm rejected restricted scoped publication; the accepted bridge for the first framework-safe slices now uses public scoped npm packages under `@dd-bot-platform`.
@@ -24,6 +27,7 @@ history:
 ## Use this runbook when
 
 - releasing `@dd-bot-platform/api-contract`;
+- releasing `@dd-bot-platform/core`;
 - releasing `@dd-bot-platform/scenario-system`;
 - confirming whether a merged framework package change is actually ready to go to npm.
 
@@ -49,6 +53,7 @@ If both packages change together, bump each package according to its own consume
 This runbook currently applies only to:
 
 - `@dd-bot-platform/api-contract`
+- `@dd-bot-platform/core`
 - `@dd-bot-platform/scenario-system`
 
 Do not widen publication beyond this allowlist until the owning protocol wave explicitly accepts new framework packages as publishable seams.
@@ -63,6 +68,7 @@ Do not widen publication beyond this allowlist until the owning protocol wave ex
    - `pnpm build`
 4. Run package artifact proof:
    - `pnpm --filter @dd-bot-platform/api-contract pack --pack-destination <tmp-dir>`
+   - `pnpm --filter @dd-bot-platform/core pack --pack-destination <tmp-dir>`
    - `pnpm --filter @dd-bot-platform/scenario-system pack --pack-destination <tmp-dir>`
    - inspect `package/package.json` from each tarball
 5. Run release readiness proof:
@@ -122,6 +128,7 @@ Important rule:
 Maintainer lesson:
 
 - do not assume `pnpm pack --json` is machine-clean when package `prepack` hooks print lifecycle logs; prefer discovering the produced tarball from the pack destination and then inspecting the packed manifest directly.
+- when a package deleted or renamed exported source files in the same wave, clean `dist/` before trusting the tarball contents; stale compiled files can survive and leak into `pack` output.
 
 ## Post-publish verification
 
