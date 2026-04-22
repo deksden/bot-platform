@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.95.0
+version: 1.96.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -100,6 +100,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.96.0
+    date: 2026-04-22
+    changes: Recorded wave 171: Wave 6 is now closed for active Docoved product-surface ownership because the seeded `SCN-187` beta smoke executes owner-side from `docoved-agent`, `dv-admin` no longer depends on the shared `sa-admin` CLI, and the remaining work is re-scoped to later scenario-system/shared-auth/bootstrap cleanup rather than owner-side mixed-code truth.
   - version: 1.95.0
     date: 2026-04-22
     changes: Recorded wave 170: Wave 6 is now materially advanced but not closed. Canonical Docoved operator/deploy script ownership moved into `docoved-agent`, `sales-agent` now keeps only transition wrappers for the migrated Docoved script surface, and the remaining mixed-source retirement tail is explicitly narrowed to legacy `SCN-187`/scenario-runner bridging plus broader shared-admin/auth residue.
@@ -2804,9 +2807,9 @@ Expected outcome:
 - residual source either migrates, archives, or is intentionally deleted.
 
 Current status:
-- materially advanced, not closed;
-- `sales-agent` no longer owns the migrated Docoved script surface or `dv-admin` package implementation;
-- the remaining open tail is intentionally narrow: the legacy seeded `SCN-187` smoke still bridges through the mixed `scenario-runner` contour, and broader shared-admin/auth/bootstrap residue remains later cleanup.
+- closed for active product-surface ownership;
+- `sales-agent` no longer owns the migrated Docoved script surface, the seeded `SCN-187` beta smoke, or the runtime implementation behind `packages/dv-admin`;
+- remaining follow-up is no longer an owner-side Wave 6 blocker: later work still needs to extract the shared runnable-local scenario framework contour, place shared auth/observed-user seams cleanly, and retire residual mixed bootstrap storage habits.
 
 ## Acceptance gates
 
