@@ -7,3 +7,14 @@ Current private package scope:
 
 Primary documentation entrypoint:
 - `.memory-bank/index.md`
+
+## Local verification
+
+Install dependencies and run the protected-branch baseline locally:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm check
+```
+
+`pnpm check` intentionally maps to the repo build baseline. Release publication remains handled by the controlled `Release Packages` workflow.

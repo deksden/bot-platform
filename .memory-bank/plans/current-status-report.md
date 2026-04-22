@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as framework extraction moves from planning into implementation.
-version: 0.28.0
+version: 0.29.0
 date: 2026-04-22
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.29.0
+    date: 2026-04-22
+    changes: Added the missing minimal protected-branch verification baseline for `bot-platform` by introducing a root `pnpm check` alias plus a `Verification` push/PR workflow, while leaving `Release Packages` focused on the accepted mainline release-readiness and publish path.
   - version: 0.28.0
     date: 2026-04-22
     changes: Closed Wave 2 in safe-mode repo state by materializing `@dd-bot-platform/core@0.2.0` through `changeset version`; the framework core is now extracted, broadened into the generic runtime-helper tranche, release-allowlisted, and versioned, while actual npm publication remains a mainline release operation rather than additional extraction work.
@@ -144,6 +147,9 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `@dd-bot-platform/core` has been versioned to `0.2.0` in repo state
   - the corresponding changelog entry is materialized
   - publish dry-run proof stays green on the controlled release path
+- minimal protected-branch verification baseline now also landed:
+  - root `pnpm check` alias for the repo build baseline
+  - `.github/workflows/ci.yml` provides the `Verification` push/PR check
 - Changesets/release workflow scaffolding for the first publishable framework packages
 - first published framework package versions:
   - `@dd-bot-platform/api-contract@0.2.0`

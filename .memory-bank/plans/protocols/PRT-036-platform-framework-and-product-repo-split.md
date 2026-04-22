@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.87.0
+version: 1.88.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.88.0
+    date: 2026-04-22
+    changes: Recorded wave 162: `seller-agent`, `docoved-agent`, and `bot-platform` now all have a minimal protected-branch verification baseline (`pnpm check` plus push/PR workflow), closing the current acceptance-gate CI gap without widening release workflows or reopening Wave 2 extraction scope.
   - version: 1.87.0
     date: 2026-04-22
     changes: Recorded wave 161: `@dd-bot-platform/core` is now materialized as release-ready versioned repo state `0.2.0`, so Wave 2 framework-core extraction is treated as closed in safe-mode repo state; the remaining publish step is now an accepted mainline release operation rather than additional extraction work.
@@ -2643,6 +2646,7 @@ Current status:
 - target-repo scenario hubs now explicitly distinguish repo-local acceptance anchors from still-unmigrated source-side `SCN/XE` ids;
 - `TR-01` explicit cross-repo traceability is complete for the current split stage;
 - repo-local core-family scenario docs are now landed across `seller-agent`, `docoved-agent`, and `bot-platform`, so the next code migration wave can name canonical target-repo spec/feature/scenario anchors for each moved family;
+- the three target repos now also have a minimal protected-branch verification baseline (`pnpm check` plus push/PR workflow), so the current bootstrap stage no longer relies on release workflows alone for CI gate coverage;
 - deeper repo-local doc migration still remains as later documentation depth, but the Wave 1B exit condition is now satisfied.
 
 ### Wave 2: Extract `bot-platform` framework core

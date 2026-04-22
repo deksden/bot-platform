@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "packageManager": "pnpm@10.23.0",
   "scripts": {
+    "check": "pnpm build",
     "build": "tsc -b tsconfig.build.json",
     "typecheck": "tsc -b tsconfig.build.json --pretty false",
     "clean": "find apps packages -type d -name dist -prune -exec rm -rf {} +",
