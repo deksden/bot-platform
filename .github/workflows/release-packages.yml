@@ -24,6 +24,8 @@ jobs:
           fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
+        with:
+          version: 10.23.0
 
       - uses: actions/setup-node@v4
         with:
@@ -37,13 +39,14 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Validate changeset state
-        run: pnpm changeset status
+      - name: Validate publishable versioned state
+        run: pnpm changeset:publish --dry-run
 
       - name: Note release workflow mode
         run: |
           echo "Release PR creation is not performed on push."
-          echo "The repository currently treats this workflow as release-readiness validation."
+          echo "This workflow treats only already-versioned repo state as publish-ready."
+          echo "Pending .changeset/*.md intent must be materialized with pnpm changeset version before publish."
 
   publish:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true'
@@ -54,6 +57,8 @@ jobs:
           fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
+        with:
+          version: 10.23.0
 
       - uses: actions/setup-node@v4
         with:
@@ -66,6 +71,9 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Validate publishable versioned state
+        run: pnpm changeset:publish --dry-run
 
       - name: Publish packages
         run: pnpm changeset:publish
