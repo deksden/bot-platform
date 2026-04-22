@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.89.0
+version: 1.90.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.90.0
+    date: 2026-04-22
+    changes: Recorded wave 165: Wave 3 is now materially closed in `seller-agent` repo state because the product repo carries the runnable app/package/DB contour with green local verification (`pnpm typecheck`, `pnpm check`), and the remaining work is now explicitly narrowed to deploy-rebind plus cleanup of temporary transition exceptions rather than basic repo bootstrap.
   - version: 1.89.0
     date: 2026-04-22
     changes: Recorded wave 163: Wave 2 is now closed in fully released form because the mainline `Release Packages` workflow was aligned to versioned-state publication and `@dd-bot-platform/core@0.2.0` was published from `bot-platform/main`; the next active work now moves from framework-core release closure toward product-facing Wave 3 adoption.
@@ -2709,6 +2712,11 @@ Expected outcome:
 - SellerAgent web app, server, workflows, and DB own one repo and one deployment chain;
 - SellerAgent Memory Bank becomes product SSoT.
 
+Current status after wave 165:
+- materially closed in repo state;
+- `seller-agent` now owns the runnable local app/package/DB contour and passes the accepted local verification baseline;
+- remaining work is operational follow-through: deploy/repo rebind, secret split follow-through, and cleanup of temporary compatibility seams.
+
 ### Wave 4: Land Docoved product repo
 
 Goal:
@@ -2789,9 +2797,9 @@ Expected outcome:
 - Result: `follow_up_needed`
 - Follow-up needed:
   - finalize dependency bridge strategy between `bot-platform` and product repos;
-  - convert phase-1 and phase-2 findings into the next normative revision of the protocol task register and gates;
-  - complete Wave `1B` repo-local truth population and source-doc migration;
-  - perform package-by-package extraction planning for `api-contract`, `client-sdk`, `core`, `db`, and `scenario-runner`;
+  - complete operational follow-through after SellerAgent Wave 3 repo-state closure: GitHub/Vercel rebind, secret ownership split, and hosted acceptance under the product repo;
+  - clean up Wave 3 transition exceptions where possible: shrink `shared`, remove temporary product-local adapters after upstream package seams catch up, and keep boundary docs synchronized;
+  - continue later product-repo waves for Docoved, CI/CD separation, and mixed-source retirement;
   - convert current mixed-repo hubs into durable transition stubs as target-repo canonical docs take over.
 
 ## Memory Bank impact
