@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.86.0
+version: 1.87.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.87.0
+    date: 2026-04-22
+    changes: Recorded wave 161: `@dd-bot-platform/core` is now materialized as release-ready versioned repo state `0.2.0`, so Wave 2 framework-core extraction is treated as closed in safe-mode repo state; the remaining publish step is now an accepted mainline release operation rather than additional extraction work.
   - version: 1.86.0
     date: 2026-04-22
     changes: Recorded wave 160: Wave 2 in `bot-platform` advanced as a broader generic runtime-helper tranche by adding `pipeline-registry` and `provider-stage` primitives alongside `provider-result`, explicitly keeping concrete product registries/adapters local, adding `@dd-bot-platform/core` to the controlled publish allowlist, and hardening `prepack` with a clean-build guard.
@@ -2675,6 +2678,10 @@ Current status:
   - generic pipeline-registry primitives now live in `bot-platform/packages/core/src/runtime/pipeline-registry.ts`;
   - generic provider-stage vocabulary and adapter-registry primitives now live in `bot-platform/packages/core/src/runtime/provider-stage.ts`;
   - the tranche explicitly excludes concrete product pipeline catalogs, concrete provider adapters, product DTO builders, and product compatibility glue, which remain local to the product repos or the mixed repo until later adoption waves.
+- the extracted framework-core package is now also materialized in release-ready versioned repo state:
+  - `@dd-bot-platform/core` now sits at `0.2.0` after `changeset version`;
+  - the broader helper tranche is therefore no longer only pending release intent, but concrete versioned package state in git;
+  - in the accepted safe-mode path, this closes Wave 2 extraction work, while actual npm publication remains an operational release action on the mainline flow.
 
 Current extraction-design baseline:
 - package/runtime/data/host/scenario/shared seams are now mapped for `core`, `api-contract`, `client-sdk`, `db`, `server`, `workflow`, `scenario-runner`, and `shared`;
