@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.94.0
+version: 1.95.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -100,6 +100,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.95.0
+    date: 2026-04-22
+    changes: Recorded wave 170: Wave 6 is now materially advanced but not closed. Canonical Docoved operator/deploy script ownership moved into `docoved-agent`, `sales-agent` now keeps only transition wrappers for the migrated Docoved script surface, and the remaining mixed-source retirement tail is explicitly narrowed to legacy `SCN-187`/scenario-runner bridging plus broader shared-admin/auth residue.
   - version: 1.94.0
     date: 2026-04-22
     changes: Recorded wave 169: Wave 5 is now closed for live owner-side GitHub/Vercel/npm rebind because SellerAgent Vercel projects are linked to `deksden/seller-agent` with verified `develop`/`main` branch mapping, Docoved API projects are rebound to `apps/api` under the manual-only `docoved-agent` contour, and the remaining mixed bootstrap/operator inventory is now treated only as explicit transition debt for later retirement rather than as open live ownership drift.
@@ -927,6 +930,13 @@ Review status:
   - `packages/core/src/index.ts` now re-exports `buildDocovedDocumentMachineLocator`, `buildDocovedResolvedSourceRefs`, `createDocovedDocumentLevelSourceRef`, and `createDocovedResolvedSourceRef` from `@docoved-agent/sa-docoved@0.1.10`;
   - `@sales-agent/core` `typecheck` and `build`, plus `SCN-215`, are green on the cutover;
 - wave-83 synthesis is recorded in `.tasks/prt-036-implementation-wave-83-2026-04-21/summary/PRT-036-implementation-wave-83-synthesis.md`;
+- implementation stage: wave 170 completed as Wave 6 transition-hardening;
+- canonical Docoved deploy/bootstrap/proof scripts now live in `docoved-agent`, and `sales-agent` keeps those entrypoints only as explicit thin transition wrappers/forwarders;
+- `sales-agent/packages/dv-admin` is removed, while mixed-root `dv-admin` now proxies to `docoved-agent`;
+- the remaining mixed-source retirement tail is now explicit instead of hidden:
+  - `docoved:verify:beta:api-seeded` remains bridged through `sales-agent` because `SCN-187` still depends on the mixed `scenario-runner` contour;
+  - broader shared-admin/auth/observed-user cleanup and final mixed bootstrap residue retirement still remain later follow-up;
+- wave-170 synthesis is recorded in `.tasks/prt-036-implementation-wave-170-2026-04-22/summary/PRT-036-implementation-wave-170-synthesis.md`;
 - the next protocol revision pass must focus on:
   - choosing the next bounded local cleanup tail after the completed citation-resolution consumer waves;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
@@ -2776,11 +2786,12 @@ Expected outcome:
 - source-side shared or obsolete secrets are rotated/decommissioned from the mixed contour;
 - simpler release management without repo-level deployment gymnastics.
 
-Current status after wave 169:
+Current status after wave 170:
 - closed for live owner-side repo/Vercel/npm rebind;
 - SellerAgent now has remote `develop`, live Vercel linkage to `deksden/seller-agent`, and explicit `develop`/`main` beta/prod branch mapping across web/server/workflow projects;
 - Docoved now keeps the intended manual-only live contour in `deksden/docoved-agent`, with `link = null` preserved on live web/api projects and API root directories rebound from historical `apps/server` to repo-local `apps/api`;
 - required owner-side npm release secrets are verified in both product repos;
+- canonical Docoved operator/deploy/bootstrap scripts now live in `docoved-agent`, while `sales-agent` exposes them only through explicit transition wrappers and forwarders;
 - remaining mixed bootstrap/operator inventory is no longer treated as live ownership drift and is now only explicit transition debt for Wave 6 mixed-source retirement.
 
 ### Wave 6: Mixed-source retirement
@@ -2791,6 +2802,11 @@ Goal:
 Expected outcome:
 - no active product development depends on the old mixed layout;
 - residual source either migrates, archives, or is intentionally deleted.
+
+Current status:
+- materially advanced, not closed;
+- `sales-agent` no longer owns the migrated Docoved script surface or `dv-admin` package implementation;
+- the remaining open tail is intentionally narrow: the legacy seeded `SCN-187` smoke still bridges through the mixed `scenario-runner` contour, and broader shared-admin/auth/bootstrap residue remains later cleanup.
 
 ## Acceptance gates
 
