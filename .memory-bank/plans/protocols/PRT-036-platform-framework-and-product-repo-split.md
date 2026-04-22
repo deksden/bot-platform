@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.92.0
+version: 1.93.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -20,6 +20,12 @@ related_files:
   - .memory-bank/spec/operations/production-rollout-runbook.md
   - .memory-bank/spec/operations/hosted-beta-acceptance-contract.md
   - .memory-bank/spec/engineering/delivery-standards.md
+  - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/plans/current-status-report.md
+  - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/operations/deployment-architecture.md
+  - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/operations/repo-rebind-and-secret-ownership.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/plans/current-status-report.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/operations/docoved-hosted-deployment-topology.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/operations/docoved-repo-rebind-and-secret-ownership.md
   - .memory-bank/plans/adr/ADR-001-private-registry-bridge-for-product-repos.md
   - .memory-bank/plans/adr/ADR-002-public-npm-bridge-for-framework-packages.md
   - .tasks/prt-036-protocol-review-2026-04-19/summary/PRT-036-review-synthesis.md
@@ -94,6 +100,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.93.0
+    date: 2026-04-22
+    changes: Recorded wave 168: Wave 5 now has canonical owner-side operations truth in `seller-agent` and `docoved-agent` through explicit repo-rebind/secret-ownership docs plus status/runbook sync, while live repo/Vercel/secret rebind and source-side decommission remain explicit follow-up rather than implied closure.
   - version: 1.92.0
     date: 2026-04-22
     changes: Recorded wave 167: Wave 4 is now closed in `docoved-agent` repo state because the target repo owns the Docoved API/runtime/store/prompt/deploy source contour with green local verification; the remaining explicit follow-up is now narrowed to shared-admin/auth/operator transition exceptions and live GitHub/Vercel/secret rebind in Wave 5 rather than unfinished product-code ownership.
@@ -499,6 +508,14 @@ Implication:
 - the protocol must now drive controlled content migration and repo-local truth actualization;
 - the next blocker is no longer "create Memory Bank skeletons";
 - the next blocker is "fill those Memory Banks with correct repo-owned truth and bind features to scenarios before code extraction".
+
+As of 2026-04-22, the program has moved beyond repo bootstrap:
+- SellerAgent Wave 3 is closed in repo state;
+- Docoved Wave 4 is closed in repo state;
+- Wave 5 now has owner-side operational SSoT in the product repos:
+  - `seller-agent` owns its deployment topology plus repo-rebind/secret-ownership truth
+  - `docoved-agent` owns its hosted topology plus repo-rebind/secret-ownership truth
+- live GitHub/Vercel/secret rebind, source-side decommission, and the remaining transition exceptions are still follow-up rather than closed state.
 
 Review status:
 - stage of plan elaboration: phase 1 completed;
@@ -1639,6 +1656,12 @@ The protocol must maintain an explicit `repo rebind and deploy ownership matrix`
 
 The protocol must not rely on "we will remember how this is wired later".
 
+Current owner-side evidence for this matrix now lives in:
+- `seller-agent/.memory-bank/spec/operations/deployment-architecture.md`
+- `seller-agent/.memory-bank/spec/operations/repo-rebind-and-secret-ownership.md`
+- `docoved-agent/.memory-bank/spec/operations/docoved-hosted-deployment-topology.md`
+- `docoved-agent/.memory-bank/spec/operations/docoved-repo-rebind-and-secret-ownership.md`
+
 ### GitHub and hosting rebind scope
 
 For repo/hosting ownership, the matrix must explicitly cover:
@@ -2750,6 +2773,13 @@ Expected outcome:
 - source-side shared or obsolete secrets are rotated/decommissioned from the mixed contour;
 - simpler release management without repo-level deployment gymnastics.
 
+Current status after wave 168:
+- operationally active, not closed;
+- owner-side deployment/topology SSoT now exists in both product repos;
+- SellerAgent owner docs now record the canonical target repo `deksden/seller-agent`, Vercel Git-driven deploy model, and the still-open live repo/secret rebind tail;
+- Docoved owner docs now record the canonical target repo `deksden/docoved-agent`, manual-only deploy policy, the still-open API root-path rebind from historical `apps/server` to repo-local `apps/api`, and the remaining mixed verification/operator transition packs;
+- live rebind, required secret relocation/rotation, and source-side decommission remain explicit follow-up rather than implied by repo-state closure.
+
 ### Wave 6: Mixed-source retirement
 
 Goal:
@@ -2800,6 +2830,7 @@ Expected outcome:
   - secret inventory ownership and target locations are explicit;
   - required rotations/decommissions are complete or explicitly time-boxed as transition exceptions;
   - rollback and decommission evidence is recorded.
+- No owner-side doc sync by itself is considered proof that live repo/project/secret ownership is already rebound.
 - No protocol run is considered operationally closed until:
   - reusable lessons learned / insights have been captured when needed;
   - accepted long-lived findings have been folded into the owning SSoT before closeout.
@@ -2809,8 +2840,8 @@ Expected outcome:
 - Result: `follow_up_needed`
 - Follow-up needed:
   - finalize dependency bridge strategy between `bot-platform` and product repos;
-  - complete operational follow-through after SellerAgent Wave 3 repo-state closure: GitHub/Vercel rebind, secret ownership split, and hosted acceptance under the product repo;
-  - execute Docoved Wave 5 from the new honest repo-state closure: migrate or retire the remaining shared-admin/auth/operator transition exceptions, rebind GitHub/Vercel/secrets from the owning repo, and keep hosted proof explicit rather than implied by repo-state code moves;
+  - complete SellerAgent Wave 5 from the owner-side docs now landed in `seller-agent`: live GitHub/Vercel rebind, secret ownership split, and hosted acceptance under the product repo;
+  - complete Docoved Wave 5 from the owner-side docs now landed in `docoved-agent`: live Vercel/root-path/secret follow-through, mixed verification/operator-pack migration or explicit exception handling, and retirement or framework reclassification of the remaining shared-admin/auth bridges;
   - clean up Wave 3 transition exceptions where possible: shrink `shared`, remove temporary product-local adapters after upstream package seams catch up, and keep boundary docs synchronized;
   - continue later product-repo waves for Docoved, CI/CD separation, and mixed-source retirement;
   - convert current mixed-repo hubs into durable transition stubs as target-repo canonical docs take over.
