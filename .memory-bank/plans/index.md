@@ -2,8 +2,8 @@
 file: .memory-bank/plans/index.md
 description: 'Plans hub для bot-platform: framework epics, ADRs, protocols, current status и verification planning.'
 purpose: Читать для понимания delivery contour `bot-platform`, не смешивая framework delivery с SellerAgent и Docoved product waves.
-version: 0.1.0
-date: 2026-04-19
+version: 0.2.0
+date: 2026-04-22
 status: DRAFT
 tags: [plans, bot-platform, adr, epics, protocols, delivery]
 parent: .memory-bank/index.md
@@ -14,6 +14,9 @@ children:
   - protocols/index.md
   - verification-matrix.md
 history:
+  - version: 0.2.0
+    date: 2026-04-22
+    changes: Updated the verification-matrix navigation wording to match the now split-aware feature-group and scenario-anchor planning surfaces.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial draft plans hub for the future bot-platform Memory Bank under PRT-036.
@@ -44,7 +47,7 @@ history:
 - [Epic catalog](epics/index.md): platform-owned `EP-*` и их feature breakdown.
 - [Current status report](current-status-report.md): краткий snapshot, что уже materialized в `bot-platform`, а что пока только planned.
 - [Protocols hub](protocols/index.md): execution docs для migration waves и boundary cleanup.
-- [Verification matrix](verification-matrix.md): map `EP/FT -> SCN` для framework acceptance.
+- [Verification matrix](verification-matrix.md): map `feature_group -> contract anchors -> scenario anchors` для framework acceptance (split-aware).
 
 ## Must-exist docs immediately
 

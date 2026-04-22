@@ -2,12 +2,15 @@
 file: .memory-bank/plans/epics/framework-feature-registry.md
 description: 'Framework feature registry for bot-platform: framework-only planning surface.'
 purpose: Define stable framework feature groups with explicit scope, exclusions, ownership language, and primary-doc anchors under PRT-036.
-version: 0.2.0
-date: 2026-04-20
+version: 0.3.0
+date: 2026-04-22
 status: ACTIVE
 tags: [features, registry, bot-platform, framework, planning]
 parent: .memory-bank/plans/epics/index.md
 history:
+  - version: 0.3.0
+    date: 2026-04-22
+    changes: Tightened the planning anchors to match landed security/scenario specs and extracted package reality, removing residual runtime-hub-only pointers for auth and reducing mixed-repo ambiguity.
   - version: 0.2.0
     date: 2026-04-20
     changes: Actualized feature groups, aligned naming with framework feature-area boundaries, added explicit framework vs product exclusions (PRT-036), replaced placeholder primary-doc pointers with real repo-local doc anchors, and promoted the registry to active planning use.
@@ -31,12 +34,12 @@ Authority:
 | feature_group | framework role | primary docs (current anchors) | status note |
 | --- | --- | --- | --- |
 | `runtime-kernel` | framework owner | [Runtime hub](../../spec/runtime/index.md) | defined; runtime seams are still mixed in source until extraction |
-| `auth-framework` | framework owner (contracts + extension points) | [Runtime hub](../../spec/runtime/index.md) | defined; product repos own tables/migrations/authority projections |
+| `auth-framework` | framework owner (contracts + extension points) | [Security hub](../../spec/security/index.md) | defined; product repos own tables/migrations/authority projections |
 | `command-framework` | framework owner (envelope + primitives) | [Runtime hub](../../spec/runtime/index.md) | defined; product repos own actual commands and permission mapping |
 | `workflow-framework` | framework owner (contracts + helpers) | [Runtime hub](../../spec/runtime/index.md) | defined; product repos own workflow hosts and business steps |
 | `client-contracts` | framework owner | [Client API hub](../../spec/client-api/index.md) | defined; product repos own product namespaces and operations |
 | `persistence-interfaces` | framework owner (contracts only) | [Runtime hub](../../spec/runtime/index.md) | defined; product repos own concrete DB schema/migrations/runtime wiring |
-| `scenario-system` | framework owner | [Scenario specs hub](../../spec/scenarios/index.md), [Scenarios hub](../../scenarios/index.md) | defined; product repos own product acceptance and e2e journeys |
+| `scenario-system` | framework owner | [Scenario specs hub](../../spec/scenarios/index.md), [Scenarios hub](../../scenarios/index.md) | defined; extracted package (`@dd-bot-platform/scenario-system`) is already published; product repos own product acceptance and e2e journeys |
 | `support-packages` | framework owner (product-agnostic only) | [Repo structure](../../spec/project/repo-structure.md) | defined; package extraction is still pending |
 | `documentation-and-mbb-standards` | upstream canonical (mirrored to product repos) | [MBB index](../../mbb/index.md), [Operations hub](../../spec/operations/index.md) | stable; governs cross-repo authoring discipline |
 
@@ -79,7 +82,9 @@ Explicit exclusions (product-owned):
 - deploy-time wiring and secrets.
 
 Primary docs:
-- [Runtime hub](../../spec/runtime/index.md)
+- [Security hub](../../spec/security/index.md)
+- [Auth core](../../spec/security/auth-core.md)
+- [Auth and access](../../spec/security/auth-and-access.md)
 - [PRT-036](../protocols/PRT-036-platform-framework-and-product-repo-split.md)
 
 Not framework-owned yet (until extraction):

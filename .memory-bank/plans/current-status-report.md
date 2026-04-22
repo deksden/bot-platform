@@ -1,13 +1,16 @@
 ---
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
-purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.22.0
+purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as framework extraction moves from planning into implementation.
+version: 0.23.0
 date: 2026-04-22
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.23.0
+    date: 2026-04-22
+    changes: Actualized the framework planning/scenario truth for Wave 1B: verification matrix is now aligned to the feature registry and extracted packages, scenario matrix anchors reflect the landed scenario-system/hosted-beta specs, the scenario hubs no longer read as bootstrap placeholders, and the first repo-local `@dd-bot-platform/core` extraction slice is now landed.
   - version: 0.22.0
     date: 2026-04-22
     changes: Closed framework architecture/operations waves 151-152 by landing repo-local architecture guardrails plus remaining container contracts (`core`, `server`, `db-and-projections`, `web-and-cli-surfaces`) and the framework control-plane/evaluation/observability packet (`control-plane-configuration-and-observability-surfaces`, `evaluation-plane-and-judge-runtime`, `observability-and-incident-diagnostics`) with synced architecture/operations/spec hubs.
@@ -93,11 +96,14 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - npm package release runbook
 - initial architecture, project, and planning skeleton docs
 - framework epic map and feature registry
-- framework scenario matrix and verification matrix
+- framework scenario matrix (actualized anchors) and verification matrix (actualized inventory)
+- scenario navigation hubs (`scenarios/`, `scenarios/contracts/`, `scenarios/hosted/`, `scenarios/by-epic/`) are no longer bootstrap placeholders
 - canonical `PRT-036` copy in `bot-platform`
 - first publish-ready framework package metadata for:
   - `@dd-bot-platform/api-contract`
   - `@dd-bot-platform/scenario-system`
+- first repo-local Wave 2 core extraction slice:
+  - `@dd-bot-platform/core@0.1.0` in `packages/core`
 - Changesets/release workflow scaffolding for the first publishable framework packages
 - first published framework package versions:
   - `@dd-bot-platform/api-contract@0.2.0`
@@ -198,21 +204,31 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
 - moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
 - remaining framework scenario docs/catalog beyond the now-landed scenario-system/evidence and hosted-beta execution baseline
-- actual framework code extraction
+- broader framework code extraction beyond the first contract-first `packages/core` slice
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 
 ## Current blockers before broader code extraction
 
 - broader namespace split for `client-sdk` and later framework packages
-- `packages/core` seam extraction map
+- next `packages/core` follow-on seams beyond the now-landed execution-contract vocabulary
 - workflow host code/runtime split design
 - persistence interface vs product store split
 
 ## Immediate next document wave
 
-1. land remaining framework spec families:
-   - remaining `CB-*` contracts not yet landed in repo-local form
-   - remaining framework runtime/security/client-api/architecture/scenario docs still only present in the mixed repo beyond the now-landed packets
-2. land framework planning docs:
+1. convert planning anchors into the first repo-local framework scenario docs:
+   - contract scenarios for extracted bridge slices (`api-contract`, `scenario-system`) and the core framework runtime/security contracts that are already landed
+   - hosted preflight/pattern scenarios that exercise the hosted-beta execution model without embedding product acceptance overlays
+2. land the next framework contract/spec docs that unblock gated feature groups without importing product truth:
+   - workflow framework contract spec (host/start/callback/durability vocabulary)
+   - command framework contract spec (envelope/registry primitives; no channel/product commands)
+3. continue PRT-036 planning migration:
+   - remaining `CB-*` contract docs not yet landed in repo-local form
    - follow-up split child protocols and ADR decisions after `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
-3. continue moving clearly framework-owned scenario/planning source docs into this repo beyond the landed scenario, operations, and protocol packets
+
+## Immediate next implementation wave
+
+1. extend `@dd-bot-platform/core` only through framework-safe seams:
+   - result/trace abstractions that do not import product DTOs
+   - adapter boundaries instead of copied SellerAgent or Docoved request models
+2. prepare the next runtime/workflow split after the now-landed contract vocabulary slice

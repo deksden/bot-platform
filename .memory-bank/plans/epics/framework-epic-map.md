@@ -1,13 +1,16 @@
 ---
 file: .memory-bank/plans/epics/framework-epic-map.md
-description: 'Initial framework epic map for bot-platform.'
-purpose: Define which epic families belong to the framework repo after the split and which must stay in product repos.
-version: 0.1.0
-date: 2026-04-19
-status: DRAFT
+description: 'Framework epic map for bot-platform.'
+purpose: Define the canonical framework epic families, their ownership boundaries, and how they trace into the framework feature/scenario layer after the split.
+version: 0.2.0
+date: 2026-04-22
+status: ACTIVE
 tags: [epics, bot-platform, framework, planning]
 parent: .memory-bank/plans/epics/index.md
 history:
+  - version: 0.2.0
+    date: 2026-04-22
+    changes: Removed residual mixed-repo ambiguity from the epic ownership notes, clarified the Docoved epic boundary, and added explicit traceability pointers to the feature/scenario registries.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial framework epic map created from the mixed source epic catalog and PRT-036 ownership rules.
@@ -20,6 +23,11 @@ history:
 An epic belongs to `bot-platform` when its primary output is a reusable framework capability, shared contract, or shared verification system.
 
 An epic does not belong here when its primary output is SellerAgent or Docoved product behavior.
+
+Traceability:
+- feature-level ownership lives in [Framework feature registry](framework-feature-registry.md);
+- scenario-level ownership lives in [Scenario matrix](../../scenarios/scenario-matrix.md).
+- verification-level anchors live in [Verification matrix](../verification-matrix.md).
 
 ## Primary framework epic families
 
@@ -76,8 +84,8 @@ Keep here as the main framework architecture epic.
 
 ### `EP-023`
 
-Does not belong here as product truth.
-Only generic framework contracts extracted out of the Docoved delivery may later appear here as separate framework docs or split-off features.
+`EP-023` is Docoved product truth and belongs to `docoved-agent` per `PRT-036`.
+Only product-agnostic contracts that are proven multi-consumer and extracted behind an explicit seam may later re-enter `bot-platform` as separate framework features (not as a direct re-home of Docoved acceptance).
 
 ## Explicit non-framework epic families
 
@@ -103,3 +111,8 @@ This belongs to `docoved-agent` as product truth:
 
 This epic map should later grow into:
 - `epic -> feature registry -> contract docs -> scenario families`.
+
+Current repo state already supports that chain at the planning level:
+- epic ownership is defined here;
+- feature groups are canonicalized in the feature registry;
+- scenario and verification anchors now live in repo-local matrices.

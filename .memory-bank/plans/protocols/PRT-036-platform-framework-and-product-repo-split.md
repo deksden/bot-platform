@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.81.0
+version: 1.82.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.82.0
+    date: 2026-04-22
+    changes: Recorded wave 156: target repos now have actualized repo-local epic/feature/scenario/verification truth (`seller-agent`, `bot-platform`, and `docoved-agent` planning/scenario layers no longer rely on placeholder framing), and Wave 2 is now materially started by the first real `@dd-bot-platform/core` extraction slice in `bot-platform`.
   - version: 1.81.0
     date: 2026-04-22
     changes: Recorded waves 148-154: the next target-repo documentation tranche is now landed, with SellerAgent guide/protocol packets migrated into `seller-agent`, framework architecture/operations packets migrated into `bot-platform`, Docoved runtime semantic-publication plus evidence/binding packets migrated into `docoved-agent`, and Wave 1B remaining-next wording narrowed accordingly.
@@ -2617,8 +2620,9 @@ Exit condition:
 Current status:
 - actualized feature registries are landed in all target repos;
 - scenario ownership and verification matrices are rebound to those registries;
+- target-repo scenario hubs now explicitly distinguish repo-local acceptance anchors from still-unmigrated source-side `SCN/XE` ids;
 - `TR-01` explicit cross-repo traceability is complete for the current split stage;
-- remaining work in Wave 1B is deeper repo-local doc migration beyond the newly landed SellerAgent source-doc/guides/protocol packets, the newly landed framework architecture/operations packets, and the newly landed Docoved runtime packets, so broad hub anchors can later be replaced with detailed child specs.
+- remaining work in Wave 1B is now narrower: deeper repo-local doc migration and the first real repo-local scenario-doc families still need to replace matrix-only anchors where those detailed docs do not yet exist.
 
 ### Wave 2: Extract `bot-platform` framework core
 
@@ -2641,6 +2645,10 @@ Current status:
 - final design tranche is also complete for:
   - `X-07` `packages/scenario-runner`
   - `X-08` `packages/shared`
+- the first real Wave 2 extraction slice is now landed:
+  - `bot-platform/packages/core` now materializes `@dd-bot-platform/core` as the first contract-first framework kernel package;
+  - the landed slice is limited to framework-safe execution contracts, builders, and kernel dispatch helpers;
+  - product DTOs, reply envelopes, and product-specific request/result adapters remain intentionally outside the framework package for later bounded waves.
 
 Current extraction-design baseline:
 - package/runtime/data/host/scenario/shared seams are now mapped for `core`, `api-contract`, `client-sdk`, `db`, `server`, `workflow`, `scenario-runner`, and `shared`;

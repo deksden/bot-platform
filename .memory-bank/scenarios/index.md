@@ -2,8 +2,8 @@
 file: .memory-bank/scenarios/index.md
 description: 'Framework scenarios hub for bot-platform.'
 purpose: Use as the repo-local navigation hub for framework-owned verification scenarios, contract checks, and shared evidence rules.
-version: 0.1.0
-date: 2026-04-19
+version: 0.2.0
+date: 2026-04-22
 status: DRAFT
 tags: [scenarios, bot-platform, framework, verification]
 parent: .memory-bank/index.md
@@ -12,6 +12,9 @@ children:
   - contracts/index.md
   - hosted/index.md
 history:
+  - version: 0.2.0
+    date: 2026-04-22
+    changes: Removed bootstrap placeholder wording and aligned the scenarios hub with the landed scenario-system/hosted-beta specs plus the scenario/verification matrices as the current Wave 1B anchors.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial framework scenarios hub created during the PRT-036 Memory Bank bootstrap.
@@ -38,6 +41,17 @@ It is not for:
 - [Contract scenarios](contracts/index.md): API, auth, workflow, runtime, and persistence contract verification.
 - [Hosted scenarios](hosted/index.md): shared hosted verification patterns and framework acceptance anchors.
 - [Scenario matrix](scenario-matrix.md): initial capability-to-scenario ownership map for the framework repo.
+- [Verification matrix](../plans/verification-matrix.md): capability-to-contract-to-scenario anchor inventory for the framework repo.
+
+## Current Wave 1B posture
+
+At this stage, the framework repo has canonical scenario-system and hosted-beta execution specs, plus planning matrices.
+Most concrete `SCN-*` scenario docs are still pending.
+
+Until the runnable catalog lands:
+- use the spec hubs under `spec/scenarios/` and `spec/runtime/` as canonical contract anchors;
+- use [Scenario matrix](scenario-matrix.md) and [Verification matrix](../plans/verification-matrix.md) as the planning and traceability surfaces;
+- treat mixed-repo scenario IDs as source-side migration anchors only.
 
 ## First wave outcome
 
