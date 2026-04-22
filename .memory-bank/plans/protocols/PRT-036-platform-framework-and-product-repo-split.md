@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.93.0
+version: 1.94.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -100,6 +100,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.94.0
+    date: 2026-04-22
+    changes: Recorded wave 169: Wave 5 is now closed for live owner-side GitHub/Vercel/npm rebind because SellerAgent Vercel projects are linked to `deksden/seller-agent` with verified `develop`/`main` branch mapping, Docoved API projects are rebound to `apps/api` under the manual-only `docoved-agent` contour, and the remaining mixed bootstrap/operator inventory is now treated only as explicit transition debt for later retirement rather than as open live ownership drift.
   - version: 1.93.0
     date: 2026-04-22
     changes: Recorded wave 168: Wave 5 now has canonical owner-side operations truth in `seller-agent` and `docoved-agent` through explicit repo-rebind/secret-ownership docs plus status/runbook sync, while live repo/Vercel/secret rebind and source-side decommission remain explicit follow-up rather than implied closure.
@@ -2773,12 +2776,12 @@ Expected outcome:
 - source-side shared or obsolete secrets are rotated/decommissioned from the mixed contour;
 - simpler release management without repo-level deployment gymnastics.
 
-Current status after wave 168:
-- operationally active, not closed;
-- owner-side deployment/topology SSoT now exists in both product repos;
-- SellerAgent owner docs now record the canonical target repo `deksden/seller-agent`, Vercel Git-driven deploy model, and the still-open live repo/secret rebind tail;
-- Docoved owner docs now record the canonical target repo `deksden/docoved-agent`, manual-only deploy policy, the still-open API root-path rebind from historical `apps/server` to repo-local `apps/api`, and the remaining mixed verification/operator transition packs;
-- live rebind, required secret relocation/rotation, and source-side decommission remain explicit follow-up rather than implied by repo-state closure.
+Current status after wave 169:
+- closed for live owner-side repo/Vercel/npm rebind;
+- SellerAgent now has remote `develop`, live Vercel linkage to `deksden/seller-agent`, and explicit `develop`/`main` beta/prod branch mapping across web/server/workflow projects;
+- Docoved now keeps the intended manual-only live contour in `deksden/docoved-agent`, with `link = null` preserved on live web/api projects and API root directories rebound from historical `apps/server` to repo-local `apps/api`;
+- required owner-side npm release secrets are verified in both product repos;
+- remaining mixed bootstrap/operator inventory is no longer treated as live ownership drift and is now only explicit transition debt for Wave 6 mixed-source retirement.
 
 ### Wave 6: Mixed-source retirement
 
@@ -2840,10 +2843,8 @@ Expected outcome:
 - Result: `follow_up_needed`
 - Follow-up needed:
   - finalize dependency bridge strategy between `bot-platform` and product repos;
-  - complete SellerAgent Wave 5 from the owner-side docs now landed in `seller-agent`: live GitHub/Vercel rebind, secret ownership split, and hosted acceptance under the product repo;
-  - complete Docoved Wave 5 from the owner-side docs now landed in `docoved-agent`: live Vercel/root-path/secret follow-through, mixed verification/operator-pack migration or explicit exception handling, and retirement or framework reclassification of the remaining shared-admin/auth bridges;
   - clean up Wave 3 transition exceptions where possible: shrink `shared`, remove temporary product-local adapters after upstream package seams catch up, and keep boundary docs synchronized;
-  - continue later product-repo waves for Docoved, CI/CD separation, and mixed-source retirement;
+  - continue later product-repo waves for Docoved and mixed-source retirement, especially the eventual migration/retirement of mixed executable operator and verification packs plus residual bootstrap inventory;
   - convert current mixed-repo hubs into durable transition stubs as target-repo canonical docs take over.
 
 ## Memory Bank impact
