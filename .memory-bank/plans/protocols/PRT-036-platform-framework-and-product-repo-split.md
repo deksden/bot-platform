@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.99.0
+version: 2.0.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -100,6 +100,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 2.0.0
+    date: 2026-04-22
+    changes: Recorded wave 175 closure for the active Docoved local split tail: `docoved-agent` now owns the minimal auth/conversation seam end-to-end through repo-local DB exports plus fresh migration foundations, and the canonical local Docoved verification command is no longer a mixed `@sales-agent/scenario-runner` bridge but an owner-side proof pack. Protocol guidance is correspondingly narrowed: broader historical `SCN-*` migration remains later product follow-up, but the mixed local-runner blocker is closed and no full shared runnable-local scenario-engine extraction is required for honest repo-split closure.
   - version: 1.99.0
     date: 2026-04-22
     changes: Recorded wave 174 audit: the remaining Docoved shared auth/observed-user blocker is now mapped as three concrete script clusters (runtime/bootstrap admin, Telegram observed-user/command projection, and conversation-readback proofs), so the next honest follow-up is the minimal Docoved-needed auth/conversation seam rather than a vague Telegram-helper cleanup wave.
@@ -2818,7 +2821,7 @@ Expected outcome:
 Current status:
 - closed for active product-surface ownership;
 - `sales-agent` no longer owns the migrated Docoved script surface, the seeded `SCN-187` beta smoke, or the runtime implementation behind `packages/dv-admin`;
-- remaining follow-up is no longer an owner-side Wave 6 blocker: wave 172 confirmed it was deeper than dead import-path cleanup alone, wave 173 removed the bounded corpus-runner harness defect, and wave 174 then mapped the next auth/observed-user blocker into three concrete Docoved script clusters. The later work that still remains is now explicitly limited to extracting the shared runnable-local scenario framework contour, landing the minimal Docoved-needed auth/conversation seam for those script clusters, localizing the remaining Docoved Telegram/operator helpers without reviving mixed `apps/server` coupling, and retiring residual mixed bootstrap storage habits.
+- remaining follow-up is no longer an owner-side Wave 6 blocker: wave 172 confirmed it was deeper than dead import-path cleanup alone, wave 173 removed the bounded corpus-runner harness defect, wave 174 mapped the next auth/observed-user blocker into three concrete Docoved script clusters, and wave 175 then closed the active local tail by landing repo-local auth/conversation seam ownership plus an owner-side `docoved:verify:local` proof pack. The later work that still remains is now limited to optional cleanup of older Docoved Telegram/operator proof scripts that still reference dead historical helper paths, deeper owner-side migration of historical `SCN-*` families where valuable, and retirement of residual mixed bootstrap storage habits.
 
 ## Acceptance gates
 
