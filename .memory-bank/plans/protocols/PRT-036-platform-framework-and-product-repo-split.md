@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.84.0
+version: 1.85.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.85.0
+    date: 2026-04-22
+    changes: Recorded wave 159: Wave 2 in `bot-platform` advanced with a third real `@dd-bot-platform/core` helper slice for provider-result envelope normalization and error metadata extraction, the next mixed consumer proof was narrowed to `sales-agent` `research-workflow.ts`, and tarball verification exposed then corrected a stale-`dist` packaging tail before commit.
   - version: 1.84.0
     date: 2026-04-22
     changes: Recorded wave 158: Wave 1B is now materially closed, with core-family repo-local scenario anchors landed across `seller-agent`, `docoved-agent`, and `bot-platform`, missing framework workflow/command contract docs landed in `bot-platform`, and mixed-repo transition-routing tightened in `sales-agent`.
@@ -2661,6 +2664,10 @@ Current status:
   - `bot-platform/packages/core` now materializes `@dd-bot-platform/core` as the first contract-first framework kernel package;
   - the landed slice is limited to framework-safe execution contracts, builders, and kernel dispatch helpers;
   - product DTOs, reply envelopes, and product-specific request/result adapters remain intentionally outside the framework package for later bounded waves.
+- the next follow-on Wave 2 helper slices are now landed as well:
+  - generic execution-result helpers now live in `bot-platform/packages/core/src/runtime/execution-result.ts`;
+  - generic provider-result envelope helpers now live in `bot-platform/packages/core/src/runtime/provider-result.ts`;
+  - these helpers normalize result/trace/provider metadata contours without pulling provider adapters, prompt catalogs, or product request models into framework ownership.
 
 Current extraction-design baseline:
 - package/runtime/data/host/scenario/shared seams are now mapped for `core`, `api-contract`, `client-sdk`, `db`, `server`, `workflow`, `scenario-runner`, and `shared`;

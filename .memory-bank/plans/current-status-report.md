@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as framework extraction moves from planning into implementation.
-version: 0.25.0
+version: 0.26.0
 date: 2026-04-22
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.26.0
+    date: 2026-04-22
+    changes: Advanced Wave 2 with a third real `@dd-bot-platform/core` slice for provider-result envelope helpers (`runtime/provider-result.ts`), keeping the move inside result/trace semantics rather than widening prematurely into provider adapters or pipeline registries.
   - version: 0.25.0
     date: 2026-04-22
     changes: Closed the remaining obvious Wave 1B framework contract/scenario gap by landing repo-local scenario docs (`SCN-012`, `SCN-041`, `SCN-118`, `SCN-168`, `SCN-170`) plus the workflow-framework and command-framework runtime contracts, and synced scenario/runtime/status surfaces accordingly.
@@ -125,6 +128,8 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `@dd-bot-platform/core@0.1.0` in `packages/core`
 - second repo-local Wave 2 core extraction slice:
   - generic execution-result helpers in `packages/core/src/runtime/execution-result.ts`
+- third repo-local Wave 2 core extraction slice:
+  - provider-result envelope helpers in `packages/core/src/runtime/provider-result.ts`
 - Changesets/release workflow scaffolding for the first publishable framework packages
 - first published framework package versions:
   - `@dd-bot-platform/api-contract@0.2.0`
@@ -225,13 +230,13 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
 - moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
 - additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`) and the scenario-system/hosted-beta baseline
-- broader framework code extraction beyond the current execution-kernel plus execution-result slices in `packages/core`
+- broader framework code extraction beyond the current execution-kernel, execution-result, and provider-result slices in `packages/core`
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 
 ## Current blockers before broader code extraction
 
 - broader namespace split for `client-sdk` and later framework packages
-- next `packages/core` follow-on seams beyond the now-landed execution-contract and execution-result helper slices
+- next `packages/core` follow-on seams beyond the now-landed execution-contract, execution-result, and provider-result helper slices
 - workflow host code/runtime split design
 - persistence interface vs product store split
 
@@ -249,6 +254,8 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 ## Immediate next implementation wave
 
 1. extend `@dd-bot-platform/core` only through framework-safe seams:
-   - result/trace abstractions that do not import product DTOs
+   - result/trace/provider-result abstractions that do not import product DTOs
    - adapter boundaries instead of copied SellerAgent or Docoved request models
-2. prepare the next runtime/workflow split after the now-landed contract vocabulary slice
+2. prepare the first real mixed consumer proof for the new helper contour:
+   - target the narrow Docoved `research-workflow.ts` execution-result/provider-result path before broader conversation-runtime adoption
+3. prepare the next runtime/workflow split after the now-landed helper slices
