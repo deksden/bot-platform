@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.96.0
+version: 1.97.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -100,6 +100,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.97.0
+    date: 2026-04-22
+    changes: Recorded wave 172: safe owner-side Docoved cleanup now removes residual hard-coded `sales-agent` artifact/git paths and dead proof imports where real repo-local equivalents already exist, while code-backed review also confirmed the remaining Wave 6 follow-up is deeper than import-path cleanup alone because `docoved-agent` Telegram/operator scripts still assume missing auth/observed-user store exports and the runnable-local regression pack remains a deliberate transition run until shared scenario-system extraction.
   - version: 1.96.0
     date: 2026-04-22
     changes: Recorded wave 171: Wave 6 is now closed for active Docoved product-surface ownership because the seeded `SCN-187` beta smoke executes owner-side from `docoved-agent`, `dv-admin` no longer depends on the shared `sa-admin` CLI, and the remaining work is re-scoped to later scenario-system/shared-auth/bootstrap cleanup rather than owner-side mixed-code truth.
@@ -2809,7 +2812,7 @@ Expected outcome:
 Current status:
 - closed for active product-surface ownership;
 - `sales-agent` no longer owns the migrated Docoved script surface, the seeded `SCN-187` beta smoke, or the runtime implementation behind `packages/dv-admin`;
-- remaining follow-up is no longer an owner-side Wave 6 blocker: later work still needs to extract the shared runnable-local scenario framework contour, place shared auth/observed-user seams cleanly, and retire residual mixed bootstrap storage habits.
+- remaining follow-up is no longer an owner-side Wave 6 blocker, but wave 172 confirmed it is deeper than dead import-path cleanup alone: later work still needs to extract the shared runnable-local scenario framework contour, place shared auth/observed-user store seams cleanly because some `docoved-agent` operator scripts still assume missing repo-local `createAuthStore` / `createConversationStore` exports, localize the remaining Docoved corpus/Telegram script helpers without reviving mixed `apps/server` coupling, and retire residual mixed bootstrap storage habits.
 
 ## Acceptance gates
 
@@ -2863,7 +2866,7 @@ Current status:
 - Follow-up needed:
   - finalize dependency bridge strategy between `bot-platform` and product repos;
   - clean up Wave 3 transition exceptions where possible: shrink `shared`, remove temporary product-local adapters after upstream package seams catch up, and keep boundary docs synchronized;
-  - continue later product-repo waves for Docoved and mixed-source retirement, especially the eventual migration/retirement of mixed executable operator and verification packs plus residual bootstrap inventory;
+  - continue later product-repo waves for Docoved and mixed-source retirement, especially the bounded owner-side corpus-acceptance harness wave, the explicit shared auth/observed-user seam placement, the later Telegram helper localization, and the eventual migration/retirement of mixed executable operator and verification packs plus residual bootstrap inventory;
   - convert current mixed-repo hubs into durable transition stubs as target-repo canonical docs take over.
 
 ## Memory Bank impact
