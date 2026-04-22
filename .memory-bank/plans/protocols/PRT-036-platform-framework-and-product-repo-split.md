@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 2.1.0
+version: 2.2.0
 date: 2026-04-22
 status: COMPLETED
 epic: EP-022
@@ -24,6 +24,7 @@ related_files:
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/operations/deployment-architecture.md
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/operations/repo-rebind-and-secret-ownership.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/plans/current-status-report.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/plans/protocols/PRT-037-docoved-transition-exception-retirement-and-legacy-surface-disposition.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/operations/docoved-hosted-deployment-topology.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/operations/docoved-repo-rebind-and-secret-ownership.md
   - .memory-bank/plans/adr/ADR-001-private-registry-bridge-for-product-repos.md
@@ -100,6 +101,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 2.2.0
+    date: 2026-04-22
+    changes: Linked the explicit Docoved post-split follow-up owner (`PRT-037`) so the remaining legacy bridges and transition exceptions stay clearly outside the completed split protocol rather than drifting back into PRT-036 scope.
   - version: 2.1.0
     date: 2026-04-22
     changes: Recorded wave 176 closure pass: the active Docoved Telegram/direct script tail is now owner-side localized through repo-local helper modules, proof/smoke checks are green on the current canonical contour, and PRT-036 is now completed with only explicit post-protocol transition exceptions left (`docoved:verify:beta:api-seeded`, the `packages/dv-admin` shared-admin seam, optional retirement/cleanup of older non-canonical proof scripts, and later historical `SCN-*` migration where valuable).
