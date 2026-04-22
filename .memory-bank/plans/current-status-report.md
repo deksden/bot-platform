@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains before framework extraction starts.
-version: 0.21.0
+version: 0.22.0
 date: 2026-04-22
 status: ACTIVE
 tags: [status, bot-platform, prt-036, migration]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.22.0
+    date: 2026-04-22
+    changes: Closed framework architecture/operations waves 151-152 by landing repo-local architecture guardrails plus remaining container contracts (`core`, `server`, `db-and-projections`, `web-and-cli-surfaces`) and the framework control-plane/evaluation/observability packet (`control-plane-configuration-and-observability-surfaces`, `evaluation-plane-and-judge-runtime`, `observability-and-incident-diagnostics`) with synced architecture/operations/spec hubs.
   - version: 0.21.0
     date: 2026-04-22
     changes: Closed framework project packet wave 145 by landing repo-local `agent-execution-platform-architecture` plus project/spec hub linkage, and narrowed immediate-next wording to still-unlanded framework doc families beyond the now-landed project packet.
@@ -78,7 +81,7 @@ history:
 ## State
 
 `bot-platform` now has a real `.memory-bank/**` skeleton and canonical `mbb/**`.
-This closes the earlier "target Memory Bank does not exist" blocker from `PRT-036`, and the first framework scenario-system packet, hosted-beta execution-model packet, next hosted-scenarios ADR packet, architecture-boundary simplification protocol packet, framework operations packet, framework engineering/security packet, and framework project packet are now landed in repo-local form.
+This closes the earlier "target Memory Bank does not exist" blocker from `PRT-036`, and the first framework scenario-system packet, hosted-beta execution-model packet, next hosted-scenarios ADR packet, architecture-boundary simplification protocol packet, framework operations packet, framework engineering/security packet, framework project packet, framework architecture guardrails/container packet, and framework operations-observability packet are now landed in repo-local form.
 
 ## Already landed
 
@@ -171,10 +174,27 @@ This closes the earlier "target Memory Bank does not exist" blocker from `PRT-03
   - `.memory-bank/spec/project/index.md`
   - `.memory-bank/spec/index.md`
   - project/spec hub linkage refreshed for this packet
+- framework architecture packet wave 151 is landed in repo-local Memory Bank:
+  - `.memory-bank/spec/architecture/architecture-guardrails.md`
+  - `.memory-bank/spec/architecture/containers/core.md`
+  - `.memory-bank/spec/architecture/containers/server.md`
+  - `.memory-bank/spec/architecture/containers/db-and-projections.md`
+  - `.memory-bank/spec/architecture/containers/web-and-cli-surfaces.md`
+  - `.memory-bank/spec/architecture/index.md`
+  - `.memory-bank/spec/architecture/containers/index.md`
+  - `.memory-bank/spec/index.md`
+  - architecture/spec hub linkage refreshed for this packet
+- framework operations packet wave 152 is landed in repo-local Memory Bank:
+  - `.memory-bank/spec/operations/control-plane-configuration-and-observability-surfaces.md`
+  - `.memory-bank/spec/operations/evaluation-plane-and-judge-runtime.md`
+  - `.memory-bank/spec/operations/observability-and-incident-diagnostics.md`
+  - `.memory-bank/spec/operations/index.md`
+  - `.memory-bank/spec/index.md`
+  - operations/spec hub linkage refreshed for this packet
 
 ## Not landed yet
 
-- remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, scenario-system, hosted-scenario, operations, engineering/security, and project packets
+- remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
 - moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
 - remaining framework scenario docs/catalog beyond the now-landed scenario-system/evidence and hosted-beta execution baseline

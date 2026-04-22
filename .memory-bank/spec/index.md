@@ -2,7 +2,7 @@
 file: .memory-bank/spec/index.md
 description: 'Spec hub для bot-platform: framework architecture, project architecture, package contracts, scenario system и repo-level placement rules.'
 purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo, включая project-level architecture framing и обязательные нормативные docs.
-version: 0.14.0
+version: 0.16.0
 date: 2026-04-22
 status: DRAFT
 c4_level: L1
@@ -10,8 +10,14 @@ tags: [spec, bot-platform, architecture, contracts, framework]
 parent: .memory-bank/index.md
 children:
   - architecture/index.md
+  - architecture/architecture-guardrails.md
   - architecture/boundaries.md
   - architecture/containers/index.md
+  - architecture/containers/core.md
+  - architecture/containers/server.md
+  - architecture/containers/workflow-host.md
+  - architecture/containers/db-and-projections.md
+  - architecture/containers/web-and-cli-surfaces.md
   - project/index.md
   - project/agent-execution-platform-architecture.md
   - project/repo-structure.md
@@ -29,6 +35,12 @@ children:
   - scenarios/index.md
   - operations/index.md
 history:
+  - version: 0.16.0
+    date: 2026-04-22
+    changes: Linked the framework operations observability packet (control-plane configuration surfaces, evaluation-plane judge runtime, and observability incident diagnostics) from operations/spec hubs and must-exist inventory (PRT-036 Wave 152).
+  - version: 0.15.0
+    date: 2026-04-22
+    changes: Linked the framework architecture guardrails and remaining container packet (core, server, db/projections, web/CLI surfaces) in spec navigation and must-exist inventory (PRT-036 Wave 151).
   - version: 0.14.0
     date: 2026-04-22
     changes: Linked the new project-level framework architecture doc (`project/agent-execution-platform-architecture.md`) in spec navigation and must-exist inventory (PRT-036 Wave 145).
@@ -97,7 +109,7 @@ history:
 
 ## Current spec sections
 
-- [Architecture hub](architecture/index.md): glossary, system context, container map, domain map и dependency rules для framework repo, включая [containers index](architecture/containers/index.md) и [workflow host](architecture/containers/workflow-host.md).
+- [Architecture hub](architecture/index.md): glossary, system context, container map и dependency rules для framework repo, включая [architecture guardrails](architecture/architecture-guardrails.md), [containers index](architecture/containers/index.md), [core](architecture/containers/core.md), [server](architecture/containers/server.md), [workflow host](architecture/containers/workflow-host.md), [db/projections](architecture/containers/db-and-projections.md), and [web/CLI surfaces](architecture/containers/web-and-cli-surfaces.md).
 - [Framework boundaries](architecture/boundaries.md): главный запретительный документ про то, что может и не может жить в `bot-platform`.
 - [Project docs](project/index.md): repo shape, project-level architecture framing, package catalog, feature-area ownership и naming/placement conventions, включая [agent execution platform architecture](project/agent-execution-platform-architecture.md).
 - [Runtime docs](runtime/index.md): execution kernel, decision-explanation envelope, execution traces/token accounting, trace-artifact governance, pipeline registry/binding contract, persistence-interface/store-boundary contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
@@ -105,19 +117,24 @@ history:
 - [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md) и [auth and access](security/auth-and-access.md).
 - [Client API docs](client-api/index.md): operation catalog, schemas, typed errors и client-sdk boundary, включая [API namespace registry](client-api/api-namespace-registry.md) и landed [typed client API and SDK](client-api/typed-client-api-and-sdk.md).
 - [Scenario docs](scenarios/index.md): scenario taxonomy, evidence model, hosted verification classes и runner assumptions, включая [scenario system and evidence](scenarios/scenario-system-and-evidence.md) и [hosted beta execution model](scenarios/hosted-beta-execution-model.md).
-- [Operations docs](operations/index.md): package publishing, deployment/runbook contracts, hosted-beta acceptance rules, mirrored process standards и framework-level release/verification rules.
+- [Operations docs](operations/index.md): package publishing, deployment/runbook contracts, hosted-beta acceptance rules, control-plane configuration surface rules, evaluation-plane runtime model, observability diagnostics baseline, and mirrored process standards.
 
 ## Must-exist docs immediately
 
 Ниже список документов, без которых `bot-platform` будет слишком пустым и не пройдет Wave 1 как repo-local SSoT:
 
 - `architecture/index.md`
+- `architecture/architecture-guardrails.md`
 - `architecture/boundaries.md`
 - `architecture/platform-glossary.md`
 - `architecture/system-context.md`
 - `architecture/container-architecture.md`
 - `architecture/containers/index.md`
+- `architecture/containers/core.md`
+- `architecture/containers/server.md`
 - `architecture/containers/workflow-host.md`
+- `architecture/containers/db-and-projections.md`
+- `architecture/containers/web-and-cli-surfaces.md`
 - `architecture/dependency-and-placement-rules.md`
 - `project/index.md`
 - `project/agent-execution-platform-architecture.md`
@@ -145,7 +162,10 @@ history:
 - `scenarios/hosted-beta-execution-model.md`
 - `operations/index.md`
 - `operations/deployment-architecture.md`
+- `operations/control-plane-configuration-and-observability-surfaces.md`
 - `operations/runbook.md`
+- `operations/evaluation-plane-and-judge-runtime.md`
+- `operations/observability-and-incident-diagnostics.md`
 - `operations/production-rollout-runbook.md`
 - `operations/hosted-beta-acceptance-contract.md`
 - `operations/git-flow.md`
