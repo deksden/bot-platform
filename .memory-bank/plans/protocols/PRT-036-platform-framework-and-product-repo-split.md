@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.91.0
+version: 1.92.0
 date: 2026-04-22
 status: ACTIVE
 epic: EP-022
@@ -94,6 +94,9 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 1.92.0
+    date: 2026-04-22
+    changes: Recorded wave 167: Wave 4 is now closed in `docoved-agent` repo state because the target repo owns the Docoved API/runtime/store/prompt/deploy source contour with green local verification; the remaining explicit follow-up is now narrowed to shared-admin/auth/operator transition exceptions and live GitHub/Vercel/secret rebind in Wave 5 rather than unfinished product-code ownership.
   - version: 1.91.0
     date: 2026-04-22
     changes: Recorded wave 166: Wave 4 is now materially started in `docoved-agent` repo state because the target repo owns the first runnable workflow-host app contour (`apps/workflow`) plus the first repo-local operator shell package (`packages/dv-admin`) and passes the accepted local verification baseline without overstating API/runtime/store closure.
@@ -2729,11 +2732,11 @@ Expected outcome:
 - Docoved runtime, ingest/publication, workflows, and operators own one repo and one deployment chain;
 - Docoved Memory Bank becomes product SSoT.
 
-Current status after wave 166:
-- materially started in repo state;
-- `docoved-agent` now owns the first runnable app/operator contour through `apps/workflow` and `packages/dv-admin`;
+Current status after wave 167:
+- closed in repo state;
+- `docoved-agent` now owns the Docoved API/runtime/store/prompt/deploy source contour through `apps/api`, `apps/workflow`, `packages/core`, `packages/db`, `packages/prompt-catalog`, local migrations, and repo-local deploy scripts;
 - the accepted local verification baseline is green on `pnpm typecheck` and `pnpm check`;
-- remaining work is still substantial and explicit: Docoved API/runtime/store ownership, deploy/secret rebind, and retirement of the temporary shared-admin bridge.
+- remaining work is now intentionally narrowed to operational and transition-exception follow-up: owner-side verification/operator script migration where needed, live GitHub/Vercel/secret rebind, and retirement or framework reclassification of the remaining shared-admin/auth bridges.
 
 ### Wave 5: CI/CD and deploy separation
 
@@ -2807,7 +2810,7 @@ Expected outcome:
 - Follow-up needed:
   - finalize dependency bridge strategy between `bot-platform` and product repos;
   - complete operational follow-through after SellerAgent Wave 3 repo-state closure: GitHub/Vercel rebind, secret ownership split, and hosted acceptance under the product repo;
-  - continue Docoved Wave 4 from the new honest start state: land API/runtime/store ownership in `docoved-agent`, keep `dv-admin` bridge exceptions explicit, and defer deploy/rebind proof until that operational scope is intentionally opened;
+  - execute Docoved Wave 5 from the new honest repo-state closure: migrate or retire the remaining shared-admin/auth/operator transition exceptions, rebind GitHub/Vercel/secrets from the owning repo, and keep hosted proof explicit rather than implied by repo-state code moves;
   - clean up Wave 3 transition exceptions where possible: shrink `shared`, remove temporary product-local adapters after upstream package seams catch up, and keep boundary docs synchronized;
   - continue later product-repo waves for Docoved, CI/CD separation, and mixed-source retirement;
   - convert current mixed-repo hubs into durable transition stubs as target-repo canonical docs take over.
