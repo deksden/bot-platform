@@ -2,7 +2,7 @@
 file: .tasks/prt-038-wave1-shared-vocabulary-implementation/index.md
 description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content substrate slices.'
 purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, acceptance notes, and stage progress stay organized under one execution packet.'
-version: 1.2.0
+version: 1.3.0
 date: 2026-04-23
 status: ACTIVE
 tags: [tasks, protocol, implementation, prt-038, wave1, subagents]
@@ -55,6 +55,8 @@ It does not yet include:
 - `tasks/T039-04-control-plane-export-integration.md`
 - `tasks/T040-04-governed-content-api-read-models.md`
 - `tasks/T040-05-governed-content-export-integration.md`
+- `tasks/T039-V1-control-plane-verifier.md`
+- `tasks/T040-V1-governed-content-verifier.md`
 
 ## Reserved lessons / insights slots
 
@@ -68,6 +70,8 @@ It does not yet include:
 - `lessons/008-lessons-learned.md` / `lessons/008-insights.md` — reserved for `T039-04` if needed
 - `lessons/009-lessons-learned.md` / `lessons/009-insights.md` — reserved for `T040-04` if needed
 - `lessons/010-lessons-learned.md` / `lessons/010-insights.md` — reserved for `T040-05` if needed
+- `lessons/011-lessons-learned.md` / `lessons/011-insights.md` — reserved for `T039-V1` if needed
+- `lessons/012-lessons-learned.md` / `lessons/012-insights.md` — reserved for `T040-V1` if needed
 
 ## Progress notes
 
@@ -82,3 +86,7 @@ It does not yet include:
   - `T039-04-control-plane-export-integration`
   - `T040-04-governed-content-api-read-models`
   - `T040-05-governed-content-export-integration`
+- `2026-04-23`: `T039-04`, `T040-04`, and `T040-05` were accepted after main-agent review; root/package entrypoints now expose both shared substrates and the combined rerun proof again passed for package-local checks plus `pnpm check`.
+- `2026-04-23`: next bounded verifier tasks were opened on top of the now-stable exports:
+  - `T039-V1-control-plane-verifier`
+  - `T040-V1-governed-content-verifier`
