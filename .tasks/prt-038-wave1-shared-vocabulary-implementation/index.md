@@ -1,8 +1,8 @@
 ---
 file: .tasks/prt-038-wave1-shared-vocabulary-implementation/index.md
-description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content vocabulary slices.'
-purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, and stage progress stay organized under one execution packet.'
-version: 1.1.0
+description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content substrate slices.'
+purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, acceptance notes, and stage progress stay organized under one execution packet.'
+version: 1.2.0
 date: 2026-04-23
 status: ACTIVE
 tags: [tasks, protocol, implementation, prt-038, wave1, subagents]
@@ -15,21 +15,21 @@ related_files:
   - .tasks/prt-038-phase3-ops-runbook-alignment/reports/phase3-ops-runbook-alignment.md
 ---
 
-# PRT-038 Wave 1 Shared Vocabulary Implementation
+# PRT-038 Wave 1 Shared Substrate Implementation
 
 ## Goal
 
-Start the first real implementation wave under `PRT-038` with the two bounded prerequisite tasks recommended by phase 2:
-- `T039-01-control-plane-vocabulary`
-- `T040-01-governed-content-vocabulary`
+Advance the first real implementation wave under `PRT-038` through the bounded shared-substrate slices recommended by phase 2:
+- control-plane vocabulary, channel-binding helpers, and first API read models;
+- governed-content vocabulary, source-processing helpers, and import-lifecycle/idempotency helpers.
 
-This wave is intentionally limited to shared domain vocabulary and supporting helpers in `packages/core`.
+This wave is still intentionally lean.
 
 It does not yet include:
-- API-contract envelopes;
-- root barrel/export integration;
-- scenario/verifier tasks;
-- Memory Bank closure sync;
+- root barrel/export integration for both shared substrates;
+- the governed-content API-contract slice;
+- verifier/scenario tasks;
+- final protocol/status sync tasks;
 - product-repo adoption work.
 
 ## Working folders
@@ -52,6 +52,9 @@ It does not yet include:
 - `tasks/T039-03-control-plane-api-read-models.md`
 - `tasks/T040-02-source-processing-bundle-contract.md`
 - `tasks/T040-03-import-lifecycle-idempotency.md`
+- `tasks/T039-04-control-plane-export-integration.md`
+- `tasks/T040-04-governed-content-api-read-models.md`
+- `tasks/T040-05-governed-content-export-integration.md`
 
 ## Reserved lessons / insights slots
 
@@ -62,6 +65,9 @@ It does not yet include:
 - `lessons/005-lessons-learned.md` / `lessons/005-insights.md` — reserved for `T039-03` if needed
 - `lessons/006-lessons-learned.md` / `lessons/006-insights.md` — reserved for `T040-02` if needed
 - `lessons/007-lessons-learned.md` / `lessons/007-insights.md` — reserved for `T040-03` if needed
+- `lessons/008-lessons-learned.md` / `lessons/008-insights.md` — reserved for `T039-04` if needed
+- `lessons/009-lessons-learned.md` / `lessons/009-insights.md` — reserved for `T040-04` if needed
+- `lessons/010-lessons-learned.md` / `lessons/010-insights.md` — reserved for `T040-05` if needed
 
 ## Progress notes
 
@@ -70,5 +76,9 @@ It does not yet include:
 - `2026-04-23`: accepted findings were routed into owning Memory Bank docs:
   - temporary pre-`develop` execution rule -> `spec/operations/git-flow.md`
   - `pipelineId` / `channelKind` naming alignment -> `spec/runtime/pipeline-registry-and-binding-contract.md`, `spec/operations/control-plane-configuration-and-observability-surfaces.md`
-- `2026-04-23`: next implementation candidates are `T039-02`, `T039-03`, `T040-02`, and `T040-03`.
 - `2026-04-23`: second implementation tranche opened with disjoint write scopes for channel-binding helpers, control-plane API envelopes, source-processing bundle helpers, and import-lifecycle/idempotency helpers.
+- `2026-04-23`: `T039-02`, `T039-03`, `T040-02`, and `T040-03` were accepted after main-agent review; the combined rerun proof passed for `pnpm --filter @dd-bot-platform/core typecheck`, `pnpm --filter @dd-bot-platform/core build`, `pnpm --filter @dd-bot-platform/api-contract typecheck`, `pnpm --filter @dd-bot-platform/api-contract build`, and `pnpm check`.
+- `2026-04-23`: next bounded tasks were opened for serialized continuation of the same wave:
+  - `T039-04-control-plane-export-integration`
+  - `T040-04-governed-content-api-read-models`
+  - `T040-05-governed-content-export-integration`
