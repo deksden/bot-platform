@@ -2,9 +2,9 @@
 file: .tasks/prt-038-wave1-shared-vocabulary-implementation/index.md
 description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content substrate slices.'
 purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, acceptance notes, and stage progress stay organized under one execution packet.'
-version: 1.5.0
+version: 1.6.0
 date: 2026-04-23
-status: ACTIVE
+status: COMPLETED
 tags: [tasks, protocol, implementation, prt-038, wave1, subagents]
 parent: .tasks/
 related_files:
@@ -13,24 +13,29 @@ related_files:
   - .memory-bank/plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md
   - .tasks/prt-038-phase2-implementation/reports/phase2-implementation-synthesis.md
   - .tasks/prt-038-phase3-ops-runbook-alignment/reports/phase3-ops-runbook-alignment.md
+  - .tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-shared-substrate-closeout.md
 ---
 
 # PRT-038 Wave 1 Shared Substrate Implementation
 
 ## Goal
 
-Advance the first real implementation wave under `PRT-038` through the bounded shared-substrate slices recommended by phase 2:
+This execution packet records the first real implementation wave under `PRT-038`.
+
+Wave 1 delivered the bounded shared-substrate slices recommended by phase 2:
 - control-plane vocabulary, channel-binding helpers, and first API read models;
-- governed-content vocabulary, source-processing helpers, and import-lifecycle/idempotency helpers.
+- governed-content vocabulary, source-processing helpers, and import-lifecycle/idempotency helpers;
+- shared package export integration and governed-content API read models;
+- runnable local verifier proof via `SCN-176` and `SCN-177`;
+- serialized protocol/status/scenario sync closure for `PRT-039` and `PRT-040`.
 
-This wave is still intentionally lean.
+Wave 1 remains intentionally lean.
 
-It does not yet include:
-- root barrel/export integration for both shared substrates;
-- the governed-content API-contract slice;
-- verifier/scenario tasks;
-- final protocol/status sync tasks;
+It does not include:
 - product-repo adoption work.
+- hosted proof.
+- cross-repo handshake closure (`G3`).
+- legacy retirement.
 
 ## Working folders
 
@@ -43,6 +48,11 @@ It does not yet include:
 - Git lane: temporary feature-wave execution on `feature/EP-022-prt-038-wave1`
 - Reason: `develop` is not yet activated as a real local branch in this repo state, so the wave starts from the current feature baseline with explicit local-only execution and no remote promotion by subagents
 - Remote trigger stance for this first pass: local-only; no push, PR, hosted deploy, or release actions by subagents
+- Final wave result: `accepted_partial_handoff`
+- Gate state at closeout:
+  - `G1-control-plane-shared-contract-ready` reached
+  - `G2-governed-content-shared-contract-ready` reached
+  - `G3-cross-repo-adoption-handshake` pending downstream mirrors and product-local proof
 
 ## Task set
 
@@ -98,3 +108,8 @@ It does not yet include:
 - `2026-04-23`: next bounded tasks are the serialized documentation/sync closures:
   - `T039-S1-control-plane-sync`
   - `T040-S1-governed-content-sync`
+- `2026-04-23`: `T039-S1` and `T040-S1` were accepted after main-agent review; `PRT-039`, `PRT-040`, status surfaces, verification matrix, and scenario navigation now reflect the landed runnable-local proof honestly.
+- `2026-04-23`: wave-1 bot-platform closeout was accepted:
+  - `G1-control-plane-shared-contract-ready` reached
+  - `G2-governed-content-shared-contract-ready` reached
+  - downstream product protocols are now unblocked, while `G3-cross-repo-adoption-handshake` remains pending product-local mirrors and owner-side adoption proof

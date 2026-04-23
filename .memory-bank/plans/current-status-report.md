@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform under the active PRT-038 convergence program.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from framework extraction into shared-substrate hardening and product adoption support.
-version: 0.40.0
+version: 0.41.0
 date: 2026-04-23
 status: ACTIVE
 tags: [status, bot-platform, prt-036, prt-038, migration, convergence]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.41.0
+    date: 2026-04-23
+    changes: Closed wave 1 in bot-platform at the honest shared-contract handoff stage: `G1` and `G2` are now reached, the umbrella packet reflects implementation-in-progress rather than design-only state, and downstream product repos are unblocked while `G3` remains pending their local mirrors and adoption proof.
   - version: 0.40.0
     date: 2026-04-23
     changes: Completed the governed-content sync after the runnable verifier tranche: `SCN-177` is now discoverable across the scenario/navigation surfaces, `PRT-040` and the verification matrix acknowledge runnable local proof, and the next sync work no longer lists `T040-S1` as pending.
@@ -338,6 +341,12 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 - convergence-era verification inventory is now explicit:
   - `.memory-bank/plans/verification-matrix.md` now includes a `shared-control-plane-substrate` row anchored by `SCN-176`, with honest `partial` closure language that stops short of downstream adoption claims
   - `.memory-bank/plans/verification-matrix.md` now includes a `shared-governed-content-and-import-substrate` row anchored by `SCN-177`, with honest `partial` closure language that stops short of downstream adoption, hosted proof, or product-local activation claims
+- wave-1 shared-substrate closeout is now accepted in `bot-platform`:
+  - `G1-control-plane-shared-contract-ready` reached
+  - `G2-governed-content-shared-contract-ready` reached
+  - `G3-cross-repo-adoption-handshake` remains intentionally pending until SellerAgent and Docoved mirror the shared assumptions and prove adoption locally
+  - closeout report:
+    - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-shared-substrate-closeout.md`
 
 ## Not landed yet
 
@@ -347,27 +356,32 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 - broader runnable framework scenario depth beyond the first shared-substrate anchors
 - first product-local adoption proof under the hardened convergence packet
+
 ## Current blockers before broader code extraction
 
 - downstream semver consumer adoption still belongs to later product-facing waves
+- `G3-cross-repo-adoption-handshake` depends on product-local protocol mirrors and no-regression proof in SellerAgent and Docoved, not on more local-only bot-platform sync work
 
 ## Immediate next document wave
 
-1. deepen convergence verification only where a clean framework-owned split exists:
+1. mirror the reached shared-contract gates into downstream product-local adoption packets:
+   - SellerAgent may now start control-plane adoption against the `G1` shared base
+   - Docoved may now start governed-content/import adoption against the `G2` shared base
+   - broader cross-repo work should treat `G3` as pending until those local mirrors exist
+2. deepen convergence verification only where a clean framework-owned split exists:
    - extend shared control-plane proof beyond `SCN-176` only where additional platform-owned seams can be verified honestly
    - extend governed-content/import proof beyond `SCN-177` only where additional platform-owned seams can be verified honestly without overclaiming adoption
-2. continue later framework scenario depth only where a clean framework-owned split exists:
+3. continue later framework scenario depth only where a clean framework-owned split exists:
    - persistence-interface scenarios
    - command-framework split scenarios after Telegram/product semantics are stripped out
    - later scenario-system package/tier anchors beyond the current hosted/auth/workflow/runtime baseline
-3. sync framework status surfaces to the active convergence program:
+4. sync framework status surfaces to the active convergence program:
    - keep `current-status-report.md` aligned with real convergence progress
    - mirror shared-contract changes into product-local adoption docs before product implementation claims adoption
 
 ## Immediate next implementation wave
 
-1. use the synced protocol/status/scenario surfaces as the upstream base for later umbrella closeout and product adoption packets
-2. keep downstream product adoption and hosted proof explicitly separate from framework-local verifier closure
-3. perform the first real downstream consumer adoption in later product waves:
-   - start with the narrow `research-workflow.ts` path before broader conversation-runtime adoption
-4. use the hardened platform packet as the upstream base for product-repo cutover and later host/runtime separation work
+1. start SellerAgent control-plane adoption from the reached `G1` shared-contract base
+2. start Docoved governed-content/import adoption from the reached `G2` shared-contract base
+3. keep hosted proof and product acceptance explicitly inside the product repos until they can link honest adoption evidence back upstream
+4. use later product-local proof to reach `G3` and only then advance legacy retirement or broader cutover claims
