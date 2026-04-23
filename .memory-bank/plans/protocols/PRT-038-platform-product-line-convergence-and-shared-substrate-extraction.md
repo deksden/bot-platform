@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md
 description: 'Umbrella post-split protocol for converging the three repos toward a three-layer product-line architecture, extracting the shared cross-product substrate in bot-platform, and declaring the kickoff gate for product adoption protocols.'
 purpose: Use as the single active bot-platform execution contract after PRT-036 so shared-layer extraction, product handoff timing, and legacy retirement follow one explicit program instead of drifting across repos.
-version: 1.6.0
+version: 1.7.0
 date: 2026-04-23
 status: ACTIVE
 epic: EP-022
@@ -40,6 +40,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/sales-agent/.memory-bank/plans/protocols/PRT-034-docoved-burst-continuity-finalization-and-verification-repair.md
   - /Users/deksden/Documents/_Projects/sales-agent/.memory-bank/plans/protocols/PRT-035-docoved-semantic-folder-governance-indirect-references-temporal-defaults-and-duplicate-review.md
 history:
+  - version: 1.7.0
+    date: 2026-04-23
+    changes: Added the dist-verifier sequencing rule to the local verification contour so future runnable-local proofs do not race compiled `dist` output and accidentally validate stale artifacts.
   - version: 1.6.0
     date: 2026-04-23
     changes: Recorded the phase-3 operational execution model: git/worktree and promotion discipline, commit/push/CI/hosted trigger policy, deploy/preflight/rollout rules, and lessons-learned/insights routing requirements; marked phase 3 planning as complete.
@@ -689,6 +692,7 @@ Additionally:
 - run the narrowest slice-specific verification path available;
 - if the affected slice has repo-local lint, test, scenario, or security scripts, run the relevant ones and record them;
 - if such scripts do not exist for the slice, record explicit `N/A` instead of inventing a command;
+- if the chosen verifier path executes compiled `dist` artifacts, the producing build must complete before the dist-based test command starts; stale compiled output is not valid evidence;
 - failures found in local checks must be fixed or the wave must be explicitly re-scoped before push/PR/deploy closure.
 
 ### CI gate

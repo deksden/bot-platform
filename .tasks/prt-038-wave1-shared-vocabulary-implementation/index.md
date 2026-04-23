@@ -2,7 +2,7 @@
 file: .tasks/prt-038-wave1-shared-vocabulary-implementation/index.md
 description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content substrate slices.'
 purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, acceptance notes, and stage progress stay organized under one execution packet.'
-version: 1.3.0
+version: 1.4.0
 date: 2026-04-23
 status: ACTIVE
 tags: [tasks, protocol, implementation, prt-038, wave1, subagents]
@@ -90,3 +90,7 @@ It does not yet include:
 - `2026-04-23`: next bounded verifier tasks were opened on top of the now-stable exports:
   - `T039-V1-control-plane-verifier`
   - `T040-V1-governed-content-verifier`
+- `2026-04-23`: `T039-V1` and `T040-V1` were accepted after main-agent review; runnable local framework verifier proof now exists for both shared substrates via `node:test` on compiled package artifacts plus flat scenario anchors `SCN-176` and `SCN-177`.
+- `2026-04-23`: next bounded tasks are the serialized documentation/sync closures:
+  - `T039-S1-control-plane-sync`
+  - `T040-S1-governed-content-sync`

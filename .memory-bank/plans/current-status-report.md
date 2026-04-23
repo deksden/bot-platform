@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform under the active PRT-038 convergence program.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from framework extraction into shared-substrate hardening and product adoption support.
-version: 0.37.0
+version: 0.38.0
 date: 2026-04-23
 status: ACTIVE
 tags: [status, bot-platform, prt-036, prt-038, migration, convergence]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.38.0
+    date: 2026-04-23
+    changes: Recorded the runnable verifier tranche for PRT-038 wave 1: local `node:test` proof and flat framework scenario anchors now exist for both the shared control-plane and shared governed-content/import substrates, while the next work narrows to serialized status/protocol sync rather than additional shared-contract coding.
   - version: 0.37.0
     date: 2026-04-23
     changes: Recorded the third real PRT-038 implementation tranche: control-plane export integration, governed-content API read models, and governed-content export integration are now landed and accepted locally, so the next bounded work shifts to runnable verifier proof and later status-sync tasks.
@@ -316,6 +319,14 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - governed-content API-contract schemas and read models are landed in `packages/api-contract/src/governed-content/**`
   - governed-content package exports are wired through `packages/core/src/index.ts` and `packages/api-contract/src/index.ts`
   - accepted tranche reports in `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T039-04-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-04-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-05-report.md`, and `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-third-tranche-acceptance.md`
+- runnable verifier proof is now landed for both shared substrates:
+  - control-plane verifier specs in `packages/core/src/control-plane/channel-binding/verifier.spec.ts` and `packages/api-contract/src/control-plane/read-models.spec.ts`
+  - governed-content verifier specs in `packages/core/src/governed-content/governed-content.verifier.spec.ts` and `packages/api-contract/src/governed-content/read-models.spec.ts`
+  - flat framework scenario anchors:
+    - `.memory-bank/scenarios/SCN-176-shared-control-plane-channel-binding-and-readback-contract.md`
+    - `.memory-bank/scenarios/SCN-177-shared-governed-content-import-readback-contract.md`
+  - accepted verifier report:
+    - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-verifier-acceptance.md`
 - convergence-era verification inventory is now explicit:
   - `.memory-bank/plans/verification-matrix.md` now includes dedicated `shared-control-plane-substrate` and `shared-governed-content-and-import-substrate` rows with honest `design-hardened` status language
 
@@ -327,7 +338,7 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 - dedicated runnable framework scenario anchors for the shared control-plane and governed-content/import substrates
 - first product-local adoption proof under the hardened convergence packet
-- verifier and status-sync tasks under the new `T039-*` / `T040-*` execution graph
+- status-sync tasks under the new `T039-*` / `T040-*` execution graph
 
 ## Current blockers before broader code extraction
 
@@ -335,10 +346,10 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 
 ## Immediate next document wave
 
-1. continue the next bounded verifier slices under the phase-2 execution model and the phase-3 ops/runbook rules:
-   - `T039-V1-control-plane-verifier`
-   - `T040-V1-governed-content-verifier`
-   - keep status/protocol/scenario-matrix sync serialized behind the verifier evidence
+1. continue the next serialized sync slices under the phase-2 execution model and the phase-3 ops/runbook rules:
+   - `T039-S1-control-plane-sync`
+   - `T040-S1-governed-content-sync`
+   - use the landed verifier evidence and scenario anchors as the upstream source of truth
 2. deepen convergence verification only where a clean framework-owned split exists:
    - add runnable framework anchors for the shared control-plane substrate where platform-owned proof is genuinely possible
    - add runnable framework anchors for the shared governed-content/import substrate where platform-owned proof is genuinely possible
@@ -352,8 +363,8 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 
 ## Immediate next implementation wave
 
-1. advance from landed shared contracts into runnable verifier proof in `bot-platform`
-2. keep shared status-surface sync serialized behind dedicated later tasks
+1. advance from landed runnable verifier proof into serialized protocol/status/scenario sync in `bot-platform`
+2. keep downstream product adoption and hosted proof explicitly separate from framework-local verifier closure
 3. perform the first real downstream consumer adoption in later product waves:
    - start with the narrow `research-workflow.ts` path before broader conversation-runtime adoption
 4. use the hardened platform packet as the upstream base for product-repo cutover and later host/runtime separation work
