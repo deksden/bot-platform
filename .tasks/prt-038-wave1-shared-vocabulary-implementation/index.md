@@ -48,12 +48,20 @@ It does not yet include:
 
 - `tasks/T039-01-control-plane-vocabulary.md`
 - `tasks/T040-01-governed-content-vocabulary.md`
+- `tasks/T039-02-channel-binding-contract.md`
+- `tasks/T039-03-control-plane-api-read-models.md`
+- `tasks/T040-02-source-processing-bundle-contract.md`
+- `tasks/T040-03-import-lifecycle-idempotency.md`
 
 ## Reserved lessons / insights slots
 
 - `lessons/001-lessons-learned.md` — protocol-start operational finding recorded by the main agent
 - `lessons/002-lessons-learned.md` / `lessons/002-insights.md` — reserved for `T039-01` if needed
 - `lessons/003-lessons-learned.md` / `lessons/003-insights.md` — reserved for `T040-01` if needed
+- `lessons/004-lessons-learned.md` / `lessons/004-insights.md` — reserved for `T039-02` if needed
+- `lessons/005-lessons-learned.md` / `lessons/005-insights.md` — reserved for `T039-03` if needed
+- `lessons/006-lessons-learned.md` / `lessons/006-insights.md` — reserved for `T040-02` if needed
+- `lessons/007-lessons-learned.md` / `lessons/007-insights.md` — reserved for `T040-03` if needed
 
 ## Progress notes
 
@@ -63,3 +71,4 @@ It does not yet include:
   - temporary pre-`develop` execution rule -> `spec/operations/git-flow.md`
   - `pipelineId` / `channelKind` naming alignment -> `spec/runtime/pipeline-registry-and-binding-contract.md`, `spec/operations/control-plane-configuration-and-observability-surfaces.md`
 - `2026-04-23`: next implementation candidates are `T039-02`, `T039-03`, `T040-02`, and `T040-03`.
+- `2026-04-23`: second implementation tranche opened with disjoint write scopes for channel-binding helpers, control-plane API envelopes, source-processing bundle helpers, and import-lifecycle/idempotency helpers.
