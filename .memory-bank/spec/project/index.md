@@ -2,16 +2,20 @@
 file: .memory-bank/spec/project/index.md
 description: 'Project docs hub for bot-platform with repo-shape, ownership boundaries, and high-level project architecture framing.'
 purpose: Navigate framework project architecture direction, repo structure, and feature-area ownership for the framework monorepo.
-version: 0.2.0
-date: 2026-04-22
+version: 0.3.0
+date: 2026-04-23
 status: ACTIVE
 tags: [project, architecture, repo-structure, bot-platform]
 parent: .memory-bank/spec/index.md
 children:
   - agent-execution-platform-architecture.md
+  - three-layer-product-line-architecture.md
   - repo-structure.md
   - feature-area-boundaries.md
 history:
+  - version: 0.3.0
+    date: 2026-04-23
+    changes: Added the normative three-layer product-line architecture so project docs now capture the post-split shared-substrate model as well as repo structure and feature boundaries.
   - version: 0.2.0
     date: 2026-04-22
     changes: Added the repo-local project architecture framing doc and promoted this hub from placeholder text to active project documentation navigation (PRT-036 Wave 145).
@@ -28,6 +32,7 @@ It complements `spec/architecture/*` by keeping repo-shape and ownership framing
 ## Current project docs
 
 - [Agent execution platform architecture](agent-execution-platform-architecture.md): high-level project architecture framing for execution/control/evaluation/platform planes and framework-vs-product boundary invariants. Read first when aligning architectural direction without duplicating `spec/architecture/*`.
+- [Three-layer product-line architecture](three-layer-product-line-architecture.md): canonical post-split layer model for platform substrate, shared cross-product substrate, and product policy packs. Read before deciding whether a capability belongs in `bot-platform` or stays product-local.
 - [Repo structure](repo-structure.md): target monorepo shape, package placement rules, and scope/naming policy for framework-owned packages.
 - [Feature area boundaries](feature-area-boundaries.md): framework ownership map and explicit non-owner areas that must stay product-local.
 

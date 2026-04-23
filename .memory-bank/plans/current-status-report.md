@@ -1,13 +1,25 @@
 ---
 file: .memory-bank/plans/current-status-report.md
-description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
-purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as framework extraction moves from planning into implementation.
-version: 0.30.0
-date: 2026-04-22
+description: 'Current status snapshot for bot-platform under the active PRT-038 convergence program.'
+purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from framework extraction into shared-substrate hardening and product adoption support.
+version: 0.34.0
+date: 2026-04-23
 status: ACTIVE
-tags: [status, bot-platform, prt-036, migration]
+tags: [status, bot-platform, prt-036, prt-038, migration, convergence]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.34.0
+    date: 2026-04-23
+    changes: Recorded phase-3 ops/runbook alignment under PRT-038: the umbrella packet now includes git/worktree discipline, push/CI/hosted-trigger rules, deploy/preflight/rollout gates, and lessons-learned/insights routing with explicit subagent briefing requirements.
+  - version: 0.33.0
+    date: 2026-04-23
+    changes: Recorded phase-2 implementation planning under PRT-038: the umbrella packet now includes the subagent execution model, implementation task graph, verifier workflow, and staged verification/rollout contour, and the phase-2 synthesis packet is linked as evidence.
+  - version: 0.32.0
+    date: 2026-04-23
+    changes: Recorded the protocol-hardening pass after the completed phase-1 review: PRT-038/039/040 now carry stronger ownership/lifecycle/closure rules, and the verification matrix now has explicit convergence-era rows for the shared control-plane and governed-content/import substrates.
+  - version: 0.31.0
+    date: 2026-04-23
+    changes: Synced the status snapshot to the active PRT-038 convergence program by recording ADR-005 plus PRT-038/039/040 as landed planning truth, marking the phase-1 protocol review as complete, and replacing outdated “next child protocols” wording with protocol-hardening and product-adoption follow-ups.
   - version: 0.30.0
     date: 2026-04-22
     changes: Closed Wave 2 in fully released state: the mainline release workflow was aligned to versioned-package publication, `bot-platform/main` was promoted through the governed release path, and `@dd-bot-platform/core@0.2.0` was published through the GitHub-hosted `Release Packages` workflow.
@@ -250,14 +262,48 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `.memory-bank/spec/operations/index.md`
   - `.memory-bank/spec/index.md`
   - operations/spec hub linkage refreshed for this packet
+- convergence-planning packet is now also landed in repo-local Memory Bank:
+  - `.memory-bank/plans/adr/ADR-005-three-layer-product-line-architecture-and-shared-substrate-boundary.md`
+  - `.memory-bank/spec/project/three-layer-product-line-architecture.md`
+  - `.memory-bank/guides/explanation/product-line-layering-and-split-rationale.md`
+  - `.memory-bank/plans/protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md`
+  - `.memory-bank/plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
+  - `.memory-bank/plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
+  - SellerAgent and Docoved repo-local adoption-boundary/rationale docs are now the intended downstream start package
+- protocol hardening review phase 1 is complete:
+  - `стадия проработки плана: фаза 1 выполнена`
+  - synthesis packet: `.tasks/prt-038-phase1-review/reports/_phase1-synthesis.md`
+  - consolidated review packet: `.tasks/prt-038-phase1-review/reports/phase1-consolidated-review.md`
+- implementation-planning review phase 2 is complete:
+  - `стадия проработки плана: фаза 2 выполнена`
+  - working folder: `.tasks/prt-038-phase2-implementation/`
+  - synthesis packet: `.tasks/prt-038-phase2-implementation/reports/phase2-implementation-synthesis.md`
+- ops/runbook-alignment review phase 3 is complete:
+  - `стадия проработки плана: фаза 3 выполнена`
+  - working folder: `.tasks/prt-038-phase3-ops-runbook-alignment/`
+  - synthesis packet: `.tasks/prt-038-phase3-ops-runbook-alignment/reports/phase3-ops-runbook-alignment.md`
+- protocol hardening is now landed in the active convergence packet:
+  - `PRT-038` now carries umbrella-level phase taxonomy, anti-contamination, sync-handshake, and closure-language rules
+  - `PRT-039` now carries explicit authority/storage, lifecycle, UI-doc, observability, and verification gates for the shared control-plane substrate
+  - `PRT-040` now carries explicit canon narrowing, lifecycle/idempotency, candidate-vs-live-truth, rollback, UI-doc, observability, and verification gates for the governed-content/import substrate
+- implementation execution planning is now landed in the umbrella packet:
+  - `PRT-038` now carries the subagent task contract, implementation task graph, milestone gates, verifier workflow, and staged verification/rollout contour for the next execution wave
+- operational execution planning is now landed in the umbrella packet:
+  - `PRT-038` now carries git/worktree/feature-branch discipline aligned to `develop -> main`
+  - `PRT-038` now gates push, GitHub CI, Vercel/hosted builds, and release actions so remote triggers happen only when the wave actually needs them
+  - `PRT-038` now carries deploy-truth, beta preflight, backup/rollback, and lessons-learned/insights routing rules, including mandatory subagent operational briefing requirements
+- convergence-era verification inventory is now explicit:
+  - `.memory-bank/plans/verification-matrix.md` now includes dedicated `shared-control-plane-substrate` and `shared-governed-content-and-import-substrate` rows with honest `design-hardened` status language
 
 ## Not landed yet
 
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
-- moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
 - additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`) and the scenario-system/hosted-beta baseline
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
+- dedicated runnable framework scenario anchors for the shared control-plane and governed-content/import substrates
+- first product-local adoption proof under the hardened convergence packet
+- first real implementation tasks and verifier tasks under the new `T039-*` / `T040-*` execution graph
 
 ## Current blockers before broader code extraction
 
@@ -265,18 +311,23 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 
 ## Immediate next document wave
 
-1. continue PRT-036 planning migration:
-   - remaining `CB-*` contract docs not yet landed in repo-local form
-   - follow-up split child protocols and ADR decisions after `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
-2. deepen framework scenario coverage only where a clean framework-owned split exists:
+1. open the first bounded implementation and verifier tasks under the phase-2 execution model, now constrained by the phase-3 ops/runbook rules:
+   - start with `T039-01-control-plane-vocabulary` and `T040-01-governed-content-vocabulary`
+   - keep write scopes disjoint, branch from `develop`, and reserve shared status surfaces for serialized sync tasks
+2. deepen convergence verification only where a clean framework-owned split exists:
+   - add runnable framework anchors for the shared control-plane substrate where platform-owned proof is genuinely possible
+   - add runnable framework anchors for the shared governed-content/import substrate where platform-owned proof is genuinely possible
+3. continue later framework scenario depth only where a clean framework-owned split exists:
    - persistence-interface scenarios
    - command-framework split scenarios after Telegram/product semantics are stripped out
    - later scenario-system package/tier anchors beyond the current hosted/auth/workflow/runtime baseline
-3. keep framework status surfaces aligned with real extraction progress instead of advertising future placeholders as current truth
+4. sync framework status surfaces to the active convergence program:
+   - keep `current-status-report.md` aligned with real convergence progress
+   - mirror shared-contract changes into product-local adoption docs before product implementation claims adoption
 
 ## Immediate next implementation wave
 
-1. execute the accepted mainline release flow for `@dd-bot-platform/core@0.2.0`
+1. move from protocol hardening into shared-substrate implementation in `bot-platform`
 2. perform the first real downstream consumer adoption in later product waves:
    - start with the narrow `research-workflow.ts` path before broader conversation-runtime adoption
-3. move protocol focus from framework-core extraction toward product-repo cutover and later host/runtime separation work
+3. use the hardened platform packet as the upstream base for product-repo cutover and later host/runtime separation work

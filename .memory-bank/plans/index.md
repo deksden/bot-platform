@@ -2,8 +2,8 @@
 file: .memory-bank/plans/index.md
 description: 'Plans hub для bot-platform: framework epics, ADRs, protocols, current status и verification planning.'
 purpose: Читать для понимания delivery contour `bot-platform`, не смешивая framework delivery с SellerAgent и Docoved product waves.
-version: 0.2.0
-date: 2026-04-22
+version: 0.3.0
+date: 2026-04-23
 status: DRAFT
 tags: [plans, bot-platform, adr, epics, protocols, delivery]
 parent: .memory-bank/index.md
@@ -14,6 +14,9 @@ children:
   - protocols/index.md
   - verification-matrix.md
 history:
+  - version: 0.3.0
+    date: 2026-04-23
+    changes: Added the post-split convergence follow-up `PRT-038` and clarified that the next framework planning phase is the three-layer product-line extraction and product-protocol kickoff program.
   - version: 0.2.0
     date: 2026-04-22
     changes: Updated the verification-matrix navigation wording to match the now split-aware feature-group and scenario-anchor planning surfaces.
@@ -56,17 +59,28 @@ history:
 - `current-status-report.md`
 - `protocols/index.md`
 - `protocols/PRT-036-platform-framework-and-product-repo-split.md`
+- `protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md`
+- `protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
+- `protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
 - `verification-matrix.md`
 
 ## Immediate planning priorities
 
-### 1. Stabilize the repo split narrative
+### 1. Run the post-split convergence program
 
-Пока идет PRT-036, `protocols/PRT-036-platform-framework-and-product-repo-split.md` должен быть главным execution document.
-После старта split-а здесь же должны жить follow-up protocols по:
+`protocols/PRT-036-platform-framework-and-product-repo-split.md` остается closed lineage for the repo split.
+Главным active execution document теперь является:
+- `protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md`
+
+Следующие waves внутри этого этапа должны вести:
 - dependency bridge;
-- package publication strategy;
+- shared control-plane extraction;
+- shared governed-content and import substrate extraction;
 - framework package extraction order.
+
+Current detailed child packets:
+- `protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
+- `protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
 
 ### 2. Separate framework epics from product epics
 
