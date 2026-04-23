@@ -2,12 +2,15 @@
 file: .memory-bank/plans/verification-matrix.md
 description: 'Framework verification matrix for bot-platform.'
 purpose: Track the relationship between framework feature groups, repo-local contract anchors, extracted packages, and framework verification coverage.
-version: 0.9.0
+version: 0.10.0
 date: 2026-04-23
 status: ACTIVE
 tags: [verification, matrix, scenarios, bot-platform]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.10.0
+    date: 2026-04-23
+    changes: Synced the shared governed-content/import substrate row to the landed runnable verifier tranche so `SCN-177` is now the primary framework proof anchor while closure stays partial pending consumer-side import proof and downstream adoption evidence.
   - version: 0.9.0
     date: 2026-04-23
     changes: Synced the shared control-plane substrate row to the landed runnable verifier tranche so `SCN-176` is now the primary framework proof anchor while closure language remains partial pending consumer-side adoption evidence.
@@ -58,7 +61,7 @@ Canonical planning sources:
 | `persistence-interfaces` | `spec/runtime/persistence-interface-and-store-boundary.md` | none extracted | [Scenario matrix](../scenarios/scenario-matrix.md) | contract boundary landed; runnable scenarios are still gated by split/extraction work |
 | `workflow-framework` | [SCN-116](../scenarios/SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md)<br>[SCN-118](../scenarios/SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md)<br>`spec/runtime/workflow-framework-contract.md`, `spec/runtime/index.md`, `spec/architecture/containers/workflow-host.md` | none extracted | [SCN-116](../scenarios/SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md) + [SCN-118](../scenarios/SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md) + `scenarios/hosted/index.md` | workflow topology/status and hosted durability anchors are now repo-local, and the dedicated workflow contract spec is landed |
 | `command-framework` | `spec/runtime/command-framework-contract.md`, `spec/runtime/index.md` | none extracted | [Scenario matrix](../scenarios/scenario-matrix.md) + `scenarios/contracts/index.md` | framework contract spec is now landed; concrete split command scenarios remain later-wave work |
-| `shared-governed-content-and-import-substrate` | `plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`, `spec/runtime/persistence-interface-and-store-boundary.md`, `spec/runtime/workflow-framework-contract.md`, `spec/project/feature-area-boundaries.md` | none extracted | [Scenario matrix](../scenarios/scenario-matrix.md) | protocol is now design-hardened with explicit lifecycle, idempotency, rollback, UI-doc, and observability rules; dedicated framework scenarios are still not landed, so stronger-than-`partial` closure requires new runnable anchors and first-consumer adoption proof |
+| `shared-governed-content-and-import-substrate` | [SCN-177](../scenarios/SCN-177-shared-governed-content-import-readback-contract.md)<br>`plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`, `spec/runtime/persistence-interface-and-store-boundary.md`, `spec/runtime/workflow-framework-contract.md`, `spec/project/feature-area-boundaries.md` | none extracted | [SCN-177](../scenarios/SCN-177-shared-governed-content-import-readback-contract.md) + [Scenario matrix](../scenarios/scenario-matrix.md) | shared governed-content/import implementation slices and the first runnable local framework verifier anchor are now landed in `bot-platform`; closure stays `partial` because consumer-side retry/import proof, product-local UI-doc or activation evidence, and downstream adoption are still outstanding |
 | `support-packages` | [SCN-041](../scenarios/SCN-041-verdict-export-stability-and-provenance.md)<br>`spec/project/repo-structure.md`, `spec/project/feature-area-boundaries.md`, `spec/runtime/execution-traces-and-token-accounting.md`, `spec/runtime/trace-artifact-governance.md` | only proven slices: `api-contract`, `scenario-system` | [SCN-041](../scenarios/SCN-041-verdict-export-stability-and-provenance.md) + `scenarios/contracts/index.md` | verdict export/provenance now has a repo-local framework scenario anchor; broader support-package extraction still requires multi-consumer proof |
 
 ## Reading rule

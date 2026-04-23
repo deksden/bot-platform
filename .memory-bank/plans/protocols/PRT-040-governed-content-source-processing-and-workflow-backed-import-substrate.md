@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md
 description: Framework child protocol for extracting the shared governed-content substrate: connected sources, source revisions, source processing, import runs, processing artifacts, derived reports, and workflow-backed bot-mediated import entry.
 purpose: Use when implementing the shared governed-content and import layer so Docoved can adopt it first, later products can reuse it safely, and content ingest does not degrade into ad hoc admin chat editing or premature platformization of product truth.
-version: 1.1.0
+version: 1.2.0
 date: 2026-04-23
 status: ACTIVE
 epic: EP-022
@@ -10,6 +10,7 @@ tags: [protocol, bot-platform, governed-content, source-processing, import, work
 parent: .memory-bank/plans/protocols/index.md
 related_files:
   - .memory-bank/plans/protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md
+  - .memory-bank/scenarios/SCN-177-shared-governed-content-import-readback-contract.md
   - .memory-bank/spec/project/three-layer-product-line-architecture.md
   - .memory-bank/spec/project/feature-area-boundaries.md
   - .memory-bank/spec/runtime/persistence-interface-and-store-boundary.md
@@ -22,11 +23,16 @@ related_files:
   - .memory-bank/plans/verification-matrix.md
   - .memory-bank/mbb/delivery-docs-guide.md
   - .memory-bank/mbb/scenario-docs-guide.md
+  - .tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-verifier-acceptance.md
+  - .tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-V1-report.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/architecture/domains/docoved-agentic-ingest-and-knowledge-projection-model.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-access-and-knowledge-source-binding-model.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-memory-bank-publication-and-active-snapshot-model.md
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/guides/explanation/business-profile-publication-model.md
 history:
+  - version: 1.2.0
+    date: 2026-04-23
+    changes: Synced the protocol to the landed wave-1 verifier tranche: shared governed-content/import implementation slices and the first runnable local framework proof (`SCN-177`) are now explicit protocol truth, while closure remains partial pending consumer-side retry/import proof, product-local UI-doc/adoption evidence, and downstream activation proof.
   - version: 1.1.0
     date: 2026-04-23
     changes: Hardened the protocol after the phase-1 review by narrowing the shared canon, defining lifecycle and idempotency rules, separating candidate from live truth, adding storage/rollback/observability/UI-doc obligations, and aligning closure gates with MBB and delivery standards.
@@ -394,9 +400,9 @@ This protocol may not claim stronger closure than its verification contour can s
 
 | flow | primary anchors now | owner | minimum proof for stronger-than-`partial` closure |
 | --- | --- | --- | --- |
-| extraction bundle contract | this protocol, shared package seam, `verification-matrix.md` | platform | named command set and explicit bundle/readback proof |
-| import lifecycle and idempotency | this protocol, workflow contract, product-local adoption protocol | shared contract in platform, overlay proof in product | at least one consumer-side proof of retry-safe import behavior |
-| report/readback honesty | this protocol and product-local import/readback docs | platform plus product | explicit degraded/unsupported evidence path |
+| extraction bundle contract | this protocol, `SCN-177`, `T040-V1-report.md`, `verification-matrix.md` | platform | named command set and explicit bundle/readback proof |
+| import lifecycle and idempotency | this protocol, `SCN-177`, workflow contract, product-local adoption protocol | shared contract in platform, overlay proof in product | at least one consumer-side proof of retry-safe import behavior |
+| report/readback honesty | this protocol, `SCN-177`, and product-local import/readback docs | platform plus product | explicit degraded/unsupported evidence path |
 | activation boundary and rollback | this protocol plus product-local publication protocol | product | product-local activation proof required before `adopted` status |
 | governed UI surfaces | this protocol plus product-local UI-doc packet | product | sources/imports screens and automation docs updated in the same wave |
 
@@ -419,6 +425,18 @@ Minimum sync set:
 MBB rule:
 - this protocol is a curated execution contract and evidence sink, not a duplicate spec;
 - scenario and status surfaces must be kept honest about `planned` vs runnable proof.
+
+## Wave-1 runnable proof sync
+
+Wave-1 shared governed-content/import execution is now partially landed in `bot-platform`:
+- shared governed-content vocabulary, source-processing helpers, import-lifecycle/idempotency/conflict helpers, API read models, and package exports are implemented in the repo-local shared packages;
+- `SCN-177` is the first flat framework-owned runnable anchor for this substrate;
+- verifier evidence is recorded in `T040-V1-report.md` and accepted in `wave1-verifier-acceptance.md`.
+
+Honesty rule:
+- this is runnable local framework proof for the shared substrate only;
+- it does not yet prove downstream Docoved or Seller adoption;
+- it does not yet prove hosted readiness, product-local review UX, or product-local activation/cutover proof.
 
 ## Wave closure gates
 
@@ -457,10 +475,13 @@ Outcome rule:
 ## Evidence
 
 - `PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md`
+- `SCN-177-shared-governed-content-import-readback-contract.md`
 - `persistence-interface-and-store-boundary.md`
 - `workflow-framework-contract.md`
 - `observability-and-incident-diagnostics.md`
 - `trace-artifact-governance.md`
+- `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-V1-report.md`
+- `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-verifier-acceptance.md`
 - `docoved-memory-bank-publication-and-active-snapshot-model.md`
 - `business-profile-publication-model.md`
 - `.tasks/prt-038-phase1-review/reports/phase1-consolidated-review.md`
@@ -468,10 +489,10 @@ Outcome rule:
 ## Outcome
 
 - Result: `partial`
-- Current completion state: `design_hardened`
+- Current completion state: `implementation_in_progress`
 - Follow-up needed:
-  - implement the shared governed-content contracts and workflow-backed import surfaces in `bot-platform`;
-  - land explicit convergence-era verification rows and runnable anchors where needed;
+  - prove at least one consumer-side retry-safe import path before claiming stronger-than-`partial` closure for the lifecycle contract;
+  - land product-local governed UI-doc and review/activation evidence in the adopting repo before any adoption claim;
   - adopt the full flow in Docoved first without weakening its publication semantics;
   - reuse in SellerAgent only where the semantics truly match;
   - retire compatibility bridges only after additive migration proof and owner-side no-regression evidence.
@@ -481,3 +502,4 @@ Outcome rule:
 - Hardened the governed-content/import protocol with authority, lifecycle, idempotency, rollback, observability, UI-doc, and closure rules.
 - Narrowed the first-wave canon so derived report structures and optional abstractions do not overclaim shared ownership.
 - Added explicit MBB-aligned documentation and verification sync obligations for future execution waves.
+- Recorded the landed runnable-local verifier tranche so `SCN-177` and the accepted verifier reports are now first-class evidence for the shared governed-content/import substrate.

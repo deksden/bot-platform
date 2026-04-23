@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform under the active PRT-038 convergence program.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from framework extraction into shared-substrate hardening and product adoption support.
-version: 0.39.0
+version: 0.40.0
 date: 2026-04-23
 status: ACTIVE
 tags: [status, bot-platform, prt-036, prt-038, migration, convergence]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.40.0
+    date: 2026-04-23
+    changes: Completed the governed-content sync after the runnable verifier tranche: `SCN-177` is now discoverable across the scenario/navigation surfaces, `PRT-040` and the verification matrix acknowledge runnable local proof, and the next sync work no longer lists `T040-S1` as pending.
   - version: 0.39.0
     date: 2026-04-23
     changes: Completed the control-plane sync after the runnable verifier tranche: `SCN-176` is now discoverable across the scenario/navigation surfaces, `PRT-039` and the verification matrix acknowledge runnable local proof, and the next sync work no longer lists `T039-S1` as pending.
@@ -157,6 +160,7 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `.memory-bank/scenarios/SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md`
   - `.memory-bank/scenarios/SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md`
   - `.memory-bank/scenarios/SCN-176-shared-control-plane-channel-binding-and-readback-contract.md`
+  - `.memory-bank/scenarios/SCN-177-shared-governed-content-import-readback-contract.md`
 - remaining Wave 1B runtime contract docs that were previously missing:
   - `.memory-bank/spec/runtime/workflow-framework-contract.md`
   - `.memory-bank/spec/runtime/command-framework-contract.md`
@@ -333,40 +337,36 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
     - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-verifier-acceptance.md`
 - convergence-era verification inventory is now explicit:
   - `.memory-bank/plans/verification-matrix.md` now includes a `shared-control-plane-substrate` row anchored by `SCN-176`, with honest `partial` closure language that stops short of downstream adoption claims
+  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-governed-content-and-import-substrate` row anchored by `SCN-177`, with honest `partial` closure language that stops short of downstream adoption, hosted proof, or product-local activation claims
 
 ## Not landed yet
 
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
-- additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`, `SCN-176`) and the scenario-system/hosted-beta baseline
+- additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`, `SCN-176`, `SCN-177`) and the scenario-system/hosted-beta baseline
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 - broader runnable framework scenario depth beyond the first shared-substrate anchors
 - first product-local adoption proof under the hardened convergence packet
-- remaining serialized governed-content sync under the `T040-*` execution graph
-
 ## Current blockers before broader code extraction
 
 - downstream semver consumer adoption still belongs to later product-facing waves
 
 ## Immediate next document wave
 
-1. continue the next serialized sync slices under the phase-2 execution model and the phase-3 ops/runbook rules:
-   - `T040-S1-governed-content-sync`
-   - use the landed verifier evidence and scenario anchors as the upstream source of truth
-2. deepen convergence verification only where a clean framework-owned split exists:
+1. deepen convergence verification only where a clean framework-owned split exists:
    - extend shared control-plane proof beyond `SCN-176` only where additional platform-owned seams can be verified honestly
-   - add runnable framework anchors for the shared governed-content/import substrate where platform-owned proof is genuinely possible
-3. continue later framework scenario depth only where a clean framework-owned split exists:
+   - extend governed-content/import proof beyond `SCN-177` only where additional platform-owned seams can be verified honestly without overclaiming adoption
+2. continue later framework scenario depth only where a clean framework-owned split exists:
    - persistence-interface scenarios
    - command-framework split scenarios after Telegram/product semantics are stripped out
    - later scenario-system package/tier anchors beyond the current hosted/auth/workflow/runtime baseline
-4. sync framework status surfaces to the active convergence program:
+3. sync framework status surfaces to the active convergence program:
    - keep `current-status-report.md` aligned with real convergence progress
    - mirror shared-contract changes into product-local adoption docs before product implementation claims adoption
 
 ## Immediate next implementation wave
 
-1. finish the remaining serialized protocol/status/scenario sync in `bot-platform`
+1. use the synced protocol/status/scenario surfaces as the upstream base for later umbrella closeout and product adoption packets
 2. keep downstream product adoption and hosted proof explicitly separate from framework-local verifier closure
 3. perform the first real downstream consumer adoption in later product waves:
    - start with the narrow `research-workflow.ts` path before broader conversation-runtime adoption

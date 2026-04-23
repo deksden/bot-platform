@@ -2,12 +2,15 @@
 file: .memory-bank/scenarios/by-epic/index.md
 description: 'By-epic framework scenario index for bot-platform.'
 purpose: Group framework scenarios by platform-owned epic families.
-version: 0.5.0
+version: 0.6.0
 date: 2026-04-23
 status: DRAFT
 tags: [scenarios, epics, bot-platform]
 parent: .memory-bank/scenarios/index.md
 history:
+  - version: 0.6.0
+    date: 2026-04-23
+    changes: Added `SCN-177` to the EP-008 and EP-022 overlays so the shared governed-content/import verifier anchor is discoverable by epic navigation.
   - version: 0.5.0
     date: 2026-04-23
     changes: Added `SCN-176` to the EP-008 and EP-022 overlays so the shared control-plane verifier anchor is discoverable by epic navigation.
@@ -36,11 +39,11 @@ Primary anchors:
 ## Epic families (framework-only)
 
 - `EP-008 Scenarios And Verification`
-  - current anchors: [SCN-001](../SCN-001-typed-sdk-parity.md), [SCN-012](../SCN-012-scenario-auth-bootstrap.md), [SCN-041](../SCN-041-verdict-export-stability-and-provenance.md), [SCN-168](../SCN-168-openai-runtime-provider-registration-and-readiness-projection.md), [SCN-170](../SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md), [SCN-175](../SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md), [SCN-176](../SCN-176-shared-control-plane-channel-binding-and-readback-contract.md), [Scenario matrix](../scenario-matrix.md), [Verification matrix](../../plans/verification-matrix.md), `spec/scenarios/*`
+  - current anchors: [SCN-001](../SCN-001-typed-sdk-parity.md), [SCN-012](../SCN-012-scenario-auth-bootstrap.md), [SCN-041](../SCN-041-verdict-export-stability-and-provenance.md), [SCN-168](../SCN-168-openai-runtime-provider-registration-and-readiness-projection.md), [SCN-170](../SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md), [SCN-175](../SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md), [SCN-176](../SCN-176-shared-control-plane-channel-binding-and-readback-contract.md), [SCN-177](../SCN-177-shared-governed-content-import-readback-contract.md), [Scenario matrix](../scenario-matrix.md), [Verification matrix](../../plans/verification-matrix.md), `spec/scenarios/*`
 - `EP-011 Deterministic Hosted Scenarios And Browser Automation`
   - current anchors: [SCN-012](../SCN-012-scenario-auth-bootstrap.md), [SCN-116](../SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md), [SCN-118](../SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md), `spec/scenarios/hosted-beta-execution-model.md`, [Hosted scenarios](../hosted/index.md)
 - `EP-022 Agent Execution Platform And Multi-Plane Architecture`
-  - current anchors: [SCN-116](../SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md), [SCN-118](../SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md), [SCN-168](../SCN-168-openai-runtime-provider-registration-and-readiness-projection.md), [SCN-170](../SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md), [SCN-175](../SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md), [SCN-176](../SCN-176-shared-control-plane-channel-binding-and-readback-contract.md), `spec/project/agent-execution-platform-architecture.md`, `spec/architecture/*`, `spec/runtime/*`
+  - current anchors: [SCN-116](../SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md), [SCN-118](../SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md), [SCN-168](../SCN-168-openai-runtime-provider-registration-and-readiness-projection.md), [SCN-170](../SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md), [SCN-175](../SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md), [SCN-176](../SCN-176-shared-control-plane-channel-binding-and-readback-contract.md), [SCN-177](../SCN-177-shared-governed-content-import-readback-contract.md), `spec/project/agent-execution-platform-architecture.md`, `spec/architecture/*`, `spec/runtime/*`
 
 Reading rule:
 - the flat `SCN-*` file remains canonical;
