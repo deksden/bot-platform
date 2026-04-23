@@ -2,7 +2,7 @@
 file: .tasks/prt-038-wave1-shared-vocabulary-implementation/index.md
 description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content substrate slices.'
 purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, acceptance notes, and stage progress stay organized under one execution packet.'
-version: 1.4.0
+version: 1.5.0
 date: 2026-04-23
 status: ACTIVE
 tags: [tasks, protocol, implementation, prt-038, wave1, subagents]
@@ -57,6 +57,8 @@ It does not yet include:
 - `tasks/T040-05-governed-content-export-integration.md`
 - `tasks/T039-V1-control-plane-verifier.md`
 - `tasks/T040-V1-governed-content-verifier.md`
+- `tasks/T039-S1-control-plane-sync.md`
+- `tasks/T040-S1-governed-content-sync.md`
 
 ## Reserved lessons / insights slots
 
@@ -72,6 +74,8 @@ It does not yet include:
 - `lessons/010-lessons-learned.md` / `lessons/010-insights.md` — reserved for `T040-05` if needed
 - `lessons/011-lessons-learned.md` / `lessons/011-insights.md` — reserved for `T039-V1` if needed
 - `lessons/012-lessons-learned.md` / `lessons/012-insights.md` — reserved for `T040-V1` if needed
+- `lessons/013-lessons-learned.md` / `lessons/013-insights.md` — reserved for `T039-S1` if needed
+- `lessons/014-lessons-learned.md` / `lessons/014-insights.md` — reserved for `T040-S1` if needed
 
 ## Progress notes
 
