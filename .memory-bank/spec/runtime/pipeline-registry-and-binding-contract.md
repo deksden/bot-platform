@@ -2,8 +2,8 @@
 file: .memory-bank/spec/runtime/pipeline-registry-and-binding-contract.md
 description: 'Repo-local runtime spec for the pipeline registry: canonical pipeline identifiers, argument contracts, pipeline defaults, and validation rules for channel-bound pipeline binding.'
 purpose: Read when implementing pipeline selection and channel binding validation in `bot-platform`, and when deciding what belongs to pipeline definitions versus channel transport config.
-version: 1.3.0
-date: 2026-04-21
+version: 1.4.0
+date: 2026-04-23
 status: ACTIVE
 c4_level: L2
 tags: [runtime, pipelines, registry, binding, workflow-families, control-plane, bot-platform]
@@ -14,6 +14,9 @@ related_files:
   - .memory-bank/spec/architecture/boundaries.md
   - .memory-bank/spec/project/feature-area-boundaries.md
 history:
+  - version: 1.4.0
+    date: 2026-04-23
+    changes: Added the naming-alignment rule so new shared control-plane contracts keep `pipelineId` and `channelKind` aligned with the registry seam unless an explicit compatibility mapping is documented.
   - version: 1.3.0
     date: 2026-04-21
     changes: Migrated as repo-local framework pipeline-registry spec into `bot-platform` under PRT-036 Wave 92 with bot-platform ownership positioning and index linkage.
@@ -59,6 +62,18 @@ history:
 - code-backed;
 - versioned with the app;
 - exposed in read models and validation logic.
+
+## Naming alignment rule
+
+Shared platform-owned contracts around channel binding should keep:
+- `pipelineId` as the canonical pipeline selector name;
+- `channelKind` as the canonical transport selector name.
+
+Do not introduce alternate top-level names such as `pipelineRef` in new shared control-plane/runtime contracts unless an explicit compatibility mapping is required and documented.
+
+Reason:
+- this keeps control-plane vocabulary aligned with the existing registry seam and validation payloads;
+- it avoids unnecessary adapter code and drift in later channel-binding work.
 
 ## Product-instance boundary
 

@@ -2,8 +2,8 @@
 file: .memory-bank/spec/operations/git-flow.md
 description: Git flow for bot-platform - stable promotion path from feature work to protected branches and hosted verification when applicable.
 purpose: Read before creating branches or promoting changes so beta/prod releases stay predictable and traceable.
-version: 1.2.0
-date: 2026-04-19
+version: 1.3.0
+date: 2026-04-23
 status: ACTIVE
 tags: [spec, operations, git-flow, delivery, promotion]
 parent: .memory-bank/spec/operations/index.md
@@ -32,6 +32,7 @@ related_files:
 - Repo status: bootstrap and split-program execution under `PRT-036`.
 - Active implementation waves should be declared in repo-local protocol / epic / feature docs before parallel work starts.
 - Do not leave stale cross-repo planning references in this runbook; only link repo-local planning docs that actually exist.
+- Until `develop` is materially activated as a real local branch in `bot-platform`, protocol-driven execution waves may continue from a temporary feature branch over the current stable baseline, but they must mark that exception explicitly in the owning protocol/task docs and must not claim `develop`/beta promotion state from that branch alone.
 
 ## Branch naming
 

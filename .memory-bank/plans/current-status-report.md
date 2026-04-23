@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform under the active PRT-038 convergence program.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from framework extraction into shared-substrate hardening and product adoption support.
-version: 0.34.0
+version: 0.35.0
 date: 2026-04-23
 status: ACTIVE
 tags: [status, bot-platform, prt-036, prt-038, migration, convergence]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.35.0
+    date: 2026-04-23
+    changes: Recorded the first real PRT-038 implementation wave: bounded control-plane and governed-content vocabulary slices are now landed in `packages/core`, wave-local reports are captured, and the next implementation focus moves to channel-binding, API-envelope, source-processing, and import-lifecycle slices.
   - version: 0.34.0
     date: 2026-04-23
     changes: Recorded phase-3 ops/runbook alignment under PRT-038: the umbrella packet now includes git/worktree discipline, push/CI/hosted-trigger rules, deploy/preflight/rollout gates, and lessons-learned/insights routing with explicit subagent briefing requirements.
@@ -292,6 +295,10 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `PRT-038` now carries git/worktree/feature-branch discipline aligned to `develop -> main`
   - `PRT-038` now gates push, GitHub CI, Vercel/hosted builds, and release actions so remote triggers happen only when the wave actually needs them
   - `PRT-038` now carries deploy-truth, beta preflight, backup/rollback, and lessons-learned/insights routing rules, including mandatory subagent operational briefing requirements
+- the first real PRT-038 implementation slices are now landed in repo state:
+  - control-plane shared vocabulary in `packages/core/src/control-plane/**`
+  - governed-content shared vocabulary in `packages/core/src/governed-content/**`
+  - accepted wave reports in `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T039-01-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-01-report.md`, and `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-vocabulary-acceptance.md`
 - convergence-era verification inventory is now explicit:
   - `.memory-bank/plans/verification-matrix.md` now includes dedicated `shared-control-plane-substrate` and `shared-governed-content-and-import-substrate` rows with honest `design-hardened` status language
 
@@ -303,7 +310,7 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 - dedicated runnable framework scenario anchors for the shared control-plane and governed-content/import substrates
 - first product-local adoption proof under the hardened convergence packet
-- first real implementation tasks and verifier tasks under the new `T039-*` / `T040-*` execution graph
+- export-integration, verifier, and status-sync tasks under the new `T039-*` / `T040-*` execution graph
 
 ## Current blockers before broader code extraction
 
@@ -311,9 +318,12 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 
 ## Immediate next document wave
 
-1. open the first bounded implementation and verifier tasks under the phase-2 execution model, now constrained by the phase-3 ops/runbook rules:
-   - start with `T039-01-control-plane-vocabulary` and `T040-01-governed-content-vocabulary`
-   - keep write scopes disjoint, branch from `develop`, and reserve shared status surfaces for serialized sync tasks
+1. continue the next bounded implementation slices under the phase-2 execution model and the phase-3 ops/runbook rules:
+   - `T039-02-channel-binding-contract`
+   - `T039-03-control-plane-api-read-models`
+   - `T040-02-source-processing-bundle-contract`
+   - `T040-03-import-lifecycle-idempotency`
+   - keep write scopes disjoint and reserve shared status surfaces for serialized sync tasks
 2. deepen convergence verification only where a clean framework-owned split exists:
    - add runnable framework anchors for the shared control-plane substrate where platform-owned proof is genuinely possible
    - add runnable framework anchors for the shared governed-content/import substrate where platform-owned proof is genuinely possible
@@ -327,7 +337,8 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 
 ## Immediate next implementation wave
 
-1. move from protocol hardening into shared-substrate implementation in `bot-platform`
-2. perform the first real downstream consumer adoption in later product waves:
+1. advance from vocabulary slices into reusable behavior slices in `bot-platform`
+2. keep root export wiring, verifier tasks, and shared status-surface sync serialized behind their dedicated later tasks
+3. perform the first real downstream consumer adoption in later product waves:
    - start with the narrow `research-workflow.ts` path before broader conversation-runtime adoption
-3. use the hardened platform packet as the upstream base for product-repo cutover and later host/runtime separation work
+4. use the hardened platform packet as the upstream base for product-repo cutover and later host/runtime separation work

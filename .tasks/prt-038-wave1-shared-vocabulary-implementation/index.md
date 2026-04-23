@@ -2,7 +2,7 @@
 file: .tasks/prt-038-wave1-shared-vocabulary-implementation/index.md
 description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content vocabulary slices.'
 purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, and stage progress stay organized under one execution packet.'
-version: 1.0.0
+version: 1.1.0
 date: 2026-04-23
 status: ACTIVE
 tags: [tasks, protocol, implementation, prt-038, wave1, subagents]
@@ -58,3 +58,8 @@ It does not yet include:
 ## Progress notes
 
 - `2026-04-23`: implementation workspace opened after phase-3 ops alignment, initial documentation baseline committed, and the first two bounded implementation tasks selected for parallel execution.
+- `2026-04-23`: `T039-01` and `T040-01` accepted after main-agent review; local checks were re-run in the main branch context (`pnpm --filter @dd-bot-platform/core typecheck`, `pnpm --filter @dd-bot-platform/core build`, `pnpm check`) and passed.
+- `2026-04-23`: accepted findings were routed into owning Memory Bank docs:
+  - temporary pre-`develop` execution rule -> `spec/operations/git-flow.md`
+  - `pipelineId` / `channelKind` naming alignment -> `spec/runtime/pipeline-registry-and-binding-contract.md`, `spec/operations/control-plane-configuration-and-observability-surfaces.md`
+- `2026-04-23`: next implementation candidates are `T039-02`, `T039-03`, `T040-02`, and `T040-03`.
