@@ -124,6 +124,37 @@ export const traceArtifactRedactionStateSchema = z.enum([
   'blocked'
 ]);
 
+export const CONTROL_PLANE_OBSERVABILITY_EVENT_NAMES = [
+  'membership_read',
+  'membership_updated',
+  'session_revoked',
+  'channel_binding_validated',
+  'channel_binding_updated',
+  'channel_binding_rejected',
+  'policy_assignment_updated',
+  'diagnostics_read',
+  'trace_artifact_read',
+  'compat_fallback_used'
+] as const;
+
+export const controlPlaneObservabilityEventNameSchema = z.enum(
+  CONTROL_PLANE_OBSERVABILITY_EVENT_NAMES
+);
+
+export type ControlPlaneObservabilityEventName = z.infer<
+  typeof controlPlaneObservabilityEventNameSchema
+>;
+
+export const controlPlaneObservabilityEventLevelSchema = z.enum([
+  'info',
+  'warn',
+  'error'
+]);
+
+export type ControlPlaneObservabilityEventLevel = z.infer<
+  typeof controlPlaneObservabilityEventLevelSchema
+>;
+
 export const CONTROL_PLANE_SURFACE_IDS = [
   'cp-memberships',
   'cp-sessions',
