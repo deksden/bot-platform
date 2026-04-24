@@ -2,8 +2,8 @@
 file: .memory-bank/scenarios/index.md
 description: 'Framework scenarios hub for bot-platform.'
 purpose: Use as the repo-local navigation hub for framework-owned verification scenarios, contract checks, and shared evidence rules.
-version: 0.6.0
-date: 2026-04-23
+version: 0.7.0
+date: 2026-04-24
 status: DRAFT
 tags: [scenarios, bot-platform, framework, verification]
 parent: .memory-bank/index.md
@@ -12,6 +12,9 @@ children:
   - contracts/index.md
   - hosted/index.md
 history:
+  - version: 0.7.0
+    date: 2026-04-24
+    changes: Added `SCN-178` to the framework scenario navigation surfaces and updated the shared-control-plane posture so bounded diagnostics/readback proof is discoverable alongside the original channel-binding anchor.
   - version: 0.6.0
     date: 2026-04-23
     changes: Added `SCN-177` to the framework scenario navigation surfaces and updated the Wave 1B posture so the shared governed-content/import substrate no longer reads as a missing runnable anchor.
@@ -68,8 +71,9 @@ At this stage, the framework repo has canonical scenario-system and hosted-beta 
 - [SCN-175](SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md)
 - [SCN-176](SCN-176-shared-control-plane-channel-binding-and-readback-contract.md)
 - [SCN-177](SCN-177-shared-governed-content-import-readback-contract.md)
+- [SCN-178](SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md)
 
-The obvious Wave 1B framework gap is now materially closed for auth, runtime-kernel, workflow-framework hosted durability, support-package export/provenance anchors, and the first runnable verifier anchors for both shared substrates.
+The obvious Wave 1B framework gap is now materially closed for auth, runtime-kernel, workflow-framework hosted durability, support-package export/provenance anchors, the first runnable verifier anchors for both shared substrates, and the second bounded control-plane diagnostics/readback anchor.
 Deeper scenario families are still later-wave work.
 Until those additional flat scenario docs land:
 - use the spec hubs under `spec/scenarios/` and `spec/runtime/` as canonical contract anchors for still-thin families;
@@ -78,4 +82,4 @@ Until those additional flat scenario docs land:
 
 ## First wave outcome
 
-This hub now carries a real framework-owned baseline for the main Wave 1B contract families, including the first flat verifier anchors for the shared control-plane and governed-content/import substrates via [SCN-176](SCN-176-shared-control-plane-channel-binding-and-readback-contract.md) and [SCN-177](SCN-177-shared-governed-content-import-readback-contract.md), so future migration can add depth without pretending the framework scenario layer is still only a placeholder.
+This hub now carries a real framework-owned baseline for the main Wave 1B contract families, including the shared control-plane anchors [SCN-176](SCN-176-shared-control-plane-channel-binding-and-readback-contract.md) and [SCN-178](SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md) plus the governed-content/import anchor [SCN-177](SCN-177-shared-governed-content-import-readback-contract.md), so future migration can add depth without pretending the framework scenario layer is still only a placeholder.

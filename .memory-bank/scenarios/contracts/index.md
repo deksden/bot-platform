@@ -2,12 +2,15 @@
 file: .memory-bank/scenarios/contracts/index.md
 description: 'Framework contract scenario index for bot-platform.'
 purpose: Collect framework contract verification scenarios.
-version: 0.6.0
-date: 2026-04-23
+version: 0.7.0
+date: 2026-04-24
 status: DRAFT
 tags: [scenarios, contracts, bot-platform]
 parent: .memory-bank/scenarios/index.md
 history:
+  - version: 0.7.0
+    date: 2026-04-24
+    changes: Added `SCN-178` and expanded the shared-control-plane contract family so bounded diagnostics and trace readback proof is discoverable from the framework contract scenario hub.
   - version: 0.6.0
     date: 2026-04-23
     changes: Added `SCN-177` and the shared governed-content/import contract family so governed-content verifier proof is discoverable from the framework contract scenario hub.
@@ -41,6 +44,7 @@ Current flat framework contract docs:
 - [SCN-175 Explicit model policy and config resolution diagnostics without silent fallback](../SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md)
 - [SCN-176 Shared control-plane channel binding and readback contract](../SCN-176-shared-control-plane-channel-binding-and-readback-contract.md)
 - [SCN-177 Shared governed-content import readback contract](../SCN-177-shared-governed-content-import-readback-contract.md)
+- [SCN-178 Shared control-plane execution-run and trace-artifact readback contract](../SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md)
 
 ## Contract families (framework-only)
 
@@ -50,7 +54,7 @@ Current flat framework contract docs:
 - `auth-framework`
   - contract anchors: [SCN-012](../SCN-012-scenario-auth-bootstrap.md), `spec/security/auth-core.md`, `spec/security/auth-and-access.md`
 - `shared-control-plane-substrate`
-  - contract anchors: [SCN-176](../SCN-176-shared-control-plane-channel-binding-and-readback-contract.md), `plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`, `spec/operations/control-plane-configuration-and-observability-surfaces.md`, `spec/security/auth-and-access.md`
+  - contract anchors: [SCN-176](../SCN-176-shared-control-plane-channel-binding-and-readback-contract.md), [SCN-178](../SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md), `plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`, `spec/operations/control-plane-configuration-and-observability-surfaces.md`, `spec/security/auth-and-access.md`
 - `shared-governed-content-and-import-substrate`
   - contract anchors: [SCN-177](../SCN-177-shared-governed-content-import-readback-contract.md), `plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`, `spec/runtime/workflow-framework-contract.md`, `spec/runtime/persistence-interface-and-store-boundary.md`
 - `runtime-kernel`
