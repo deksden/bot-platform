@@ -2,8 +2,8 @@
 file: .tasks/prt-038-wave1-shared-vocabulary-implementation/index.md
 description: 'Execution workspace for the first implementation wave under PRT-038: shared control-plane and governed-content substrate slices.'
 purpose: 'Use as the working index for the first bounded implementation wave so subagent tasks, reports, lessons learned, acceptance notes, and stage progress stay organized under one execution packet.'
-version: 1.6.0
-date: 2026-04-23
+version: 1.7.0
+date: 2026-04-24
 status: COMPLETED
 tags: [tasks, protocol, implementation, prt-038, wave1, subagents]
 parent: .tasks/
@@ -34,7 +34,7 @@ Wave 1 remains intentionally lean.
 It does not include:
 - product-repo adoption work.
 - hosted proof.
-- cross-repo handshake closure (`G3`).
+- future shared-substrate expansion beyond this wave.
 - legacy retirement.
 
 ## Working folders
@@ -48,11 +48,11 @@ It does not include:
 - Git lane: temporary feature-wave execution on `feature/EP-022-prt-038-wave1`
 - Reason: `develop` is not yet activated as a real local branch in this repo state, so the wave starts from the current feature baseline with explicit local-only execution and no remote promotion by subagents
 - Remote trigger stance for this first pass: local-only; no push, PR, hosted deploy, or release actions by subagents
-- Final wave result: `accepted_partial_handoff`
+- Final wave result: `accepted_cross_repo_handoff`
 - Gate state at closeout:
   - `G1-control-plane-shared-contract-ready` reached
   - `G2-governed-content-shared-contract-ready` reached
-  - `G3-cross-repo-adoption-handshake` pending downstream mirrors and product-local proof
+  - `G3-cross-repo-adoption-handshake` reached after SellerAgent and Docoved linked downstream proof upstream
 
 ## Task set
 
@@ -112,4 +112,8 @@ It does not include:
 - `2026-04-23`: wave-1 bot-platform closeout was accepted:
   - `G1-control-plane-shared-contract-ready` reached
   - `G2-governed-content-shared-contract-ready` reached
-  - downstream product protocols are now unblocked, while `G3-cross-repo-adoption-handshake` remains pending product-local mirrors and owner-side adoption proof
+  - downstream product protocols were unblocked while `G3-cross-repo-adoption-handshake` remained pending product-local mirrors and owner-side adoption proof
+- `2026-04-24`: cross-repo handoff closeout was accepted:
+  - SellerAgent `PRT-008` is closed with stable-beta hosted acceptance, live-security proof, and material `SCN-167` end-to-end evidence
+  - Docoved Wave 05 owner-side governed-content/import proof is linked upstream
+  - `G3-cross-repo-adoption-handshake` reached and `PRT-038` is closed for this wave

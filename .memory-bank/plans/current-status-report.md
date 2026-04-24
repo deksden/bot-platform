@@ -1,13 +1,22 @@
 ---
 file: .memory-bank/plans/current-status-report.md
-description: 'Current status snapshot for bot-platform under the active PRT-038 convergence program.'
-purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from framework extraction into shared-substrate hardening and product adoption support.
-version: 0.45.0
+description: 'Current status snapshot for bot-platform after closed PRT-041 dependency-boundary cleanup.'
+purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from closed wave-1 convergence into PRT-041 dependency-boundary cleanup.
+version: 0.48.0
 date: 2026-04-24
 status: ACTIVE
-tags: [status, bot-platform, prt-036, prt-038, migration, convergence]
+tags: [status, bot-platform, prt-036, prt-038, prt-041, migration, convergence, dependency-boundary]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.48.0
+    date: 2026-04-24
+    changes: Closed PRT-041 after Docoved package graph cutover removed `@selleragent/api-contract`, `@selleragent/shared`, and `@selleragent/core` from Docoved source/manifests/lockfile with green local gates.
+  - version: 0.47.0
+    date: 2026-04-24
+    changes: Opened PRT-041 as the active post-handoff dependency-boundary cleanup protocol after identifying Docoved dependencies on SellerAgent package namespaces and stale active-protocol navigation wording.
+  - version: 0.46.0
+    date: 2026-04-24
+    changes: Finalized the platform convergence protocol after SellerAgent `PRT-008` closed: `G3` is now reached, `PRT-038`/`PRT-039`/`PRT-040` are closed for the wave-1 cross-repo handoff, and remaining work is framed as future protocols rather than an open platform blocker.
   - version: 0.45.0
     date: 2026-04-24
     changes: Synced downstream truth after the Docoved Wave 05 closeout: the first governed-content/import owner-side adoption proof is now linked back upstream, `G3` is narrowed to the remaining SellerAgent proof line, and status surfaces no longer describe Docoved adoption evidence as pending.
@@ -364,39 +373,39 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - accepted verifier report:
     - `.tasks/prt-038-wave3-control-plane-observability-event-proof/reports/T042-V1-report.md`
 - convergence-era verification inventory is now explicit:
-  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-control-plane-substrate` row anchored by `SCN-176`, `SCN-178`, and `SCN-221`, with honest `partial` closure language that stops short of downstream adoption claims while no longer treating observability-event evidence as a missing local blocker
-  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-governed-content-and-import-substrate` row anchored by `SCN-177`, with honest `partial` closure language that records the linked Docoved owner-side adoption proof while keeping hosted proof and product-local activation outside the framework closeout
+  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-control-plane-substrate` row anchored by `SCN-176`, `SCN-178`, and `SCN-221`, with wave-1 closure language that records the linked SellerAgent owner-side adoption proof while keeping future shared seams as later protocol work
+  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-governed-content-and-import-substrate` row anchored by `SCN-177`, with wave-1 closure language that records the linked Docoved owner-side adoption proof while keeping future hosted/product activation as later protocol work
 - wave-1 shared-substrate closeout is now accepted in `bot-platform`:
   - `G1-control-plane-shared-contract-ready` reached
   - `G2-governed-content-shared-contract-ready` reached
-  - `G3-cross-repo-adoption-handshake` remains intentionally pending until SellerAgent links its owner-side control-plane adoption proof back upstream
+  - `G3-cross-repo-adoption-handshake` reached after SellerAgent `PRT-008` closed and Docoved Wave 05 proof was linked upstream
   - closeout report:
     - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-shared-substrate-closeout.md`
-- downstream product-local adoption packets are now materially in flight:
-  - SellerAgent executes from `.memory-bank/plans/protocols/PRT-008-selleragent-shared-platform-adoption-control-plane-and-business-profile-governance.md`
+- downstream product-local adoption packets are now closed for this platform handoff:
+  - SellerAgent `PRT-008` is closed with stable-beta hosted acceptance, live security proof, and material `SCN-167` end-to-end evidence
   - Docoved `PRT-038` has now closed its owner-side governed-content/import adoption line through Wave 05 and linked that proof upstream
-  - the remaining honest blocker for `G3` is now the missing upstream-linked SellerAgent owner-side adoption/no-regression evidence
+  - the remaining work is future product/platform evolution, not an open `G3` blocker
 
 ## Not landed yet
 
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
 - additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`, `SCN-176`, `SCN-177`, `SCN-178`, `SCN-221`) and the scenario-system/hosted-beta baseline
-- broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 - broader runnable framework scenario depth beyond the first shared-substrate anchors
-- remaining SellerAgent owner-side adoption proof under the hardened convergence packet
+- future shared-substrate expansion beyond the closed wave-1 control-plane and governed-content handoff
+- dependency-boundary cleanup under `PRT-041` is now closed for the concrete defect: Docoved no longer imports or depends on `@selleragent/api-contract`, `@selleragent/shared`, or `@selleragent/core`; SellerAgent shared/config questions are retained as future design cleanup only if a real multi-product consumer appears
 
 ## Current blockers before broader code extraction
 
 - downstream semver consumer adoption still belongs to later product-facing waves
-- `G3-cross-repo-adoption-handshake` now depends on the remaining upstream-linked SellerAgent owner-side adoption/no-regression proof, not on more local-only bot-platform sync work
+- no open `PRT-038` platform blocker remains for the wave-1 cross-repo handoff
+- no active post-handoff package dependency blocker remains from `PRT-041`; broader extraction questions are future protocol material
 
 ## Immediate next document wave
 
-1. keep the umbrella packet synchronized with downstream owner-side evidence as it appears:
-   - SellerAgent is already executing from the local `PRT-008` packet
-   - Docoved has now linked the Wave 05 local `PRT-038` governed-content/import proof back upstream
-   - broader cross-repo work should treat `G3` as pending until the remaining SellerAgent owner-side proof links back upstream
+1. keep `PRT-041` closed and use its inventory as future-reference material:
+   - Docoved package graph cleanup is complete and recorded in local `PRT-039`
+   - SellerAgent shared/config inventory is retained as no-code classification unless a new real shared consumer appears
 2. deepen convergence verification only where a clean framework-owned split exists:
    - the current local control-plane proof contour is materially explicit through `SCN-176`, `SCN-178`, and `SCN-221`; extend it further only if a new platform-owned seam is identified honestly
    - extend governed-content/import proof beyond `SCN-177` only where additional platform-owned seams can be verified honestly without overclaiming adoption
@@ -404,13 +413,9 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
    - persistence-interface scenarios
    - command-framework split scenarios after Telegram/product semantics are stripped out
    - later scenario-system package/tier anchors beyond the current hosted/auth/workflow/runtime baseline
-4. sync framework status surfaces to the active convergence program:
-   - keep `current-status-report.md` aligned with real convergence progress
-   - mirror shared-contract changes into product-local adoption docs before product implementation claims adoption
 
 ## Immediate next implementation wave
 
-1. continue SellerAgent control-plane adoption from the reached `G1` shared-contract base until owner-side proof can link back upstream
-2. treat Docoved governed-content/import adoption as the first linked downstream proof for `G2`; reopen platform work there only if a newly shared seam or upstream contract drift appears
-3. keep hosted proof and product acceptance explicitly inside the product repos until they can link honest adoption evidence back upstream
-4. use the remaining SellerAgent product-local proof to reach `G3` and only then advance legacy retirement or broader cutover claims
+No immediate implementation wave remains under `PRT-038`.
+
+Next implementation work should open a new protocol if broader conversation, Telegram, status, or config extraction becomes necessary; no further implementation remains under `PRT-041`.

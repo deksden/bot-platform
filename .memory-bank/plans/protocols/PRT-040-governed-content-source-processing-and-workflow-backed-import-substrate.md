@@ -2,9 +2,9 @@
 file: .memory-bank/plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md
 description: Framework child protocol for extracting the shared governed-content substrate: connected sources, source revisions, source processing, import runs, processing artifacts, derived reports, and workflow-backed bot-mediated import entry.
 purpose: Use when implementing the shared governed-content and import layer so Docoved can adopt it first, later products can reuse it safely, and content ingest does not degrade into ad hoc admin chat editing or premature platformization of product truth.
-version: 1.3.0
+version: 1.4.0
 date: 2026-04-24
-status: ACTIVE
+status: CLOSED
 epic: EP-022
 tags: [protocol, bot-platform, governed-content, source-processing, import, workflow, product-line, shared-substrate]
 parent: .memory-bank/plans/protocols/index.md
@@ -30,6 +30,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-memory-bank-publication-and-active-snapshot-model.md
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/guides/explanation/business-profile-publication-model.md
 history:
+  - version: 1.4.0
+    date: 2026-04-24
+    changes: Closed the wave-1 governed-content/import substrate after the Docoved first-consumer owner-side proof was linked upstream; future non-Docoved reuse, hosted activation, or source-processing service extraction must open a new protocol.
   - version: 1.3.0
     date: 2026-04-24
     changes: Synced the protocol to the first linked downstream Docoved adoption proof: Wave 05 in `docoved-agent` now closes the owner-side `SCN-205` plus `SCN-208..213` local proof line, so follow-up narrows to hosted/product-activation evidence and any later non-Docoved reuse proof.
@@ -492,13 +495,12 @@ Outcome rule:
 
 ## Outcome
 
-- Result: `partial`
-- Current completion state: `implementation_in_progress`
+- Result: `closed`
+- Current completion state: `closed_wave1_first_consumer_handoff`
 - Follow-up needed:
-  - prove at least one consumer-side retry-safe import path before claiming stronger-than-`partial` closure for the lifecycle contract;
-  - land product-local governed UI-doc and review/activation evidence in the adopting repo before any adoption claim;
   - keep the linked Docoved first-consumer proof synchronized if shared-contract wording changes upstream;
-  - reuse in SellerAgent only where the semantics truly match;
+  - prove any later non-Docoved reuse, hosted activation, or source-processing service extraction in a new protocol;
+  - reuse in SellerAgent only where the semantics truly match and after product-local proof exists;
   - retire compatibility bridges only after additive migration proof and owner-side no-regression evidence.
 
 ## Memory Bank impact

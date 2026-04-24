@@ -2,9 +2,9 @@
 file: .memory-bank/plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md
 description: Framework child protocol for extracting the shared control-plane substrate: users, sessions, memberships, workspaces, product instances, channels, pipeline bindings, and the reusable management surfaces around them.
 purpose: Use when implementing the shared control-plane layer so auth, access, channel management, diagnostics, and reusable admin primitives converge under one explicit object model without prematurely centralizing all product UI or storage.
-version: 1.4.0
+version: 1.5.0
 date: 2026-04-24
-status: ACTIVE
+status: CLOSED
 epic: EP-022
 tags: [protocol, bot-platform, control-plane, auth, access, channels, product-line, shared-substrate]
 parent: .memory-bank/plans/protocols/index.md
@@ -30,6 +30,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/ui/role-based-employee-workflows.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-access-and-knowledge-source-binding-model.md
 history:
+  - version: 1.5.0
+    date: 2026-04-24
+    changes: Closed the wave-1 shared control-plane substrate after SellerAgent `PRT-008` linked owner-side adoption/no-regression proof back upstream; future channel/control-plane expansion must open a new protocol rather than extending this packet.
   - version: 1.4.0
     date: 2026-04-24
     changes: Added the third bounded control-plane verifier anchor (`SCN-221`) for observability-event evidence, promoted the diagnostics/readback flow out of the remaining local platform-owned blocker set, and narrowed follow-up language to consumer-side/product-side proof unless a new platform-owned seam is explicitly identified.
@@ -465,13 +468,12 @@ Outcome rule:
 
 ## Outcome
 
-- Result: `partial`
-- Current completion state: `implementation_in_progress`
+- Result: `closed`
+- Current completion state: `closed_wave1_cross_repo_handoff`
 - Follow-up needed:
-  - extend runnable control-plane proof beyond the current `SCN-176` / `SCN-178` / `SCN-221` anchors only where additional platform-owned seams can be verified honestly;
-  - add at least one consumer-side verification path before stronger-than-`partial` closure is claimed for channel binding and policy assignment;
-  - adopt the shared control-plane substrate in SellerAgent and Docoved while keeping product IA and product overlays local;
-  - retire compatibility bridges only after additive migration proof and owner-side no-regression evidence.
+  - extend runnable control-plane proof beyond the current `SCN-176` / `SCN-178` / `SCN-221` anchors only under a new platform-owned protocol;
+  - keep SellerAgent and Docoved product IA and product overlays local;
+  - retire compatibility bridges only after additive migration proof and owner-side no-regression evidence in future packets.
 
 ## Memory Bank impact
 
@@ -481,3 +483,4 @@ Outcome rule:
 - Recorded the first runnable local framework verifier anchor (`SCN-176`) without overstating downstream adoption or hosted proof.
 - Recorded the second runnable local framework verifier anchor (`SCN-178`) for bounded execution-run and trace-artifact readback without overstating downstream adoption or hosted proof.
 - Recorded the third runnable local framework verifier anchor (`SCN-221`) for bounded observability-event evidence without overstating downstream adoption or hosted proof.
+- Closed the wave-1 downstream adoption gate after SellerAgent `PRT-008` provided linked owner-side proof.

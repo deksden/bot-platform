@@ -2,12 +2,15 @@
 file: .memory-bank/spec/architecture/boundaries.md
 description: 'Framework/product boundary baseline for bot-platform.'
 purpose: Define what may live in bot-platform and what must remain product-local.
-version: 0.4.0
+version: 0.5.0
 date: 2026-04-23
 status: ACTIVE
 tags: [architecture, boundaries, bot-platform, framework]
 parent: .memory-bank/spec/architecture/index.md
 history:
+  - version: 0.5.0
+    date: 2026-04-24
+    changes: Added the PRT-041 package-identity and package-graph proof rule after the Docoved/SellerAgent dependency-boundary cleanup.
   - version: 0.4.0
     date: 2026-04-23
     changes: Extended the framework boundary baseline for the post-split three-layer model by naming the extracted shared control-plane and governed-content substrates as platform-owned areas while keeping product invariants local.
@@ -51,3 +54,9 @@ Package-scope rule:
 - SellerAgent-owned packages use `@selleragent/*`;
 - Docoved-owned packages use `@docoved-agent/*`;
 - any remaining `@sales-agent/*` packages are transitional mixed-repo names only and do not represent framework ownership.
+
+Package-identity proof rule:
+- source imports, package `name`, manifests, exports, TypeScript resolution, workspace lockfile, and local workspace symlinks must tell the same ownership story;
+- a product-local package publishing under another product scope is a boundary defect even if local code compiles;
+- after a workspace package rename, refresh both lockfile and local `node_modules` links before accepting typecheck results;
+- manifest-only dependencies with no source imports should be classified separately from runtime bridges and removed when package graph proof is green.
