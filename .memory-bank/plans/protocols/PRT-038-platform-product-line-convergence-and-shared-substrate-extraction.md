@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md
 description: 'Umbrella post-split protocol for converging the three repos toward a three-layer product-line architecture, extracting the shared cross-product substrate in bot-platform, and declaring the kickoff gate for product adoption protocols.'
 purpose: Use as the single active bot-platform execution contract after PRT-036 so shared-layer extraction, product handoff timing, and legacy retirement follow one explicit program instead of drifting across repos.
-version: 1.9.0
+version: 1.10.0
 date: 2026-04-24
 status: ACTIVE
 epic: EP-022
@@ -44,6 +44,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/sales-agent/.memory-bank/plans/protocols/PRT-034-docoved-burst-continuity-finalization-and-verification-repair.md
   - /Users/deksden/Documents/_Projects/sales-agent/.memory-bank/plans/protocols/PRT-035-docoved-semantic-folder-governance-indirect-references-temporal-defaults-and-duplicate-review.md
 history:
+  - version: 1.10.0
+    date: 2026-04-24
+    changes: Synced the umbrella packet to the verified downstream Docoved state: Wave 05 closed the first governed-content/import owner-side adoption line, upstream observation no longer stops at Wave 02, and `G3` is narrowed to the remaining SellerAgent owner-side proof.
   - version: 1.9.0
     date: 2026-04-24
     changes: Synced the umbrella packet to the real downstream state after the first handoff: SellerAgent `PRT-008` and Docoved `PRT-038` are now active local adoption packets, `G3` is clarified to require upstream-linkable owner-side adoption proof in addition to downstream mirrors, and the remaining follow-up is narrowed to cross-repo evidence rather than unopened product-local kickoff work.
@@ -690,12 +693,13 @@ Observed cross-repo status on `2026-04-24`:
   - remaining blocker is hosted beta / Supabase evidence, not missing local contract mirrors.
 - Docoved:
   - local adoption packet [PRT-038](/Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/plans/protocols/PRT-038-docoved-shared-platform-adoption-control-plane-and-workflow-backed-knowledge-import.md) is active and self-contained;
-  - implementation wave 02 is closed through snapshot identity, import-run projection, workflow-backed ingest execution, diagnostics/readback, and `dv-admin` thin-shell realignment;
-  - remaining work is later product-local implementation and proof, not missing local kickoff structure.
+  - Wave 05 is closed, and the local `pnpm docoved:verify:local:prt-038` pack now anchors owner-side proof for `SCN-205` plus `SCN-208..213`;
+  - the linked downstream boundary stays explicit: `SCN-204` remains outside the local `PRT-038` closure line and `SCN-220` remains `PRT-034`-owned.
 
 Interpretation rule:
 - the downstream mirror requirement for `G3` is now materially satisfied;
-- `G3` still remains pending because owner-side product adoption and no-regression proof has not yet been linked back upstream.
+- the first governed-content/import owner-side adoption proof is now linked upstream from Docoved;
+- `G3` still remains pending because SellerAgent control-plane owner-side adoption and no-regression proof has not yet been linked back upstream.
 
 ## Verifier workflow and closure expectations
 
@@ -905,7 +909,7 @@ MBB rule:
 - Current completion state: `implementation_in_progress`
 - Follow-up needed:
   - accept and link the first downstream SellerAgent owner-side adoption proof for the shared control-plane substrate;
-  - accept and link the first downstream Docoved owner-side adoption proof for the shared governed-content/import substrate;
+  - keep the linked downstream Docoved governed-content/import proof synchronized if shared-contract wording changes upstream;
   - keep hosted proof, UI-doc proof, and owner-side acceptance local to the product repos until those evidence packets can be linked upstream honestly;
   - retire legacy seams as owner-side proofs become available.
 
