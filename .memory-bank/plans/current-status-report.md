@@ -2,12 +2,15 @@
 file: .memory-bank/plans/current-status-report.md
 description: 'Current status snapshot for bot-platform under the active PRT-038 convergence program.'
 purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from framework extraction into shared-substrate hardening and product adoption support.
-version: 0.43.0
+version: 0.44.0
 date: 2026-04-24
 status: ACTIVE
 tags: [status, bot-platform, prt-036, prt-038, migration, convergence]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.44.0
+    date: 2026-04-24
+    changes: Recorded the third bounded control-plane verifier wave: `SCN-221` now anchors observability-event evidence, the control-plane verification row no longer treats event evidence as a missing local blocker, and the new wave-3 packet is closed with runnable proof.
   - version: 0.43.0
     date: 2026-04-24
     changes: Recorded the second bounded control-plane verifier wave: `SCN-178` now anchors execution-run and trace-artifact diagnostics/readback proof, the control-plane status surfaces acknowledge the deeper platform-owned verifier slice, and the local wave-2 packet is closed with runnable evidence.
@@ -171,6 +174,7 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `.memory-bank/scenarios/SCN-176-shared-control-plane-channel-binding-and-readback-contract.md`
   - `.memory-bank/scenarios/SCN-177-shared-governed-content-import-readback-contract.md`
   - `.memory-bank/scenarios/SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md`
+  - `.memory-bank/scenarios/SCN-221-shared-control-plane-observability-event-evidence-contract.md`
 - remaining Wave 1B runtime contract docs that were previously missing:
   - `.memory-bank/spec/runtime/workflow-framework-contract.md`
   - `.memory-bank/spec/runtime/command-framework-contract.md`
@@ -351,8 +355,13 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `.memory-bank/scenarios/SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md` is the new flat framework scenario anchor for that bounded slice
   - accepted verifier report:
     - `.tasks/prt-038-wave2-control-plane-diagnostics-proof/reports/T041-V2-report.md`
+- the third bounded control-plane observability-event verifier wave is now landed in repo state:
+  - `packages/core/src/control-plane/observability.ts` and `packages/api-contract/src/control-plane/observability.ts` now materialize the shared event contract for diagnostics/readback observability evidence
+  - `.memory-bank/scenarios/SCN-221-shared-control-plane-observability-event-evidence-contract.md` is the new flat framework scenario anchor for that bounded slice
+  - accepted verifier report:
+    - `.tasks/prt-038-wave3-control-plane-observability-event-proof/reports/T042-V1-report.md`
 - convergence-era verification inventory is now explicit:
-  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-control-plane-substrate` row anchored by `SCN-176` and `SCN-178`, with honest `partial` closure language that stops short of downstream adoption claims
+  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-control-plane-substrate` row anchored by `SCN-176`, `SCN-178`, and `SCN-221`, with honest `partial` closure language that stops short of downstream adoption claims while no longer treating observability-event evidence as a missing local blocker
   - `.memory-bank/plans/verification-matrix.md` now includes a `shared-governed-content-and-import-substrate` row anchored by `SCN-177`, with honest `partial` closure language that stops short of downstream adoption, hosted proof, or product-local activation claims
 - wave-1 shared-substrate closeout is now accepted in `bot-platform`:
   - `G1-control-plane-shared-contract-ready` reached
@@ -369,7 +378,7 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
 
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
-- additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`, `SCN-176`, `SCN-177`, `SCN-178`) and the scenario-system/hosted-beta baseline
+- additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`, `SCN-176`, `SCN-177`, `SCN-178`, `SCN-221`) and the scenario-system/hosted-beta baseline
 - broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
 - broader runnable framework scenario depth beyond the first shared-substrate anchors
 - first product-local adoption proof under the hardened convergence packet
@@ -386,7 +395,7 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
    - Docoved is already executing from the local `PRT-038` packet
    - broader cross-repo work should treat `G3` as pending until owner-side proof links back upstream
 2. deepen convergence verification only where a clean framework-owned split exists:
-   - extend shared control-plane proof beyond `SCN-176` and `SCN-178` only where additional platform-owned seams can be verified honestly
+   - the current local control-plane proof contour is materially explicit through `SCN-176`, `SCN-178`, and `SCN-221`; extend it further only if a new platform-owned seam is identified honestly
    - extend governed-content/import proof beyond `SCN-177` only where additional platform-owned seams can be verified honestly without overclaiming adoption
 3. continue later framework scenario depth only where a clean framework-owned split exists:
    - persistence-interface scenarios

@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md
 description: Framework child protocol for extracting the shared control-plane substrate: users, sessions, memberships, workspaces, product instances, channels, pipeline bindings, and the reusable management surfaces around them.
 purpose: Use when implementing the shared control-plane layer so auth, access, channel management, diagnostics, and reusable admin primitives converge under one explicit object model without prematurely centralizing all product UI or storage.
-version: 1.3.0
+version: 1.4.0
 date: 2026-04-24
 status: ACTIVE
 epic: EP-022
@@ -22,6 +22,7 @@ related_files:
   - .memory-bank/plans/verification-matrix.md
   - .memory-bank/scenarios/SCN-176-shared-control-plane-channel-binding-and-readback-contract.md
   - .memory-bank/scenarios/SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md
+  - .memory-bank/scenarios/SCN-221-shared-control-plane-observability-event-evidence-contract.md
   - .memory-bank/mbb/delivery-docs-guide.md
   - .memory-bank/mbb/scenario-docs-guide.md
   - .memory-bank/plans/adr/ADR-004-workspace-product-instance-pipeline-and-environment-terminology.md
@@ -29,6 +30,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/ui/role-based-employee-workflows.md
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-access-and-knowledge-source-binding-model.md
 history:
+  - version: 1.4.0
+    date: 2026-04-24
+    changes: Added the third bounded control-plane verifier anchor (`SCN-221`) for observability-event evidence, promoted the diagnostics/readback flow out of the remaining local platform-owned blocker set, and narrowed follow-up language to consumer-side/product-side proof unless a new platform-owned seam is explicitly identified.
   - version: 1.3.0
     date: 2026-04-24
     changes: Added the second bounded control-plane verifier anchor (`SCN-178`) for execution-run and trace-artifact readback, tightened the diagnostics verification contour around the now-landed proof, and removed the earlier placeholder wording that treated bounded diagnostics/readback evidence as still missing.
@@ -385,7 +389,7 @@ This protocol may not claim stronger closure than its verification contour can s
 | auth/session envelope | `auth-and-access.md`, `SCN-012`, `verification-matrix.md` `auth-framework` row | platform | named command set plus green repo baseline; security-sensitive changes require explicit hosted or `N/A` verdict |
 | membership semantics | this protocol, `auth-and-access.md`, product-local adoption protocol | shared contract in platform, overlay proof in product | product-local adoption proof required before `adopted` status |
 | channel binding and policy assignment | this protocol, `control-plane-configuration-and-observability-surfaces.md`, `SCN-176`, `verification-matrix.md` | platform | shared contract proof plus at least one consumer-side verification path |
-| diagnostics and trace readback | this protocol, runtime trace specs, `SCN-178`, `verification-matrix.md` | platform | bounded readback proof and observability event evidence |
+| diagnostics and trace readback | this protocol, runtime trace specs, `SCN-178`, `SCN-221`, `verification-matrix.md` | platform | bounded readback proof and observability event evidence |
 | protected-shell and governed UI surfaces | this protocol plus product-local UI-doc packet | product | product-local IA/screen/automation docs must be updated in the same wave |
 
 Scenario maturity rule:
@@ -452,8 +456,10 @@ Outcome rule:
 - `delivery-standards.md`
 - `SCN-176-shared-control-plane-channel-binding-and-readback-contract.md`
 - `SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md`
+- `SCN-221-shared-control-plane-observability-event-evidence-contract.md`
 - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T039-V1-report.md`
 - `.tasks/prt-038-wave2-control-plane-diagnostics-proof/reports/T041-V2-report.md`
+- `.tasks/prt-038-wave3-control-plane-observability-event-proof/reports/T042-V1-report.md`
 - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-verifier-acceptance.md`
 - `.tasks/prt-038-phase1-review/reports/phase1-consolidated-review.md`
 
@@ -462,9 +468,8 @@ Outcome rule:
 - Result: `partial`
 - Current completion state: `implementation_in_progress`
 - Follow-up needed:
-  - extend runnable control-plane proof beyond the current `SCN-176` / `SCN-178` anchors only where additional platform-owned seams can be verified honestly;
+  - extend runnable control-plane proof beyond the current `SCN-176` / `SCN-178` / `SCN-221` anchors only where additional platform-owned seams can be verified honestly;
   - add at least one consumer-side verification path before stronger-than-`partial` closure is claimed for channel binding and policy assignment;
-  - add observability event evidence where this protocol expects it before stronger closure is claimed for diagnostics and trace readback;
   - adopt the shared control-plane substrate in SellerAgent and Docoved while keeping product IA and product overlays local;
   - retire compatibility bridges only after additive migration proof and owner-side no-regression evidence.
 
@@ -475,3 +480,4 @@ Outcome rule:
 - Added explicit MBB-aligned documentation and verification sync obligations for future execution waves.
 - Recorded the first runnable local framework verifier anchor (`SCN-176`) without overstating downstream adoption or hosted proof.
 - Recorded the second runnable local framework verifier anchor (`SCN-178`) for bounded execution-run and trace-artifact readback without overstating downstream adoption or hosted proof.
+- Recorded the third runnable local framework verifier anchor (`SCN-221`) for bounded observability-event evidence without overstating downstream adoption or hosted proof.
