@@ -2,8 +2,8 @@
 file: .memory-bank/spec/operations/private-registry-package-bridge.md
 description: Operational contract for preparing and publishing framework-safe bot-platform packages through the accepted npm package bridge.
 purpose: Read before replacing vendored product mirrors with published framework packages so package metadata, publication expectations, verification, and scope boundaries stay aligned with the current bridge ADRs.
-version: 1.2.0
-date: 2026-04-20
+version: 1.3.0
+date: 2026-04-25
 status: ACTIVE
 tags: [spec, operations, package-registry, bot-platform, prt-036]
 parent: .memory-bank/spec/operations/index.md
@@ -16,8 +16,13 @@ related_files:
   - .github/workflows/release-packages.yml
   - scripts/publish-private-packages.mjs
   - /Users/deksden/Documents/_Projects/bot-platform/packages/api-contract/package.json
+  - /Users/deksden/Documents/_Projects/bot-platform/packages/channel-runtime/package.json
+  - /Users/deksden/Documents/_Projects/bot-platform/packages/core/package.json
   - /Users/deksden/Documents/_Projects/bot-platform/packages/scenario-system/package.json
 history:
+  - version: 1.3.0
+    date: 2026-04-25
+    changes: Added PRT-042 package-readiness lessons for allowlist/Changesets coupling and standalone product consumption blockers.
   - version: 1.2.0
     date: 2026-04-20
     changes: Updated the bridge contract after the first real npm publish attempt failed with `E402` for restricted scoped packages; the accepted bridge for the first framework-safe slices is now public scoped npm under `@dd-bot-platform/*`.
@@ -81,10 +86,15 @@ A framework package is publish-ready only when all of the following are true:
   - no unnecessary build residue such as `.tsbuildinfo`
 - package-local `typecheck` and `build` pass
 - `pnpm publish --dry-run --no-git-checks` is reviewed for the package before first real publish
-- Changesets and the release workflow recognize the package as part of the controlled publish set
+- Changesets, `.changeset/README.md`, `scripts/publish-private-packages.mjs`, and the release workflow recognize the package as part of the controlled publish set
 
 Publish-ready does not mean "full release automation is already built".
 It only means the seam is shaped and documented well enough to become a deliberate published package instead of a vendored exception.
+
+Allowlist rule:
+- adding a publishable package is not complete until the package manifest, root build graph, Changeset, publish allowlist, and local dry-run publish all agree;
+- a package can build locally and still be absent from the release bridge if `scripts/publish-private-packages.mjs` is not updated;
+- keep `.changeset/README.md` aligned with the allowlisted package set so operators know which packages participate in the controlled bridge.
 
 ## What must stay out of scope
 
@@ -123,6 +133,15 @@ Secret ownership remains repo-local:
 - Vendored exceptions must be removed once the same seam is proven through the published npm bridge.
 - `bot-platform` uses Changesets plus a controlled publish allowlist to keep that versioning explicit and auditable.
 
+Standalone product repos must not commit sibling-path dependencies such as `file:../bot-platform/packages/<package>` as a substitute for publication.
+
+Allowed product consumption paths:
+- published package availability on the intended registry;
+- a deliberately documented temporary vendored exception with owner, provenance, and removal trigger;
+- an explicitly sanctioned cross-repo bridge that is safe for ordinary clones and CI.
+
+Unsafe local convenience paths may be used only as throwaway local proof and must not be committed.
+
 ## Verification baseline
 
 For the first publish-ready tranche, run at least:
@@ -130,11 +149,15 @@ For the first publish-ready tranche, run at least:
 - `pnpm typecheck`
 - `pnpm build`
 - `pnpm --filter @dd-bot-platform/api-contract pack --pack-destination <tmp-dir>`
+- `pnpm --filter @dd-bot-platform/channel-runtime pack --pack-destination <tmp-dir>` when channel-runtime changes
+- `pnpm --filter @dd-bot-platform/core pack --pack-destination <tmp-dir>` when core changes
 - `pnpm --filter @dd-bot-platform/scenario-system pack --pack-destination <tmp-dir>`
 - inspect the packed `package/package.json` for each tarball
 - `pnpm changeset status`
 - `pnpm changeset:publish --dry-run`
 - `pnpm --filter @dd-bot-platform/api-contract publish --dry-run --no-git-checks`
+- `pnpm --filter @dd-bot-platform/channel-runtime publish --dry-run --no-git-checks` when channel-runtime changes
+- `pnpm --filter @dd-bot-platform/core publish --dry-run --no-git-checks` when core changes
 - `pnpm --filter @dd-bot-platform/scenario-system publish --dry-run --no-git-checks`
 
 Packed-manifest inspection is required because internal workspace dependencies must be validated in the packed artifact form that consumers/installers will actually see.

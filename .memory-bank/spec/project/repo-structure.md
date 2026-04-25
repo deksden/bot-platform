@@ -2,8 +2,8 @@
 file: .memory-bank/spec/project/repo-structure.md
 description: 'Target repository structure for bot-platform as a framework monorepo.'
 purpose: Use when placing new framework packages, docs, and support apps so bot-platform grows as a clean framework repo rather than a second mixed product monorepo.
-version: 0.2.0
-date: 2026-04-19
+version: 0.3.0
+date: 2026-04-25
 status: DRAFT
 tags: [repo-structure, bot-platform, framework, monorepo]
 parent: .memory-bank/spec/project/index.md
@@ -12,6 +12,9 @@ related_files:
   - .memory-bank/spec/project/feature-area-boundaries.md
   - .memory-bank/plans/protocols/index.md
 history:
+  - version: 0.3.0
+    date: 2026-04-25
+    changes: Added `packages/channel-runtime` as a framework package and documented the thin-seam placement rule from PRT-042.
   - version: 0.2.0
     date: 2026-04-20
     changes: Added the canonical package-naming policy for the split program: framework-owned packages use `@dd-bot-platform/*`, product scopes stay out of bot-platform, and package renaming should happen as each seam migrates rather than as one giant end-only rename.
@@ -49,6 +52,7 @@ apps/
 
 packages/
   api-contract/        # framework namespaces, envelopes, contract catalog plumbing
+  channel-runtime/     # canonical response-document contract and pure channel render helpers
   client-sdk/          # base transport and typed invoke shell
   core/                # framework kernel, shared runtime seams, command/auth/workflow framework code
   scenario-system/     # shared scenario taxonomy, evidence tooling, semantic-eval shell
@@ -143,6 +147,27 @@ Allowed here:
 Not allowed here:
 - Seller customer/commerce/follow-up truth;
 - Docoved grounded-answering product truth.
+
+### `channel-runtime`
+
+Allowed here:
+- canonical response-document types;
+- public/operator/debug visibility helpers;
+- citation/source-ref types for channel-neutral delivery;
+- minimal markdown/plaintext pure render helpers;
+- type-level reuse or re-export of existing `core` and `api-contract` refs.
+
+Not allowed here:
+- command registry/dispatch/access policy;
+- outbound delivery orchestration;
+- provider SDKs or provider payload types;
+- email/Telegram/web adapter behavior;
+- product answer semantics;
+- DB, migrations, read models, or UI screens.
+
+Package-placement rule:
+- keep this package as a thin seam;
+- if a future addition would require product/provider/runtime side effects, open a follow-up protocol instead of broadening the package opportunistically.
 
 ### `scenario-system`
 

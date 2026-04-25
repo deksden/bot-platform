@@ -2,8 +2,8 @@
 file: .memory-bank/spec/project/feature-area-boundaries.md
 description: 'Framework feature-area boundaries for bot-platform.'
 purpose: Define which framework areas bot-platform owns and where product repos must take over.
-version: 0.2.0
-date: 2026-04-23
+version: 0.3.0
+date: 2026-04-25
 status: ACTIVE
 tags: [feature-areas, boundaries, bot-platform, framework]
 parent: .memory-bank/spec/project/index.md
@@ -12,6 +12,9 @@ related_files:
   - .memory-bank/spec/project/repo-structure.md
   - .memory-bank/spec/project/three-layer-product-line-architecture.md
 history:
+  - version: 0.3.0
+    date: 2026-04-25
+    changes: Added the channel-runtime feature area after PRT-042 implementation and recorded the thin-seam rule for canonical response documents and pure rendering helpers.
   - version: 0.2.0
     date: 2026-04-23
     changes: Updated the feature-area map for the post-split three-layer model by explicitly adding the shared control-plane and governed-content/import substrates as platform-owned areas.
@@ -61,6 +64,25 @@ Owns:
 - command registry primitives;
 - command execution hooks;
 - projection hooks and diagnostics patterns.
+
+### `channel-runtime`
+
+Owns:
+- canonical response-document vocabulary;
+- public/operator/debug response visibility semantics;
+- citations and source-reference shape for channel-neutral delivery;
+- minimal render-target vocabulary;
+- small pure markdown/plaintext helpers when they remove real duplication.
+
+Does not own:
+- command dispatch or command access policy;
+- transport senders, delivery orchestration, provider retries, or threading state;
+- provider payloads such as Telegram parse mode or email headers;
+- product answer semantics, product source selection, DB tables, migrations, or UI screens.
+
+Thin-seam rule:
+- `channel-runtime` must reuse or re-export existing `core` / `api-contract` vocabulary for execution refs, channel refs, capability families, and read-model/schema terms;
+- it must not mint parallel framework vocabulary just because the package is channel-facing.
 
 ### `workflow-framework`
 
