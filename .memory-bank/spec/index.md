@@ -2,8 +2,8 @@
 file: .memory-bank/spec/index.md
 description: 'Spec hub для bot-platform: framework architecture, project architecture, package contracts, scenario system и repo-level placement rules.'
 purpose: Читать для понимания того, как должен быть устроен `bot-platform` как framework-only monorepo, включая project-level architecture framing и обязательные нормативные docs.
-version: 0.17.0
-date: 2026-04-23
+version: 0.18.0
+date: 2026-04-25
 status: DRAFT
 c4_level: L1
 tags: [spec, bot-platform, architecture, contracts, framework]
@@ -24,6 +24,7 @@ children:
   - project/repo-structure.md
   - project/feature-area-boundaries.md
   - runtime/index.md
+  - runtime/channel-runtime-contract.md
   - engineering/index.md
   - engineering/delivery-standards.md
   - engineering/coding-style.md
@@ -36,6 +37,9 @@ children:
   - scenarios/index.md
   - operations/index.md
 history:
+  - version: 0.18.0
+    date: 2026-04-25
+    changes: Linked the first-wave channel-runtime runtime contract created for PRT-042 documentation hardening.
   - version: 0.17.0
     date: 2026-04-23
     changes: Linked the new project-level three-layer product-line architecture doc so the post-split shared-substrate placement model is part of the canonical spec navigation.
@@ -116,7 +120,7 @@ history:
 - [Architecture hub](architecture/index.md): glossary, system context, container map и dependency rules для framework repo, включая [architecture guardrails](architecture/architecture-guardrails.md), [containers index](architecture/containers/index.md), [core](architecture/containers/core.md), [server](architecture/containers/server.md), [workflow host](architecture/containers/workflow-host.md), [db/projections](architecture/containers/db-and-projections.md), and [web/CLI surfaces](architecture/containers/web-and-cli-surfaces.md).
 - [Framework boundaries](architecture/boundaries.md): главный запретительный документ про то, что может и не может жить в `bot-platform`.
 - [Project docs](project/index.md): repo shape, project-level architecture framing, product-line layer model, package catalog, feature-area ownership и naming/placement conventions, включая [agent execution platform architecture](project/agent-execution-platform-architecture.md) и [three-layer product-line architecture](project/three-layer-product-line-architecture.md).
-- [Runtime docs](runtime/index.md): execution kernel, decision-explanation envelope, execution traces/token accounting, trace-artifact governance, pipeline registry/binding contract, persistence-interface/store-boundary contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
+- [Runtime docs](runtime/index.md): execution kernel, channel runtime contract, decision-explanation envelope, execution traces/token accounting, trace-artifact governance, pipeline registry/binding contract, persistence-interface/store-boundary contract, auth framework, command framework, workflow framework, prompt/config/observability seams и shared runtime contracts.
 - [Engineering docs](engineering/index.md): framework delivery and coding standards, включая [delivery standards](engineering/delivery-standards.md) и [coding style](engineering/coding-style.md).
 - [Security docs](security/index.md): framework-owned auth and access vocabulary, auth-flow primitives, and boundary contracts, включая [auth core](security/auth-core.md) и [auth and access](security/auth-and-access.md).
 - [Client API docs](client-api/index.md): operation catalog, schemas, typed errors и client-sdk boundary, включая [API namespace registry](client-api/api-namespace-registry.md) и landed [typed client API and SDK](client-api/typed-client-api-and-sdk.md).
@@ -150,6 +154,7 @@ history:
 - `engineering/delivery-standards.md`
 - `engineering/coding-style.md`
 - `runtime/agent-execution-kernel.md`
+- `runtime/channel-runtime-contract.md`
 - `runtime/decision-explanation-envelope.md`
 - `runtime/execution-traces-and-token-accounting.md`
 - `runtime/pipeline-registry-and-binding-contract.md`
@@ -200,6 +205,7 @@ Project section уже должен содержать `bot-platform`-specific d
 - execution kernel;
 - auth framework;
 - command framework;
+- channel-neutral response document and rendering contract;
 - workflow framework;
 - trace/evidence contracts;
 - prompt/config/observability seams, если они описывают framework behavior.

@@ -2,8 +2,8 @@
 file: .memory-bank/spec/runtime/index.md
 description: 'Runtime hub for bot-platform.'
 purpose: Hold framework runtime contracts for kernels, providers, pipelines, prompts, workflow, auth, command, and shared scenario-system layers.
-version: 0.8.0
-date: 2026-04-22
+version: 0.9.0
+date: 2026-04-25
 status: DRAFT
 tags: [runtime, bot-platform, contracts]
 parent: .memory-bank/spec/index.md
@@ -12,6 +12,7 @@ children:
   - decision-explanation-envelope.md
   - execution-traces-and-token-accounting.md
   - pipeline-registry-and-binding-contract.md
+  - channel-runtime-contract.md
   - command-framework-contract.md
   - persistence-interface-and-store-boundary.md
   - trace-artifact-governance.md
@@ -20,6 +21,9 @@ children:
 target_audience: [developers, ai-agents]
 automation_ready: true
 history:
+  - version: 0.9.0
+    date: 2026-04-25
+    changes: Linked the first-wave channel-runtime contract for canonical response documents and minimal rendering primitives under PRT-042.
   - version: 0.8.0
     date: 2026-04-22
     changes: Added the repo-local workflow-framework and command-framework runtime contract docs and linked them from the runtime hub (PRT-036 Wave 158).
@@ -54,6 +58,7 @@ This section is reserved for framework runtime contracts:
 - pipeline registry;
 - prompt manager and prompt contracts;
 - conversation kernel abstractions;
+- channel-neutral response document and rendering contracts;
 - workflow framework;
 - auth and command framework seams;
 - persistence interfaces and store-boundary contracts;
@@ -64,6 +69,7 @@ Product runtime overlays stay out of this repo.
 ## Current runtime docs
 
 - [Agent execution kernel](agent-execution-kernel.md): defines the shared kernel contracts, workflow-family boundary, capability model, execution split, and trace requirements.
+- [Channel runtime contract](channel-runtime-contract.md): defines canonical response documents, visibility, citations/source refs, minimal render-target vocabulary, and first-wave exclusions for commands, delivery orchestration, DB, and UI.
 - [Command framework contract](command-framework-contract.md): defines the framework-owned command envelope, parser/registry/dispatch primitives, machine-readable diagnostics, and explicit product-owned exclusions.
 - [Decision explanation envelope](decision-explanation-envelope.md): defines the framework-shared final-outcome explainability contract (`subject`, `final_outcome`, `summaries`, `decisive_factors`, `missing_requirements`, `provenance`) and projection boundaries.
 - [Execution traces and token accounting](execution-traces-and-token-accounting.md): defines framework-owned run/step/attempt trace layers, artifact linkage, usage accounting fields, and the billing boundary.

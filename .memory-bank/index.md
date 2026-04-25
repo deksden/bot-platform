@@ -2,8 +2,8 @@
 file: .memory-bank/index.md
 description: 'Memory Bank корневой вход для bot-platform: framework-only navigation по specs, planning, guides, scenario system и MBB standards.'
 purpose: Читать как главный entrypoint в документацию `bot-platform`, чтобы быстро понять архитектурную правду framework-репозитория и не смешивать ее с product-owned truth.
-version: 0.5.0
-date: 2026-04-24
+version: 0.6.0
+date: 2026-04-25
 status: DRAFT
 c4_level: L1
 tags: [memory-bank, navigation, bot-platform, framework, mbb, repo-split]
@@ -15,6 +15,9 @@ children:
   - scenarios/index.md
   - mbb/index.md
 history:
+  - version: 0.6.0
+    date: 2026-04-25
+    changes: Added PRT-042 as the active channel-runtime planning entrypoint and linked the new runtime channel-runtime contract.
   - version: 0.5.0
     date: 2026-04-24
     changes: Reframed PRT-041 as closed after dependency-boundary cleanup completed.
@@ -52,12 +55,12 @@ history:
 - [Specs hub](spec/index.md): основной нормативный слой framework-репозитория.
 - [Architecture hub](spec/architecture/index.md): top-down карта системы, glossary, container model и framework/product boundaries.
 - [Project structure](spec/project/repo-structure.md): on-disk shape `bot-platform` и правила package/container placement.
-- [Runtime and framework contracts](spec/runtime/index.md): execution kernel, auth/command/workflow framework contracts и shared runtime semantics.
+- [Runtime and framework contracts](spec/runtime/index.md): execution kernel, channel-runtime contract, auth/command/workflow framework contracts и shared runtime semantics.
 - [Security specs](spec/security/index.md): framework-owned auth primitives, access-check boundaries и reusable auth-core contract.
 - [Client API specs](spec/client-api/index.md): typed operation catalog, SDK boundary и shared client-facing contracts.
 - [Scenario specs](spec/scenarios/index.md): canonical scenario system, evidence model и hosted verification layering.
 - [Plans hub](plans/index.md): framework-only ADRs, epics, protocols и delivery status.
-- [Protocols hub](plans/protocols/index.md): cross-epic migration waves, включая closed split/convergence protocols `PRT-036` / `PRT-038` and closed dependency-boundary cleanup protocol `PRT-041`.
+- [Protocols hub](plans/protocols/index.md): cross-epic migration waves, включая active channel-runtime protocol `PRT-042`, closed split/convergence protocols `PRT-036` / `PRT-038`, and closed dependency-boundary cleanup protocol `PRT-041`.
 - [Guides hub](guides/index.md): Diataxis-layer для framework consumers, maintainers и product repos.
 - [MBB rules](mbb/index.md): canonical documentation standards upstream, которые затем mirror'ятся в product repos.
 
@@ -78,6 +81,7 @@ history:
 - `plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
 - `plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
 - `plans/protocols/PRT-041-cross-repo-contract-dependency-boundary-realignment.md`
+- `plans/protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md`
 - `guides/index.md`
 - `mbb/index.md`
 
@@ -87,7 +91,8 @@ history:
 2. Затем прочитать `spec/architecture/boundaries.md` и `spec/project/repo-structure.md`.
 3. После этого перейти в `spec/client-api/index.md`, `spec/runtime/index.md` и `spec/scenarios/index.md`.
 4. Затем прочитать `spec/security/index.md` и `spec/security/auth-core.md`.
-5. Для закрытого dependency-boundary cleanup и будущих boundary decisions прочитать `plans/protocols/PRT-041-cross-repo-contract-dependency-boundary-realignment.md`.
-6. `plans/adr/ADR-005-three-layer-product-line-architecture-and-shared-substrate-boundary.md` и `plans/protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md` читать как закрытую architecture/handoff baseline.
-7. `plans/protocols/PRT-036-platform-framework-and-product-repo-split.md` читать как закрытую split lineage, а не как активный execution contract.
-8. Для authoring discipline и mirror policy использовать `mbb/index.md`.
+5. Для активной channel-runtime доработки прочитать `plans/protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md` и `spec/runtime/channel-runtime-contract.md`.
+6. Для закрытого dependency-boundary cleanup и будущих boundary decisions прочитать `plans/protocols/PRT-041-cross-repo-contract-dependency-boundary-realignment.md`.
+7. `plans/adr/ADR-005-three-layer-product-line-architecture-and-shared-substrate-boundary.md` и `plans/protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md` читать как закрытую architecture/handoff baseline.
+8. `plans/protocols/PRT-036-platform-framework-and-product-repo-split.md` читать как закрытую split lineage, а не как активный execution contract.
+9. Для authoring discipline и mirror policy использовать `mbb/index.md`.

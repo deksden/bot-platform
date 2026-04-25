@@ -2,8 +2,8 @@
 file: .memory-bank/plans/index.md
 description: 'Plans hub для bot-platform: framework epics, ADRs, protocols, current status и verification planning.'
 purpose: Читать для понимания delivery contour `bot-platform`, не смешивая framework delivery с SellerAgent и Docoved product waves.
-version: 0.5.0
-date: 2026-04-24
+version: 0.6.0
+date: 2026-04-25
 status: DRAFT
 tags: [plans, bot-platform, adr, epics, protocols, delivery]
 parent: .memory-bank/index.md
@@ -14,6 +14,9 @@ children:
   - protocols/index.md
   - verification-matrix.md
 history:
+  - version: 0.6.0
+    date: 2026-04-25
+    changes: Added PRT-042 as the active channel-runtime protocol after review hardening and linked its runtime-spec obligation.
   - version: 0.5.0
     date: 2026-04-24
     changes: Reframed PRT-041 as closed and moved broader extraction to future-protocol guidance.
@@ -69,11 +72,33 @@ history:
 - `protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
 - `protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
 - `protocols/PRT-041-cross-repo-contract-dependency-boundary-realignment.md`
+- `protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md`
 - `verification-matrix.md`
 
 ## Immediate planning priorities
 
-### 1. Closed dependency-boundary cleanup
+### 1. Active channel-runtime contract hardening
+
+`protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md` is the active framework protocol for the shared channel-runtime seam.
+
+Current first-wave scope:
+- canonical response documents;
+- public/operator/debug visibility;
+- citations/source refs;
+- minimal render-target vocabulary;
+- pure markdown/plaintext helper only if a first consumer needs it;
+- product adoption proof in Docoved before broader extraction.
+
+Deferred by design:
+- command runtime extraction;
+- outbound delivery orchestration;
+- threading abstractions;
+- framework-owned HTML rendering;
+- DB/UI surfaces.
+
+The stable runtime vocabulary belongs in `spec/runtime/channel-runtime-contract.md`; product mappings belong in product-local Memory Banks.
+
+### 2. Closed dependency-boundary cleanup
 
 `protocols/PRT-041-cross-repo-contract-dependency-boundary-realignment.md` is now closed for the concrete post-handoff package-boundary defect.
 
@@ -83,7 +108,7 @@ Closed result:
 - Memory Bank navigation treats adoption packets as closed baselines;
 - `sales-agent` links remain lineage rather than normative sources.
 
-### 2. Keep closed convergence docs as baseline
+### 3. Keep closed convergence docs as baseline
 
 `protocols/PRT-036-platform-framework-and-product-repo-split.md` остается closed lineage for the repo split.
 `protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md` остается closed baseline for the three-layer handoff.
@@ -92,7 +117,7 @@ Closed detailed child packets:
 - `protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
 - `protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
 
-### 3. Separate framework epics from product epics
+### 4. Separate framework epics from product epics
 
 В `epics/index.md` должны остаться только инициативы, которые после split-а по-настоящему принадлежат `bot-platform`, например:
 - foundation/repo topology;
@@ -104,7 +129,7 @@ Closed detailed child packets:
 
 SellerAgent и Docoved epic families здесь быть не должны.
 
-### 4. Keep one framework status snapshot
+### 5. Keep one framework status snapshot
 
 `current-status-report.md` нужен сразу, чтобы не потерять ответ на вопросы:
 - какие packages уже существуют в skeleton;
