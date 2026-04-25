@@ -2,8 +2,8 @@
 file: .memory-bank/scenarios/index.md
 description: 'Framework scenarios hub for bot-platform.'
 purpose: Use as the repo-local navigation hub for framework-owned verification scenarios, contract checks, and shared evidence rules.
-version: 0.4.0
-date: 2026-04-22
+version: 0.8.0
+date: 2026-04-24
 status: DRAFT
 tags: [scenarios, bot-platform, framework, verification]
 parent: .memory-bank/index.md
@@ -12,6 +12,18 @@ children:
   - contracts/index.md
   - hosted/index.md
 history:
+  - version: 0.8.0
+    date: 2026-04-24
+    changes: Added `SCN-221` to the framework scenario navigation surfaces and updated the shared-control-plane posture so observability-event evidence is discoverable alongside the existing channel-binding and diagnostics/readback anchors.
+  - version: 0.7.0
+    date: 2026-04-24
+    changes: Added `SCN-178` to the framework scenario navigation surfaces and updated the shared-control-plane posture so bounded diagnostics/readback proof is discoverable alongside the original channel-binding anchor.
+  - version: 0.6.0
+    date: 2026-04-23
+    changes: Added `SCN-177` to the framework scenario navigation surfaces and updated the Wave 1B posture so the shared governed-content/import substrate no longer reads as a missing runnable anchor.
+  - version: 0.5.0
+    date: 2026-04-23
+    changes: Added `SCN-176` to the framework scenario navigation surfaces and updated the Wave 1B posture so the shared control-plane substrate no longer reads as a missing runnable anchor.
   - version: 0.4.0
     date: 2026-04-22
     changes: Landed the next framework-owned scenario wave (`SCN-012`, `SCN-041`, `SCN-118`, `SCN-168`, `SCN-170`) and updated the hub to treat the obvious Wave 1B framework scenario gap as materially closed.
@@ -60,8 +72,12 @@ At this stage, the framework repo has canonical scenario-system and hosted-beta 
 - [SCN-168](SCN-168-openai-runtime-provider-registration-and-readiness-projection.md)
 - [SCN-170](SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md)
 - [SCN-175](SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md)
+- [SCN-176](SCN-176-shared-control-plane-channel-binding-and-readback-contract.md)
+- [SCN-177](SCN-177-shared-governed-content-import-readback-contract.md)
+- [SCN-178](SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md)
+- [SCN-221](SCN-221-shared-control-plane-observability-event-evidence-contract.md)
 
-The obvious Wave 1B framework gap is now materially closed for auth, runtime-kernel, workflow-framework hosted durability, and support-package export/provenance anchors.
+The obvious Wave 1B framework gap is now materially closed for auth, runtime-kernel, workflow-framework hosted durability, support-package export/provenance anchors, the first runnable verifier anchors for both shared substrates, and the bounded control-plane verifier chain through channel binding, diagnostics/readback, and observability-event evidence.
 Deeper scenario families are still later-wave work.
 Until those additional flat scenario docs land:
 - use the spec hubs under `spec/scenarios/` and `spec/runtime/` as canonical contract anchors for still-thin families;
@@ -70,4 +86,4 @@ Until those additional flat scenario docs land:
 
 ## First wave outcome
 
-This hub now carries a real framework-owned baseline for the main Wave 1B contract families, so future migration can add depth without pretending the framework scenario layer is still only a placeholder.
+This hub now carries a real framework-owned baseline for the main Wave 1B contract families, including the shared control-plane anchors [SCN-176](SCN-176-shared-control-plane-channel-binding-and-readback-contract.md), [SCN-178](SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md), and [SCN-221](SCN-221-shared-control-plane-observability-event-evidence-contract.md) plus the governed-content/import anchor [SCN-177](SCN-177-shared-governed-content-import-readback-contract.md), so future migration can add depth without pretending the framework scenario layer is still only a placeholder.

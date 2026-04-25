@@ -2,8 +2,8 @@
 file: .memory-bank/spec/operations/control-plane-configuration-and-observability-surfaces.md
 description: Framework operations contract for control-plane surfaces that read and mutate channel bindings, model-policy assignments, knowledge sources, and execution diagnostics.
 purpose: Read when implementing framework-owned admin surfaces so configuration writes and observability readbacks stay contract-driven across products.
-version: 1.2.0
-date: 2026-04-22
+version: 1.3.0
+date: 2026-04-23
 status: ACTIVE
 tags: [spec, operations, control-plane, channels, policies, knowledge-sources, traces, framework]
 parent: .memory-bank/spec/operations/index.md
@@ -16,6 +16,9 @@ related_files:
   - .memory-bank/plans/adr/ADR-004-workspace-product-instance-pipeline-and-environment-terminology.md
   - .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 history:
+  - version: 1.3.0
+    date: 2026-04-23
+    changes: Added the channel-binding naming-alignment rule so first-party control-plane surfaces reuse the canonical `pipelineId` / `channelKind` vocabulary from the runtime registry seam.
   - version: 1.2.0
     date: 2026-04-22
     changes: Migrated into bot-platform as framework-owned control-plane operations truth, generalized surface ownership, and removed product-runbook semantics.
@@ -156,6 +159,14 @@ All write surfaces must validate through backend-owned contracts for:
 - `pipelineArgs` schema;
 - policy override ref validity;
 - knowledge-source ref validity.
+
+## Naming alignment rule
+
+For shared control-plane contracts and read/write payloads around channel binding:
+- use `pipelineId` as the canonical pipeline selector field;
+- use `channelKind` as the canonical transport-kind field.
+
+Do not create a parallel control-plane dialect with alternate top-level names unless a compatibility bridge is explicitly documented.
 
 ## Auditability rule
 

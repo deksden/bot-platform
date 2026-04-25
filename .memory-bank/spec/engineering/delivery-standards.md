@@ -2,8 +2,8 @@
 file: .memory-bank/spec/engineering/delivery-standards.md
 description: Delivery standards for bot-platform and consuming product repos, defining evidence-first closure and environment readiness gates.
 purpose: Read before merging or promoting changes so implementation waves close with explicit verification and deployment signals instead of assumptions.
-version: 1.0.0
-date: 2026-04-21
+version: 1.2.0
+date: 2026-04-25
 status: ACTIVE
 tags: [spec, engineering, delivery, verification, evidence, framework]
 parent: .memory-bank/spec/engineering/index.md
@@ -14,6 +14,12 @@ related_files:
   - .memory-bank/spec/engineering/coding-style.md
   - .memory-bank/spec/security/auth-and-access.md
 history:
+  - version: 1.2.0
+    date: 2026-04-25
+    changes: Added standalone product package-consumption and Changesets/allowlist closure rules learned during PRT-042.
+  - version: 1.1.0
+    date: 2026-04-23
+    changes: Added the dist-verifier sequencing rule so compiled `dist` checks are not treated as valid evidence until the producing build has completed.
   - version: 1.0.0
     date: 2026-04-21
     changes: Migrated the mixed-repo delivery baseline into framework-owned standards and trimmed product-specific deployment/auth assumptions.
@@ -121,6 +127,9 @@ Implementation slice не считается ready, если:
 - Параллельные implementation waves ведутся через отдельные `git worktree`.
 - Shared contract changes мержатся ранними малыми слайсами, чтобы не накапливать cross-wave rebase debt.
 - Если wave включает dependency bump и последующие проверки должны видеть новый installed surface, одного lockfile-only обновления недостаточно: нужен реальный install/relink перед typecheck/build/scenario verification.
+- Если verifier или scenario proof запускается по compiled `dist` artifacts, producing build должен завершиться до старта `node --test` или любого другого dist-based check; иначе evidence может читать stale compiled output и считается некорректным.
+- Если wave добавляет новый publishable framework package, release-readiness включает package manifest, root build graph, Changeset, publish allowlist, package pack, and dry-run publish evidence.
+- Standalone product repos must not commit sibling-path dependencies to local framework packages; product adoption waits for a published package, documented vendored exception, or sanctioned bridge safe for ordinary clones and CI.
 
 ## Non-goals
 

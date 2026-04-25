@@ -2,12 +2,24 @@
 file: .memory-bank/scenarios/scenario-matrix.md
 description: 'Framework scenario matrix for bot-platform: split-aware ownership baseline.'
 purpose: Map canonical framework feature groups to framework contract scenario families, current repo-local anchors, and source-side migration anchors without pulling product acceptance into framework ownership.
-version: 0.5.0
-date: 2026-04-22
+version: 0.9.0
+date: 2026-04-24
 status: ACTIVE
 tags: [scenarios, matrix, bot-platform, framework, traceability]
 parent: .memory-bank/scenarios/index.md
 history:
+  - version: 0.9.0
+    date: 2026-04-24
+    changes: Added `SCN-221` as the third bounded shared-control-plane scenario anchor so observability-event evidence is explicit alongside the earlier channel-binding and diagnostics/readback slices.
+  - version: 0.8.0
+    date: 2026-04-24
+    changes: Added `SCN-178` as the second bounded shared-control-plane scenario anchor so diagnostics/execution-run/trace-artifact readback proof is explicit alongside the earlier channel-binding slice.
+  - version: 0.7.0
+    date: 2026-04-23
+    changes: Added `shared-governed-content-and-import-substrate` as a first-class framework scenario family and promoted `SCN-177` from planned gap to landed runnable-local governed-content proof.
+  - version: 0.6.0
+    date: 2026-04-23
+    changes: Added `shared-control-plane-substrate` as a first-class framework scenario family and promoted `SCN-176` from planned gap to landed runnable-local control-plane proof.
   - version: 0.5.0
     date: 2026-04-22
     changes: Added repo-local framework scenario anchors for auth-bootstrap, provider-registration/readiness, cross-provider fail-fast governance, hosted workflow durability, and verdict export provenance; linked the new workflow/command runtime contracts where scenario families are still thinner.
@@ -46,6 +58,10 @@ First landed flat framework contracts:
 - [SCN-168](SCN-168-openai-runtime-provider-registration-and-readiness-projection.md)
 - [SCN-170](SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md)
 - [SCN-175](SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md)
+- [SCN-176](SCN-176-shared-control-plane-channel-binding-and-readback-contract.md)
+- [SCN-177](SCN-177-shared-governed-content-import-readback-contract.md)
+- [SCN-178](SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md)
+- [SCN-221](SCN-221-shared-control-plane-observability-event-evidence-contract.md)
 
 ## Framework evidence and execution contours (cross-cutting)
 
@@ -69,6 +85,8 @@ Bridge/extraction contour (framework readiness signal):
 | --- | --- | --- | --- | --- |
 | `client-contracts` | [SCN-001](SCN-001-typed-sdk-parity.md) typed SDK parity | framework contract family | [Client API hub](../spec/client-api/index.md), [API namespace registry](../spec/client-api/api-namespace-registry.md), [Typed client API and SDK](../spec/client-api/typed-client-api-and-sdk.md), [Contract scenarios](contracts/index.md), [Verification matrix](../plans/verification-matrix.md) | Keep typed API / SDK envelope parity in `bot-platform` and track bridge readiness via the extracted `@dd-bot-platform/api-contract` package. Product namespaces, product operations, and product-first clients stay product-owned. |
 | `auth-framework` | [SCN-012](SCN-012-scenario-auth-bootstrap.md) deterministic auth bootstrap and hosted bootstrap methodology | framework contract family | [Security hub](../spec/security/index.md), [Auth core](../spec/security/auth-core.md), [Auth and access](../spec/security/auth-and-access.md), [Contract scenarios](contracts/index.md), [Hosted scenarios](hosted/index.md), [Verification matrix](../plans/verification-matrix.md) | Framework owns auth/bootstrap helper contracts, session vocabulary, and guard semantics. Product tables, memberships, authority projections, and operator login acceptance remain product-owned. |
+| `shared-control-plane-substrate` | [SCN-176](SCN-176-shared-control-plane-channel-binding-and-readback-contract.md) shared control-plane channel-binding and readback contract; [SCN-178](SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md) shared control-plane execution-run and trace-artifact readback contract; [SCN-221](SCN-221-shared-control-plane-observability-event-evidence-contract.md) shared control-plane observability-event evidence contract | framework contract family with partial runnable-local proof | [PRT-039](../plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md), [Control-plane configuration and observability surfaces](../spec/operations/control-plane-configuration-and-observability-surfaces.md), [Auth and access](../spec/security/auth-and-access.md), [Contract scenarios](contracts/index.md), [Verification matrix](../plans/verification-matrix.md) | Framework now owns runnable-local proof for shared channel-binding validation/status/snapshot via `SCN-176`, bounded execution-run/trace-artifact diagnostics readback via `SCN-178`, and bounded observability-event evidence via `SCN-221`. Product memberships, product IA, downstream adoption, and broader consumer proof remain product-owned or later-wave. |
+| `shared-governed-content-and-import-substrate` | [SCN-177](SCN-177-shared-governed-content-import-readback-contract.md) shared governed-content import readback contract | framework contract family with partial runnable-local proof | [PRT-040](../plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md), [Workflow framework contract](../spec/runtime/workflow-framework-contract.md), [Persistence interface and store boundary](../spec/runtime/persistence-interface-and-store-boundary.md), [Contract scenarios](contracts/index.md), [Verification matrix](../plans/verification-matrix.md) | Framework now owns the first runnable-local proof for source-processing honesty, lifecycle/idempotency/conflict guards, and governed-content readback parsing via `SCN-177`. Product review UX, activation/cutover proof, storage truth, and downstream adoption remain product-owned or later-wave. |
 | `runtime-kernel` | `SCN-025`, [SCN-168](SCN-168-openai-runtime-provider-registration-and-readiness-projection.md), [SCN-170](SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md), [SCN-175](SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md) | framework contract family | [Runtime hub](../spec/runtime/index.md), [Agent execution kernel](../spec/runtime/agent-execution-kernel.md), [Execution traces and token accounting](../spec/runtime/execution-traces-and-token-accounting.md), [Trace artifact governance](../spec/runtime/trace-artifact-governance.md), [Contract scenarios](contracts/index.md), [Verification matrix](../plans/verification-matrix.md) | Keep prompt-manager/provider-registry/fail-fast/diagnostics governance checks here. Evidence must conform to the framework trace and artifact governance rules. Product reply behavior, business routing, and product readiness acceptance stay product-owned. |
 | `workflow-framework` | [SCN-116](SCN-116-workflow-host-job-start-status-and-completion-over-internal-host.md) workflow-host topology/status, [SCN-118](SCN-118-hosted-hobby-safe-long-transcript-replay-via-workflow-host.md) hosted durable workflow-host proof | framework contract family with product split | [Runtime hub](../spec/runtime/index.md), [Workflow framework contract](../spec/runtime/workflow-framework-contract.md), [Workflow host container](../spec/architecture/containers/workflow-host.md), [Hosted scenarios](hosted/index.md), [Verification matrix](../plans/verification-matrix.md) | Framework owns host/start/callback/durability contracts and shared hosted workflow patterns. Replay content, result materialization, and product workflow families remain product-owned. |
 | `scenario-system` | `EP-011` deterministic hosted scenario methodology family plus shared tier/evidence conventions across the mixed catalog | framework hosted-pattern and contract family | [Scenario specs hub](../spec/scenarios/index.md), [Scenario system and evidence](../spec/scenarios/scenario-system-and-evidence.md), [Hosted beta execution model](../spec/scenarios/hosted-beta-execution-model.md), [Scenario system runtime contract](../spec/runtime/scenario-system-framework-contract.md), [Hosted scenarios](hosted/index.md) | Framework owns taxonomy, runner assumptions, evidence classes, and hosted verification methodology. Product repos own actual product journeys, rollout smoke packs, and beta acceptance. The extracted `@dd-bot-platform/scenario-system` package is part of the framework-owned evidence/tooling surface. |

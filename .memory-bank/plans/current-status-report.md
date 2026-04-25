@@ -1,13 +1,67 @@
 ---
 file: .memory-bank/plans/current-status-report.md
-description: 'Current status snapshot for bot-platform bootstrap under PRT-036.'
-purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as framework extraction moves from planning into implementation.
-version: 0.30.0
-date: 2026-04-22
+description: 'Current status snapshot for bot-platform after closed PRT-041 dependency-boundary cleanup.'
+purpose: Give maintainers a short answer to what is already landed in bot-platform and what remains as the repo shifts from closed wave-1 convergence into PRT-041 dependency-boundary cleanup.
+version: 0.48.0
+date: 2026-04-24
 status: ACTIVE
-tags: [status, bot-platform, prt-036, migration]
+tags: [status, bot-platform, prt-036, prt-038, prt-041, migration, convergence, dependency-boundary]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.48.0
+    date: 2026-04-24
+    changes: Closed PRT-041 after Docoved package graph cutover removed `@selleragent/api-contract`, `@selleragent/shared`, and `@selleragent/core` from Docoved source/manifests/lockfile with green local gates.
+  - version: 0.47.0
+    date: 2026-04-24
+    changes: Opened PRT-041 as the active post-handoff dependency-boundary cleanup protocol after identifying Docoved dependencies on SellerAgent package namespaces and stale active-protocol navigation wording.
+  - version: 0.46.0
+    date: 2026-04-24
+    changes: Finalized the platform convergence protocol after SellerAgent `PRT-008` closed: `G3` is now reached, `PRT-038`/`PRT-039`/`PRT-040` are closed for the wave-1 cross-repo handoff, and remaining work is framed as future protocols rather than an open platform blocker.
+  - version: 0.45.0
+    date: 2026-04-24
+    changes: Synced downstream truth after the Docoved Wave 05 closeout: the first governed-content/import owner-side adoption proof is now linked back upstream, `G3` is narrowed to the remaining SellerAgent proof line, and status surfaces no longer describe Docoved adoption evidence as pending.
+  - version: 0.44.0
+    date: 2026-04-24
+    changes: Recorded the third bounded control-plane verifier wave: `SCN-221` now anchors observability-event evidence, the control-plane verification row no longer treats event evidence as a missing local blocker, and the new wave-3 packet is closed with runnable proof.
+  - version: 0.43.0
+    date: 2026-04-24
+    changes: Recorded the second bounded control-plane verifier wave: `SCN-178` now anchors execution-run and trace-artifact diagnostics/readback proof, the control-plane status surfaces acknowledge the deeper platform-owned verifier slice, and the local wave-2 packet is closed with runnable evidence.
+  - version: 0.42.0
+    date: 2026-04-24
+    changes: Synced the convergence snapshot to the real downstream handoff state: SellerAgent `PRT-008` and Docoved `PRT-038` are now active local adoption packets, so the remaining blocker moved from missing downstream mirrors to missing upstream-linked owner-side adoption proof for `G3`.
+  - version: 0.41.0
+    date: 2026-04-23
+    changes: Closed wave 1 in bot-platform at the honest shared-contract handoff stage: `G1` and `G2` are now reached, the umbrella packet reflects implementation-in-progress rather than design-only state, and downstream product repos are unblocked while `G3` remains pending their local mirrors and adoption proof.
+  - version: 0.40.0
+    date: 2026-04-23
+    changes: Completed the governed-content sync after the runnable verifier tranche: `SCN-177` is now discoverable across the scenario/navigation surfaces, `PRT-040` and the verification matrix acknowledge runnable local proof, and the next sync work no longer lists `T040-S1` as pending.
+  - version: 0.39.0
+    date: 2026-04-23
+    changes: Completed the control-plane sync after the runnable verifier tranche: `SCN-176` is now discoverable across the scenario/navigation surfaces, `PRT-039` and the verification matrix acknowledge runnable local proof, and the next sync work no longer lists `T039-S1` as pending.
+  - version: 0.38.0
+    date: 2026-04-23
+    changes: Recorded the runnable verifier tranche for PRT-038 wave 1: local `node:test` proof and flat framework scenario anchors now exist for both the shared control-plane and shared governed-content/import substrates, while the next work narrows to serialized status/protocol sync rather than additional shared-contract coding.
+  - version: 0.37.0
+    date: 2026-04-23
+    changes: Recorded the third real PRT-038 implementation tranche: control-plane export integration, governed-content API read models, and governed-content export integration are now landed and accepted locally, so the next bounded work shifts to runnable verifier proof and later status-sync tasks.
+  - version: 0.36.0
+    date: 2026-04-23
+    changes: Recorded the second real PRT-038 implementation tranche: channel-binding, control-plane API read models, source-processing bundle helpers, and import-lifecycle/idempotency helpers are now landed, the tranche is accepted with rerun proof, and the next work shifts to export integration, the governed-content API-contract slice, and later verifier/sync tasks.
+  - version: 0.35.0
+    date: 2026-04-23
+    changes: Recorded the first real PRT-038 implementation wave: bounded control-plane and governed-content vocabulary slices are now landed in `packages/core`, wave-local reports are captured, and the next implementation focus moves to channel-binding, API-envelope, source-processing, and import-lifecycle slices.
+  - version: 0.34.0
+    date: 2026-04-23
+    changes: Recorded phase-3 ops/runbook alignment under PRT-038: the umbrella packet now includes git/worktree discipline, push/CI/hosted-trigger rules, deploy/preflight/rollout gates, and lessons-learned/insights routing with explicit subagent briefing requirements.
+  - version: 0.33.0
+    date: 2026-04-23
+    changes: Recorded phase-2 implementation planning under PRT-038: the umbrella packet now includes the subagent execution model, implementation task graph, verifier workflow, and staged verification/rollout contour, and the phase-2 synthesis packet is linked as evidence.
+  - version: 0.32.0
+    date: 2026-04-23
+    changes: Recorded the protocol-hardening pass after the completed phase-1 review: PRT-038/039/040 now carry stronger ownership/lifecycle/closure rules, and the verification matrix now has explicit convergence-era rows for the shared control-plane and governed-content/import substrates.
+  - version: 0.31.0
+    date: 2026-04-23
+    changes: Synced the status snapshot to the active PRT-038 convergence program by recording ADR-005 plus PRT-038/039/040 as landed planning truth, marking the phase-1 protocol review as complete, and replacing outdated “next child protocols” wording with protocol-hardening and product-adoption follow-ups.
   - version: 0.30.0
     date: 2026-04-22
     changes: Closed Wave 2 in fully released state: the mainline release workflow was aligned to versioned-package publication, `bot-platform/main` was promoted through the governed release path, and `@dd-bot-platform/core@0.2.0` was published through the GitHub-hosted `Release Packages` workflow.
@@ -129,6 +183,10 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `.memory-bank/scenarios/SCN-168-openai-runtime-provider-registration-and-readiness-projection.md`
   - `.memory-bank/scenarios/SCN-170-cross-provider-fail-fast-on-schema-or-prompt-error.md`
   - `.memory-bank/scenarios/SCN-175-explicit-model-policy-and-config-resolution-diagnostics-without-silent-fallback.md`
+  - `.memory-bank/scenarios/SCN-176-shared-control-plane-channel-binding-and-readback-contract.md`
+  - `.memory-bank/scenarios/SCN-177-shared-governed-content-import-readback-contract.md`
+  - `.memory-bank/scenarios/SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md`
+  - `.memory-bank/scenarios/SCN-221-shared-control-plane-observability-event-evidence-contract.md`
 - remaining Wave 1B runtime contract docs that were previously missing:
   - `.memory-bank/spec/runtime/workflow-framework-contract.md`
   - `.memory-bank/spec/runtime/command-framework-contract.md`
@@ -250,33 +308,114 @@ The remaining obvious Wave 1B framework contract/scenario gap is now materially 
   - `.memory-bank/spec/operations/index.md`
   - `.memory-bank/spec/index.md`
   - operations/spec hub linkage refreshed for this packet
+- convergence-planning packet is now also landed in repo-local Memory Bank:
+  - `.memory-bank/plans/adr/ADR-005-three-layer-product-line-architecture-and-shared-substrate-boundary.md`
+  - `.memory-bank/spec/project/three-layer-product-line-architecture.md`
+  - `.memory-bank/guides/explanation/product-line-layering-and-split-rationale.md`
+  - `.memory-bank/plans/protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md`
+  - `.memory-bank/plans/protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
+  - `.memory-bank/plans/protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
+  - SellerAgent and Docoved repo-local adoption-boundary/rationale docs are now the intended downstream start package
+- protocol hardening review phase 1 is complete:
+  - `стадия проработки плана: фаза 1 выполнена`
+  - synthesis packet: `.tasks/prt-038-phase1-review/reports/_phase1-synthesis.md`
+  - consolidated review packet: `.tasks/prt-038-phase1-review/reports/phase1-consolidated-review.md`
+- implementation-planning review phase 2 is complete:
+  - `стадия проработки плана: фаза 2 выполнена`
+  - working folder: `.tasks/prt-038-phase2-implementation/`
+  - synthesis packet: `.tasks/prt-038-phase2-implementation/reports/phase2-implementation-synthesis.md`
+- ops/runbook-alignment review phase 3 is complete:
+  - `стадия проработки плана: фаза 3 выполнена`
+  - working folder: `.tasks/prt-038-phase3-ops-runbook-alignment/`
+  - synthesis packet: `.tasks/prt-038-phase3-ops-runbook-alignment/reports/phase3-ops-runbook-alignment.md`
+- protocol hardening is now landed in the active convergence packet:
+  - `PRT-038` now carries umbrella-level phase taxonomy, anti-contamination, sync-handshake, and closure-language rules
+  - `PRT-039` now carries explicit authority/storage, lifecycle, UI-doc, observability, and verification gates for the shared control-plane substrate
+  - `PRT-040` now carries explicit canon narrowing, lifecycle/idempotency, candidate-vs-live-truth, rollback, UI-doc, observability, and verification gates for the governed-content/import substrate
+- implementation execution planning is now landed in the umbrella packet:
+  - `PRT-038` now carries the subagent task contract, implementation task graph, milestone gates, verifier workflow, and staged verification/rollout contour for the next execution wave
+- operational execution planning is now landed in the umbrella packet:
+  - `PRT-038` now carries git/worktree/feature-branch discipline aligned to `develop -> main`
+  - `PRT-038` now gates push, GitHub CI, Vercel/hosted builds, and release actions so remote triggers happen only when the wave actually needs them
+  - `PRT-038` now carries deploy-truth, beta preflight, backup/rollback, and lessons-learned/insights routing rules, including mandatory subagent operational briefing requirements
+- the first real PRT-038 implementation slices are now landed in repo state:
+  - control-plane shared vocabulary in `packages/core/src/control-plane/**`
+  - governed-content shared vocabulary in `packages/core/src/governed-content/**`
+  - accepted wave reports in `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T039-01-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-01-report.md`, and `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-vocabulary-acceptance.md`
+- the second real PRT-038 implementation tranche is now landed in repo state:
+  - control-plane channel-binding helpers in `packages/core/src/control-plane/channel-binding/**`
+  - control-plane API-contract schemas and read models in `packages/api-contract/src/control-plane/**`
+  - governed-content source-processing bundle helpers in `packages/core/src/governed-content/source-processing/**`
+  - governed-content import-lifecycle and idempotency helpers in `packages/core/src/governed-content/import-lifecycle/**`
+  - accepted tranche reports in `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T039-02-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T039-03-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-02-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-03-report.md`, and `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-second-tranche-acceptance.md`
+- the third real PRT-038 implementation tranche is now landed in repo state:
+  - control-plane package exports are wired through `packages/core/src/index.ts` and `packages/api-contract/src/index.ts`
+  - governed-content API-contract schemas and read models are landed in `packages/api-contract/src/governed-content/**`
+  - governed-content package exports are wired through `packages/core/src/index.ts` and `packages/api-contract/src/index.ts`
+  - accepted tranche reports in `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T039-04-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-04-report.md`, `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/T040-05-report.md`, and `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-third-tranche-acceptance.md`
+- runnable verifier proof is now landed for both shared substrates:
+  - control-plane verifier specs in `packages/core/src/control-plane/channel-binding/verifier.spec.ts` and `packages/api-contract/src/control-plane/read-models.spec.ts`
+  - governed-content verifier specs in `packages/core/src/governed-content/governed-content.verifier.spec.ts` and `packages/api-contract/src/governed-content/read-models.spec.ts`
+  - flat framework scenario anchors:
+    - `.memory-bank/scenarios/SCN-176-shared-control-plane-channel-binding-and-readback-contract.md`
+    - `.memory-bank/scenarios/SCN-177-shared-governed-content-import-readback-contract.md`
+    - `.memory-bank/scenarios/SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md`
+  - accepted verifier report:
+    - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-verifier-acceptance.md`
+- the second bounded control-plane diagnostics/readback verifier wave is now landed in repo state:
+  - `packages/api-contract/src/control-plane/read-models.spec.ts` now proves representative `ExecutionRun` and `TraceArtifact` payload parsing plus `cp-runs` and `cp-trace-artifacts` surface readback
+  - `.memory-bank/scenarios/SCN-178-shared-control-plane-execution-run-and-trace-artifact-readback-contract.md` is the new flat framework scenario anchor for that bounded slice
+  - accepted verifier report:
+    - `.tasks/prt-038-wave2-control-plane-diagnostics-proof/reports/T041-V2-report.md`
+- the third bounded control-plane observability-event verifier wave is now landed in repo state:
+  - `packages/core/src/control-plane/observability.ts` and `packages/api-contract/src/control-plane/observability.ts` now materialize the shared event contract for diagnostics/readback observability evidence
+  - `.memory-bank/scenarios/SCN-221-shared-control-plane-observability-event-evidence-contract.md` is the new flat framework scenario anchor for that bounded slice
+  - accepted verifier report:
+    - `.tasks/prt-038-wave3-control-plane-observability-event-proof/reports/T042-V1-report.md`
+- convergence-era verification inventory is now explicit:
+  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-control-plane-substrate` row anchored by `SCN-176`, `SCN-178`, and `SCN-221`, with wave-1 closure language that records the linked SellerAgent owner-side adoption proof while keeping future shared seams as later protocol work
+  - `.memory-bank/plans/verification-matrix.md` now includes a `shared-governed-content-and-import-substrate` row anchored by `SCN-177`, with wave-1 closure language that records the linked Docoved owner-side adoption proof while keeping future hosted/product activation as later protocol work
+- wave-1 shared-substrate closeout is now accepted in `bot-platform`:
+  - `G1-control-plane-shared-contract-ready` reached
+  - `G2-governed-content-shared-contract-ready` reached
+  - `G3-cross-repo-adoption-handshake` reached after SellerAgent `PRT-008` closed and Docoved Wave 05 proof was linked upstream
+  - closeout report:
+    - `.tasks/prt-038-wave1-shared-vocabulary-implementation/reports/wave1-shared-substrate-closeout.md`
+- downstream product-local adoption packets are now closed for this platform handoff:
+  - SellerAgent `PRT-008` is closed with stable-beta hosted acceptance, live security proof, and material `SCN-167` end-to-end evidence
+  - Docoved `PRT-038` has now closed its owner-side governed-content/import adoption line through Wave 05 and linked that proof upstream
+  - the remaining work is future product/platform evolution, not an open `G3` blocker
 
 ## Not landed yet
 
 - remaining framework specs from the mixed source repo beyond the landed runtime, client/workflow-host, contract, runtime-governance, architecture-context, architecture-guardrails/container, scenario-system, hosted-scenario, operations, operations-observability, engineering/security, and project packets
 - remaining framework contract docs from the `CB-*` workstream beyond the now-landed auth/persistence/namespace/access core
-- moved framework ADRs and follow-up child protocols beyond the now-landed `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
-- additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`) and the scenario-system/hosted-beta baseline
-- broader consumer cutover proof beyond the first active `sales-agent` bridge exercise
+- additional framework scenario depth beyond the now-landed repo-local contract anchors (`SCN-001`, `SCN-012`, `SCN-041`, `SCN-116`, `SCN-118`, `SCN-168`, `SCN-170`, `SCN-175`, `SCN-176`, `SCN-177`, `SCN-178`, `SCN-221`) and the scenario-system/hosted-beta baseline
+- broader runnable framework scenario depth beyond the first shared-substrate anchors
+- future shared-substrate expansion beyond the closed wave-1 control-plane and governed-content handoff
+- dependency-boundary cleanup under `PRT-041` is now closed for the concrete defect: Docoved no longer imports or depends on `@selleragent/api-contract`, `@selleragent/shared`, or `@selleragent/core`; SellerAgent shared/config questions are retained as future design cleanup only if a real multi-product consumer appears
 
 ## Current blockers before broader code extraction
 
 - downstream semver consumer adoption still belongs to later product-facing waves
+- no open `PRT-038` platform blocker remains for the wave-1 cross-repo handoff
+- no active post-handoff package dependency blocker remains from `PRT-041`; broader extraction questions are future protocol material
 
 ## Immediate next document wave
 
-1. continue PRT-036 planning migration:
-   - remaining `CB-*` contract docs not yet landed in repo-local form
-   - follow-up split child protocols and ADR decisions after `PRT-030`, `PRT-036`, `ADR-003`, and `ADR-004`
-2. deepen framework scenario coverage only where a clean framework-owned split exists:
+1. keep `PRT-041` closed and use its inventory as future-reference material:
+   - Docoved package graph cleanup is complete and recorded in local `PRT-039`
+   - SellerAgent shared/config inventory is retained as no-code classification unless a new real shared consumer appears
+2. deepen convergence verification only where a clean framework-owned split exists:
+   - the current local control-plane proof contour is materially explicit through `SCN-176`, `SCN-178`, and `SCN-221`; extend it further only if a new platform-owned seam is identified honestly
+   - extend governed-content/import proof beyond `SCN-177` only where additional platform-owned seams can be verified honestly without overclaiming adoption
+3. continue later framework scenario depth only where a clean framework-owned split exists:
    - persistence-interface scenarios
    - command-framework split scenarios after Telegram/product semantics are stripped out
    - later scenario-system package/tier anchors beyond the current hosted/auth/workflow/runtime baseline
-3. keep framework status surfaces aligned with real extraction progress instead of advertising future placeholders as current truth
 
 ## Immediate next implementation wave
 
-1. execute the accepted mainline release flow for `@dd-bot-platform/core@0.2.0`
-2. perform the first real downstream consumer adoption in later product waves:
-   - start with the narrow `research-workflow.ts` path before broader conversation-runtime adoption
-3. move protocol focus from framework-core extraction toward product-repo cutover and later host/runtime separation work
+No immediate implementation wave remains under `PRT-038`.
+
+Next implementation work should open a new protocol if broader conversation, Telegram, status, or config extraction becomes necessary; no further implementation remains under `PRT-041`.

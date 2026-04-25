@@ -27,6 +27,17 @@ importers:
         specifier: 4.3.6
         version: 4.3.6
 
+  packages/channel-runtime:
+    dependencies:
+      '@dd-bot-platform/api-contract':
+        specifier: workspace:*
+        version: link:../api-contract
+      '@dd-bot-platform/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/core: {}
+
   packages/scenario-system:
     dependencies:
       '@dd-bot-platform/api-contract':

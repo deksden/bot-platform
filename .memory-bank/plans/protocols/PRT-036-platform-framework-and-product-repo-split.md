@@ -2,9 +2,9 @@
 file: .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 description: Cross-epic architecture and migration protocol for splitting the current mixed repository into a framework-only `bot-platform` monorepo plus separate `selleragent` and `docoved-agent` product monorepos with independent deployment and Memory Bank ownership.
 purpose: Reference when executing the repository split so framework code, product code, deployment boundaries, Memory Bank truth, and historical tails move in a controlled sequence instead of drifting through ad hoc folder moves.
-version: 1.89.0
+version: 2.2.0
 date: 2026-04-22
-status: ACTIVE
+status: COMPLETED
 epic: EP-022
 tags: [protocol, architecture, repo-split, bot-platform, selleragent, docoved, monorepo, migration, ci-cd]
 parent: .memory-bank/plans/protocols/index.md
@@ -20,6 +20,13 @@ related_files:
   - .memory-bank/spec/operations/production-rollout-runbook.md
   - .memory-bank/spec/operations/hosted-beta-acceptance-contract.md
   - .memory-bank/spec/engineering/delivery-standards.md
+  - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/plans/current-status-report.md
+  - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/operations/deployment-architecture.md
+  - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/spec/operations/repo-rebind-and-secret-ownership.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/plans/current-status-report.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/plans/protocols/PRT-037-docoved-transition-exception-retirement-and-legacy-surface-disposition.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/operations/docoved-hosted-deployment-topology.md
+  - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/operations/docoved-repo-rebind-and-secret-ownership.md
   - .memory-bank/plans/adr/ADR-001-private-registry-bridge-for-product-repos.md
   - .memory-bank/plans/adr/ADR-002-public-npm-bridge-for-framework-packages.md
   - .tasks/prt-036-protocol-review-2026-04-19/summary/PRT-036-review-synthesis.md
@@ -94,6 +101,45 @@ related_files:
   - .tasks/prt-036-implementation-wave-85-2026-04-21/summary/PRT-036-implementation-wave-85-synthesis.md
   - .tasks/prt-036-implementation-wave-86-2026-04-21/summary/PRT-036-implementation-wave-86-synthesis.md
 history:
+  - version: 2.2.0
+    date: 2026-04-22
+    changes: Linked the explicit Docoved post-split follow-up owner (`PRT-037`) so the remaining legacy bridges and transition exceptions stay clearly outside the completed split protocol rather than drifting back into PRT-036 scope.
+  - version: 2.1.0
+    date: 2026-04-22
+    changes: Recorded wave 176 closure pass: the active Docoved Telegram/direct script tail is now owner-side localized through repo-local helper modules, proof/smoke checks are green on the current canonical contour, and PRT-036 is now completed with only explicit post-protocol transition exceptions left (`docoved:verify:beta:api-seeded`, the `packages/dv-admin` shared-admin seam, optional retirement/cleanup of older non-canonical proof scripts, and later historical `SCN-*` migration where valuable).
+  - version: 2.0.0
+    date: 2026-04-22
+    changes: Recorded wave 175 closure for the active Docoved local split tail: `docoved-agent` now owns the minimal auth/conversation seam end-to-end through repo-local DB exports plus fresh migration foundations, and the canonical local Docoved verification command is no longer a mixed `@sales-agent/scenario-runner` bridge but an owner-side proof pack. Protocol guidance is correspondingly narrowed: broader historical `SCN-*` migration remains later product follow-up, but the mixed local-runner blocker is closed and no full shared runnable-local scenario-engine extraction is required for honest repo-split closure.
+  - version: 1.99.0
+    date: 2026-04-22
+    changes: Recorded wave 174 audit: the remaining Docoved shared auth/observed-user blocker is now mapped as three concrete script clusters (runtime/bootstrap admin, Telegram observed-user/command projection, and conversation-readback proofs), so the next honest follow-up is the minimal Docoved-needed auth/conversation seam rather than a vague Telegram-helper cleanup wave.
+  - version: 1.98.0
+    date: 2026-04-22
+    changes: Recorded wave 173: the bounded owner-side Docoved corpus-acceptance harness wave is now landed in `docoved-agent`, replacing the broken mixed `scenario-runner` / runtime-control dependency path with repo-local in-memory harness wiring plus narrow live-runtime adapters; the remaining Wave 6 follow-up is correspondingly narrowed to shared scenario-system extraction, shared auth/observed-user seam placement, later Telegram/operator localization, and residual bootstrap cleanup rather than unfinished corpus-runner ownership.
+  - version: 1.97.0
+    date: 2026-04-22
+    changes: Recorded wave 172: safe owner-side Docoved cleanup now removes residual hard-coded `sales-agent` artifact/git paths and dead proof imports where real repo-local equivalents already exist, while code-backed review also confirmed the remaining Wave 6 follow-up is deeper than import-path cleanup alone because `docoved-agent` Telegram/operator scripts still assume missing auth/observed-user store exports and the runnable-local regression pack remains a deliberate transition run until shared scenario-system extraction.
+  - version: 1.96.0
+    date: 2026-04-22
+    changes: Recorded wave 171: Wave 6 is now closed for active Docoved product-surface ownership because the seeded `SCN-187` beta smoke executes owner-side from `docoved-agent`, `dv-admin` no longer depends on the shared `sa-admin` CLI, and the remaining work is re-scoped to later scenario-system/shared-auth/bootstrap cleanup rather than owner-side mixed-code truth.
+  - version: 1.95.0
+    date: 2026-04-22
+    changes: Recorded wave 170: Wave 6 is now materially advanced but not closed. Canonical Docoved operator/deploy script ownership moved into `docoved-agent`, `sales-agent` now keeps only transition wrappers for the migrated Docoved script surface, and the remaining mixed-source retirement tail is explicitly narrowed to legacy `SCN-187`/scenario-runner bridging plus broader shared-admin/auth residue.
+  - version: 1.94.0
+    date: 2026-04-22
+    changes: Recorded wave 169: Wave 5 is now closed for live owner-side GitHub/Vercel/npm rebind because SellerAgent Vercel projects are linked to `deksden/seller-agent` with verified `develop`/`main` branch mapping, Docoved API projects are rebound to `apps/api` under the manual-only `docoved-agent` contour, and the remaining mixed bootstrap/operator inventory is now treated only as explicit transition debt for later retirement rather than as open live ownership drift.
+  - version: 1.93.0
+    date: 2026-04-22
+    changes: Recorded wave 168: Wave 5 now has canonical owner-side operations truth in `seller-agent` and `docoved-agent` through explicit repo-rebind/secret-ownership docs plus status/runbook sync, while live repo/Vercel/secret rebind and source-side decommission remain explicit follow-up rather than implied closure.
+  - version: 1.92.0
+    date: 2026-04-22
+    changes: Recorded wave 167: Wave 4 is now closed in `docoved-agent` repo state because the target repo owns the Docoved API/runtime/store/prompt/deploy source contour with green local verification; the remaining explicit follow-up is now narrowed to shared-admin/auth/operator transition exceptions and live GitHub/Vercel/secret rebind in Wave 5 rather than unfinished product-code ownership.
+  - version: 1.91.0
+    date: 2026-04-22
+    changes: Recorded wave 166: Wave 4 is now materially started in `docoved-agent` repo state because the target repo owns the first runnable workflow-host app contour (`apps/workflow`) plus the first repo-local operator shell package (`packages/dv-admin`) and passes the accepted local verification baseline without overstating API/runtime/store closure.
+  - version: 1.90.0
+    date: 2026-04-22
+    changes: Recorded wave 165: Wave 3 is now materially closed in `seller-agent` repo state because the product repo carries the runnable app/package/DB contour with green local verification (`pnpm typecheck`, `pnpm check`), and the remaining work is now explicitly narrowed to deploy-rebind plus cleanup of temporary transition exceptions rather than basic repo bootstrap.
   - version: 1.89.0
     date: 2026-04-22
     changes: Recorded wave 163: Wave 2 is now closed in fully released form because the mainline `Release Packages` workflow was aligned to versioned-state publication and `@dd-bot-platform/core@0.2.0` was published from `bot-platform/main`; the next active work now moves from framework-core release closure toward product-facing Wave 3 adoption.
@@ -490,6 +536,14 @@ Implication:
 - the protocol must now drive controlled content migration and repo-local truth actualization;
 - the next blocker is no longer "create Memory Bank skeletons";
 - the next blocker is "fill those Memory Banks with correct repo-owned truth and bind features to scenarios before code extraction".
+
+As of 2026-04-22, the program has moved beyond repo bootstrap:
+- SellerAgent Wave 3 is closed in repo state;
+- Docoved Wave 4 is closed in repo state;
+- Wave 5 now has owner-side operational SSoT in the product repos:
+  - `seller-agent` owns its deployment topology plus repo-rebind/secret-ownership truth
+  - `docoved-agent` owns its hosted topology plus repo-rebind/secret-ownership truth
+- live GitHub/Vercel/secret rebind, source-side decommission, and the remaining transition exceptions are still follow-up rather than closed state.
 
 Review status:
 - stage of plan elaboration: phase 1 completed;
@@ -898,6 +952,13 @@ Review status:
   - `packages/core/src/index.ts` now re-exports `buildDocovedDocumentMachineLocator`, `buildDocovedResolvedSourceRefs`, `createDocovedDocumentLevelSourceRef`, and `createDocovedResolvedSourceRef` from `@docoved-agent/sa-docoved@0.1.10`;
   - `@sales-agent/core` `typecheck` and `build`, plus `SCN-215`, are green on the cutover;
 - wave-83 synthesis is recorded in `.tasks/prt-036-implementation-wave-83-2026-04-21/summary/PRT-036-implementation-wave-83-synthesis.md`;
+- implementation stage: wave 170 completed as Wave 6 transition-hardening;
+- canonical Docoved deploy/bootstrap/proof scripts now live in `docoved-agent`, and `sales-agent` keeps those entrypoints only as explicit thin transition wrappers/forwarders;
+- `sales-agent/packages/dv-admin` is removed, while mixed-root `dv-admin` now proxies to `docoved-agent`;
+- the remaining mixed-source retirement tail is now explicit instead of hidden:
+  - `docoved:verify:beta:api-seeded` remains bridged through `sales-agent` because `SCN-187` still depends on the mixed `scenario-runner` contour;
+  - broader shared-admin/auth/observed-user cleanup and final mixed bootstrap residue retirement still remain later follow-up;
+- wave-170 synthesis is recorded in `.tasks/prt-036-implementation-wave-170-2026-04-22/summary/PRT-036-implementation-wave-170-synthesis.md`;
 - the next protocol revision pass must focus on:
   - choosing the next bounded local cleanup tail after the completed citation-resolution consumer waves;
   - planning the later helper-tail/security retirement contour for `@selleragent/shared` separately from the completed moved-symbol cleanup;
@@ -1629,6 +1690,12 @@ The protocol must maintain an explicit `repo rebind and deploy ownership matrix`
 - source-side decommission action.
 
 The protocol must not rely on "we will remember how this is wired later".
+
+Current owner-side evidence for this matrix now lives in:
+- `seller-agent/.memory-bank/spec/operations/deployment-architecture.md`
+- `seller-agent/.memory-bank/spec/operations/repo-rebind-and-secret-ownership.md`
+- `docoved-agent/.memory-bank/spec/operations/docoved-hosted-deployment-topology.md`
+- `docoved-agent/.memory-bank/spec/operations/docoved-repo-rebind-and-secret-ownership.md`
 
 ### GitHub and hosting rebind scope
 
@@ -2709,6 +2776,11 @@ Expected outcome:
 - SellerAgent web app, server, workflows, and DB own one repo and one deployment chain;
 - SellerAgent Memory Bank becomes product SSoT.
 
+Current status after wave 165:
+- materially closed in repo state;
+- `seller-agent` now owns the runnable local app/package/DB contour and passes the accepted local verification baseline;
+- remaining work is operational follow-through: deploy/repo rebind, secret split follow-through, and cleanup of temporary compatibility seams.
+
 ### Wave 4: Land Docoved product repo
 
 Goal:
@@ -2717,6 +2789,12 @@ Goal:
 Expected outcome:
 - Docoved runtime, ingest/publication, workflows, and operators own one repo and one deployment chain;
 - Docoved Memory Bank becomes product SSoT.
+
+Current status after wave 167:
+- closed in repo state;
+- `docoved-agent` now owns the Docoved API/runtime/store/prompt/deploy source contour through `apps/api`, `apps/workflow`, `packages/core`, `packages/db`, `packages/prompt-catalog`, local migrations, and repo-local deploy scripts;
+- the accepted local verification baseline is green on `pnpm typecheck` and `pnpm check`;
+- remaining work is now intentionally narrowed to operational and transition-exception follow-up: owner-side verification/operator script migration where needed, live GitHub/Vercel/secret rebind, and retirement or framework reclassification of the remaining shared-admin/auth bridges.
 
 ### Wave 5: CI/CD and deploy separation
 
@@ -2730,6 +2808,14 @@ Expected outcome:
 - source-side shared or obsolete secrets are rotated/decommissioned from the mixed contour;
 - simpler release management without repo-level deployment gymnastics.
 
+Current status after wave 170:
+- closed for live owner-side repo/Vercel/npm rebind;
+- SellerAgent now has remote `develop`, live Vercel linkage to `deksden/seller-agent`, and explicit `develop`/`main` beta/prod branch mapping across web/server/workflow projects;
+- Docoved now keeps the intended manual-only live contour in `deksden/docoved-agent`, with `link = null` preserved on live web/api projects and API root directories rebound from historical `apps/server` to repo-local `apps/api`;
+- required owner-side npm release secrets are verified in both product repos;
+- canonical Docoved operator/deploy/bootstrap scripts now live in `docoved-agent`, while `sales-agent` exposes them only through explicit transition wrappers and forwarders;
+- remaining mixed bootstrap/operator inventory is no longer treated as live ownership drift and is now only explicit transition debt for Wave 6 mixed-source retirement.
+
 ### Wave 6: Mixed-source retirement
 
 Goal:
@@ -2738,6 +2824,11 @@ Goal:
 Expected outcome:
 - no active product development depends on the old mixed layout;
 - residual source either migrates, archives, or is intentionally deleted.
+
+Current status:
+- closed for active product-surface ownership;
+- `sales-agent` no longer owns the migrated Docoved script surface, the seeded `SCN-187` beta smoke, or the runtime implementation behind `packages/dv-admin`;
+- remaining follow-up is no longer an owner-side Wave 6 blocker: wave 172 confirmed the tail was deeper than dead import-path cleanup alone, wave 173 removed the bounded corpus-runner harness defect, wave 174 mapped the next auth/observed-user blocker into three concrete Docoved script clusters, wave 175 then closed the active local seam by landing repo-local auth/conversation ownership plus an owner-side `docoved:verify:local` proof pack, and wave 176 localized the current canonical Telegram/direct script tail owner-side. The later work that still remains is now limited to explicit historical bridge exceptions (`docoved:verify:beta:api-seeded`, the `packages/dv-admin` shared-admin seam), optional cleanup or retirement of older non-canonical proof scripts, deeper owner-side migration of historical `SCN-*` families where valuable, and retirement of residual mixed bootstrap storage habits.
 
 ## Acceptance gates
 
@@ -2780,19 +2871,20 @@ Expected outcome:
   - secret inventory ownership and target locations are explicit;
   - required rotations/decommissions are complete or explicitly time-boxed as transition exceptions;
   - rollback and decommission evidence is recorded.
+- No owner-side doc sync by itself is considered proof that live repo/project/secret ownership is already rebound.
 - No protocol run is considered operationally closed until:
   - reusable lessons learned / insights have been captured when needed;
   - accepted long-lived findings have been folded into the owning SSoT before closeout.
 
 ## Outcome
 
-- Result: `follow_up_needed`
-- Follow-up needed:
-  - finalize dependency bridge strategy between `bot-platform` and product repos;
-  - convert phase-1 and phase-2 findings into the next normative revision of the protocol task register and gates;
-  - complete Wave `1B` repo-local truth population and source-doc migration;
-  - perform package-by-package extraction planning for `api-contract`, `client-sdk`, `core`, `db`, and `scenario-runner`;
-  - convert current mixed-repo hubs into durable transition stubs as target-repo canonical docs take over.
+- Result: `completed`
+- Post-protocol follow-up that remains outside the active closure line:
+  - continue shrinking historical transition exceptions where valuable, especially the remaining `packages/dv-admin` shared-admin seam and residual mixed bootstrap storage habits;
+  - keep `docoved:verify:beta:api-seeded` documented as an explicit mixed historical bridge until that hosted verification path is either retired or replaced owner-side;
+  - clean up or retire older non-canonical proof/operator scripts where they are no longer worth preserving;
+  - deepen historical `SCN-*` owner-side migration only where the additional runnable coverage is worth the maintenance cost;
+  - keep mixed-repo transition stubs honest as target-repo canonical docs and code remain the SSoT.
 
 ## Memory Bank impact
 
@@ -2802,4 +2894,5 @@ Expected outcome:
 - Recorded the requirement that future product truth must move into repo-local Memory Banks rather than remaining mixed in this source repo.
 - Recorded that target repo Memory Banks now exist and that the next mandatory protocol phase is repo-local truth population, feature/scenario actualization, and transition routing rather than raw bootstrap.
 - Recorded the phase-2 implementation model for subagent task files, verification workflow, execution lanes, and wave-specific verification stages.
+- Recorded the final closure line for PRT-036: the repo split is complete for the active framework/SellerAgent/Docoved contours, and the remaining items are explicit post-protocol transition exceptions rather than open split blockers.
 - Recorded the phase-3 operational execution model: git/worktree discipline, CI/Vercel trigger policy, deploy/preflight gates, hosted verification expectations, and lessons-learned/insights handling for protocol-driven execution.

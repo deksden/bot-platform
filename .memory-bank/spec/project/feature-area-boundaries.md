@@ -2,15 +2,22 @@
 file: .memory-bank/spec/project/feature-area-boundaries.md
 description: 'Framework feature-area boundaries for bot-platform.'
 purpose: Define which framework areas bot-platform owns and where product repos must take over.
-version: 0.1.0
-date: 2026-04-19
-status: DRAFT
+version: 0.3.0
+date: 2026-04-25
+status: ACTIVE
 tags: [feature-areas, boundaries, bot-platform, framework]
 parent: .memory-bank/spec/project/index.md
 related_files:
   - .memory-bank/spec/architecture/boundaries.md
   - .memory-bank/spec/project/repo-structure.md
+  - .memory-bank/spec/project/three-layer-product-line-architecture.md
 history:
+  - version: 0.3.0
+    date: 2026-04-25
+    changes: Added the channel-runtime feature area after PRT-042 implementation and recorded the thin-seam rule for canonical response documents and pure rendering helpers.
+  - version: 0.2.0
+    date: 2026-04-23
+    changes: Updated the feature-area map for the post-split three-layer model by explicitly adding the shared control-plane and governed-content/import substrates as platform-owned areas.
   - version: 0.1.0
     date: 2026-04-19
     changes: Initial framework feature-area boundary map created from the current mixed source and the PRT-036 ownership model.
@@ -58,6 +65,25 @@ Owns:
 - command execution hooks;
 - projection hooks and diagnostics patterns.
 
+### `channel-runtime`
+
+Owns:
+- canonical response-document vocabulary;
+- public/operator/debug response visibility semantics;
+- citations and source-reference shape for channel-neutral delivery;
+- minimal render-target vocabulary;
+- small pure markdown/plaintext helpers when they remove real duplication.
+
+Does not own:
+- command dispatch or command access policy;
+- transport senders, delivery orchestration, provider retries, or threading state;
+- provider payloads such as Telegram parse mode or email headers;
+- product answer semantics, product source selection, DB tables, migrations, or UI screens.
+
+Thin-seam rule:
+- `channel-runtime` must reuse or re-export existing `core` / `api-contract` vocabulary for execution refs, channel refs, capability families, and read-model/schema terms;
+- it must not mint parallel framework vocabulary just because the package is channel-facing.
+
 ### `workflow-framework`
 
 Owns:
@@ -65,6 +91,24 @@ Owns:
 - retry and resumability rules;
 - health and manifest contracts;
 - workflow S2S auth vocabulary.
+
+### `shared-control-plane-substrate`
+
+Owns:
+- shared workspace, product-instance, and membership vocabulary;
+- channel and pipeline-binding base contracts;
+- shared capability envelope and auditability rules;
+- structured configuration write-path rules;
+- shared control-plane read models and diagnostics primitives.
+
+### `shared-governed-content-and-import-substrate`
+
+Owns:
+- connected-source registration contracts;
+- source revision and activation lifecycle primitives;
+- import-run and processing-artifact contracts;
+- workflow-backed import lifecycle rules;
+- source-processing contract from raw files or folders to canonical extraction bundles.
 
 ### `client-contracts`
 
@@ -105,8 +149,10 @@ These areas do not belong to `bot-platform` as product truth:
 - `memory`
 - `handoff`
 - `followups`
+- `business-profile` as SellerAgent product behavior
 - Docoved `knowledge-publication` as product behavior
 - Docoved `grounded-answering` as product behavior
+- Docoved duplicate/conflict review and temporal default policy
 
 Framework overlap is allowed only at the contract level.
 

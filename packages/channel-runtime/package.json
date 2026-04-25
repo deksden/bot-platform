@@ -1,0 +1,48 @@
+{
+  "name": "@dd-bot-platform/channel-runtime",
+  "description": "Framework-safe canonical channel response contract and pure render helpers for bot-platform.",
+  "version": "0.2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo"
+  ],
+  "keywords": [
+    "dd-bot-platform",
+    "bot-platform",
+    "framework",
+    "channel-runtime",
+    "canonical-response"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deksden/bot-platform.git",
+    "directory": "packages/channel-runtime"
+  },
+  "homepage": "https://github.com/deksden/bot-platform",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prepack": "pnpm clean && pnpm build",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --pretty false"
+  },
+  "dependencies": {
+    "@dd-bot-platform/api-contract": "workspace:*",
+    "@dd-bot-platform/core": "workspace:*"
+  }
+}

@@ -10,6 +10,7 @@ const packagesDir = resolve(rootDir, 'packages');
 const dryRun = process.argv.includes('--dry-run');
 const allowedPackages = new Set([
   '@dd-bot-platform/api-contract',
+  '@dd-bot-platform/channel-runtime',
   '@dd-bot-platform/core',
   '@dd-bot-platform/scenario-system'
 ]);

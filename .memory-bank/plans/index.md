@@ -2,8 +2,8 @@
 file: .memory-bank/plans/index.md
 description: 'Plans hub для bot-platform: framework epics, ADRs, protocols, current status и verification planning.'
 purpose: Читать для понимания delivery contour `bot-platform`, не смешивая framework delivery с SellerAgent и Docoved product waves.
-version: 0.2.0
-date: 2026-04-22
+version: 0.7.0
+date: 2026-04-25
 status: DRAFT
 tags: [plans, bot-platform, adr, epics, protocols, delivery]
 parent: .memory-bank/index.md
@@ -14,6 +14,21 @@ children:
   - protocols/index.md
   - verification-matrix.md
 history:
+  - version: 0.7.0
+    date: 2026-04-25
+    changes: Marked PRT-042 closed after first-wave channel-runtime implementation and retained publication/product direct-consumption as explicit follow-up.
+  - version: 0.6.0
+    date: 2026-04-25
+    changes: Added PRT-042 as the active channel-runtime protocol after review hardening and linked its runtime-spec obligation.
+  - version: 0.5.0
+    date: 2026-04-24
+    changes: Reframed PRT-041 as closed and moved broader extraction to future-protocol guidance.
+  - version: 0.4.0
+    date: 2026-04-24
+    changes: Updated planning priorities after PRT-038 closure so PRT-041 becomes the active dependency-boundary cleanup packet.
+  - version: 0.3.0
+    date: 2026-04-23
+    changes: Added the post-split convergence follow-up `PRT-038` and clarified that the next framework planning phase is the three-layer product-line extraction and product-protocol kickoff program.
   - version: 0.2.0
     date: 2026-04-22
     changes: Updated the verification-matrix navigation wording to match the now split-aware feature-group and scenario-anchor planning surfaces.
@@ -56,19 +71,63 @@ history:
 - `current-status-report.md`
 - `protocols/index.md`
 - `protocols/PRT-036-platform-framework-and-product-repo-split.md`
+- `protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md`
+- `protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
+- `protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
+- `protocols/PRT-041-cross-repo-contract-dependency-boundary-realignment.md`
+- `protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md`
 - `verification-matrix.md`
 
 ## Immediate planning priorities
 
-### 1. Stabilize the repo split narrative
+### 1. Closed channel-runtime first wave
 
-Пока идет PRT-036, `protocols/PRT-036-platform-framework-and-product-repo-split.md` должен быть главным execution document.
-После старта split-а здесь же должны жить follow-up protocols по:
-- dependency bridge;
-- package publication strategy;
-- framework package extraction order.
+`protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md` is closed for the first-wave shared channel-runtime seam.
 
-### 2. Separate framework epics from product epics
+Closed result:
+- canonical response documents;
+- public/operator/debug visibility;
+- citations/source refs;
+- minimal render-target vocabulary;
+- pure markdown/plaintext helpers;
+- `@dd-bot-platform/channel-runtime` package;
+- local publish-readiness proof;
+- Docoved product-local mapping proof;
+- SellerAgent readiness review.
+
+Follow-ups:
+- publish the package before direct product dependency adoption;
+- replace Docoved's local fixture-only proof with direct package import after publication or a sanctioned bridge.
+
+Still deferred by design:
+- command runtime extraction;
+- outbound delivery orchestration;
+- threading abstractions;
+- framework-owned HTML rendering;
+- DB/UI surfaces.
+
+The stable runtime vocabulary belongs in `spec/runtime/channel-runtime-contract.md`; product mappings belong in product-local Memory Banks.
+
+### 2. Closed dependency-boundary cleanup
+
+`protocols/PRT-041-cross-repo-contract-dependency-boundary-realignment.md` is now closed for the concrete post-handoff package-boundary defect.
+
+Closed result:
+- Docoved imports and package manifests no longer depend on `@selleragent/api-contract`, `@selleragent/shared`, or `@selleragent/core`;
+- SellerAgent `packages/shared` and `@selleragent/platform-config` are classified as product-local/no-code for this protocol unless a future real shared consumer appears;
+- Memory Bank navigation treats adoption packets as closed baselines;
+- `sales-agent` links remain lineage rather than normative sources.
+
+### 3. Keep closed convergence docs as baseline
+
+`protocols/PRT-036-platform-framework-and-product-repo-split.md` остается closed lineage for the repo split.
+`protocols/PRT-038-platform-product-line-convergence-and-shared-substrate-extraction.md` остается closed baseline for the three-layer handoff.
+
+Closed detailed child packets:
+- `protocols/PRT-039-shared-control-plane-access-channel-and-management-substrate.md`
+- `protocols/PRT-040-governed-content-source-processing-and-workflow-backed-import-substrate.md`
+
+### 4. Separate framework epics from product epics
 
 В `epics/index.md` должны остаться только инициативы, которые после split-а по-настоящему принадлежат `bot-platform`, например:
 - foundation/repo topology;
@@ -80,7 +139,7 @@ history:
 
 SellerAgent и Docoved epic families здесь быть не должны.
 
-### 3. Keep one framework status snapshot
+### 5. Keep one framework status snapshot
 
 `current-status-report.md` нужен сразу, чтобы не потерять ответ на вопросы:
 - какие packages уже существуют в skeleton;
