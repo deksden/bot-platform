@@ -65,20 +65,20 @@ Observed passing commands included:
 
 `bot-platform`:
 - Branch: `feature/EP-022-prt-038-wave1`
-- HEAD: `83543ac`
+- HEAD: `cb63727`
 - Remote tracking: `origin/feature/EP-022-prt-038-wave1`
-- Status: ahead 7, not pushed to branch tip
+- Status: pushed and aligned with `origin/feature/EP-022-prt-038-wave1`; local working tree clean
 - PR: none associated with the branch
-- GitHub Actions: no branch-specific runs found
+- GitHub Actions: no branch-specific runs found after push
 - Default branch: `main`
 
 `docoved-agent`:
 - Branch: `feature/EP-022-prt-038-platform-adoption`
 - HEAD: `00539bc`
 - Remote tracking: `origin/feature/EP-022-prt-038-platform-adoption`
-- Status: ahead 1, not pushed to branch tip
+- Status: pushed and aligned with `origin/feature/EP-022-prt-038-platform-adoption`; local working tree clean
 - PR: none associated with the branch
-- GitHub Actions: no branch-specific runs found
+- GitHub Actions: no branch-specific runs found after push
 
 ## Remaining Blockers
 

@@ -54,20 +54,20 @@ No additional Memory Bank edits were needed in this synthesis pass.
 
 `bot-platform`:
 - Branch: `feature/EP-022-prt-038-wave1`
-- HEAD: `83543ac` (`Promote PRT-042 package lessons to Memory Bank`)
+- HEAD: `cb63727` (`Close PRT-042 channel runtime protocol`)
 - Remote tracking: `origin/feature/EP-022-prt-038-wave1`
-- Status: ahead by 7 commits, not pushed to the branch tip yet
+- Status: pushed and aligned with `origin/feature/EP-022-prt-038-wave1`; local working tree clean
 - PR: none associated with the branch
-- GitHub Actions: no runs found for `feature/EP-022-prt-038-wave1`
+- GitHub Actions: `gh run list --branch feature/EP-022-prt-038-wave1 --limit 5` returned no branch-specific runs after push
 - Default branch: `main`
 
 `docoved-agent`:
 - Branch: `feature/EP-022-prt-038-platform-adoption`
 - HEAD: `00539bc` (`Document Docoved channel runtime adoption`)
 - Remote tracking: `origin/feature/EP-022-prt-038-platform-adoption`
-- Status: ahead by 1 commit, not pushed to the branch tip yet
+- Status: pushed and aligned with `origin/feature/EP-022-prt-038-platform-adoption`; local working tree clean
 - PR: none associated with the branch
-- GitHub Actions: no runs found for `feature/EP-022-prt-038-platform-adoption`
+- GitHub Actions: `gh run list --branch feature/EP-022-prt-038-platform-adoption --limit 5` returned no branch-specific runs after push
 
 ## Remaining Blockers
 
