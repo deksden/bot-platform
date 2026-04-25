@@ -2,7 +2,7 @@
 file: .memory-bank/plans/index.md
 description: 'Plans hub для bot-platform: framework epics, ADRs, protocols, current status и verification planning.'
 purpose: Читать для понимания delivery contour `bot-platform`, не смешивая framework delivery с SellerAgent и Docoved product waves.
-version: 0.6.0
+version: 0.7.0
 date: 2026-04-25
 status: DRAFT
 tags: [plans, bot-platform, adr, epics, protocols, delivery]
@@ -14,6 +14,9 @@ children:
   - protocols/index.md
   - verification-matrix.md
 history:
+  - version: 0.7.0
+    date: 2026-04-25
+    changes: Marked PRT-042 closed after first-wave channel-runtime implementation and retained publication/product direct-consumption as explicit follow-up.
   - version: 0.6.0
     date: 2026-04-25
     changes: Added PRT-042 as the active channel-runtime protocol after review hardening and linked its runtime-spec obligation.
@@ -77,19 +80,26 @@ history:
 
 ## Immediate planning priorities
 
-### 1. Active channel-runtime contract hardening
+### 1. Closed channel-runtime first wave
 
-`protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md` is the active framework protocol for the shared channel-runtime seam.
+`protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md` is closed for the first-wave shared channel-runtime seam.
 
-Current first-wave scope:
+Closed result:
 - canonical response documents;
 - public/operator/debug visibility;
 - citations/source refs;
 - minimal render-target vocabulary;
-- pure markdown/plaintext helper only if a first consumer needs it;
-- product adoption proof in Docoved before broader extraction.
+- pure markdown/plaintext helpers;
+- `@dd-bot-platform/channel-runtime` package;
+- local publish-readiness proof;
+- Docoved product-local mapping proof;
+- SellerAgent readiness review.
 
-Deferred by design:
+Follow-ups:
+- publish the package before direct product dependency adoption;
+- replace Docoved's local fixture-only proof with direct package import after publication or a sanctioned bridge.
+
+Still deferred by design:
 - command runtime extraction;
 - outbound delivery orchestration;
 - threading abstractions;

@@ -2,12 +2,15 @@
 file: .memory-bank/plans/protocols/index.md
 description: 'Framework protocol hub for bot-platform.'
 purpose: Hold cross-epic migration, extraction, and hardening protocols for the framework repo.
-version: 0.12.0
+version: 0.13.0
 date: 2026-04-25
 status: ACTIVE
 tags: [protocols, bot-platform, planning]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.13.0
+    date: 2026-04-25
+    changes: Marked PRT-042 closed after the first-wave channel-runtime package, publish-readiness proof, Docoved mapping proof, SellerAgent readiness review, and Memory Bank lesson promotion landed.
   - version: 0.12.0
     date: 2026-04-25
     changes: Noted that PRT-042 phase-3 planning now includes git-flow, CI/Vercel, hosted beta, backup/migration, and lessons/insights operating rules.
@@ -68,5 +71,5 @@ Current rule:
 - `PRT-038` is the closed wave-1 umbrella protocol for the platform/product handoff.
 - `PRT-039` and `PRT-040` are closed child protocols for the wave-1 shared control-plane and governed-content/import substrata.
 - `PRT-041` is the closed dependency-boundary cleanup protocol after the handoff; it removed Docoved accidental dependencies on SellerAgent package namespaces and classified retained future extraction questions.
-- `PRT-042` is the active shared channel-runtime protocol; its hardened first-wave scope is canonical response documents, minimal rendering primitives, reuse of existing framework vocabulary, and product adoption proof, while command/delivery orchestration stays deferred until the document seam is proven. Stable vocabulary belongs in `spec/runtime/channel-runtime-contract.md`; the protocol owns sequencing, subagent task graph, ops/devops gates, and closure criteria.
+- `PRT-042` is the closed first-wave shared channel-runtime protocol. It landed the `@dd-bot-platform/channel-runtime` package, local publish-readiness proof, Docoved mapping proof, SellerAgent readiness review, and Memory Bank lesson promotion. Command/delivery orchestration remains deferred until a later protocol opens it.
 - future SellerAgent, Docoved, or shared-substrate expansion outside channel-runtime should open a new protocol rather than extending the closed `PRT-038` or `PRT-041` packets.

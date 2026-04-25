@@ -2,9 +2,9 @@
 file: .memory-bank/plans/protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md
 description: Framework protocol for extracting the first typed channel-runtime contract shared by SellerAgent, Docoved, and future product adapters.
 purpose: Define the first cross-repo contract for canonical response documents and minimal channel rendering primitives so product channels do not drift semantically across Telegram, email, web, or future transports.
-version: 1.5.0
+version: 1.6.0
 date: 2026-04-25
-status: ACTIVE
+status: CLOSED
 epic: EP-022
 tags: [protocol, channel-runtime, contracts, rendering, docoved, selleragent]
 parent: .memory-bank/plans/protocols/index.md
@@ -39,6 +39,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/plans/protocols/PRT-038-docoved-shared-platform-adoption-control-plane-and-workflow-backed-knowledge-import.md
   - /Users/deksden/Documents/_Projects/sales-agent/.memory-bank/plans/protocols/PRT-026-docoved-workspace-control-plane-channel-access-and-locator-fidelity.md
 history:
+  - version: 1.6.0
+    date: 2026-04-25
+    changes: Closed the first-wave implementation after landing `@dd-bot-platform/channel-runtime`, local publish-readiness proof, Docoved mapping proof, SellerAgent readiness review, verifier reports, and Memory Bank lesson promotion.
   - version: 1.5.0
     date: 2026-04-25
     changes: Added phase-3 operations planning: git-flow/worktree rules, CI/Vercel deployment gates, hosted beta scenario policy, backup/migration constraints, quality checks, and lessons/insights capture requirements for subagents.
@@ -806,3 +809,47 @@ This protocol can close when:
 - SellerAgent has either adopted the contract or has a documented follow-up blocker with no conflicting local framework truth;
 - Memory Bank entrypoints in `bot-platform`, `docoved-agent`, and `seller-agent` route readers to the correct owner for the shared channel runtime contract;
 - `sales-agent` remains tracker/lineage only and does not restate the canonical contract.
+
+## Closure record
+
+Status: `CLOSED` with follow-ups.
+
+Closed on: 2026-04-25.
+
+Implementation evidence:
+- `@dd-bot-platform/channel-runtime` exists as `packages/channel-runtime`;
+- the package is wired into the root build graph;
+- the package exposes canonical response-document types, visibility filtering, `renderChannelMarkdownToPlainText`, `splitRenderedMessageParts`, and `ChannelRuntimeValidationError`;
+- package-local deterministic specs cover visibility, markdown/plaintext rendering, and message splitting;
+- `scripts/publish-private-packages.mjs`, `.changeset/README.md`, and a Changeset include the package in the controlled publish path;
+- [PRT-042 implementation synthesis](../../../.tasks/prt-042-channel-runtime-implementation-plan/summary/PRT-042-implementation-synthesis.md) records accepted executor/verifier results.
+
+Verification evidence:
+- `pnpm typecheck` — passed;
+- `pnpm check` — passed;
+- `pnpm --filter @dd-bot-platform/channel-runtime typecheck` — passed;
+- `pnpm --filter @dd-bot-platform/channel-runtime build` — passed;
+- `node --test packages/channel-runtime/dist/channel-runtime.spec.js` — passed;
+- `pnpm changeset:status` — passed;
+- `pnpm --filter @dd-bot-platform/channel-runtime pack --pack-destination <tmp-dir>` — passed;
+- `pnpm changeset:publish --dry-run` — passed;
+- Docoved local proof `pnpm exec tsx scripts/docoved-channel-runtime-adoption-proof.ts` — passed;
+- Docoved `pnpm typecheck` and `pnpm check` — passed;
+- framework verifier `V-042-01` accepted the framework slice with bounded follow-ups;
+- Docoved verifier `V-042-02` accepted the product mapping slice.
+
+Memory Bank outcome:
+- framework runtime vocabulary lives in [Channel runtime contract](../../spec/runtime/channel-runtime-contract.md);
+- feature/package placement lessons were promoted into [Feature area boundaries](../../spec/project/feature-area-boundaries.md) and [Repo structure](../../spec/project/repo-structure.md);
+- publish/consumption lessons were promoted into [Package registry bridge](../../spec/operations/private-registry-package-bridge.md) and [Delivery standards](../../spec/engineering/delivery-standards.md);
+- Docoved routes product readers through `/Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-channel-runtime-adoption.md`;
+- SellerAgent readiness evidence is archived in `.tasks/prt-042-channel-runtime-implementation-plan/`.
+
+Explicit follow-ups:
+- publish `@dd-bot-platform/channel-runtime` through the controlled package release path before direct product dependency adoption;
+- after publication or a sanctioned bridge, replace Docoved's local fixture-only proof with direct package import in a product-local follow-up task;
+- keep command runtime extraction, outbound delivery orchestration, threading abstractions, framework-owned HTML rendering, DB/read-models, and UI/admin surfaces deferred until their documented start triggers are met.
+
+Hosted/deploy outcome:
+- no hosted beta or production rollout was required for this first wave because framework package work did not alter hosted surfaces and Docoved adapter behavior did not change;
+- no DB backup or migration was required because first-wave work added no DB/storage/schema surfaces.
