@@ -2,7 +2,7 @@
 file: .memory-bank/spec/project/feature-area-boundaries.md
 description: 'Framework feature-area boundaries for bot-platform.'
 purpose: Define which framework areas bot-platform owns and where product repos must take over.
-version: 0.3.0
+version: 0.4.0
 date: 2026-04-25
 status: ACTIVE
 tags: [feature-areas, boundaries, bot-platform, framework]
@@ -12,6 +12,9 @@ related_files:
   - .memory-bank/spec/project/repo-structure.md
   - .memory-bank/spec/project/three-layer-product-line-architecture.md
 history:
+  - version: 0.4.0
+    date: 2026-04-26
+    changes: Updated command-framework and channel-runtime boundaries after PRT-043 landed typed command contracts plus provider-neutral threading/delivery summary contracts.
   - version: 0.3.0
     date: 2026-04-25
     changes: Added the channel-runtime feature area after PRT-042 implementation and recorded the thin-seam rule for canonical response documents and pure rendering helpers.
@@ -63,7 +66,14 @@ Owns:
 - command envelope and parser;
 - command registry primitives;
 - command execution hooks;
+- actor/channel availability policy shape;
 - projection hooks and diagnostics patterns.
+
+Does not own:
+- product command catalogs or command names;
+- product permission ladders and role mapping;
+- channel tokenization quirks such as Telegram slash mentions or email subject conventions;
+- command side effects, product persistence writes, provider sends, or UI/menu copy.
 
 ### `channel-runtime`
 
@@ -73,10 +83,11 @@ Owns:
 - citations and source-reference shape for channel-neutral delivery;
 - minimal render-target vocabulary;
 - small pure markdown/plaintext helpers when they remove real duplication.
+- provider-neutral threading intent and outbound delivery result-summary contracts when they remain side-effect free and reference-only.
 
 Does not own:
 - command dispatch or command access policy;
-- transport senders, delivery orchestration, provider retries, or threading state;
+- transport senders, delivery orchestration, provider retries, or persisted threading state;
 - provider payloads such as Telegram parse mode or email headers;
 - product answer semantics, product source selection, DB tables, migrations, or UI screens.
 

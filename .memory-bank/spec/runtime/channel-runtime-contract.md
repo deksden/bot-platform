@@ -2,13 +2,14 @@
 file: .memory-bank/spec/runtime/channel-runtime-contract.md
 description: 'Framework runtime contract for canonical response documents and minimal channel rendering primitives.'
 purpose: Define the stable first-wave vocabulary for channel-neutral response documents so product channels can render the same answer semantics without copying Telegram/email-specific helpers into core logic.
-version: 0.2.0
-date: 2026-04-25
+version: 0.4.0
+date: 2026-04-26
 status: DRAFT
 tags: [runtime, channel-runtime, contracts, rendering, framework]
 parent: .memory-bank/spec/runtime/index.md
 related_files:
   - .memory-bank/plans/protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md
+  - .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md
   - .memory-bank/spec/runtime/command-framework-contract.md
   - .memory-bank/spec/runtime/pipeline-registry-and-binding-contract.md
   - .memory-bank/spec/architecture/boundaries.md
@@ -16,6 +17,12 @@ related_files:
   - .memory-bank/mbb/principles.md
   - .memory-bank/mbb/delivery-docs-guide.md
 history:
+  - version: 0.4.0
+    date: 2026-04-26
+    changes: Recorded the PRT-043 provider-neutral threading and outbound delivery result-summary slice in `packages/channel-runtime`, keeping delivery intent reference-only and side-effect free.
+  - version: 0.3.0
+    date: 2026-04-26
+    changes: Linked PRT-043 as the draft follow-up that opens actor-aware commands, universal channel rendering, threading intent, and outbound delivery intent after the first-wave document seam.
   - version: 0.2.0
     date: 2026-04-25
     changes: Added deferred-work semantics to clarify why commands, delivery orchestration, threading, HTML, DB, and UI are outside the first-wave contract but remain possible future extensions.
@@ -37,18 +44,21 @@ It defines:
 - stable response/run/trace reference slots;
 - minimal render-target vocabulary;
 - pure helper boundaries for markdown/plaintext rendering.
+- provider-neutral threading intent and delivery result-summary contracts after PRT-043, without provider send logic.
 
 It does not define:
 - product answer semantics;
 - product knowledge-source selection;
 - provider-specific Telegram, email, web, or SMS payloads;
 - command dispatch, command registry, or command access policy;
-- delivery orchestration, retry queues, threading, or provider send logic;
+- delivery orchestration, retry queues, provider send logic, or persisted delivery/threading state;
 - DB tables, migrations, persistent delivery records, read models, or UI screens.
 
 These exclusions are first-wave boundaries, not permanent bans.
 
 Future work may add command adoption, delivery orchestration, threading, HTML rendering, persistence, or UI only after a product proof demonstrates repeated provider-neutral behavior. Until then, product adapters keep side effects and provider-specific behavior local.
+
+The active follow-up planning anchor for command adoption, channel rendering responsibility, configurable threading intent, and outbound delivery intent is [PRT-043 Channel Interaction Runtime](../../plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md).
 
 ## Ownership
 
@@ -115,8 +125,8 @@ Out of scope:
 - universal `ChannelRenderer`;
 - `ChannelRenderPolicy`;
 - `RenderedChannelMessage`;
-- `OutboundDeliveryPlan`;
-- `OutboundDeliveryThreading`;
+- `OutboundDeliveryPlan` as orchestration;
+- provider-specific delivery/threading payloads;
 - framework-owned HTML renderer.
 
 Product adapters remain responsible for provider-specific output:
@@ -124,6 +134,47 @@ Product adapters remain responsible for provider-specific output:
 - email HTML/plaintext body, `Message-ID`, `In-Reply-To`, and `References`;
 - web component rendering;
 - transport send attempts, retries, and provider errors.
+
+## Threading Intent
+
+`channel-runtime` owns only a provider-neutral threading request shape.
+
+Current package anchor:
+- `OutboundThreadingMode`;
+- `OutboundThreadingConfig`;
+- `InboundThreadingContext`;
+- `OutboundThreadingIntent`;
+- `createDefaultThreadingIntent`.
+
+Supported modes:
+- `reply_to_inbound` — ask the adapter to answer in relation to the inbound message when the inbound transport reference and channel capability allow it;
+- `new_thread` — ask the adapter to start a new provider thread/conversation unit;
+- `none` — send without thread linkage.
+
+Rules:
+- products configure the mode per concrete channel instance;
+- provider-specific mapping remains adapter-owned, for example email `In-Reply-To` / `References` or Telegram reply parameters;
+- fallback from `reply_to_inbound` must be explicit and deterministic;
+- missing or unsupported inbound reply targets must not silently pretend that a threaded reply happened.
+
+## Outbound Delivery Result Summary
+
+`channel-runtime` may describe provider-neutral delivery intent and terminal summary, but it must not send messages.
+
+Current package anchor:
+- `OutboundDeliveryIntent`;
+- `OutboundDeliveryTarget`;
+- `OutboundDeliveryResultSummary`;
+- `OutboundDeliveryDiagnosticsSummary`;
+- `classifyOutboundDeliveryTerminalState`;
+- `isOutboundDeliveryTerminalSuccess`.
+
+Rules:
+- `OutboundDeliveryIntent` is reference-only for response/rendered content (`documentRef`, `renderedMessageRef`, format, threading, and correlation fields);
+- full `CanonicalResponseDocument` values stay in runtime/product memory or product-owned artifacts and are not embedded into the delivery intent seam;
+- terminal summary statuses are `delivered`, `suppressed`, and `failed`;
+- diagnostics must be bounded and safe for logs; raw provider payloads, secrets, and full answer bodies stay out of routine framework diagnostics;
+- retries, queues, idempotency stores, and provider SDK sends remain product/adapter-owned.
 
 ## Markdown Subset
 
@@ -189,6 +240,12 @@ The first implementation must include:
 - deterministic fixture for markdown/plaintext helper if the helper exists;
 - import-boundary proof showing no product, DB, or provider SDK imports;
 - pack/publish dry-run if a new publishable package is created.
+
+The PRT-043 implementation slice adds deterministic tests for:
+- reply-to-inbound retention when inbound refs exist;
+- `new_thread` / `none` fallback when inbound refs are missing or unsupported;
+- delivered / suppressed / failed terminal delivery classification;
+- public export smoke for threading and delivery contracts.
 
 Product adoption must add product-local proofs:
 - Docoved maps `DocovedAnswerArtifact` to `CanonicalResponseDocument`;

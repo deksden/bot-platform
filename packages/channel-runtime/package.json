@@ -1,7 +1,7 @@
 {
   "name": "@dd-bot-platform/channel-runtime",
   "description": "Framework-safe canonical channel response contract and pure render helpers for bot-platform.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
