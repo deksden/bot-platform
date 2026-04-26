@@ -2,7 +2,7 @@
 file: .memory-bank/plans/index.md
 description: 'Plans hub для bot-platform: framework epics, ADRs, protocols, current status и verification planning.'
 purpose: Читать для понимания delivery contour `bot-platform`, не смешивая framework delivery с SellerAgent и Docoved product waves.
-version: 0.11.0
+version: 0.12.0
 date: 2026-04-26
 status: DRAFT
 tags: [plans, bot-platform, adr, epics, protocols, delivery]
@@ -14,6 +14,9 @@ children:
   - protocols/index.md
   - verification-matrix.md
 history:
+  - version: 0.12.0
+    date: 2026-04-26
+    changes: Marked PRT-043 closed after platform package publication, Docoved and SellerAgent product adoption, CI/Vercel proof, and final closeout evidence.
   - version: 0.11.0
     date: 2026-04-26
     changes: Marked PRT-043 phase-2 implementation planning complete and linked the subagent execution companion and task workspace.
@@ -95,16 +98,17 @@ history:
 
 ## Immediate planning priorities
 
-### 1. Draft channel interaction runtime follow-up
+### 1. Closed channel interaction runtime follow-up
 
-`protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md` is the draft follow-up to closed `PRT-042`.
+`protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md` is the closed follow-up to closed `PRT-042`.
 
 Phase state:
 - стадия проработки протокола: фаза 0 выполнена.
 - стадия проработки протокола: фаза 1 выполнена.
 - стадия проработки протокола: фаза 2 выполнена.
+- стадия реализации протокола: product adoption/release closeout выполнены.
 
-Draft scope:
+Closed scope:
 - actor-aware command runtime policy for system admins, workspace admins, employees/members, known external users, unknown external users, and anonymous actors;
 - channel-neutral command input normalization and typed safe command failures;
 - canonical command responses through `CanonicalResponseDocument`;
@@ -115,9 +119,11 @@ Draft scope:
 - idempotency, anti-abuse/rate-limit hooks, fallback diagnostics, and logging-first observability with no framework DB/UI in the first implementation;
 - Docoved and SellerAgent adoption waves with beta verification.
 
-The protocol must reuse `spec/runtime/command-framework-contract.md` and must not create a second command framework inside `channel-runtime`.
-Implementation code must not start until the pre-code gates in `PRT-043` are resolved.
-Implementation task packets and subagent execution rules live in `protocols/PRT-043-channel-interaction-runtime-implementation-plan.md`.
+Closed result:
+- platform packages `@dd-bot-platform/core@0.3.0` and `@dd-bot-platform/channel-runtime@0.3.0` published;
+- Docoved adoption merged in `deksden/docoved-agent#14`;
+- SellerAgent adoption merged in `deksden/seller-agent#4`;
+- final closeout evidence recorded in `.tasks/prt-043-channel-interaction-runtime/007-final-closeout.md`.
 
 ### 2. Closed channel-runtime first wave
 

@@ -2,9 +2,9 @@
 file: .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-implementation-plan.md
 description: Implementation plan companion for PRT-043, covering subagent task packets, dependency graph, verification-by-subagent, local/hosted checks, and documentation closure.
 purpose: Use before implementing PRT-043 so work is sliced into bounded subagent tasks with clear context, ownership, verification, and Memory Bank evidence rules.
-version: 0.2.0
+version: 1.0.0
 date: 2026-04-26
-status: DRAFT
+status: CLOSED
 tags: [protocol-detail, implementation-plan, subagents, channel-runtime, command-runtime]
 parent: .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md
 related_files:
@@ -23,6 +23,9 @@ related_files:
   - .tasks/prt-043-channel-interaction-runtime/000-index.md
   - .tasks/prt-043-channel-interaction-runtime/001-task-packet-template.md
 history:
+  - version: 1.0.0
+    date: 2026-04-26
+    changes: Closed implementation plan after T-043-07 Docoved adoption, T-043-08 SellerAgent adoption, T-043-09 release evidence, package publication, and cross-repo clean-state verification.
   - version: 0.2.0
     date: 2026-04-26
     changes: Recorded execution progress for platform code tasks T-043-02/T-043-03, verifier outcomes, and remaining product adoption gates.
@@ -37,8 +40,10 @@ history:
 
 стадия проработки протокола: фаза 2 выполнена
 
+стадия реализации протокола: product adoption/release closeout выполнены
+
 This companion turns PRT-043 from architectural protocol into an executable implementation plan.
-It does not authorize coding by itself: pre-code gates in PRT-043 still must be resolved before implementation tasks start.
+It is now closed as execution evidence for PRT-043.
 
 ## Subagent operating model
 
@@ -114,9 +119,11 @@ Execution status:
 - `T-043-01`: completed; package-boundary decision accepted.
 - `T-043-02`: completed; `packages/core/src/command-framework` landed, missing command policy was hardened to default deny, and verifier accepted after orchestrator hardening.
 - `T-043-03`: completed after orchestrator fix; `packages/channel-runtime/src/threading.ts` and `packages/channel-runtime/src/delivery.ts` landed, delivery intent is reference-only, and verifier accepted after fix.
-- `T-043-04`: not opened in this slice; no extra observability helper was needed beyond typed result diagnostics and existing package tests.
-- `T-043-05` / `T-043-06`: completed as inventory reports; product adoption remains gated by first parity subset decisions.
-- `T-043-07` / `T-043-08` / `T-043-09`: not executed in this platform slice.
+- `T-043-04`: not opened; no extra observability helper was needed beyond typed result diagnostics, existing logs, and package tests.
+- `T-043-05` / `T-043-06`: completed as inventory reports.
+- `T-043-07`: completed; Docoved adopted the released platform package surface in PR `deksden/docoved-agent#14`.
+- `T-043-08`: completed; SellerAgent adopted the released platform command/delivery vocabulary in PR `deksden/seller-agent#4`.
+- `T-043-09`: completed; platform package publication and cross-repo closure evidence are recorded in `.tasks/prt-043-channel-interaction-runtime/007-final-closeout.md`.
 
 Parallelism:
 - inventories for Docoved and SellerAgent can run in parallel;
@@ -200,6 +207,12 @@ Current platform slice evidence:
 - `pnpm --filter @dd-bot-platform/channel-runtime typecheck`;
 - `node --test packages/core/dist/command-framework.spec.js packages/channel-runtime/dist/channel-runtime.spec.js`;
 - 18 Node tests passed after the command default-deny hardening and post-verification delivery-intent fix.
+
+Final cross-repo closure evidence:
+- platform PR `deksden/bot-platform#2` merged at `7b0b82f`;
+- platform publish workflow `24952161247` published `@dd-bot-platform/core@0.3.0` and `@dd-bot-platform/channel-runtime@0.3.0`;
+- Docoved PR `deksden/docoved-agent#14` merged at `8681c3b` with `pnpm docoved:proof:prt043-package-surface`, `pnpm tsx scripts/docoved-channel-runtime-adoption-proof.ts`, and `pnpm typecheck`;
+- SellerAgent PR `deksden/seller-agent#4` merged at `3ee2931` with `pnpm --filter @selleragent/core typecheck`, `pnpm --filter @selleragent/core build`, `pnpm --filter @selleragent/server typecheck`, and Vercel preview checks.
 
 ## Documentation closure
 
