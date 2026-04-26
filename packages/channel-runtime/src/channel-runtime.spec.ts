@@ -1,8 +1,16 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import type { CanonicalResponseDocument } from './index';
+import type {
+  CanonicalResponseDocument,
+  OutboundDeliveryIntent,
+  OutboundDeliveryResultSummary,
+  OutboundThreadingIntent
+} from './index';
 import {
+  classifyOutboundDeliveryTerminalState,
+  createDefaultThreadingIntent,
   filterCanonicalResponseDocumentByVisibility,
+  isOutboundDeliveryTerminalSuccess,
   renderChannelMarkdownToPlainText,
   splitRenderedMessageParts
 } from './index';
@@ -113,4 +121,107 @@ test('channel-runtime split helper rejects invalid maxLength', () => {
     () => splitRenderedMessageParts('hello', { maxLength: 0 }),
     /positive integer/
   );
+});
+
+test('channel-runtime default threading keeps reply_to_inbound when inbound ref exists', () => {
+  const intent = createDefaultThreadingIntent(
+    { mode: 'reply_to_inbound', fallbackMode: 'new_thread' },
+    {
+      inboundTransportMessageRef: 'transport_message_01',
+      inboundThreadRef: 'thread_01',
+      supportsReplyToInbound: true
+    }
+  );
+
+  assert.equal(intent.mode, 'reply_to_inbound');
+  assert.equal(intent.inboundTransportMessageRef, 'transport_message_01');
+  assert.equal(intent.inboundThreadRef, 'thread_01');
+});
+
+test('channel-runtime threading fallback can create new_thread when inbound ref missing', () => {
+  const intent = createDefaultThreadingIntent(
+    { mode: 'reply_to_inbound', fallbackMode: 'new_thread' },
+    {
+      inboundTransportMessageRef: null
+    }
+  );
+
+  assert.equal(intent.mode, 'new_thread');
+});
+
+test('channel-runtime threading fallback can disable threading when unsupported', () => {
+  const intent = createDefaultThreadingIntent(
+    { mode: 'reply_to_inbound', fallbackMode: 'none' },
+    {
+      inboundTransportMessageRef: 'transport_message_01',
+      supportsReplyToInbound: false
+    }
+  );
+
+  assert.equal(intent.mode, 'none');
+});
+
+test('channel-runtime delivery summary classifies delivered as terminal success', () => {
+  const deliveredSummary: OutboundDeliveryResultSummary = {
+    status: 'delivered',
+    channelRef: 'channel_01',
+    target: {
+      targetRef: 'user_01'
+    },
+    attemptId: 'attempt_01',
+    transportMessageRef: 'transport_message_02',
+    traceId: 'trace_01'
+  };
+
+  assert.equal(isOutboundDeliveryTerminalSuccess(deliveredSummary), true);
+  assert.equal(classifyOutboundDeliveryTerminalState(deliveredSummary), 'success');
+});
+
+test('channel-runtime delivery summary distinguishes suppressed and failed', () => {
+  const suppressedSummary: OutboundDeliveryResultSummary = {
+    status: 'suppressed',
+    channelRef: 'channel_01',
+    target: {
+      targetRef: 'user_01'
+    },
+    attemptId: 'attempt_02'
+  };
+
+  const failedSummary: OutboundDeliveryResultSummary = {
+    status: 'failed',
+    channelRef: 'channel_01',
+    target: {
+      targetRef: 'user_01'
+    },
+    attemptId: 'attempt_03',
+    diagnostics: {
+      reasonCode: 'transport_timeout',
+      summary: 'Send attempt exceeded timeout.'
+    }
+  };
+
+  assert.equal(classifyOutboundDeliveryTerminalState(suppressedSummary), 'suppressed');
+  assert.equal(classifyOutboundDeliveryTerminalState(failedSummary), 'failure');
+  assert.equal(isOutboundDeliveryTerminalSuccess(suppressedSummary), false);
+  assert.equal(isOutboundDeliveryTerminalSuccess(failedSummary), false);
+});
+
+test('channel-runtime public exports include delivery and threading contracts', () => {
+  const threadingIntent: OutboundThreadingIntent = {
+    mode: 'none'
+  };
+
+  const intent: OutboundDeliveryIntent = {
+    channelRef: 'channel_01',
+    target: {
+      targetAddress: 'operator@example.com'
+    },
+    renderedFormat: 'plain_text',
+    threading: threadingIntent,
+    correlationId: 'correlation_01'
+  };
+
+  assert.equal(intent.threading.mode, 'none');
+  assert.equal(typeof createDefaultThreadingIntent, 'function');
+  assert.equal(typeof classifyOutboundDeliveryTerminalState, 'function');
 });
