@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-implementation-plan.md
 description: Implementation plan companion for PRT-043, covering subagent task packets, dependency graph, verification-by-subagent, local/hosted checks, and documentation closure.
 purpose: Use before implementing PRT-043 so work is sliced into bounded subagent tasks with clear context, ownership, verification, and Memory Bank evidence rules.
-version: 0.1.0
+version: 0.2.0
 date: 2026-04-26
 status: DRAFT
 tags: [protocol-detail, implementation-plan, subagents, channel-runtime, command-runtime]
@@ -23,6 +23,9 @@ related_files:
   - .tasks/prt-043-channel-interaction-runtime/000-index.md
   - .tasks/prt-043-channel-interaction-runtime/001-task-packet-template.md
 history:
+  - version: 0.2.0
+    date: 2026-04-26
+    changes: Recorded execution progress for platform code tasks T-043-02/T-043-03, verifier outcomes, and remaining product adoption gates.
   - version: 0.1.0
     date: 2026-04-26
     changes: Added phase-2 implementation planning for subagent-based execution, task packet format, dependency graph, verifier workflow, checks, hosted beta gates, and documentation closure.
@@ -107,6 +110,14 @@ Implementation tasks:
 - `T-043-08`: SellerAgent adoption implementation; depends on platform package release or approved prerelease bridge plus `T-043-06`.
 - `T-043-09`: cross-repo docs, scenario, release, and closure evidence; depends on at least one product adoption and all touched package checks.
 
+Execution status:
+- `T-043-01`: completed; package-boundary decision accepted.
+- `T-043-02`: completed; `packages/core/src/command-framework` landed, missing command policy was hardened to default deny, and verifier accepted after orchestrator hardening.
+- `T-043-03`: completed after orchestrator fix; `packages/channel-runtime/src/threading.ts` and `packages/channel-runtime/src/delivery.ts` landed, delivery intent is reference-only, and verifier accepted after fix.
+- `T-043-04`: not opened in this slice; no extra observability helper was needed beyond typed result diagnostics and existing package tests.
+- `T-043-05` / `T-043-06`: completed as inventory reports; product adoption remains gated by first parity subset decisions.
+- `T-043-07` / `T-043-08` / `T-043-09`: not executed in this platform slice.
+
 Parallelism:
 - inventories for Docoved and SellerAgent can run in parallel;
 - command-framework contracts and channel-runtime intent/result contracts can run in parallel only if write scopes are disjoint;
@@ -183,6 +194,12 @@ SellerAgent hosted beta lane:
 - hosted evidence includes stable alias/readback and traceable logs.
 
 Do not run hosted deploys just to exercise CI. Hosted deploy happens only when hosted beta scenarios are ready.
+
+Current platform slice evidence:
+- `pnpm --filter @dd-bot-platform/core typecheck`;
+- `pnpm --filter @dd-bot-platform/channel-runtime typecheck`;
+- `node --test packages/core/dist/command-framework.spec.js packages/channel-runtime/dist/channel-runtime.spec.js`;
+- 18 Node tests passed after the command default-deny hardening and post-verification delivery-intent fix.
 
 ## Documentation closure
 

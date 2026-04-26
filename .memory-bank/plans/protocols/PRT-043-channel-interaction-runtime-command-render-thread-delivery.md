@@ -2,7 +2,7 @@
 file: .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md
 description: Framework protocol for channel interaction runtime: actor-aware command runtime, canonical response rendering, threading intent, and outbound delivery intent across Docoved and SellerAgent.
 purpose: Define the next shared platform contract after PRT-042 so commands, canonical responses, reply/thread behavior, and outbound delivery semantics are configured consistently across Telegram, email, web, and future channels without moving product logic into bot-platform.
-version: 0.4.0
+version: 0.5.0
 date: 2026-04-26
 status: DRAFT
 epic: EP-022
@@ -27,6 +27,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-channel-runtime-adoption.md
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/plans/protocols/PRT-007-telegram-privileged-command-surface-bot-level-release-control-and-runtime-diagnostics.md
 history:
+  - version: 0.5.0
+    date: 2026-04-26
+    changes: Recorded platform implementation progress for T-043-02/T-043-03: core command-framework contracts and channel-runtime threading/delivery summary contracts landed with subagent reports, verification, and local checks.
   - version: 0.4.0
     date: 2026-04-26
     changes: Completed phase-2 implementation planning by linking the subagent execution companion, task workspace, task-packet discipline, dependency graph, verification-by-subagent rules, and local/hosted test lanes.
@@ -68,7 +71,14 @@ This protocol opens that follow-up work.
 
 стадия проработки протокола: фаза 2 выполнена
 
+стадия реализации протокола: платформа T-043-02/T-043-03 выполнена
+
 Phase 0 reviewed platform contracts/product lineage; phase 1 reviewed the protocol through focused subagent reports in `.tasks/prt-043-protocol-review-phase-1/`; phase 2 defined subagent-based implementation planning in [PRT-043 implementation plan](PRT-043-channel-interaction-runtime-implementation-plan.md).
+The first platform implementation slice was executed through `.tasks/prt-043-channel-interaction-runtime/`:
+- `T-043-02` landed command-framework typed contracts in `@dd-bot-platform/core`;
+- `T-043-03` landed provider-neutral threading and delivery result-summary contracts in `@dd-bot-platform/channel-runtime`;
+- orchestrator hardened command availability to default deny when command policy is missing;
+- both tasks have implementation reports, verifier reports, and local typecheck/test evidence in the task workspace.
 
 ## Core decision
 
@@ -84,6 +94,7 @@ Therefore:
 - Telegram, email, web, and future channel adapters render and deliver provider payloads from the same canonical result instead of deciding answer semantics.
 
 No new framework-owned UI or DB tables are part of this protocol.
+The current platform slice also intentionally does not ship product command catalogs, provider senders, hosted deploys, or product adoption changes.
 
 Phase 0 and phase 1 review found that the direction is sound, but implementation must be guarded by explicit ownership, policy precedence, safe failure rendering, config compatibility, idempotency, observability, and product adoption gates.
 The accepted phase-1 findings are summarized in `.tasks/prt-043-protocol-review-phase-1/001-orchestrator-consolidated-review.md`.
@@ -128,6 +139,11 @@ Product-owned implementations:
 - persistence lookup for transport refs;
 - provider send/retry behavior;
 - product-specific audit or trace artifacts.
+
+Current code anchors:
+- command framework: `packages/core/src/command-framework`;
+- channel threading: `packages/channel-runtime/src/threading.ts`;
+- channel delivery summary: `packages/channel-runtime/src/delivery.ts`.
 
 Adapter-owned implementations:
 - inbound event parsing;
