@@ -2,9 +2,9 @@
 file: .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md
 description: Framework protocol for channel interaction runtime: actor-aware command runtime, canonical response rendering, threading intent, and outbound delivery intent across Docoved and SellerAgent.
 purpose: Define the next shared platform contract after PRT-042 so commands, canonical responses, reply/thread behavior, and outbound delivery semantics are configured consistently across Telegram, email, web, and future channels without moving product logic into bot-platform.
-version: 0.5.0
+version: 1.0.0
 date: 2026-04-26
-status: DRAFT
+status: CLOSED
 epic: EP-022
 tags: [protocol, channel-runtime, command-runtime, rendering, threading, delivery, docoved, selleragent]
 parent: .memory-bank/plans/protocols/index.md
@@ -27,6 +27,9 @@ related_files:
   - /Users/deksden/Documents/_Projects/docoved-agent/.memory-bank/spec/runtime/docoved-channel-runtime-adoption.md
   - /Users/deksden/Documents/_Projects/seller-agent/.memory-bank/plans/protocols/PRT-007-telegram-privileged-command-surface-bot-level-release-control-and-runtime-diagnostics.md
 history:
+  - version: 1.0.0
+    date: 2026-04-26
+    changes: Closed PRT-043 after platform package publication, Docoved adoption, SellerAgent adoption, CI/Vercel verification, and cross-repo clean-state proof.
   - version: 0.5.0
     date: 2026-04-26
     changes: Recorded platform implementation progress for T-043-02/T-043-03: core command-framework contracts and channel-runtime threading/delivery summary contracts landed with subagent reports, verification, and local checks.
@@ -73,12 +76,21 @@ This protocol opens that follow-up work.
 
 стадия реализации протокола: платформа T-043-02/T-043-03 выполнена
 
+стадия реализации протокола: product adoption/release closeout выполнены
+
 Phase 0 reviewed platform contracts/product lineage; phase 1 reviewed the protocol through focused subagent reports in `.tasks/prt-043-protocol-review-phase-1/`; phase 2 defined subagent-based implementation planning in [PRT-043 implementation plan](PRT-043-channel-interaction-runtime-implementation-plan.md).
 The first platform implementation slice was executed through `.tasks/prt-043-channel-interaction-runtime/`:
 - `T-043-02` landed command-framework typed contracts in `@dd-bot-platform/core`;
 - `T-043-03` landed provider-neutral threading and delivery result-summary contracts in `@dd-bot-platform/channel-runtime`;
 - orchestrator hardened command availability to default deny when command policy is missing;
 - both tasks have implementation reports, verifier reports, and local typecheck/test evidence in the task workspace.
+
+Final closure evidence is recorded in `.tasks/prt-043-channel-interaction-runtime/007-final-closeout.md`.
+Closure includes:
+- platform PR `deksden/bot-platform#2`, merge commit `7b0b82f`, publish workflow run `24952161247`, and npm packages `@dd-bot-platform/core@0.3.0` plus `@dd-bot-platform/channel-runtime@0.3.0`;
+- Docoved PR `deksden/docoved-agent#14`, merge commit `8681c3b`, package-surface proof, channel-runtime adoption proof, and typecheck;
+- SellerAgent PR `deksden/seller-agent#4`, merge commit `3ee2931`, core/server typecheck/build, and Vercel preview checks;
+- documented exclusion of framework DB/read-model tables, framework UI/admin, provider SDK sender extraction, and broad mutation-command expansion from this protocol.
 
 ## Core decision
 
@@ -94,7 +106,7 @@ Therefore:
 - Telegram, email, web, and future channel adapters render and deliver provider payloads from the same canonical result instead of deciding answer semantics.
 
 No new framework-owned UI or DB tables are part of this protocol.
-The current platform slice also intentionally does not ship product command catalogs, provider senders, hosted deploys, or product adoption changes.
+The platform slice also intentionally does not ship product command catalogs, provider senders, or hosted deploys; product adoption happened in Docoved and SellerAgent repos through package consumption and product-local wiring.
 
 Phase 0 and phase 1 review found that the direction is sound, but implementation must be guarded by explicit ownership, policy precedence, safe failure rendering, config compatibility, idempotency, observability, and product adoption gates.
 The accepted phase-1 findings are summarized in `.tasks/prt-043-protocol-review-phase-1/001-orchestrator-consolidated-review.md`.
@@ -686,6 +698,12 @@ Exit criteria:
 - CI/package checks are green where releases were pushed;
 - beta evidence is linked from product repos;
 - this protocol is marked `CLOSED` only after both product adoption waves are complete or explicitly split into follow-up protocols.
+
+Closure result:
+- platform release completed through `@dd-bot-platform/core@0.3.0` and `@dd-bot-platform/channel-runtime@0.3.0`;
+- Docoved adoption completed through PR `deksden/docoved-agent#14`;
+- SellerAgent adoption completed through PR `deksden/seller-agent#4`;
+- no deferred DB/UI/provider-sender scope was pulled into this protocol.
 
 ## Verification matrix
 

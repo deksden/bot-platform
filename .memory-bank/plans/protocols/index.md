@@ -2,12 +2,15 @@
 file: .memory-bank/plans/protocols/index.md
 description: 'Framework protocol hub for bot-platform.'
 purpose: Hold cross-epic migration, extraction, and hardening protocols for the framework repo.
-version: 0.18.0
+version: 0.19.0
 date: 2026-04-26
 status: ACTIVE
 tags: [protocols, bot-platform, planning]
 parent: .memory-bank/plans/index.md
 history:
+  - version: 0.19.0
+    date: 2026-04-26
+    changes: Marked PRT-043 closed after platform package publication, Docoved and SellerAgent adoption, release evidence, and clean-state verification.
   - version: 0.18.0
     date: 2026-04-26
     changes: Recorded PRT-043 platform implementation progress for core command-framework contracts and channel-runtime threading/delivery summary contracts.
@@ -90,5 +93,5 @@ Current rule:
 - `PRT-039` and `PRT-040` are closed child protocols for the wave-1 shared control-plane and governed-content/import substrata.
 - `PRT-041` is the closed dependency-boundary cleanup protocol after the handoff; it removed Docoved accidental dependencies on SellerAgent package namespaces and classified retained future extraction questions.
 - `PRT-042` is the closed first-wave shared channel-runtime protocol. It landed the `@dd-bot-platform/channel-runtime` package, local publish-readiness proof, Docoved mapping proof, SellerAgent readiness review, and Memory Bank lesson promotion. Command/delivery orchestration remains deferred until a later protocol opens it.
-- `PRT-043` is the draft follow-up protocol for channel interaction runtime. Phase-2 implementation planning is complete and the first platform code slice has landed: typed command-framework contracts in `@dd-bot-platform/core` plus provider-neutral threading/delivery summary contracts in `@dd-bot-platform/channel-runtime`. Product adoption, hosted beta scenarios, and any package release/publish flow remain gated follow-up work. Subagent execution rules live in `PRT-043-channel-interaction-runtime-implementation-plan.md`; detailed phase-1 tables live in `PRT-043-channel-interaction-runtime-review-details.md`.
+- `PRT-043` is the closed channel interaction runtime protocol. It landed typed command-framework contracts in `@dd-bot-platform/core`, provider-neutral threading/delivery summary contracts in `@dd-bot-platform/channel-runtime`, published both packages as `0.3.0`, and completed Docoved plus SellerAgent adoption through their product repos. Subagent execution evidence lives in `.tasks/prt-043-channel-interaction-runtime/`; final closeout is `.tasks/prt-043-channel-interaction-runtime/007-final-closeout.md`.
 - future SellerAgent, Docoved, or shared-substrate expansion outside channel-runtime should open a new protocol rather than extending the closed `PRT-038` or `PRT-041` packets.

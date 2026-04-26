@@ -2,9 +2,9 @@
 file: .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-review-details.md
 description: Companion details for PRT-043 phase-1 review: boundary step contracts, entity ownership matrix, observability event checklist, and verification lanes.
 purpose: Keep PRT-043 lean while preserving phase-1 review details needed before implementation task packets are opened.
-version: 0.1.0
+version: 1.0.0
 date: 2026-04-26
-status: DRAFT
+status: CLOSED
 tags: [protocol-detail, channel-runtime, command-runtime, review, verification]
 parent: .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md
 related_files:
@@ -13,6 +13,9 @@ related_files:
   - .memory-bank/spec/runtime/channel-runtime-contract.md
   - .tasks/prt-043-protocol-review-phase-1/001-orchestrator-consolidated-review.md
 history:
+  - version: 1.0.0
+    date: 2026-04-26
+    changes: Closed companion review details with parent PRT-043; implementation and final evidence live in the implementation plan and task workspace.
   - version: 0.1.0
     date: 2026-04-26
     changes: Extracted detailed phase-1 review tables from PRT-043 to keep the main protocol below the MBB decomposition threshold.
@@ -21,6 +24,7 @@ history:
 # PRT-043 Channel Interaction Runtime Review Details
 
 This companion file is not the canonical protocol.
+It is closed with PRT-043 and remains as phase-1 review detail evidence.
 
 Canonical sequencing and scope remain in:
 - [PRT-043 Channel Interaction Runtime](PRT-043-channel-interaction-runtime-command-render-thread-delivery.md)
