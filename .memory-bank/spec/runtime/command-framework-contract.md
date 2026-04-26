@@ -2,8 +2,8 @@
 file: .memory-bank/spec/runtime/command-framework-contract.md
 description: 'Framework runtime contract for the command framework: command envelope, parser and registry primitives, dispatch hooks, and shared diagnostics.'
 purpose: Read when defining reusable command surfaces in `bot-platform` so framework command mechanics stay product-agnostic and do not absorb channel or product command truth.
-version: 1.0.0
-date: 2026-04-22
+version: 1.1.0
+date: 2026-04-26
 status: ACTIVE
 c4_level: L2
 tags: [runtime, commands, framework-contract, diagnostics, dispatch, bot-platform]
@@ -11,9 +11,13 @@ parent: .memory-bank/spec/runtime/index.md
 related_files:
   - .memory-bank/spec/project/feature-area-boundaries.md
   - .memory-bank/spec/runtime/agent-execution-kernel.md
+  - .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md
   - .memory-bank/plans/epics/framework-feature-registry.md
   - .memory-bank/plans/protocols/PRT-036-platform-framework-and-product-repo-split.md
 history:
+  - version: 1.1.0
+    date: 2026-04-26
+    changes: Linked PRT-043 as the draft implementation follow-up for actor-aware command availability across product actors, channel kinds, and concrete channel instances.
   - version: 1.0.0
     date: 2026-04-22
     changes: Landed the repo-local framework command contract for command envelope, parser/registry/dispatch primitives, and shared diagnostics under PRT-036 Wave 158.
@@ -30,6 +34,8 @@ Define the narrow command-framework slice that `bot-platform` owns:
 
 This contract is intentionally narrow.
 It does not make `bot-platform` the owner of SellerAgent, Docoved, Telegram, or any other product command catalog.
+
+The current draft implementation follow-up is [PRT-043 Channel Interaction Runtime](../../plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md). It extends this contract direction toward actor-aware command availability across system admins, workspace admins, employees/members, known external users, unknown external users, anonymous actors, channel kinds, and concrete channel instances without moving product command catalogs into the framework.
 
 ## Framework ownership boundary
 

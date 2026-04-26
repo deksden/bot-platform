@@ -2,13 +2,14 @@
 file: .memory-bank/spec/runtime/channel-runtime-contract.md
 description: 'Framework runtime contract for canonical response documents and minimal channel rendering primitives.'
 purpose: Define the stable first-wave vocabulary for channel-neutral response documents so product channels can render the same answer semantics without copying Telegram/email-specific helpers into core logic.
-version: 0.2.0
-date: 2026-04-25
+version: 0.3.0
+date: 2026-04-26
 status: DRAFT
 tags: [runtime, channel-runtime, contracts, rendering, framework]
 parent: .memory-bank/spec/runtime/index.md
 related_files:
   - .memory-bank/plans/protocols/PRT-042-channel-runtime-canonical-document-command-and-rendering.md
+  - .memory-bank/plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md
   - .memory-bank/spec/runtime/command-framework-contract.md
   - .memory-bank/spec/runtime/pipeline-registry-and-binding-contract.md
   - .memory-bank/spec/architecture/boundaries.md
@@ -16,6 +17,9 @@ related_files:
   - .memory-bank/mbb/principles.md
   - .memory-bank/mbb/delivery-docs-guide.md
 history:
+  - version: 0.3.0
+    date: 2026-04-26
+    changes: Linked PRT-043 as the draft follow-up that opens actor-aware commands, universal channel rendering, threading intent, and outbound delivery intent after the first-wave document seam.
   - version: 0.2.0
     date: 2026-04-25
     changes: Added deferred-work semantics to clarify why commands, delivery orchestration, threading, HTML, DB, and UI are outside the first-wave contract but remain possible future extensions.
@@ -49,6 +53,8 @@ It does not define:
 These exclusions are first-wave boundaries, not permanent bans.
 
 Future work may add command adoption, delivery orchestration, threading, HTML rendering, persistence, or UI only after a product proof demonstrates repeated provider-neutral behavior. Until then, product adapters keep side effects and provider-specific behavior local.
+
+The active follow-up planning anchor for command adoption, channel rendering responsibility, configurable threading intent, and outbound delivery intent is [PRT-043 Channel Interaction Runtime](../../plans/protocols/PRT-043-channel-interaction-runtime-command-render-thread-delivery.md).
 
 ## Ownership
 
