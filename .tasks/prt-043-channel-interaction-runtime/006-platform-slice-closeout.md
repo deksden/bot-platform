@@ -10,10 +10,10 @@ Closed for the platform-only implementation slice:
 ## Scope intentionally not closed
 
 Not closed by this slice:
-- Docoved product adoption;
-- SellerAgent product adoption;
-- hosted beta scenarios;
-- package publication;
+- Docoved product adoption is blocked until `@dd-bot-platform/*@0.3.0` is published or an approved immutable bridge is used;
+- SellerAgent product adoption is blocked until `@dd-bot-platform/*@0.3.0` is published or an approved immutable bridge is used;
+- hosted beta scenarios wait for product adoption after package release;
+- package publication is prepared through Changesets `0.3.0` versioned state but still requires merge to `main` and the release workflow;
 - provider senders, DB/read models, UI/admin, queues/retry orchestration.
 
 ## Closure evidence

@@ -2,7 +2,7 @@
 file: .memory-bank/guides/reference/npm-package-release-runbook.md
 description: Practical runbook for versioning, verifying, publishing and post-release checking the `@dd-bot-platform/*` npm packages.
 purpose: Read when preparing or executing a real npm release for the first publishable framework packages so maintainers can follow one short canonical checklist instead of reconstructing the process from workflow files, Changesets config, and protocol notes.
-version: 1.2.0
+version: 1.3.0
 date: 2026-04-20
 status: ACTIVE
 parent: .memory-bank/guides/reference/index.md
@@ -14,6 +14,9 @@ related_files:
   - .github/workflows/release-packages.yml
   - scripts/publish-private-packages.mjs
 history:
+  - version: 1.3.0
+    date: 2026-04-26
+    changes: Added `@dd-bot-platform/channel-runtime` to the explicit runbook package set and pack/post-publish checklist after PRT-043 release readiness proved it is already controlled by the publish script allowlist.
   - version: 1.2.0
     date: 2026-04-22
     changes: Widened the allowed publish set to include `@dd-bot-platform/core` after the broader Wave 2 runtime-helper pack made the package a real framework seam rather than a bootstrap-only stub, and added package-cleanliness guidance for stale `dist` prevention before `pack`/publish.
@@ -27,6 +30,7 @@ history:
 ## Use this runbook when
 
 - releasing `@dd-bot-platform/api-contract`;
+- releasing `@dd-bot-platform/channel-runtime`;
 - releasing `@dd-bot-platform/core`;
 - releasing `@dd-bot-platform/scenario-system`;
 - confirming whether a merged framework package change is actually ready to go to npm.
@@ -53,6 +57,7 @@ If both packages change together, bump each package according to its own consume
 This runbook currently applies only to:
 
 - `@dd-bot-platform/api-contract`
+- `@dd-bot-platform/channel-runtime`
 - `@dd-bot-platform/core`
 - `@dd-bot-platform/scenario-system`
 
@@ -68,6 +73,7 @@ Do not widen publication beyond this allowlist until the owning protocol wave ex
    - `pnpm build`
 4. Run package artifact proof:
    - `pnpm --filter @dd-bot-platform/api-contract pack --pack-destination <tmp-dir>`
+   - `pnpm --filter @dd-bot-platform/channel-runtime pack --pack-destination <tmp-dir>`
    - `pnpm --filter @dd-bot-platform/core pack --pack-destination <tmp-dir>`
    - `pnpm --filter @dd-bot-platform/scenario-system pack --pack-destination <tmp-dir>`
    - inspect `package/package.json` from each tarball
@@ -136,6 +142,9 @@ For each released package:
 
 1. Check the registry version:
    - `npm view @dd-bot-platform/api-contract version`
+   - `npm view @dd-bot-platform/channel-runtime version`
+   - `npm view @dd-bot-platform/core version`
+   - `npm view @dd-bot-platform/scenario-system version`
 2. Check dist-tags if needed:
    - `npm dist-tag ls @dd-bot-platform/api-contract`
 3. Verify installability from a clean temp project.
